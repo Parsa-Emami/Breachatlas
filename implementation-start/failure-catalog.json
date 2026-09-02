@@ -1,0 +1,19 @@
+{
+  "project": "BreachAtlas",
+  "failures": [
+    "hash mismatch",
+    "interrupted upload",
+    "object store outage",
+    "analyzer crash",
+    "OpenSearch loss",
+    "timezone ambiguity",
+    "legal hold/delete conflict",
+    "export corruption"
+  ],
+  "required_result": [
+    "invariants preserved",
+    "observable failure",
+    "bounded retries",
+    "recovery/reconciliation succeeds"
+  ]
+}

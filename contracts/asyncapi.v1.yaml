@@ -1,0 +1,186 @@
+asyncapi: 3.1.0
+id: urn:parsa-security:breachatlas:events:v1
+info:
+  title: BreachAtlas Events
+  version: 1.0.0
+  description: Canonical application event contract. Delivery is at-least-once; consumers must be idempotent and deduplicate by event id.
+defaultContentType: application/json
+channels:
+  event_evidence_ingest_started_v1:
+    address: evidence.ingest_started.v1
+    messages:
+      EvidenceIngestStartedV1Message:
+        $ref: '#/components/messages/EvidenceIngestStartedV1Message'
+  event_evidence_sealed_v1:
+    address: evidence.sealed.v1
+    messages:
+      EvidenceSealedV1Message:
+        $ref: '#/components/messages/EvidenceSealedV1Message'
+  event_custody_event_recorded_v1:
+    address: custody.event_recorded.v1
+    messages:
+      CustodyEventRecordedV1Message:
+        $ref: '#/components/messages/CustodyEventRecordedV1Message'
+  event_analyzer_run_started_v1:
+    address: analyzer.run_started.v1
+    messages:
+      AnalyzerRunStartedV1Message:
+        $ref: '#/components/messages/AnalyzerRunStartedV1Message'
+  event_derived_artifact_created_v1:
+    address: derived_artifact.created.v1
+    messages:
+      DerivedArtifactCreatedV1Message:
+        $ref: '#/components/messages/DerivedArtifactCreatedV1Message'
+  event_timeline_projection_updated_v1:
+    address: timeline.projection_updated.v1
+    messages:
+      TimelineProjectionUpdatedV1Message:
+        $ref: '#/components/messages/TimelineProjectionUpdatedV1Message'
+  event_legal_hold_applied_v1:
+    address: legal_hold.applied.v1
+    messages:
+      LegalHoldAppliedV1Message:
+        $ref: '#/components/messages/LegalHoldAppliedV1Message'
+  event_export_sealed_v1:
+    address: export.sealed.v1
+    messages:
+      ExportSealedV1Message:
+        $ref: '#/components/messages/ExportSealedV1Message'
+operations:
+  send_evidence_ingest_started_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_evidence_ingest_started_v1'
+    messages:
+    - $ref: '#/channels/event_evidence_ingest_started_v1/messages/EvidenceIngestStartedV1Message'
+  send_evidence_sealed_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_evidence_sealed_v1'
+    messages:
+    - $ref: '#/channels/event_evidence_sealed_v1/messages/EvidenceSealedV1Message'
+  send_custody_event_recorded_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_custody_event_recorded_v1'
+    messages:
+    - $ref: '#/channels/event_custody_event_recorded_v1/messages/CustodyEventRecordedV1Message'
+  send_analyzer_run_started_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_analyzer_run_started_v1'
+    messages:
+    - $ref: '#/channels/event_analyzer_run_started_v1/messages/AnalyzerRunStartedV1Message'
+  send_derived_artifact_created_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_derived_artifact_created_v1'
+    messages:
+    - $ref: '#/channels/event_derived_artifact_created_v1/messages/DerivedArtifactCreatedV1Message'
+  send_timeline_projection_updated_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_timeline_projection_updated_v1'
+    messages:
+    - $ref: '#/channels/event_timeline_projection_updated_v1/messages/TimelineProjectionUpdatedV1Message'
+  send_legal_hold_applied_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_legal_hold_applied_v1'
+    messages:
+    - $ref: '#/channels/event_legal_hold_applied_v1/messages/LegalHoldAppliedV1Message'
+  send_export_sealed_v1:
+    action: send
+    channel:
+      $ref: '#/channels/event_export_sealed_v1'
+    messages:
+    - $ref: '#/channels/event_export_sealed_v1/messages/ExportSealedV1Message'
+components:
+  messages:
+    EvidenceIngestStartedV1Message:
+      name: evidence.ingest_started.v1
+      title: evidence.ingest_started.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+    EvidenceSealedV1Message:
+      name: evidence.sealed.v1
+      title: evidence.sealed.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+    CustodyEventRecordedV1Message:
+      name: custody.event_recorded.v1
+      title: custody.event_recorded.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+    AnalyzerRunStartedV1Message:
+      name: analyzer.run_started.v1
+      title: analyzer.run_started.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+    DerivedArtifactCreatedV1Message:
+      name: derived_artifact.created.v1
+      title: derived_artifact.created.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+    TimelineProjectionUpdatedV1Message:
+      name: timeline.projection_updated.v1
+      title: timeline.projection_updated.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+    LegalHoldAppliedV1Message:
+      name: legal_hold.applied.v1
+      title: legal_hold.applied.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+    ExportSealedV1Message:
+      name: export.sealed.v1
+      title: export.sealed.v1
+      payload:
+        $ref: '#/components/schemas/EventEnvelope'
+  schemas:
+    EventEnvelope:
+      type: object
+      additionalProperties: false
+      required:
+      - specversion
+      - id
+      - source
+      - type
+      - time
+      - subject
+      - data
+      properties:
+        specversion:
+          type: string
+          const: '1.0'
+        id:
+          type: string
+          minLength: 16
+        source:
+          type: string
+          minLength: 1
+        type:
+          type: string
+          enum:
+          - evidence.ingest_started.v1
+          - evidence.sealed.v1
+          - custody.event_recorded.v1
+          - analyzer.run_started.v1
+          - derived_artifact.created.v1
+          - timeline.projection_updated.v1
+          - legal_hold.applied.v1
+          - export.sealed.v1
+        time:
+          type: string
+          format: date-time
+        subject:
+          type: string
+        traceparent:
+          type:
+          - string
+          - 'null'
+        datacontenttype:
+          type: string
+          const: application/json
+        data:
+          type: object

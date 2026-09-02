@@ -1,0 +1,15 @@
+{
+  "project": "BreachAtlas",
+  "status": "baseline-to-be-measured-in-code",
+  "required_metrics": [
+    "p50",
+    "p95",
+    "p99",
+    "throughput",
+    "cpu",
+    "memory",
+    "storage_growth",
+    "queue_lag"
+  ],
+  "rule": "No performance number may be published without commit, workload and hardware metadata."
+}
