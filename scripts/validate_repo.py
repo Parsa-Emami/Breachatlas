@@ -8,6 +8,7 @@ required=['README.md','LICENSE','SECURITY.md','CONTRIBUTING.md','.env.example','
 for x in required:
     if not (root/x).exists(): err(f'missing: {x}')
 for p in root.rglob('*.json'):
+    if any(part in p.relative_to(root).parts for part in ['.git','node_modules','dist','test-results','playwright-report']): continue
     try: json.loads(p.read_text(encoding='utf-8'))
     except Exception as e: err(f'invalid JSON {p.relative_to(root)}: {e}')
 if (root/'contracts/openapi.v1.json').exists():

@@ -1,0 +1,436 @@
+openapi: 3.2.0
+info:
+  title: BreachAtlas API
+  version: 1.0.0
+  description: Canonical implementation-start HTTP contract. Source code must conform to this contract; changes require compatibility review.
+servers:
+- url: /api/v1
+tags:
+- name: BreachAtlas
+security:
+- bearerAuth: []
+paths:
+  /cases:
+    post:
+      summary: Create investigation case
+      operationId: breachatlas_post_cases
+      tags:
+      - BreachAtlas
+      responses:
+        '202':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResult'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        '422':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                classification:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+              required:
+              - title
+              - classification
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      - $ref: '#/components/parameters/RequestId'
+  /cases/{case}/evidence:
+    parameters:
+    - name: case
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+      description: Opaque resource identifier.
+    post:
+      summary: Register/seal evidence
+      operationId: breachatlas_post_cases_case_evidence
+      tags:
+      - BreachAtlas
+      responses:
+        '202':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResult'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        '422':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                digest:
+                  type: string
+                  pattern: ^[A-Fa-f0-9]{64}$
+                size_bytes:
+                  type: integer
+                  minimum: 0
+                media_type:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                source:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+              required:
+              - name
+              - digest
+              - size_bytes
+              - media_type
+              - source
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      - $ref: '#/components/parameters/RequestId'
+  /evidence/{evidence}/verify:
+    parameters:
+    - name: evidence
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+      description: Opaque resource identifier.
+    get:
+      summary: Verify evidence seal/custody
+      operationId: breachatlas_get_evidence_evidence_verify
+      tags:
+      - BreachAtlas
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResult'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        '422':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      parameters:
+      - $ref: '#/components/parameters/RequestId'
+  /analyzers/{plugin}/runs:
+    parameters:
+    - name: plugin
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+      description: Opaque resource identifier.
+    post:
+      summary: Run isolated analyzer
+      operationId: breachatlas_post_analyzers_plugin_runs
+      tags:
+      - BreachAtlas
+      responses:
+        '202':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResult'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        '422':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                case_id:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                evidence_id:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                plugin_digest:
+                  type: string
+                  pattern: ^[A-Fa-f0-9]{64}$
+                parameters:
+                  type:
+                  - object
+                  - array
+              required:
+              - case_id
+              - evidence_id
+              - plugin_digest
+              - parameters
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      - $ref: '#/components/parameters/RequestId'
+  /cases/{case}/timeline:
+    parameters:
+    - name: case
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+      description: Opaque resource identifier.
+    get:
+      summary: Read derived timeline
+      operationId: breachatlas_get_cases_case_timeline
+      tags:
+      - BreachAtlas
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResult'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        '422':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      parameters:
+      - $ref: '#/components/parameters/RequestId'
+  /cases/{case}/exports:
+    parameters:
+    - name: case
+      in: path
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+      description: Opaque resource identifier.
+    post:
+      summary: Create sealed case export
+      operationId: breachatlas_post_cases_case_exports
+      tags:
+      - BreachAtlas
+      responses:
+        '202':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResult'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '403':
+          $ref: '#/components/responses/ErrorResponse'
+        '404':
+          $ref: '#/components/responses/ErrorResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+        '422':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/ErrorResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                format:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                include_evidence:
+                  type: boolean
+                reason:
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+              required:
+              - format
+              - include_evidence
+              - reason
+      parameters:
+      - $ref: '#/components/parameters/IdempotencyKey'
+      - $ref: '#/components/parameters/RequestId'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: opaque/OIDC-access-token
+    mutualTLS:
+      type: mutualTLS
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        minLength: 16
+        maxLength: 128
+      description: Unique command key. Same key + same principal + same semantic request must replay the original result.
+    RequestId:
+      name: X-Request-ID
+      in: header
+      required: false
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 128
+  schemas:
+    OperationResult:
+      type: object
+      additionalProperties: false
+      required:
+      - request_id
+      - status
+      properties:
+        request_id:
+          type: string
+        operation_id:
+          type:
+          - string
+          - 'null'
+        resource_id:
+          type:
+          - string
+          - 'null'
+        version:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        status:
+          type: string
+        data:
+          type:
+          - object
+          - array
+          - string
+          - number
+          - boolean
+          - 'null'
+    ApiError:
+      type: object
+      additionalProperties: false
+      required:
+      - request_id
+      - code
+      - message
+      properties:
+        request_id:
+          type: string
+        code:
+          type: string
+          pattern: ^[A-Z0-9_]+$
+        message:
+          type: string
+        retryable:
+          type: boolean
+        details:
+          type:
+          - object
+          - array
+          - 'null'
+  responses:
+    ErrorResponse:
+      description: Stable API error envelope.
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ApiError'

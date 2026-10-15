@@ -1,0 +1,26 @@
+[Unit]
+Description=BreachAtlas web application shell
+After=network.target
+
+[Service]
+Type=simple
+User=breachatlas-web
+Group=breachatlas-web
+WorkingDirectory=/srv/breachatlas/current
+ExecStart=/usr/bin/node scripts/serve-web.mjs --root web --port 4310 --config ops/web/runtime-config.json
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

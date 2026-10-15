@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:parsa:breachatlas:input:0",
+  "title": "evidence-manifest planning draft",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "size_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "media_type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "acquired_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "custody_root": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "case_id",
+    "evidence_id",
+    "sha256",
+    "size_bytes",
+    "media_type",
+    "acquired_at",
+    "custody_root"
+  ]
+}

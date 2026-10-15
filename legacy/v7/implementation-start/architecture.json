@@ -1,0 +1,32 @@
+{
+  "project": "BreachAtlas",
+  "version": "v1-reference",
+  "risk": "CRITICAL",
+  "runtime": [
+    "Laravel 13",
+    "React graph/timeline UI",
+    "PostgreSQL 18",
+    "OpenSearch derived search/timeline",
+    "S3-compatible object store",
+    "rootless Podman analyzer workers",
+    "Valkey",
+    "OpenTelemetry"
+  ],
+  "final_decisions": [
+    "Evidence bytes are content-addressed immutable objects. The application never mutates source evidence; analyzers create new derived artifacts.",
+    "EvidenceManifest v1 records SHA-256, size, media type, acquisition/source metadata, uploader, storage locator, timestamps and custody root.",
+    "PostgreSQL is authoritative for cases/evidence/custody/legal holds. OpenSearch is a fully rebuildable timeline/search projection.",
+    "Timeline events retain original timestamp string/value, timezone/offset if known, normalized UTC, precision, source clock and confidence/ambiguity metadata.",
+    "AnalyzerPlugin v1 is an OCI image pinned by digest, no-network by default, read-only evidence mount, bounded resources and structured output manifest.",
+    "Analyzer results include tool/image digest, config hash, input evidence hashes, output hashes and timestamps; in-toto-style attestation format is supported for provenance.",
+    "Legal hold overrides normal retention/deletion. Deletion creates durable audit/tombstone evidence and never rewrites historical custody events.",
+    "Portable export contains case manifest, evidence/derived manifests, custody log and SHA256SUMS; optional manifest signature is produced via SignerProvider/OpenBao Transit.",
+    "Real incident evidence is never committed to repository demo fixtures."
+  ],
+  "data_ownership": {
+    "PostgreSQL": "case/evidence metadata/custody/holds/analyst state",
+    "ObjectStore": "immutable source and derived bytes",
+    "OpenSearch": "rebuildable timeline/search projection",
+    "Valkey": "jobs/cache only"
+  }
+}

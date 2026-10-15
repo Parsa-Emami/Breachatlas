@@ -1,0 +1,554 @@
+{
+  "name": "BreachAtlas",
+  "slug": "breachatlas",
+  "title": "Give every piece of evidence a place.",
+  "description": "A browser workspace for case evidence, chain of custody and source-backed timelines.",
+  "accent": "#a4c9f6",
+  "mode": "private-web",
+  "documentType": "evidence-manifest",
+  "invariants": [
+    "Sealed source bytes never modified",
+    "Legal hold takes precedence over deletion",
+    "Raw timestamp and confidence survive normalization"
+  ],
+  "fields": {
+    "case_id": "id",
+    "evidence_id": "id",
+    "sha256": "hash",
+    "size_bytes": "int",
+    "media_type": "text",
+    "acquired_at": "timestamp",
+    "custody_root": "hash"
+  },
+  "tasks": [
+    {
+      "id": "C01",
+      "title": "docs(product): confirm personal use acceptance and demand hypotheses",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Choose one owned real task, identify current workaround and record measured baseline; public demand remains unvalidated."
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": "C02",
+      "title": "chore(toolchain): verify supported versions and lock dependencies",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Official support/release URLs and verification date exist for each selected dependency; no future or assumed version pin."
+      ],
+      "dependsOn": [
+        "C01"
+      ]
+    },
+    {
+      "id": "C03",
+      "title": "chore(app): initialize selected minimal runtime",
+      "stage": "foundation",
+      "status": "in_progress",
+      "acceptance": [
+        "Fresh checkout boots minimal CLI or local UI; do not run legacy Laravel/PostgreSQL bootstrap.",
+        "Web entry point is mandatory. W01-W05 supply the tested shell; complete engine obligations before verifying C03."
+      ],
+      "dependsOn": [
+        "C02"
+      ]
+    },
+    {
+      "id": "C04",
+      "title": "feat(contracts): freeze typed local and transport contracts",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Inputs, errors, output, schema versions, timeout and compatibility behavior are typed with positive/negative fixtures."
+      ],
+      "dependsOn": [
+        "C03"
+      ]
+    },
+    {
+      "id": "C05",
+      "title": "feat(storage): implement minimal authoritative storage adapter",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Authority, atomic write boundary and recovery mechanism match selected profile; storage loss test has actionable result."
+      ],
+      "dependsOn": [
+        "C04"
+      ]
+    },
+    {
+      "id": "C06",
+      "title": "ci(checks): run actual runtime build and foundational tests",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Clean-checkout build, formatting and contract/invariant tests pass; plan validation is never reported as application testing."
+      ],
+      "dependsOn": [
+        "C05"
+      ]
+    },
+    {
+      "id": "C07",
+      "title": "feat(cases): define analyst case and evidence aggregates",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Evidence belongs to one case; cross-case access fails."
+      ],
+      "dependsOn": [
+        "C06"
+      ]
+    },
+    {
+      "id": "C08",
+      "title": "feat(upload): stream evidence into quarantine and hash",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Interrupted or oversized upload never appears sealed."
+      ],
+      "dependsOn": [
+        "C07"
+      ]
+    },
+    {
+      "id": "C09",
+      "title": "feat(seal): commit content addressed evidence manifests",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "File is durable before metadata seal; hash mismatch aborts and orphan recovery is defined."
+      ],
+      "dependsOn": [
+        "C08"
+      ]
+    },
+    {
+      "id": "C10",
+      "title": "feat(verify): verify bytes against sealed manifest",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "One-byte modification, missing file and size mismatch are distinct failures."
+      ],
+      "dependsOn": [
+        "C09"
+      ]
+    },
+    {
+      "id": "C11",
+      "title": "feat(custody): append attributable custody events",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Every transfer records actor/time/reason; no update API rewrites event history."
+      ],
+      "dependsOn": [
+        "C10"
+      ]
+    },
+    {
+      "id": "C12",
+      "title": "feat(checkpoints): verify signed externally stored custody roots",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Independent checkpoint detects ledger rewrite; signer trust must be supplied outside bundle."
+      ],
+      "dependsOn": [
+        "C11"
+      ]
+    },
+    {
+      "id": "C13",
+      "title": "feat(holds): block deletion while hold is active",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Concurrent hold/delete cannot remove held evidence and reason is audited."
+      ],
+      "dependsOn": [
+        "C12"
+      ]
+    },
+    {
+      "id": "C14",
+      "title": "feat(analyzers): define fixed csv json analyzer interface",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Only shipped allowlisted non-executing parsers are enabled in MVP."
+      ],
+      "dependsOn": [
+        "C13"
+      ]
+    },
+    {
+      "id": "C15",
+      "title": "feat(isolation): bound analyzer resources and filesystem access",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Read-only evidence, private scratch, no network and deadline are verified."
+      ],
+      "dependsOn": [
+        "C14"
+      ]
+    },
+    {
+      "id": "C16",
+      "title": "feat(artifacts): bind derived output to inputs and tools",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Derived manifest includes input hashes, tool version and config hash."
+      ],
+      "dependsOn": [
+        "C15"
+      ]
+    },
+    {
+      "id": "C17",
+      "title": "feat(timestamps): normalize times without losing raw values",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Unknown zone and DST ambiguity remain explicit rather than fabricated UTC."
+      ],
+      "dependsOn": [
+        "C16"
+      ]
+    },
+    {
+      "id": "C18",
+      "title": "feat(timeline): index stable derived event identities",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Duplicate/reordered analysis cannot duplicate timeline entries."
+      ],
+      "dependsOn": [
+        "C17"
+      ]
+    },
+    {
+      "id": "C19",
+      "title": "feat(search): query bounded local timeline index",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Index can be rebuilt and queries stay within event/deadline bounds."
+      ],
+      "dependsOn": [
+        "C18"
+      ]
+    },
+    {
+      "id": "C20",
+      "title": "feat(hypotheses): separate notes from observed facts",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Analyst hypothesis has author and rationale and cannot become source evidence by UI label."
+      ],
+      "dependsOn": [
+        "C19"
+      ]
+    },
+    {
+      "id": "C21",
+      "title": "feat(ui): show case evidence integrity and custody",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Failed verification and incomplete seal are visible; user strings are escaped."
+      ],
+      "dependsOn": [
+        "C20"
+      ]
+    },
+    {
+      "id": "C22",
+      "title": "feat(ui): render timezone aware timeline and notes",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Raw timestamp, normalized time and confidence are inspectable with table alternative."
+      ],
+      "dependsOn": [
+        "C21"
+      ]
+    },
+    {
+      "id": "C23",
+      "title": "feat(export): package evidence manifests and custody ledger",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Export binds selected evidence, derived files and checkpoint without altering source bytes."
+      ],
+      "dependsOn": [
+        "C22"
+      ]
+    },
+    {
+      "id": "C24",
+      "title": "feat(verifier): verify portable bundle without server",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Missing or tampered file fails; unsigned and trusted-signature status remain distinct."
+      ],
+      "dependsOn": [
+        "C23"
+      ]
+    },
+    {
+      "id": "C25",
+      "title": "feat(retention): audit explicit evidence destruction",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "No automatic raw-evidence TTL; operator destruction respects hold and creates tombstone."
+      ],
+      "dependsOn": [
+        "C24"
+      ]
+    },
+    {
+      "id": "C26",
+      "title": "test(recovery): restore case bytes custody and derived indexes",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Restore cross-checks manifest/file consistency and rebuilds timeline without custody rewrite."
+      ],
+      "dependsOn": [
+        "C25"
+      ]
+    },
+    {
+      "id": "C27",
+      "title": "test(security): close abuse and authorization release gaps",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "Run project-specific negative UAT plus XSS/import/auth checks for enabled surfaces; document unsupported attack surface and unresolved findings."
+      ],
+      "dependsOn": [
+        "C26"
+      ]
+    },
+    {
+      "id": "C28",
+      "title": "perf(budgets): measure target workload and overload behavior",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "Record hardware, OS, source digest, workload, p50/p95/p99 where meaningful, CPU, RSS, storage growth, cancellation and saturation; lower supported limits if targets fail."
+      ],
+      "dependsOn": [
+        "C27"
+      ]
+    },
+    {
+      "id": "C29",
+      "title": "feat(operations): expose health diagnostics and bounded logs",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "Local health/status path identifies storage/job/provider failure; sensitive content is absent from synthetic log sentinel test."
+      ],
+      "dependsOn": [
+        "C28"
+      ]
+    },
+    {
+      "id": "C30",
+      "title": "test(recovery): prove personal backup restore and private install",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "Fresh machine/browser install and restore completes project UAT; personal deployment remains private until its relevant safety gates pass."
+      ],
+      "dependsOn": [
+        "C29"
+      ]
+    },
+    {
+      "id": "C31",
+      "title": "build(packaging): create versioned installable artifacts",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Static/CLI/container artifact matches chosen distribution; SBOM, licenses, checksums and provenance truthfully reflect what is built."
+      ],
+      "dependsOn": [
+        "C30"
+      ]
+    },
+    {
+      "id": "C32",
+      "title": "feat(web): configure domain tls and isolated public demo",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Domain/HTTPS/cookies/CSP and private-origin policy are checked; public demo contains synthetic data only and dangerous runtime features are disabled."
+      ],
+      "dependsOn": [
+        "C31"
+      ]
+    },
+    {
+      "id": "C33",
+      "title": "test(ux): verify accessibility mobile and update behavior",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Keyboard/table alternative, 360px through 1440px layouts, empty/error/offline states and N-1 data upgrade fixtures work on documented supported platforms."
+      ],
+      "dependsOn": [
+        "C32"
+      ]
+    },
+    {
+      "id": "C34",
+      "title": "docs(release): publish english usage limits and support contract",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "New user completes one documented task; English install/use/privacy/limits/support pages include owner contact supplied by maintainer and actual evidence links."
+      ],
+      "dependsOn": [
+        "C33"
+      ]
+    },
+    {
+      "id": "C35",
+      "title": "test(release): exercise signed artifact and clean upgrade paths",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Install artifact from clean environment; verify signer with independently trusted key/identity; supported upgrade and rollback preserve latest valid data."
+      ],
+      "dependsOn": [
+        "C34"
+      ]
+    },
+    {
+      "id": "C36",
+      "title": "docs(beta): record independent pilot feedback and beta gate",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Target: 5 relevant trials, 3 complete core task and 2 return for real repeat use; if unavailable continue personal release and mark demand unvalidated rather than inventing pilots."
+      ],
+      "dependsOn": [
+        "C35"
+      ]
+    },
+    {
+      "id": "C37",
+      "title": "fix(beta): resolve evidence backed pilot blockers",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Fix observed failures, re-run affected checks, record remaining limitations; if no pilots, use observed personal UAT issues and retain unvalidated market label."
+      ],
+      "dependsOn": [
+        "C36"
+      ]
+    },
+    {
+      "id": "C38",
+      "title": "docs(service): freeze retention portability quotas and support policy",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "For public service state data location, deletion/export rules, quotas, expected support and outage behavior; paid billing and SLA are not enabled without separate ADR."
+      ],
+      "dependsOn": [
+        "C37"
+      ]
+    },
+    {
+      "id": "C39",
+      "title": "ci(release): verify v1 gate from clean source tree",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Every mandatory requirement has actual passed evidence; no critical open security/recovery issue; release profile and demand status are explicit."
+      ],
+      "dependsOn": [
+        "C38"
+      ]
+    },
+    {
+      "id": "C40",
+      "title": "chore(release): publish v1 artifacts and monitor first use",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Release only verified profile artifacts, run installed smoke test, record actual version/source digest and follow up support/rollback; never publish fabricated claims."
+      ],
+      "dependsOn": [
+        "C39"
+      ]
+    }
+  ],
+  "webTasks": [
+    {
+      "id": "W01",
+      "title": "Browser workspace and project roadmap",
+      "status": "verified",
+      "acceptance": "Responsive workspace, local JSON preview, accessible navigation and filterable forty-task roadmap work."
+    },
+    {
+      "id": "W02",
+      "title": "Validated runtime and constrained web server",
+      "status": "verified",
+      "acceptance": "Configuration fails closed; no engine admission, same-origin paths, health scopes, no-store configuration and path containment are tested."
+    },
+    {
+      "id": "W03",
+      "title": "Automated build and verification pipeline",
+      "status": "verified",
+      "acceptance": "Pinned Actions build the application, run web tests and publish a web-only CI artifact. Remote run result is recorded separately."
+    },
+    {
+      "id": "W04",
+      "title": "Web release packaging and operator configuration",
+      "status": "verified",
+      "acceptance": "Package contains runnable web server, assets, checksums and provenance; TLS proxy and hardened systemd templates are supplied, not deployed."
+    },
+    {
+      "id": "W05",
+      "title": "Reconcile web delivery with product plans",
+      "status": "verified",
+      "acceptance": "All supplied forty product intents and requirements remain traceable. Existing code and protected configuration are preserved."
+    },
+    {
+      "id": "W06",
+      "title": "BreachAtlas engine integration",
+      "status": "planned",
+      "acceptance": "Implement the first domain slice from IMPLEMENTATION_BLUEPRINT.md through the browser; return real typed results and failures."
+    },
+    {
+      "id": "W07",
+      "title": "Private identity and permission boundaries",
+      "status": "planned",
+      "acceptance": "Establish project-scoped identity, object authorization, CSRF for cookie mutations, bounded work and redacted audit before enabling a private engine API."
+    },
+    {
+      "id": "W08",
+      "title": "Observed host deployment and recovery",
+      "status": "planned",
+      "acceptance": "Provision an owned domain/TLS and approved private admission, install artifact, observe health, validate persistence/provider recovery and retain measured evidence."
+    }
+  ]
+}

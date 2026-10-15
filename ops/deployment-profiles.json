@@ -1,0 +1,42 @@
+{
+  "version": "0",
+  "project": "BreachAtlas",
+  "status": "web_foundation",
+  "primary_mode": "private-web",
+  "domain_profile": {
+    "public_demo": "synthetic-only",
+    "admit_untrusted_runtime_jobs": false,
+    "enable_sensitive_data_upload_by_default": false,
+    "https_required": true
+  },
+  "private_profile": {
+    "single_owner": true,
+    "persistent_local_volume": true,
+    "use_external_database_service": false,
+    "providers": [
+      "Go private service/CLI",
+      "SQLite case and custody metadata",
+      "Content-addressed local evidence files",
+      "React timeline UI"
+    ]
+  },
+  "capacity_targets": {
+    "active_analysts": 1,
+    "evidence_file_max_mib": 100,
+    "case_evidence_max_gib": 5,
+    "analyzer_concurrency": 1,
+    "timeline_events": 100000
+  },
+  "measured": false,
+  "engine_mode": "embedded-private",
+  "web": {
+    "artifact": "dist/release",
+    "listen": "127.0.0.1",
+    "port": 4310,
+    "https_proxy": "ops/web/nginx.conf.template",
+    "service": "ops/web/service.systemd",
+    "engine_enabled": false,
+    "private_admission": "deny-all until operator sets trusted network ranges",
+    "offline": false
+  }
+}

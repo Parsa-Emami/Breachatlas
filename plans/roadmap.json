@@ -1,0 +1,1003 @@
+{
+  "version": "0.0.0",
+  "project": "BreachAtlas",
+  "commits": [
+    {
+      "id": "C01",
+      "stage": "foundation",
+      "title": "docs(product): confirm personal use acceptance and demand hypotheses",
+      "status": "planned",
+      "depends_on": [],
+      "requirements": [
+        "N01"
+      ],
+      "deliverables": [
+        "docs/product/VALIDATION_LOG.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C01.json"
+      ],
+      "acceptance": [
+        "Choose one owned real task, identify current workaround and record measured baseline; public demand remains unvalidated."
+      ],
+      "evidence_path": "docs/evidence/C01.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C02",
+      "stage": "foundation",
+      "title": "chore(toolchain): verify supported versions and lock dependencies",
+      "status": "planned",
+      "depends_on": [
+        "C01"
+      ],
+      "requirements": [
+        "N02"
+      ],
+      "deliverables": [
+        "docs/engineering/toolchain-lock.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C02.json"
+      ],
+      "acceptance": [
+        "Official support/release URLs and verification date exist for each selected dependency; no future or assumed version pin."
+      ],
+      "evidence_path": "docs/evidence/C02.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C03",
+      "stage": "foundation",
+      "title": "chore(app): initialize selected minimal runtime",
+      "status": "planned",
+      "depends_on": [
+        "C02"
+      ],
+      "requirements": [
+        "N03"
+      ],
+      "deliverables": [
+        "docs/engineering/BOOTSTRAP_EVIDENCE.md",
+        "go.mod",
+        "go.sum",
+        "cmd/breachatlas/main.go",
+        "package.json",
+        "package-lock.json",
+        "apps/web/src/main.tsx",
+        "docs/engineering/WEB_RUNBOOK.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C03.json"
+      ],
+      "acceptance": [
+        "Fresh checkout boots minimal CLI or local UI; do not run legacy Laravel/PostgreSQL bootstrap.",
+        "Web entry point is mandatory. W01-W05 supply the tested shell; complete engine obligations before verifying C03."
+      ],
+      "evidence_path": "docs/evidence/C03.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C04",
+      "stage": "foundation",
+      "title": "feat(contracts): freeze typed local and transport contracts",
+      "status": "planned",
+      "depends_on": [
+        "C03"
+      ],
+      "requirements": [
+        "N04"
+      ],
+      "deliverables": [
+        "contracts/README.md",
+        "contracts/input.schema.json",
+        "contracts/result.schema.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C04.json"
+      ],
+      "acceptance": [
+        "Inputs, errors, output, schema versions, timeout and compatibility behavior are typed with positive/negative fixtures."
+      ],
+      "evidence_path": "docs/evidence/C04.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C05",
+      "stage": "foundation",
+      "title": "feat(storage): implement minimal authoritative storage adapter",
+      "status": "planned",
+      "depends_on": [
+        "C04"
+      ],
+      "requirements": [
+        "N05"
+      ],
+      "deliverables": [
+        "docs/architecture/STORAGE_PROOF.md",
+        "internal/storage/adapter.go",
+        "tests/storage_test.go"
+      ],
+      "verification": [
+        "tests/storage_test.go"
+      ],
+      "acceptance": [
+        "Authority, atomic write boundary and recovery mechanism match selected profile; storage loss test has actionable result."
+      ],
+      "evidence_path": "docs/evidence/C05.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C06",
+      "stage": "foundation",
+      "title": "ci(checks): run actual runtime build and foundational tests",
+      "status": "planned",
+      "depends_on": [
+        "C05"
+      ],
+      "requirements": [
+        "N06"
+      ],
+      "deliverables": [
+        ".github/workflows/runtime.yml"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C06.json"
+      ],
+      "acceptance": [
+        "Clean-checkout build, formatting and contract/invariant tests pass; plan validation is never reported as application testing."
+      ],
+      "evidence_path": "docs/evidence/C06.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C07",
+      "stage": "domain",
+      "title": "feat(cases): define analyst case and evidence aggregates",
+      "status": "planned",
+      "depends_on": [
+        "C06"
+      ],
+      "requirements": [
+        "F01"
+      ],
+      "deliverables": [
+        "internal/cases/model.go",
+        "tests/case_test.go"
+      ],
+      "verification": [
+        "tests/case_test.go"
+      ],
+      "acceptance": [
+        "Evidence belongs to one case; cross-case access fails."
+      ],
+      "evidence_path": "docs/evidence/C07.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C08",
+      "stage": "domain",
+      "title": "feat(upload): stream evidence into quarantine and hash",
+      "status": "planned",
+      "depends_on": [
+        "C07"
+      ],
+      "requirements": [
+        "F02"
+      ],
+      "deliverables": [
+        "internal/evidence/upload.go",
+        "tests/upload_test.go"
+      ],
+      "verification": [
+        "tests/upload_test.go"
+      ],
+      "acceptance": [
+        "Interrupted or oversized upload never appears sealed."
+      ],
+      "evidence_path": "docs/evidence/C08.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C09",
+      "stage": "domain",
+      "title": "feat(seal): commit content addressed evidence manifests",
+      "status": "planned",
+      "depends_on": [
+        "C08"
+      ],
+      "requirements": [
+        "F03"
+      ],
+      "deliverables": [
+        "internal/evidence/seal.go",
+        "tests/seal_test.go"
+      ],
+      "verification": [
+        "tests/seal_test.go"
+      ],
+      "acceptance": [
+        "File is durable before metadata seal; hash mismatch aborts and orphan recovery is defined."
+      ],
+      "evidence_path": "docs/evidence/C09.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C10",
+      "stage": "domain",
+      "title": "feat(verify): verify bytes against sealed manifest",
+      "status": "planned",
+      "depends_on": [
+        "C09"
+      ],
+      "requirements": [
+        "F04"
+      ],
+      "deliverables": [
+        "internal/evidence/verify.go",
+        "tests/integrity_test.go"
+      ],
+      "verification": [
+        "tests/integrity_test.go"
+      ],
+      "acceptance": [
+        "One-byte modification, missing file and size mismatch are distinct failures."
+      ],
+      "evidence_path": "docs/evidence/C10.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C11",
+      "stage": "domain",
+      "title": "feat(custody): append attributable custody events",
+      "status": "planned",
+      "depends_on": [
+        "C10"
+      ],
+      "requirements": [
+        "F05"
+      ],
+      "deliverables": [
+        "internal/custody/events.go",
+        "tests/custody_test.go"
+      ],
+      "verification": [
+        "tests/custody_test.go"
+      ],
+      "acceptance": [
+        "Every transfer records actor/time/reason; no update API rewrites event history."
+      ],
+      "evidence_path": "docs/evidence/C11.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C12",
+      "stage": "domain",
+      "title": "feat(checkpoints): verify signed externally stored custody roots",
+      "status": "planned",
+      "depends_on": [
+        "C11"
+      ],
+      "requirements": [
+        "F06"
+      ],
+      "deliverables": [
+        "internal/custody/checkpoints.go",
+        "tests/checkpoint_test.go"
+      ],
+      "verification": [
+        "tests/checkpoint_test.go"
+      ],
+      "acceptance": [
+        "Independent checkpoint detects ledger rewrite; signer trust must be supplied outside bundle."
+      ],
+      "evidence_path": "docs/evidence/C12.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C13",
+      "stage": "domain",
+      "title": "feat(holds): block deletion while hold is active",
+      "status": "planned",
+      "depends_on": [
+        "C12"
+      ],
+      "requirements": [
+        "F07"
+      ],
+      "deliverables": [
+        "internal/holds/service.go",
+        "tests/hold_test.go"
+      ],
+      "verification": [
+        "tests/hold_test.go"
+      ],
+      "acceptance": [
+        "Concurrent hold/delete cannot remove held evidence and reason is audited."
+      ],
+      "evidence_path": "docs/evidence/C13.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C14",
+      "stage": "domain",
+      "title": "feat(analyzers): define fixed csv json analyzer interface",
+      "status": "planned",
+      "depends_on": [
+        "C13"
+      ],
+      "requirements": [
+        "F08"
+      ],
+      "deliverables": [
+        "internal/analyzers/provider.go",
+        "tests/analyzer_contract_test.go"
+      ],
+      "verification": [
+        "tests/analyzer_contract_test.go"
+      ],
+      "acceptance": [
+        "Only shipped allowlisted non-executing parsers are enabled in MVP."
+      ],
+      "evidence_path": "docs/evidence/C14.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C15",
+      "stage": "domain",
+      "title": "feat(isolation): bound analyzer resources and filesystem access",
+      "status": "planned",
+      "depends_on": [
+        "C14"
+      ],
+      "requirements": [
+        "F09"
+      ],
+      "deliverables": [
+        "internal/analyzers/sandbox.go",
+        "tests/isolation_test.go"
+      ],
+      "verification": [
+        "tests/isolation_test.go"
+      ],
+      "acceptance": [
+        "Read-only evidence, private scratch, no network and deadline are verified."
+      ],
+      "evidence_path": "docs/evidence/C15.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C16",
+      "stage": "domain",
+      "title": "feat(artifacts): bind derived output to inputs and tools",
+      "status": "planned",
+      "depends_on": [
+        "C15"
+      ],
+      "requirements": [
+        "F10"
+      ],
+      "deliverables": [
+        "internal/artifacts/manifest.go",
+        "tests/provenance_test.go"
+      ],
+      "verification": [
+        "tests/provenance_test.go"
+      ],
+      "acceptance": [
+        "Derived manifest includes input hashes, tool version and config hash."
+      ],
+      "evidence_path": "docs/evidence/C16.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C17",
+      "stage": "domain",
+      "title": "feat(timestamps): normalize times without losing raw values",
+      "status": "planned",
+      "depends_on": [
+        "C16"
+      ],
+      "requirements": [
+        "F11"
+      ],
+      "deliverables": [
+        "internal/timeline/time.go",
+        "tests/time_test.go"
+      ],
+      "verification": [
+        "tests/time_test.go"
+      ],
+      "acceptance": [
+        "Unknown zone and DST ambiguity remain explicit rather than fabricated UTC."
+      ],
+      "evidence_path": "docs/evidence/C17.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C18",
+      "stage": "domain",
+      "title": "feat(timeline): index stable derived event identities",
+      "status": "planned",
+      "depends_on": [
+        "C17"
+      ],
+      "requirements": [
+        "F12"
+      ],
+      "deliverables": [
+        "internal/timeline/index.go",
+        "tests/timeline_test.go"
+      ],
+      "verification": [
+        "tests/timeline_test.go"
+      ],
+      "acceptance": [
+        "Duplicate/reordered analysis cannot duplicate timeline entries."
+      ],
+      "evidence_path": "docs/evidence/C18.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C19",
+      "stage": "domain",
+      "title": "feat(search): query bounded local timeline index",
+      "status": "planned",
+      "depends_on": [
+        "C18"
+      ],
+      "requirements": [
+        "F13"
+      ],
+      "deliverables": [
+        "internal/timeline/search.go",
+        "tests/search_test.go"
+      ],
+      "verification": [
+        "tests/search_test.go"
+      ],
+      "acceptance": [
+        "Index can be rebuilt and queries stay within event/deadline bounds."
+      ],
+      "evidence_path": "docs/evidence/C19.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C20",
+      "stage": "domain",
+      "title": "feat(hypotheses): separate notes from observed facts",
+      "status": "planned",
+      "depends_on": [
+        "C19"
+      ],
+      "requirements": [
+        "F14"
+      ],
+      "deliverables": [
+        "internal/findings/notes.go",
+        "tests/facts_test.go"
+      ],
+      "verification": [
+        "tests/facts_test.go"
+      ],
+      "acceptance": [
+        "Analyst hypothesis has author and rationale and cannot become source evidence by UI label."
+      ],
+      "evidence_path": "docs/evidence/C20.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C21",
+      "stage": "domain",
+      "title": "feat(ui): show case evidence integrity and custody",
+      "status": "planned",
+      "depends_on": [
+        "C20"
+      ],
+      "requirements": [
+        "F15"
+      ],
+      "deliverables": [
+        "apps/web/src/pages/Evidence.tsx",
+        "apps/web/tests/evidence.spec.ts"
+      ],
+      "verification": [
+        "apps/web/tests/evidence.spec.ts"
+      ],
+      "acceptance": [
+        "Failed verification and incomplete seal are visible; user strings are escaped."
+      ],
+      "evidence_path": "docs/evidence/C21.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C22",
+      "stage": "domain",
+      "title": "feat(ui): render timezone aware timeline and notes",
+      "status": "planned",
+      "depends_on": [
+        "C21"
+      ],
+      "requirements": [
+        "F16"
+      ],
+      "deliverables": [
+        "apps/web/src/pages/Timeline.tsx",
+        "apps/web/tests/timeline.spec.ts"
+      ],
+      "verification": [
+        "apps/web/tests/timeline.spec.ts"
+      ],
+      "acceptance": [
+        "Raw timestamp, normalized time and confidence are inspectable with table alternative."
+      ],
+      "evidence_path": "docs/evidence/C22.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C23",
+      "stage": "domain",
+      "title": "feat(export): package evidence manifests and custody ledger",
+      "status": "planned",
+      "depends_on": [
+        "C22"
+      ],
+      "requirements": [
+        "F17"
+      ],
+      "deliverables": [
+        "internal/export/package.go",
+        "tests/export_test.go"
+      ],
+      "verification": [
+        "tests/export_test.go"
+      ],
+      "acceptance": [
+        "Export binds selected evidence, derived files and checkpoint without altering source bytes."
+      ],
+      "evidence_path": "docs/evidence/C23.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C24",
+      "stage": "domain",
+      "title": "feat(verifier): verify portable bundle without server",
+      "status": "planned",
+      "depends_on": [
+        "C23"
+      ],
+      "requirements": [
+        "F18"
+      ],
+      "deliverables": [
+        "cmd/verify/main.go",
+        "tests/offline_verify_test.go"
+      ],
+      "verification": [
+        "tests/offline_verify_test.go"
+      ],
+      "acceptance": [
+        "Missing or tampered file fails; unsigned and trusted-signature status remain distinct."
+      ],
+      "evidence_path": "docs/evidence/C24.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C25",
+      "stage": "domain",
+      "title": "feat(retention): audit explicit evidence destruction",
+      "status": "planned",
+      "depends_on": [
+        "C24"
+      ],
+      "requirements": [
+        "F19"
+      ],
+      "deliverables": [
+        "internal/retention/destroy.go",
+        "tests/retention_test.go"
+      ],
+      "verification": [
+        "tests/retention_test.go"
+      ],
+      "acceptance": [
+        "No automatic raw-evidence TTL; operator destruction respects hold and creates tombstone."
+      ],
+      "evidence_path": "docs/evidence/C25.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C26",
+      "stage": "domain",
+      "title": "test(recovery): restore case bytes custody and derived indexes",
+      "status": "planned",
+      "depends_on": [
+        "C25"
+      ],
+      "requirements": [
+        "F20"
+      ],
+      "deliverables": [
+        "tests/restore_test.go",
+        "docs/evidence/restore-template.md"
+      ],
+      "verification": [
+        "tests/restore_test.go"
+      ],
+      "acceptance": [
+        "Restore cross-checks manifest/file consistency and rebuilds timeline without custody rewrite."
+      ],
+      "evidence_path": "docs/evidence/C26.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C27",
+      "stage": "private-release",
+      "title": "test(security): close abuse and authorization release gaps",
+      "status": "planned",
+      "depends_on": [
+        "C26"
+      ],
+      "requirements": [
+        "N27"
+      ],
+      "deliverables": [
+        "tests/release/security-matrix.md"
+      ],
+      "verification": [
+        "tests/release/security-matrix.md"
+      ],
+      "acceptance": [
+        "Run project-specific negative UAT plus XSS/import/auth checks for enabled surfaces; document unsupported attack surface and unresolved findings."
+      ],
+      "evidence_path": "docs/evidence/C27.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C28",
+      "stage": "private-release",
+      "title": "perf(budgets): measure target workload and overload behavior",
+      "status": "planned",
+      "depends_on": [
+        "C27"
+      ],
+      "requirements": [
+        "N28"
+      ],
+      "deliverables": [
+        "docs/evidence/performance.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C28.json"
+      ],
+      "acceptance": [
+        "Record hardware, OS, source digest, workload, p50/p95/p99 where meaningful, CPU, RSS, storage growth, cancellation and saturation; lower supported limits if targets fail."
+      ],
+      "evidence_path": "docs/evidence/C28.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C29",
+      "stage": "private-release",
+      "title": "feat(operations): expose health diagnostics and bounded logs",
+      "status": "planned",
+      "depends_on": [
+        "C28"
+      ],
+      "requirements": [
+        "N29"
+      ],
+      "deliverables": [
+        "ops/diagnostics.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C29.json"
+      ],
+      "acceptance": [
+        "Local health/status path identifies storage/job/provider failure; sensitive content is absent from synthetic log sentinel test."
+      ],
+      "evidence_path": "docs/evidence/C29.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C30",
+      "stage": "private-release",
+      "title": "test(recovery): prove personal backup restore and private install",
+      "status": "planned",
+      "depends_on": [
+        "C29"
+      ],
+      "requirements": [
+        "N30"
+      ],
+      "deliverables": [
+        "docs/evidence/private-install.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C30.json"
+      ],
+      "acceptance": [
+        "Fresh machine/browser install and restore completes project UAT; personal deployment remains private until its relevant safety gates pass."
+      ],
+      "evidence_path": "docs/evidence/C30.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C31",
+      "stage": "public-release",
+      "title": "build(packaging): create versioned installable artifacts",
+      "status": "planned",
+      "depends_on": [
+        "C30"
+      ],
+      "requirements": [
+        "N31"
+      ],
+      "deliverables": [
+        "scripts/package.sh",
+        "docs/release/ARTIFACTS.md",
+        "ops/web/nginx.conf.template",
+        "ops/web/service.systemd",
+        "docs/engineering/WEB_RUNBOOK.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C31.json"
+      ],
+      "acceptance": [
+        "Static/CLI/container artifact matches chosen distribution; SBOM, licenses, checksums and provenance truthfully reflect what is built."
+      ],
+      "evidence_path": "docs/evidence/C31.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C32",
+      "stage": "public-release",
+      "title": "feat(web): configure domain tls and isolated public demo",
+      "status": "planned",
+      "depends_on": [
+        "C31"
+      ],
+      "requirements": [
+        "N32"
+      ],
+      "deliverables": [
+        "infra/deployment.md",
+        "docs/evidence/domain.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C32.json"
+      ],
+      "acceptance": [
+        "Domain/HTTPS/cookies/CSP and private-origin policy are checked; public demo contains synthetic data only and dangerous runtime features are disabled."
+      ],
+      "evidence_path": "docs/evidence/C32.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C33",
+      "stage": "public-release",
+      "title": "test(ux): verify accessibility mobile and update behavior",
+      "status": "planned",
+      "depends_on": [
+        "C32"
+      ],
+      "requirements": [
+        "N33"
+      ],
+      "deliverables": [
+        "docs/evidence/ux.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C33.json"
+      ],
+      "acceptance": [
+        "Keyboard/table alternative, 360px through 1440px layouts, empty/error/offline states and N-1 data upgrade fixtures work on documented supported platforms."
+      ],
+      "evidence_path": "docs/evidence/C33.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C34",
+      "stage": "public-release",
+      "title": "docs(release): publish english usage limits and support contract",
+      "status": "planned",
+      "depends_on": [
+        "C33"
+      ],
+      "requirements": [
+        "N34"
+      ],
+      "deliverables": [
+        "docs/release/USER_GUIDE.md",
+        "SECURITY.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C34.json"
+      ],
+      "acceptance": [
+        "New user completes one documented task; English install/use/privacy/limits/support pages include owner contact supplied by maintainer and actual evidence links."
+      ],
+      "evidence_path": "docs/evidence/C34.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C35",
+      "stage": "public-release",
+      "title": "test(release): exercise signed artifact and clean upgrade paths",
+      "status": "planned",
+      "depends_on": [
+        "C34"
+      ],
+      "requirements": [
+        "N35"
+      ],
+      "deliverables": [
+        "docs/evidence/release-verification.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C35.json"
+      ],
+      "acceptance": [
+        "Install artifact from clean environment; verify signer with independently trusted key/identity; supported upgrade and rollback preserve latest valid data."
+      ],
+      "evidence_path": "docs/evidence/C35.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C36",
+      "stage": "public-release",
+      "title": "docs(beta): record independent pilot feedback and beta gate",
+      "status": "planned",
+      "depends_on": [
+        "C35"
+      ],
+      "requirements": [
+        "N36"
+      ],
+      "deliverables": [
+        "docs/product/PILOT_RESULTS.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C36.json"
+      ],
+      "acceptance": [
+        "Target: 5 relevant trials, 3 complete core task and 2 return for real repeat use; if unavailable continue personal release and mark demand unvalidated rather than inventing pilots."
+      ],
+      "evidence_path": "docs/evidence/C36.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C37",
+      "stage": "public-release",
+      "title": "fix(beta): resolve evidence backed pilot blockers",
+      "status": "planned",
+      "depends_on": [
+        "C36"
+      ],
+      "requirements": [
+        "N37"
+      ],
+      "deliverables": [
+        "docs/product/BETA_FIXES.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C37.json"
+      ],
+      "acceptance": [
+        "Fix observed failures, re-run affected checks, record remaining limitations; if no pilots, use observed personal UAT issues and retain unvalidated market label."
+      ],
+      "evidence_path": "docs/evidence/C37.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C38",
+      "stage": "public-release",
+      "title": "docs(service): freeze retention portability quotas and support policy",
+      "status": "planned",
+      "depends_on": [
+        "C37"
+      ],
+      "requirements": [
+        "N38"
+      ],
+      "deliverables": [
+        "docs/release/SERVICE_POLICY.md"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C38.json"
+      ],
+      "acceptance": [
+        "For public service state data location, deletion/export rules, quotas, expected support and outage behavior; paid billing and SLA are not enabled without separate ADR."
+      ],
+      "evidence_path": "docs/evidence/C38.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C39",
+      "stage": "public-release",
+      "title": "ci(release): verify v1 gate from clean source tree",
+      "status": "planned",
+      "depends_on": [
+        "C38"
+      ],
+      "requirements": [
+        "N39"
+      ],
+      "deliverables": [
+        "docs/evidence/v1-gate.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C39.json"
+      ],
+      "acceptance": [
+        "Every mandatory requirement has actual passed evidence; no critical open security/recovery issue; release profile and demand status are explicit."
+      ],
+      "evidence_path": "docs/evidence/C39.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    },
+    {
+      "id": "C40",
+      "stage": "public-release",
+      "title": "chore(release): publish v1 artifacts and monitor first use",
+      "status": "planned",
+      "depends_on": [
+        "C39"
+      ],
+      "requirements": [
+        "N40"
+      ],
+      "deliverables": [
+        "docs/evidence/launch.json",
+        "plans/progress.json"
+      ],
+      "verification": [
+        "Run the actual project checks relevant to this task and record results in docs/evidence/C40.json"
+      ],
+      "acceptance": [
+        "Release only verified profile artifacts, run installed smoke test, record actual version/source digest and follow up support/rollback; never publish fabricated claims."
+      ],
+      "evidence_path": "docs/evidence/C40.json",
+      "rollback": "Before release: revert isolated code change with tests. For persisted data: preserve exports/backup and last compatible reader; use forward repair after new writes. Do not restore a stale snapshot over newer data.",
+      "scope": "BreachAtlas private-web"
+    }
+  ]
+}

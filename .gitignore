@@ -23,3 +23,22 @@ storage/logs/*.log
 *.p12
 *.pfx
 secrets/
+
+# Supplied planning and web foundation rules
+node_modules/
+target/
+dist/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+data/
+*.sqlite*
+!legacy/v7/.env.example
+
+# Web application outputs
+node_modules/
+dist/
+playwright-report/
+test-results/

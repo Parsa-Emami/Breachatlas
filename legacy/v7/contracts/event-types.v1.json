@@ -1,0 +1,17 @@
+{
+  "project": "BreachAtlas",
+  "envelope": "CloudEvents-compatible 1.0 profile",
+  "delivery": "at-least-once",
+  "ordering": "not globally guaranteed; per-aggregate sequencing when documented",
+  "deduplication": "required by event id",
+  "types": [
+    "evidence.ingest_started.v1",
+    "evidence.sealed.v1",
+    "custody.event_recorded.v1",
+    "analyzer.run_started.v1",
+    "derived_artifact.created.v1",
+    "timeline.projection_updated.v1",
+    "legal_hold.applied.v1",
+    "export.sealed.v1"
+  ]
+}

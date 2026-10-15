@@ -1,0 +1,28 @@
+{
+  "verified_on": "2026-10-15",
+  "scope": "web foundation only",
+  "runtime": {
+    "node": "24.19.0",
+    "npm": "11.9.0"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "vite": "8.3.4",
+    "typescript": "7.0.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@playwright/test": "1.64.1"
+  },
+  "registry_source": "https://registry.npmjs.org/",
+  "official_sources": [
+    "https://nodejs.org/api/http.html",
+    "https://vite.dev/guide/",
+    "https://react.dev/",
+    "https://playwright.dev/docs/intro"
+  ],
+  "lockfile": "package-lock.json",
+  "engine_toolchain": "pending project-specific C02 evidence"
+}

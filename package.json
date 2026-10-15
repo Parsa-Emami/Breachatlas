@@ -1,0 +1,35 @@
+{
+  "name": "@parsa-emami/breachatlas-web",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "BreachAtlas web application foundation",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=24.19.0 <25"
+  },
+  "packageManager": "npm@11.9.0",
+  "scripts": {
+    "prepare:web": "node scripts/generate-web-data.mjs",
+    "dev": "npm run prepare:web && vite --config apps/web/vite.config.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "npm run prepare:web && npm run typecheck && vite build --config apps/web/vite.config.ts",
+    "start": "node scripts/serve-web.mjs",
+    "test": "node --test tests/web/*.test.mjs",
+    "test:browser": "playwright test",
+    "package:web": "node scripts/package-web.mjs",
+    "validate:plan": "python3 scripts/plan.py validate",
+    "check": "npm run validate:plan && npm run build && npm test"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "vite": "8.3.4",
+    "typescript": "7.0.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@playwright/test": "1.64.1"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "folder": "10-breachatlas",
+  "name": "BreachAtlas",
+  "rank": 6,
+  "score": 7.1,
+  "verdict": "برای پروندهٔ شخصی و خروجی قابل‌بررسی مناسب؛ ادعای اعتبار قضایی نکن.",
+  "user": "تحلیلگر مستقل DFIR و مشاور رخداد",
+  "pain": "فایل‌های شواهد، timeline و یادداشت‌ها ارتباط قابل‌بررسی و export مستقل ندارند",
+  "value": "case کوچک با integrity و custody history قابل‌حمل",
+  "wedge": "bundle قابل‌حمل و verifier مستقل؛ نصب بسیار سبک برای یک analyst",
+  "alternatives": "DFIR-IRIS و مدیریت پروندهٔ دستی",
+  "source_ids": [
+    "iris"
+  ],
+  "mvp": [
+    "یک analyst و یک case namespace",
+    "stream upload و SHA-256 manifest",
+    "append-only custody با checkpoint خارج از host",
+    "timeline CSV/JSON و export verifier"
+  ],
+  "later": [
+    "جست‌وجوی OpenSearch",
+    "analyzer plugin دلخواه",
+    "chain-of-custody رسمی قضایی",
+    "team case collaboration و SIEM integration"
+  ],
+  "stack": [
+    "Go private service/CLI",
+    "SQLite case and custody metadata",
+    "Content-addressed local evidence files",
+    "React timeline UI"
+  ],
+  "mode": "private-web",
+  "stores": {
+    "SQLite": "cases, sealed metadata, custody events, holds, notes and transactional jobs",
+    "Filesystem": "immutable source evidence and derived files; read-only analyzers; separate backup",
+    "Memory/SQLite indexes": "rebuildable timeline/search for documented small-case scope"
+  },
+  "removed": [
+    "Laravel",
+    "PostgreSQL",
+    "OpenSearch",
+    "Valkey",
+    "S3 server required"
+  ],
+  "limits": {
+    "active_analysts": 1,
+    "evidence_file_max_mib": 100,
+    "case_evidence_max_gib": 5,
+    "analyzer_concurrency": 1,
+    "timeline_events": 100000
+  },
+  "hardware": "private host هدف 2 vCPU / 2–4 GiB RAM و حداقل 20 GiB SSD به‌علاوهٔ ظرفیت evidence و backup.",
+  "weeks": "7–12 هفته",
+  "risks": [
+    "root میزبان می‌تواند فایل/SQLite را دستکاری کند؛ hash-chain به‌تنهایی immutability نیست",
+    "هش integrity را بررسی می‌کند، منبع واقعی یا قابلیت قضایی را ثابت نمی‌کند",
+    "legal hold باید با backup/retention سازگار باشد؛ پیش‌فرض حذف خودکار evidence خام نداریم"
+  ],
+  "uat": [
+    "evidence را upload/seal کن؛ byte عوض‌شده verifier را شکست دهد",
+    "hold فعال اجازهٔ delete و expire ندهد",
+    "export در دستگاه جدا بدون سرور با trust key مستقل بررسی شود و timezone خام حفظ شود"
+  ],
+  "domain": {
+    "primary": "evidence-manifest",
+    "fields": {
+      "case_id": "id",
+      "evidence_id": "id",
+      "sha256": "hash",
+      "size_bytes": "int",
+      "media_type": "text",
+      "acquired_at": "timestamp",
+      "custody_root": "hash"
+    },
+    "invariants": [
+      "Sealed source bytes never modified",
+      "Legal hold takes precedence over deletion",
+      "Raw timestamp and confidence survive normalization"
+    ]
+  },
+  "version": "0.0.0",
+  "status": "WEB_FOUNDATION",
+  "source_implemented": true,
+  "market_validation": "UNVALIDATED",
+  "assumption": "Browser application first; optional CLI/worker remains an engine adapter. Web foundation does not satisfy domain release gates.",
+  "engine_implemented": false,
+  "previous_engine_mode": "embedded-private",
+  "web_application": {
+    "status": "foundation_implemented",
+    "deployment_profile": "private-web",
+    "frontend": "React + TypeScript + Vite",
+    "web_runtime": "Node.js static shell; no engine proxy",
+    "default_engine_enabled": false,
+    "preview_storage": "tab memory only",
+    "offline_supported": false,
+    "engine_status": "planned",
+    "source": "apps/web/src/main.tsx",
+    "existing_backend": null
+  },
+  "web_version": "0.0.1"
+}
