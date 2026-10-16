@@ -1,24 +1,20 @@
 {
   "project": "BreachAtlas",
   "date": "2026-10-16",
-  "base_commit": "49a8400f646ba2eca631b306605e11e96ca66acf",
-  "scope": "OSS roadmap, clone/setup tooling, agent execution contract and preserved optional API CI repair; full core tasks are not certified",
+  "base_commit": "45cd03fb33ff6753f8d448ce0532a3e0299231e7",
+  "scope": "Repair CI for all main and Dependabot heads: historical source records, exact current Git checkout and real regression tests",
   "core_tasks_verified": [],
   "commands": [
-    "npm ci --ignore-scripts --no-fund",
+    "python3 -m unittest discover -s tests/engineering -p 'test_*.py' -v",
+    "python3 scripts/verify_ci_source.py",
     "npm run check",
-    "npm run test:browser",
-    "npm run test:clone",
-    "npm run package:web",
-    "python3 scripts/plan.py validate",
-    "python3 scripts/validate_repo.py",
-    "npm run release:check"
+    "npm run test:clone"
   ],
-  "validation_results": "docs/evidence/oss-roadmap.json",
+  "validation_results": "docs/evidence/ci-integrity-repair.json",
   "final_source_identity": "Read the source_identity in docs/evidence/oss-roadmap.json; it excludes evidence and SHA256SUMS.txt to avoid recursive hashing. This is a source digest, not a fabricated remote commit ID.",
   "protected_paths_changed": [],
   "current_core_ready": false,
   "next_task": "C01",
   "next_command": "npm run plan -- next",
-  "continuation": "Read the complete C01 task card. Specification/resource validators are created in C01/C02; C03 creates the actual engine smoke tests. Do not mark core tasks verified from these web/roadmap checks."
+  "continuation": "See docs/engineering/CI_SOURCE_INTEGRITY.md for source proof scope. Historical evidence retains its original source; current runtime results are the actual new CI jobs. Core implementation remains at the existing next task."
 }

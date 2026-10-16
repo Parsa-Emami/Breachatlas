@@ -1,5 +1,10 @@
 # BreachAtlas
 
+[![Source](https://github.com/Parsa-Emami/Breachatlas/actions/workflows/contracts.yml/badge.svg?branch=main)](https://github.com/Parsa-Emami/Breachatlas/actions/workflows/contracts.yml?query=branch%3Amain) [![Plan](https://github.com/Parsa-Emami/Breachatlas/actions/workflows/plan.yml/badge.svg?branch=main)](https://github.com/Parsa-Emami/Breachatlas/actions/workflows/plan.yml?query=branch%3Amain) [![Web](https://github.com/Parsa-Emami/Breachatlas/actions/workflows/web.yml/badge.svg?branch=main)](https://github.com/Parsa-Emami/Breachatlas/actions/workflows/web.yml?query=branch%3Amain)
+
+[CI source integrity and dependency updates](docs/engineering/CI_SOURCE_INTEGRITY.md)
+
+
 Open-source local-first web application under [Apache-2.0](LICENSE). **Current implementation: web foundation; complete domain workflow pending.**
 
 ## Clone and run the current workspace
