@@ -1,0 +1,24 @@
+{
+  "project": "BreachAtlas",
+  "date": "2026-10-16",
+  "base_commit": "49a8400f646ba2eca631b306605e11e96ca66acf",
+  "scope": "OSS roadmap, clone/setup tooling, agent execution contract and preserved optional API CI repair; full core tasks are not certified",
+  "core_tasks_verified": [],
+  "commands": [
+    "npm ci --ignore-scripts --no-fund",
+    "npm run check",
+    "npm run test:browser",
+    "npm run test:clone",
+    "npm run package:web",
+    "python3 scripts/plan.py validate",
+    "python3 scripts/validate_repo.py",
+    "npm run release:check"
+  ],
+  "validation_results": "docs/evidence/oss-roadmap.json",
+  "final_source_identity": "Read the source_identity in docs/evidence/oss-roadmap.json; it excludes evidence and SHA256SUMS.txt to avoid recursive hashing. This is a source digest, not a fabricated remote commit ID.",
+  "protected_paths_changed": [],
+  "current_core_ready": false,
+  "next_task": "C01",
+  "next_command": "npm run plan -- next",
+  "continuation": "Read the complete C01 task card. Specification/resource validators are created in C01/C02; C03 creates the actual engine smoke tests. Do not mark core tasks verified from these web/roadmap checks."
+}

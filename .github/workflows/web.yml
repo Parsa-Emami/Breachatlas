@@ -22,11 +22,12 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: python3 scripts/plan.py validate
+      - run: npm run validate:plan
       - run: npm run build
       - run: npm test
       - run: npx --no-install playwright install --with-deps chromium
       - run: npm run test:browser
+      - run: npm run test:clone
       - run: npm run package:web
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:

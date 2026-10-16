@@ -1,19 +1,35 @@
 # BreachAtlas
 
-**Web application foundation · v0.0.1 · domain integration pending**
+Open-source local-first web application under [Apache-2.0](LICENSE). **Current implementation: web foundation; complete domain workflow pending.**
 
-A browser workspace for case evidence, chain of custody and source-backed timelines.
+## Clone and run the current workspace
+
+Prerequisites: Git and Node 24.19+ within Node 24 (npm included).
 
 ```sh
-npm ci --ignore-scripts
-npm run check
-npm run dev
+git clone https://github.com/Parsa-Emami/Breachatlas.git
+cd Breachatlas
+npm run setup
+npm start
 ```
 
-Open http://127.0.0.1:5173. Node 24.19.0 is pinned in `.nvmrc`. Build production assets with `npm run build`; start the constrained local server with `npm start`. The responsive workspace can preview JSON locally and browse this project's forty-step product roadmap. It does not run the security engine or persist imported files.
+Open http://127.0.0.1:4173. Current features are a roadmap browser and local bounded JSON structure preview. No Python, database, paid/cloud account, public domain or sibling clone is needed for this shell. It does not run the domain engine. [Clone guide](docs/engineering/CLONE_TO_RUN.md).
 
-Read [START_HERE.md](START_HERE.md), [web runbook](docs/engineering/WEB_RUNBOOK.md), [web roadmap](plans/WEB_ROADMAP.md), [product roadmap](plans/COMMIT_ROADMAP.md) and [web ADR](docs/architecture/ADR-0002-web-application.md). Product assessment: [فارسی](product/PRODUCT_REVIEW_FA.md). Original requirements and historical input remain available; v7 bootstrap is superseded.
+## Full product endpoint
 
-The web workflow installs locked dependencies, builds, runs Node/browser tests and produces a web artifact. Checksums, source identity and dirty-tree status accompany packaging. Nginx/systemd templates are operator configuration, not a deployed service. `/readyz` is web-only and `/api/*` stays unavailable until real engine integration. The domain engine and production identity/persistence integration remain in the product plan.
+Upload synthetic evidence -> seal -> add custody -> parse bounded timeline -> hold/delete negative test -> export -> verify on another host with external trust -> recover consistency.
 
-No database schema, migration, existing `.env` configuration or Dockerfile change is included.
+[C30](plans/commits/C30.md) proves the first locally usable supported product from a clean clone, including restart/restore. [C40](plans/commits/C40.md) proves complete published OSS v1. These are future evidence gates, not current shell capability claims. [Runtime resources](ops/runtime-requirements.json).
+
+## Implement the next commit
+
+```sh
+npm run plan -- status
+npm run plan -- next
+npm run plan -- show C07
+npm run check
+```
+
+Each [work card](plans/COMMIT_ROADMAP.md) specifies paths, actions, resources, fixtures, acceptance, negative tests, command availability and rollback. [AGENTS.md](AGENTS.md) and [execution contract](docs/agents/EXECUTION_CONTRACT.md) let an agent resume from this repository alone. [فارسی](docs/ROADMAP_FA.md).
+
+[Open-source contract](OPEN_SOURCE.md) · [Contributing](CONTRIBUTING.md) · [Third-party inventory](THIRD_PARTY_NOTICES.md) · [Definition of done](docs/release/DEFINITION_OF_DONE.md) · [Security](SECURITY.md). No DB schema, migration, .env or Dockerfile changes are authorized.

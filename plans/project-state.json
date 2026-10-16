@@ -1,0 +1,15 @@
+{
+  "project": "BreachAtlas",
+  "reviewed_commit": "49a8400f646ba2eca631b306605e11e96ca66acf",
+  "readiness": "WEB_FOUNDATION",
+  "core_ready": false,
+  "implemented": [
+    "responsive web shell",
+    "roadmap browser",
+    "local bounded JSON structure preview"
+  ],
+  "engine": "not implemented",
+  "next_task": "C01",
+  "next_command": "npm run plan -- next",
+  "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
+}

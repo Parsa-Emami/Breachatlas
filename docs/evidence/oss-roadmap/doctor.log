@@ -1,0 +1,13 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 doctor
+> node scripts/oss-bootstrap.mjs doctor
+
+{
+  "nodeSupported": true,
+  "webAssetsBuilt": true,
+  "readiness": "WEB_FOUNDATION",
+  "engineReady": false,
+  "start": "npm start",
+  "next": "npm run plan -- next"
+}

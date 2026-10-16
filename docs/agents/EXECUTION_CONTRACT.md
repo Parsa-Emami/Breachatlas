@@ -1,0 +1,13 @@
+# BreachAtlas: execution and continuation
+
+Use AGENTS.md, current Git/source/manifests/locks/tests/CI, project-state.json, roadmap.json, progress.json, release-gates.json and the selected full task card. ADR-0003 supersedes older mandatory hosting/pilots/CLI-only delivery/storage assumptions. A plan is not evidence that a feature exists.
+
+Select npm run plan -- next, verify dependency evidence and inspect targets before create/update. The card defines before/after behavior, exact paths, actions, fixture/provenance, hardware/providers/upstreams, positive/negative acceptance, available versus future commands and rollback. C01/C02 create self-contained specification/resource validators without future engine dependencies. C03 creates the real engine smoke-test command in that same commit; C06 extends it with integration tests and CI. Do not report future commands executed because their names exist. Work units may split into traceable child IDs when needed; avoid empty quota commits and unrelated changes.
+
+Keep domain invariants, transport validation, application permission checks, storage/provider ports and UI projection separate. No sibling dependencies. Never fix a test by disabling it, broad-ignore analysis, invent provider success or use mock-only proof for actual durability/security. Starting a UI is not permission to execute arbitrary payloads or provision a lab.
+
+Do not modify database schemas, migrations, .env files or Dockerfiles, overwrite unrelated work, delete user data or commit secrets. Use the compatible local adapter; record the exact blocked task when necessary and proceed only with independent authorized work.
+
+For verified Cxx, retain actual commit_id, source_identity, tool/provider versions, licensed fixture hashes, exact commands/exits/output, results and relevant hardware in docs/evidence/Cxx.json. passed=true requires every acceptance and negative case. Planning templates and shell-only tests do not verify domain behavior. Keep historical proof tied to its original source; never pretend an old test ran on a newer tree. Update progress and docs/agents/SESSION_HANDOFF.json after each session with base/final source, changed paths, commands, blockers and next task. Exclude dependencies/build/cache files from source checksums.
+
+C30 requires full clean clone, core workflow, restart and restore. C39 checks C01-C38 and complete source/engine/license/recovery proof; C40 needs maintainer-authorized actual release and installed artifact workflow. No paid account, public domain or invented customer pilots. Actual user authorization controls remote/destructive actions, not a title in a future roadmap.

@@ -23,3 +23,7 @@ jobs:
           persist-credentials: false
       - name: Validate repository contracts
         run: python3 scripts/validate_repo.py
+      - name: Verify source manifest and recorded validation identity
+        run: |
+          python3 scripts/hashes.py
+          python3 scripts/source_identity.py --check

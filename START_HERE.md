@@ -1,13 +1,18 @@
 # Continue BreachAtlas
 
-Read AGENTS.md, product/project.json, plans/progress.json, plans/web-roadmap.json and ADR-0002-web-application.md before work. Inspect real source and current Git status. This is now a browser app foundation; the original 40 domain intents are not all implemented.
+Current: web foundation; full domain workflow pending.
 
 ```sh
-npm ci --ignore-scripts
-npm run check
-npx --no-install playwright install chromium
-npm run test:browser
-npm run dev
+npm run setup
+npm start
 ```
 
-See WEB_RUNBOOK.md for build, package, TLS host configuration, upgrade and rollback. W01-W05 evidence is recorded separately; C03 remains partial. Complete project-specific engine acceptance before verifying a C milestone. Read docs/engineering/CONTINUATION.md for truthful evidence rules. Do not execute historical v7 bootstrap. Preserve existing source, environment and database files.
+Open http://127.0.0.1:4173. Read docs/engineering/CLONE_TO_RUN.md for actual prerequisites/capability. For implementation read AGENTS.md, docs/agents/EXECUTION_CONTRACT.md and ROADMAP.md, then use:
+
+```sh
+npm run validate:plan
+npm run plan -- status
+npm run plan -- next
+```
+
+Each task links exact work/resources/tests. C30 is first actual local usability and C40 full OSS v1; both require evidence. Do not run historical bootstrap or modify protected files.
