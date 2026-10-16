@@ -1,0 +1,296 @@
+{
+  "version": "0.0.0",
+  "project": "BreachAtlas",
+  "readiness": "WEB_FOUNDATION",
+  "market_validation": "UNVALIDATED",
+  "commits": [
+    {
+      "id": "C01",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C02",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C03",
+      "status": "in_progress",
+      "evidence": [],
+      "source_identity": null,
+      "notes": "Web foundation implemented in W01-W05. Remaining domain/runtime acceptance and earlier prerequisite evidence still pending."
+    },
+    {
+      "id": "C04",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C05",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C06",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C07",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C08",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C09",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C10",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C11",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C12",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C13",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C14",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C15",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C16",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C17",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C18",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C19",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C20",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C21",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C22",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C23",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C24",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C25",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C26",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C27",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C28",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C29",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C30",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C31",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C32",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C33",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C34",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C35",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C36",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C37",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C38",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C39",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    },
+    {
+      "id": "C40",
+      "status": "planned",
+      "evidence": [],
+      "source_identity": null,
+      "notes": ""
+    }
+  ],
+  "web_progress": "plans/web-roadmap.json",
+  "existing_source_review": {
+    "base_commit": "54076d0b742c825e61be00553fcc0b1b32d52ac0",
+    "backend": null,
+    "backend_tests": "not_implemented"
+  },
+  "roadmap_contract": "clone-to-run-oss-v1",
+  "current_core_ready": false
+}

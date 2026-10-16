@@ -1,0 +1,11 @@
+test_action_and_source_updates_keep_old_proofs_bound_to_their_real_tree (test_ci_source.CiSourceTest.test_action_and_source_updates_keep_old_proofs_bound_to_their_real_tree) ... ok
+test_corrupted_recorded_manifest_cannot_be_relabelled_as_history (test_ci_source.CiSourceTest.test_corrupted_recorded_manifest_cannot_be_relabelled_as_history) ... ok
+test_dirty_workflow_is_rejected_even_if_old_evidence_is_valid (test_ci_source.CiSourceTest.test_dirty_workflow_is_rejected_even_if_old_evidence_is_valid) ... ok
+test_forged_evidence_identity_is_rejected (test_ci_source.CiSourceTest.test_forged_evidence_identity_is_rejected) ... ok
+test_shallow_history_fails_with_an_actionable_message (test_ci_source.CiSourceTest.test_shallow_history_fails_with_an_actionable_message) ... ok
+test_untracked_source_is_not_silently_omitted (test_ci_source.CiSourceTest.test_untracked_source_is_not_silently_omitted) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.297s
+
+OK

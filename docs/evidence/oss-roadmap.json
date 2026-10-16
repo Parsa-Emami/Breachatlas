@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "project": "BreachAtlas",
+  "date": "2026-10-16",
+  "passed": true,
+  "planning_template": false,
+  "scope": "Current web foundation, OSS roadmap contracts and clone/setup tooling; no full domain implementation certified",
+  "source_identity": "sha256:f71401f74e5981a2894742611e4cbb1cc4592c37e2b2ac0592013ce13fd616da",
+  "source_identity_method": "scripts/source_identity.py: repository source excluding docs/evidence and SHA256SUMS.txt",
+  "base_commit": "49a8400f646ba2eca631b306605e11e96ca66acf",
+  "core_ready": false,
+  "core_tasks_verified": [],
+  "counts": {
+    "planned_commit_cards": 40,
+    "web_unit_tests": 6,
+    "browser_tests": 2
+  },
+  "tools": {
+    "node": "v24.19.0",
+    "npm": "11.9.0",
+    "browser": "Chromium 153.0.8010.0 (@sparticuz/chromium 153.0.0, private QA runtime)",
+    "playwright": "1.64.1"
+  },
+  "clone_proof": {
+    "passed": true,
+    "stagedTree": "60ad0b3e568cbeb0729c9f9b0cf2ecbf9c2c2a35",
+    "proof": "real git clone -> npm run setup -> web startup",
+    "coreReady": false
+  },
+  "commands": [
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "output": "docs/evidence/oss-roadmap/check.log"
+    },
+    {
+      "command": "npm run test:browser",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "output": "docs/evidence/oss-roadmap/browser.log"
+    },
+    {
+      "command": "npm run test:clone",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "output": "docs/evidence/oss-roadmap/clone.log"
+    },
+    {
+      "command": "npm run package:web",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "output": "docs/evidence/oss-roadmap/package-web.log"
+    },
+    {
+      "command": "python3 scripts/plan.py validate",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "output": "docs/evidence/oss-roadmap/legacy-plan.log"
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "output": "docs/evidence/oss-roadmap/contracts.log"
+    },
+    {
+      "command": "npm run doctor",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "output": "docs/evidence/oss-roadmap/doctor.log"
+    },
+    {
+      "command": "npm run release:check",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "output": "docs/evidence/oss-roadmap/release-guard.log"
+    }
+  ],
+  "protected_file_digests_unchanged": {
+    ".env.example": "94aabc53b1ae21e69450bad3e888880971fbadb196af12df0dd2b96978a832f2"
+  },
+  "remaining": "C01-C40 remain unverified; C30 requires full real-engine workflow, restart and restore; C40 requires authorized full publication and clean installed proof."
+}

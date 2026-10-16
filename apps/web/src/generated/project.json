@@ -1,0 +1,553 @@
+{
+  "name": "BreachAtlas",
+  "slug": "breachatlas",
+  "title": "Give every piece of evidence a place.",
+  "description": "A browser workspace for case evidence, chain of custody and source-backed timelines.",
+  "accent": "#a4c9f6",
+  "mode": "private-web",
+  "documentType": "evidence-manifest",
+  "invariants": [
+    "Sealed source bytes never modified",
+    "Legal hold takes precedence over deletion",
+    "Raw timestamp and confidence survive normalization"
+  ],
+  "fields": {
+    "case_id": "id",
+    "evidence_id": "id",
+    "sha256": "hash",
+    "size_bytes": "int",
+    "media_type": "text",
+    "acquired_at": "timestamp",
+    "custody_root": "hash"
+  },
+  "tasks": [
+    {
+      "id": "C01",
+      "title": "docs(product): freeze the open-source clone-to-value workflow",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Define one repository-owned synthetic reference workflow, expected results and failure cases. No customer interview, paid account, external pilot count or market-validation claim is required."
+      ],
+      "dependsOn": []
+    },
+    {
+      "id": "C02",
+      "title": "chore(toolchain): lock reproducible open-source resources",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Record exact supported runtime, engine, provider/image, grammar, rule and fixture versions/digests, licenses and official release sources. Use real dependency lockfiles and preserve a source-build route."
+      ],
+      "dependsOn": [
+        "C01"
+      ]
+    },
+    {
+      "id": "C03",
+      "title": "feat(runtime): implement unified local engine setup and launch",
+      "stage": "foundation",
+      "status": "in_progress",
+      "acceptance": [
+        "npm run setup prepares the actual selected local engine and npm start supervises the web workspace and loopback engine with clean shutdown. Minimal health does not imply completed business features; no second undocumented terminal is required."
+      ],
+      "dependsOn": [
+        "C02"
+      ]
+    },
+    {
+      "id": "C04",
+      "title": "feat(contracts): define typed versioned domain inputs and results",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Implement exact typed domain inputs, output/error codes, size/time/cancellation limits and positive/negative compatibility fixtures. Generic nested JSON is not a domain contract. No database schema change is allowed."
+      ],
+      "dependsOn": [
+        "C03"
+      ]
+    },
+    {
+      "id": "C05",
+      "title": "feat(storage): prove recoverable local authoritative writes",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Use ADR-0003 storage ports, a bounded single writer, atomic visible state, stable operation IDs and tested interrupted/disk-full/replay recovery. No database schema, migration, .env or Dockerfile changes."
+      ],
+      "dependsOn": [
+        "C04"
+      ]
+    },
+    {
+      "id": "C06",
+      "title": "ci(engine): verify the actual engine from a clean checkout",
+      "stage": "foundation",
+      "status": "planned",
+      "acceptance": [
+        "Build and test the actual selected engine, typed contracts and storage using pinned local open-source providers where relevant. Add exact engine test commands and collect the listed test directories. Shell-only tests cannot verify an engine."
+      ],
+      "dependsOn": [
+        "C05"
+      ]
+    },
+    {
+      "id": "C07",
+      "title": "feat(cases): define analyst case and evidence aggregates",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Evidence belongs to one case; cross-case access fails."
+      ],
+      "dependsOn": [
+        "C06"
+      ]
+    },
+    {
+      "id": "C08",
+      "title": "feat(upload): stream evidence into quarantine and hash",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Interrupted or oversized upload never appears sealed."
+      ],
+      "dependsOn": [
+        "C07"
+      ]
+    },
+    {
+      "id": "C09",
+      "title": "feat(seal): commit content addressed evidence manifests",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "File is durable before metadata seal; hash mismatch aborts and orphan recovery is defined."
+      ],
+      "dependsOn": [
+        "C08"
+      ]
+    },
+    {
+      "id": "C10",
+      "title": "feat(verify): verify bytes against sealed manifest",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "One-byte modification, missing file and size mismatch are distinct failures."
+      ],
+      "dependsOn": [
+        "C09"
+      ]
+    },
+    {
+      "id": "C11",
+      "title": "feat(custody): append attributable custody events",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Every transfer records actor/time/reason; no update API rewrites event history."
+      ],
+      "dependsOn": [
+        "C10"
+      ]
+    },
+    {
+      "id": "C12",
+      "title": "feat(checkpoints): verify signed externally stored custody roots",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Independent checkpoint detects ledger rewrite; signer trust must be supplied outside bundle."
+      ],
+      "dependsOn": [
+        "C11"
+      ]
+    },
+    {
+      "id": "C13",
+      "title": "feat(holds): block deletion while hold is active",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Concurrent hold/delete cannot remove held evidence and reason is audited."
+      ],
+      "dependsOn": [
+        "C12"
+      ]
+    },
+    {
+      "id": "C14",
+      "title": "feat(analyzers): define fixed csv json analyzer interface",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Only shipped allowlisted non-executing parsers are enabled in MVP."
+      ],
+      "dependsOn": [
+        "C13"
+      ]
+    },
+    {
+      "id": "C15",
+      "title": "feat(isolation): bound analyzer resources and filesystem access",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Read-only evidence, private scratch, no network and deadline are verified."
+      ],
+      "dependsOn": [
+        "C14"
+      ]
+    },
+    {
+      "id": "C16",
+      "title": "feat(artifacts): bind derived output to inputs and tools",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Derived manifest includes input hashes, tool version and config hash."
+      ],
+      "dependsOn": [
+        "C15"
+      ]
+    },
+    {
+      "id": "C17",
+      "title": "feat(timestamps): normalize times without losing raw values",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Unknown zone and DST ambiguity remain explicit rather than fabricated UTC."
+      ],
+      "dependsOn": [
+        "C16"
+      ]
+    },
+    {
+      "id": "C18",
+      "title": "feat(timeline): index stable derived event identities",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Duplicate/reordered analysis cannot duplicate timeline entries."
+      ],
+      "dependsOn": [
+        "C17"
+      ]
+    },
+    {
+      "id": "C19",
+      "title": "feat(search): query bounded local timeline index",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Index can be rebuilt and queries stay within event/deadline bounds."
+      ],
+      "dependsOn": [
+        "C18"
+      ]
+    },
+    {
+      "id": "C20",
+      "title": "feat(hypotheses): separate notes from observed facts",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Analyst hypothesis has author and rationale and cannot become source evidence by UI label."
+      ],
+      "dependsOn": [
+        "C19"
+      ]
+    },
+    {
+      "id": "C21",
+      "title": "feat(ui): show case evidence integrity and custody",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Failed verification and incomplete seal are visible; user strings are escaped."
+      ],
+      "dependsOn": [
+        "C20"
+      ]
+    },
+    {
+      "id": "C22",
+      "title": "feat(ui): render timezone aware timeline and notes",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Raw timestamp, normalized time and confidence are inspectable with table alternative."
+      ],
+      "dependsOn": [
+        "C21"
+      ]
+    },
+    {
+      "id": "C23",
+      "title": "feat(export): package evidence manifests and custody ledger",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Export binds selected evidence, derived files and checkpoint without altering source bytes."
+      ],
+      "dependsOn": [
+        "C22"
+      ]
+    },
+    {
+      "id": "C24",
+      "title": "feat(verifier): verify portable bundle without server",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Missing or tampered file fails; unsigned and trusted-signature status remain distinct."
+      ],
+      "dependsOn": [
+        "C23"
+      ]
+    },
+    {
+      "id": "C25",
+      "title": "feat(retention): audit explicit evidence destruction",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "No automatic raw-evidence TTL; operator destruction respects hold and creates tombstone."
+      ],
+      "dependsOn": [
+        "C24"
+      ]
+    },
+    {
+      "id": "C26",
+      "title": "test(recovery): restore case bytes custody and derived indexes",
+      "stage": "domain",
+      "status": "planned",
+      "acceptance": [
+        "Restore cross-checks manifest/file consistency and rebuilds timeline without custody rewrite."
+      ],
+      "dependsOn": [
+        "C25"
+      ]
+    },
+    {
+      "id": "C27",
+      "title": "test(security): prove project abuse and authorization boundaries",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "Execute this project's negative UAT, XSS/import and object/provider authorization tests for every enabled surface. Fix critical/high findings or block the affected supported profile."
+      ],
+      "dependsOn": [
+        "C26"
+      ]
+    },
+    {
+      "id": "C28",
+      "title": "perf(local): measure bounded target and overload workloads",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "Record hardware, OS, source and fixture identities, latency/CPU/RSS/disk, cancellation and saturation for the target and an over-limit workload. Publish only observed limits and reduce unsupported targets."
+      ],
+      "dependsOn": [
+        "C27"
+      ]
+    },
+    {
+      "id": "C29",
+      "title": "feat(operations): expose real engine readiness and redacted diagnostics",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "Separate web health from engine, authoritative storage and required provider readiness. Failures are visible; logs are bounded and exclude synthetic secret/credential sentinels."
+      ],
+      "dependsOn": [
+        "C28"
+      ]
+    },
+    {
+      "id": "C30",
+      "title": "test(acceptance): prove full local usability from git clone",
+      "stage": "private-release",
+      "status": "planned",
+      "acceptance": [
+        "On a clean supported Linux host, git clone -> npm run setup -> npm start completes this project's full reference workflow, negative cases, restart and restore with verified C01-C30 evidence. This is the first locally usable supported product."
+      ],
+      "dependsOn": [
+        "C29"
+      ]
+    },
+    {
+      "id": "C31",
+      "title": "build(release): package complete reproducible open-source artifacts",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Package the actual engine, web UI and offline rules/resources, source archive/build recipes, SBOM, upstream notices, checksums and provenance. A web-only artifact cannot satisfy this complete-product task."
+      ],
+      "dependsOn": [
+        "C30"
+      ]
+    },
+    {
+      "id": "C32",
+      "title": "feat(network): harden local launch and optional private hosting",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Local operation needs no owned public domain. Prove loopback/origin/cache boundaries and document optional TLS/private ingress without exposing engine work by default."
+      ],
+      "dependsOn": [
+        "C31"
+      ]
+    },
+    {
+      "id": "C33",
+      "title": "test(ux): verify keyboard mobile failures and compatible updates",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Complete the actual reference workflow with keyboard/table equivalents at 360px and 1440px, invalid/empty/interrupted/provider-outage cases and N-1 data/export fixtures. Advertise only observed supported platforms."
+      ],
+      "dependsOn": [
+        "C32"
+      ]
+    },
+    {
+      "id": "C34",
+      "title": "docs(oss): complete installation usage contribution and support guides",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "A fresh reader completes the core task from public instructions. Document source builds, licenses, data/limits/privacy/recovery/support and a confirmed vulnerability reporting route without mandatory cloud or paid entitlements."
+      ],
+      "dependsOn": [
+        "C33"
+      ]
+    },
+    {
+      "id": "C35",
+      "title": "test(distribution): verify signed artifacts and data-safe upgrades",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Verify integrity and authenticity against independently trusted release identity/key. Install, upgrade and roll back on supported hosts without discarding newer accepted data; maintain the documented source-build alternative."
+      ],
+      "dependsOn": [
+        "C34"
+      ]
+    },
+    {
+      "id": "C36",
+      "title": "test(onboarding): repeat clone-to-value independently",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "A separate clean environment or independent contributor follows only the public guide and completes the actual core workflow. Record observed effort and failures; customer demand and five pilots are not prerequisites for OSS usability."
+      ],
+      "dependsOn": [
+        "C35"
+      ]
+    },
+    {
+      "id": "C37",
+      "title": "fix(acceptance): resolve observed installation and workflow blockers",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Fix actual C30/C33/C35/C36 failures with targeted regressions and repeat affected checks. Keep unresolved blockers explicit; never invent feedback or weaken an invariant to claim completion."
+      ],
+      "dependsOn": [
+        "C36"
+      ]
+    },
+    {
+      "id": "C38",
+      "title": "docs(release): freeze local privacy limits and maintenance policy",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Document local data locations, export/deletion/retention/backup/recovery, supported profiles and maintenance/dependency policy. No required hosted subscription, paid core feature or unearned SLA."
+      ],
+      "dependsOn": [
+        "C37"
+      ]
+    },
+    {
+      "id": "C39",
+      "title": "ci(release): enforce evidence-backed open-source v1 readiness",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Verify actual evidence for C01-C38, full clone-to-value, complete source/engine packaging, dependency/fixture licenses and supported-profile security/recovery. Planning templates, missing proofs and wrong-source evidence fail the release gate."
+      ],
+      "dependsOn": [
+        "C38"
+      ]
+    },
+    {
+      "id": "C40",
+      "title": "chore(release): publish and install the verified open-source v1",
+      "stage": "public-release",
+      "status": "planned",
+      "acceptance": [
+        "Use a maintainer-authorized publication workflow to publish the verified source/tag and full artifacts. Install the actual published version on a clean host and complete the same core task; retain real source/version, results and rollback evidence."
+      ],
+      "dependsOn": [
+        "C39"
+      ]
+    }
+  ],
+  "webTasks": [
+    {
+      "id": "W01",
+      "title": "Browser workspace and project roadmap",
+      "status": "verified",
+      "acceptance": "Responsive workspace, local JSON preview, accessible navigation and filterable forty-task roadmap work."
+    },
+    {
+      "id": "W02",
+      "title": "Validated runtime and constrained web server",
+      "status": "verified",
+      "acceptance": "Configuration fails closed; no engine admission, same-origin paths, health scopes, no-store configuration and path containment are tested."
+    },
+    {
+      "id": "W03",
+      "title": "Automated build and verification pipeline",
+      "status": "verified",
+      "acceptance": "Pinned Actions build the application, run web tests and publish a web-only CI artifact. Remote run result is recorded separately."
+    },
+    {
+      "id": "W04",
+      "title": "Web release packaging and operator configuration",
+      "status": "verified",
+      "acceptance": "Package contains runnable web server, assets, checksums and provenance; TLS proxy and hardened systemd templates are supplied, not deployed."
+    },
+    {
+      "id": "W05",
+      "title": "Reconcile web delivery with product plans",
+      "status": "verified",
+      "acceptance": "All supplied forty product intents and requirements remain traceable. Existing code and protected configuration are preserved."
+    },
+    {
+      "id": "W06",
+      "title": "BreachAtlas engine integration",
+      "status": "planned",
+      "acceptance": "Implement the first domain slice from IMPLEMENTATION_BLUEPRINT.md through the browser; return real typed results and failures."
+    },
+    {
+      "id": "W07",
+      "title": "Private identity and permission boundaries",
+      "status": "planned",
+      "acceptance": "Establish project-scoped identity, object authorization, CSRF for cookie mutations, bounded work and redacted audit before enabling a private engine API."
+    },
+    {
+      "id": "W08",
+      "title": "Observed host deployment and recovery",
+      "status": "planned",
+      "acceptance": "Provision an owned domain/TLS and approved private admission, install artifact, observe health, validate persistence/provider recovery and retain measured evidence."
+    }
+  ]
+}

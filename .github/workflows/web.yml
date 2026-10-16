@@ -1,0 +1,37 @@
+name: web-foundation
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: web-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run validate:plan
+      - run: npm run build
+      - run: npm test
+      - run: npx --no-install playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: npm run test:clone
+      - run: npm run package:web
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: web-${{ github.sha }}
+          path: dist/release/
+          retention-days: 14
+          if-no-files-found: error

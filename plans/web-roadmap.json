@@ -1,0 +1,114 @@
+{
+  "project": "BreachAtlas",
+  "date": "2026-10-15",
+  "status": "web_foundation_verified_locally",
+  "product_roadmap": "plans/roadmap.json",
+  "source_baseline": "54076d0b742c825e61be00553fcc0b1b32d52ac0",
+  "engine_enabled": false,
+  "tasks": [
+    {
+      "id": "W01",
+      "title": "Browser workspace and project roadmap",
+      "status": "verified",
+      "depends_on": [],
+      "acceptance": "Responsive workspace, local JSON preview, accessible navigation and filterable forty-task roadmap work.",
+      "verification": "npm run build; npm run test:browser",
+      "evidence": [
+        "docs/evidence/web-foundation.json"
+      ],
+      "release_blocker": false
+    },
+    {
+      "id": "W02",
+      "title": "Validated runtime and constrained web server",
+      "status": "verified",
+      "depends_on": [
+        "W01"
+      ],
+      "acceptance": "Configuration fails closed; no engine admission, same-origin paths, health scopes, no-store configuration and path containment are tested.",
+      "verification": "npm test",
+      "evidence": [
+        "docs/evidence/web-foundation.json"
+      ],
+      "release_blocker": false
+    },
+    {
+      "id": "W03",
+      "title": "Automated build and verification pipeline",
+      "status": "verified",
+      "depends_on": [
+        "W02"
+      ],
+      "acceptance": "Pinned Actions build the application, run web tests and publish a web-only CI artifact. Remote run result is recorded separately.",
+      "verification": "npm run check; npm run test:browser",
+      "evidence": [
+        "docs/evidence/web-foundation.json"
+      ],
+      "release_blocker": false
+    },
+    {
+      "id": "W04",
+      "title": "Web release packaging and operator configuration",
+      "status": "verified",
+      "depends_on": [
+        "W03"
+      ],
+      "acceptance": "Package contains runnable web server, assets, checksums and provenance; TLS proxy and hardened systemd templates are supplied, not deployed.",
+      "verification": "npm run package:web",
+      "evidence": [
+        "docs/evidence/web-foundation.json"
+      ],
+      "release_blocker": false
+    },
+    {
+      "id": "W05",
+      "title": "Reconcile web delivery with product plans",
+      "status": "verified",
+      "depends_on": [
+        "W04"
+      ],
+      "acceptance": "All supplied forty product intents and requirements remain traceable. Existing code and protected configuration are preserved.",
+      "verification": "python3 scripts/plan.py validate",
+      "evidence": [
+        "docs/evidence/web-foundation.json"
+      ],
+      "release_blocker": false
+    },
+    {
+      "id": "W06",
+      "title": "BreachAtlas engine integration",
+      "status": "planned",
+      "depends_on": [
+        "W05"
+      ],
+      "acceptance": "Implement the first domain slice from IMPLEMENTATION_BLUEPRINT.md through the browser; return real typed results and failures.",
+      "verification": "Project-specific engine integration suite",
+      "evidence": [],
+      "release_blocker": true
+    },
+    {
+      "id": "W07",
+      "title": "Private identity and permission boundaries",
+      "status": "planned",
+      "depends_on": [
+        "W06"
+      ],
+      "acceptance": "Establish project-scoped identity, object authorization, CSRF for cookie mutations, bounded work and redacted audit before enabling a private engine API.",
+      "verification": "Authenticated positive and negative integration tests",
+      "evidence": [],
+      "release_blocker": true
+    },
+    {
+      "id": "W08",
+      "title": "Observed host deployment and recovery",
+      "status": "planned",
+      "depends_on": [
+        "W07"
+      ],
+      "acceptance": "Provision an owned domain/TLS and approved private admission, install artifact, observe health, validate persistence/provider recovery and retain measured evidence.",
+      "verification": "Operator install, update, rollback and restore drill",
+      "evidence": [],
+      "release_blocker": true
+    }
+  ]
+}

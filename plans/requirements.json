@@ -1,0 +1,365 @@
+{
+  "project": "BreachAtlas",
+  "requirements": [
+    {
+      "id": "N01",
+      "kind": "engineering-release",
+      "description": "Define one repository-owned synthetic reference workflow, expected results and failure cases. No customer interview, paid account, external pilot count or market-validation claim is required.",
+      "mandatory": true,
+      "planned_commit": "C01",
+      "evidence_path": "docs/evidence/C01.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N02",
+      "kind": "engineering-release",
+      "description": "Record exact supported runtime, engine, provider/image, grammar, rule and fixture versions/digests, licenses and official release sources. Use real dependency lockfiles and preserve a source-build route.",
+      "mandatory": true,
+      "planned_commit": "C02",
+      "evidence_path": "docs/evidence/C02.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N03",
+      "kind": "engineering-release",
+      "description": "npm run setup prepares the actual selected local engine and npm start supervises the web workspace and loopback engine with clean shutdown. Minimal health does not imply completed business features; no second undocumented terminal is required.",
+      "mandatory": true,
+      "planned_commit": "C03",
+      "evidence_path": "docs/evidence/C03.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N04",
+      "kind": "engineering-release",
+      "description": "Implement exact typed domain inputs, output/error codes, size/time/cancellation limits and positive/negative compatibility fixtures. Generic nested JSON is not a domain contract. No database schema change is allowed.",
+      "mandatory": true,
+      "planned_commit": "C04",
+      "evidence_path": "docs/evidence/C04.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N05",
+      "kind": "engineering-release",
+      "description": "Use ADR-0003 storage ports, a bounded single writer, atomic visible state, stable operation IDs and tested interrupted/disk-full/replay recovery. No database schema, migration, .env or Dockerfile changes.",
+      "mandatory": true,
+      "planned_commit": "C05",
+      "evidence_path": "docs/evidence/C05.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N06",
+      "kind": "engineering-release",
+      "description": "Build and test the actual selected engine, typed contracts and storage using pinned local open-source providers where relevant. Add exact engine test commands and collect the listed test directories. Shell-only tests cannot verify an engine.",
+      "mandatory": true,
+      "planned_commit": "C06",
+      "evidence_path": "docs/evidence/C06.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F01",
+      "kind": "functional",
+      "description": "Evidence belongs to one case; cross-case access fails.",
+      "mandatory": true,
+      "planned_commit": "C07",
+      "evidence_path": "docs/evidence/C07.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F02",
+      "kind": "functional",
+      "description": "Interrupted or oversized upload never appears sealed.",
+      "mandatory": true,
+      "planned_commit": "C08",
+      "evidence_path": "docs/evidence/C08.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F03",
+      "kind": "functional",
+      "description": "File is durable before metadata seal; hash mismatch aborts and orphan recovery is defined.",
+      "mandatory": true,
+      "planned_commit": "C09",
+      "evidence_path": "docs/evidence/C09.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F04",
+      "kind": "functional",
+      "description": "One-byte modification, missing file and size mismatch are distinct failures.",
+      "mandatory": true,
+      "planned_commit": "C10",
+      "evidence_path": "docs/evidence/C10.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F05",
+      "kind": "functional",
+      "description": "Every transfer records actor/time/reason; no update API rewrites event history.",
+      "mandatory": true,
+      "planned_commit": "C11",
+      "evidence_path": "docs/evidence/C11.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F06",
+      "kind": "functional",
+      "description": "Independent checkpoint detects ledger rewrite; signer trust must be supplied outside bundle.",
+      "mandatory": true,
+      "planned_commit": "C12",
+      "evidence_path": "docs/evidence/C12.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F07",
+      "kind": "functional",
+      "description": "Concurrent hold/delete cannot remove held evidence and reason is audited.",
+      "mandatory": true,
+      "planned_commit": "C13",
+      "evidence_path": "docs/evidence/C13.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F08",
+      "kind": "functional",
+      "description": "Only shipped allowlisted non-executing parsers are enabled in MVP.",
+      "mandatory": true,
+      "planned_commit": "C14",
+      "evidence_path": "docs/evidence/C14.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F09",
+      "kind": "functional",
+      "description": "Read-only evidence, private scratch, no network and deadline are verified.",
+      "mandatory": true,
+      "planned_commit": "C15",
+      "evidence_path": "docs/evidence/C15.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F10",
+      "kind": "functional",
+      "description": "Derived manifest includes input hashes, tool version and config hash.",
+      "mandatory": true,
+      "planned_commit": "C16",
+      "evidence_path": "docs/evidence/C16.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F11",
+      "kind": "functional",
+      "description": "Unknown zone and DST ambiguity remain explicit rather than fabricated UTC.",
+      "mandatory": true,
+      "planned_commit": "C17",
+      "evidence_path": "docs/evidence/C17.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F12",
+      "kind": "functional",
+      "description": "Duplicate/reordered analysis cannot duplicate timeline entries.",
+      "mandatory": true,
+      "planned_commit": "C18",
+      "evidence_path": "docs/evidence/C18.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F13",
+      "kind": "functional",
+      "description": "Index can be rebuilt and queries stay within event/deadline bounds.",
+      "mandatory": true,
+      "planned_commit": "C19",
+      "evidence_path": "docs/evidence/C19.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F14",
+      "kind": "functional",
+      "description": "Analyst hypothesis has author and rationale and cannot become source evidence by UI label.",
+      "mandatory": true,
+      "planned_commit": "C20",
+      "evidence_path": "docs/evidence/C20.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F15",
+      "kind": "functional",
+      "description": "Failed verification and incomplete seal are visible; user strings are escaped.",
+      "mandatory": true,
+      "planned_commit": "C21",
+      "evidence_path": "docs/evidence/C21.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F16",
+      "kind": "functional",
+      "description": "Raw timestamp, normalized time and confidence are inspectable with table alternative.",
+      "mandatory": true,
+      "planned_commit": "C22",
+      "evidence_path": "docs/evidence/C22.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F17",
+      "kind": "functional",
+      "description": "Export binds selected evidence, derived files and checkpoint without altering source bytes.",
+      "mandatory": true,
+      "planned_commit": "C23",
+      "evidence_path": "docs/evidence/C23.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F18",
+      "kind": "functional",
+      "description": "Missing or tampered file fails; unsigned and trusted-signature status remain distinct.",
+      "mandatory": true,
+      "planned_commit": "C24",
+      "evidence_path": "docs/evidence/C24.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F19",
+      "kind": "functional",
+      "description": "No automatic raw-evidence TTL; operator destruction respects hold and creates tombstone.",
+      "mandatory": true,
+      "planned_commit": "C25",
+      "evidence_path": "docs/evidence/C25.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "F20",
+      "kind": "functional",
+      "description": "Restore cross-checks manifest/file consistency and rebuilds timeline without custody rewrite.",
+      "mandatory": true,
+      "planned_commit": "C26",
+      "evidence_path": "docs/evidence/C26.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N27",
+      "kind": "engineering-release",
+      "description": "Execute this project's negative UAT, XSS/import and object/provider authorization tests for every enabled surface. Fix critical/high findings or block the affected supported profile.",
+      "mandatory": true,
+      "planned_commit": "C27",
+      "evidence_path": "docs/evidence/C27.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N28",
+      "kind": "engineering-release",
+      "description": "Record hardware, OS, source and fixture identities, latency/CPU/RSS/disk, cancellation and saturation for the target and an over-limit workload. Publish only observed limits and reduce unsupported targets.",
+      "mandatory": true,
+      "planned_commit": "C28",
+      "evidence_path": "docs/evidence/C28.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N29",
+      "kind": "engineering-release",
+      "description": "Separate web health from engine, authoritative storage and required provider readiness. Failures are visible; logs are bounded and exclude synthetic secret/credential sentinels.",
+      "mandatory": true,
+      "planned_commit": "C29",
+      "evidence_path": "docs/evidence/C29.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N30",
+      "kind": "engineering-release",
+      "description": "On a clean supported Linux host, git clone -> npm run setup -> npm start completes this project's full reference workflow, negative cases, restart and restore with verified C01-C30 evidence. This is the first locally usable supported product.",
+      "mandatory": true,
+      "planned_commit": "C30",
+      "evidence_path": "docs/evidence/C30.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N31",
+      "kind": "engineering-release",
+      "description": "Package the actual engine, web UI and offline rules/resources, source archive/build recipes, SBOM, upstream notices, checksums and provenance. A web-only artifact cannot satisfy this complete-product task.",
+      "mandatory": true,
+      "planned_commit": "C31",
+      "evidence_path": "docs/evidence/C31.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N32",
+      "kind": "engineering-release",
+      "description": "Local operation needs no owned public domain. Prove loopback/origin/cache boundaries and document optional TLS/private ingress without exposing engine work by default.",
+      "mandatory": true,
+      "planned_commit": "C32",
+      "evidence_path": "docs/evidence/C32.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N33",
+      "kind": "engineering-release",
+      "description": "Complete the actual reference workflow with keyboard/table equivalents at 360px and 1440px, invalid/empty/interrupted/provider-outage cases and N-1 data/export fixtures. Advertise only observed supported platforms.",
+      "mandatory": true,
+      "planned_commit": "C33",
+      "evidence_path": "docs/evidence/C33.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N34",
+      "kind": "engineering-release",
+      "description": "A fresh reader completes the core task from public instructions. Document source builds, licenses, data/limits/privacy/recovery/support and a confirmed vulnerability reporting route without mandatory cloud or paid entitlements.",
+      "mandatory": true,
+      "planned_commit": "C34",
+      "evidence_path": "docs/evidence/C34.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N35",
+      "kind": "engineering-release",
+      "description": "Verify integrity and authenticity against independently trusted release identity/key. Install, upgrade and roll back on supported hosts without discarding newer accepted data; maintain the documented source-build alternative.",
+      "mandatory": true,
+      "planned_commit": "C35",
+      "evidence_path": "docs/evidence/C35.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N36",
+      "kind": "engineering-release",
+      "description": "A separate clean environment or independent contributor follows only the public guide and completes the actual core workflow. Record observed effort and failures; customer demand and five pilots are not prerequisites for OSS usability.",
+      "mandatory": true,
+      "planned_commit": "C36",
+      "evidence_path": "docs/evidence/C36.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N37",
+      "kind": "engineering-release",
+      "description": "Fix actual C30/C33/C35/C36 failures with targeted regressions and repeat affected checks. Keep unresolved blockers explicit; never invent feedback or weaken an invariant to claim completion.",
+      "mandatory": true,
+      "planned_commit": "C37",
+      "evidence_path": "docs/evidence/C37.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N38",
+      "kind": "engineering-release",
+      "description": "Document local data locations, export/deletion/retention/backup/recovery, supported profiles and maintenance/dependency policy. No required hosted subscription, paid core feature or unearned SLA.",
+      "mandatory": true,
+      "planned_commit": "C38",
+      "evidence_path": "docs/evidence/C38.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N39",
+      "kind": "engineering-release",
+      "description": "Verify actual evidence for C01-C38, full clone-to-value, complete source/engine packaging, dependency/fixture licenses and supported-profile security/recovery. Planning templates, missing proofs and wrong-source evidence fail the release gate.",
+      "mandatory": true,
+      "planned_commit": "C39",
+      "evidence_path": "docs/evidence/C39.json",
+      "status": "unimplemented"
+    },
+    {
+      "id": "N40",
+      "kind": "engineering-release",
+      "description": "Use a maintainer-authorized publication workflow to publish the verified source/tag and full artifacts. Install the actual published version on a clean host and complete the same core task; retain real source/version, results and rollback evidence.",
+      "mandatory": true,
+      "planned_commit": "C40",
+      "evidence_path": "docs/evidence/C40.json",
+      "status": "unimplemented"
+    }
+  ]
+}

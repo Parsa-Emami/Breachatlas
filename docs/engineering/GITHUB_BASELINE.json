@@ -1,0 +1,13 @@
+{
+  "repository": "Parsa-Emami/Breachatlas",
+  "reviewed_commit": "54076d0b742c825e61be00553fcc0b1b32d52ac0",
+  "existing_file_count": 78,
+  "existing_runtime": "architecture scaffold only",
+  "protected_files_sha256": {
+    ".env.example": "94aabc53b1ae21e69450bad3e888880971fbadb196af12df0dd2b96978a832f2"
+  },
+  "skipped_input_archival_config_paths": [
+    "legacy/v7/.env.example"
+  ],
+  "preservation": "All existing protected files remain at their original paths with identical bytes. Supplied archival env duplicates were omitted to avoid creating extra config files."
+}

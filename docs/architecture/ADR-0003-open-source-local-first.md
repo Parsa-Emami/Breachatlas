@@ -1,0 +1,15 @@
+# ADR-0003: BreachAtlas complete open-source local delivery
+
+Accepted 2026-10-16 for the owner's clone-to-run and full-OSS request. Supersedes mandatory hosted services, CLI-only distribution, public-domain launch and pilot/customer counts as local release prerequisites. Preserve existing domain invariants and source adapters.
+
+All core UI/engine source, rules, examples, tests, resource pins, build recipes and operating instructions are public under Apache-2.0 or explicitly compatible upstream licenses. No proprietary entitlement, paid/cloud account or sibling repository is required. Existing package.json private=true prevents accidental npm registry publication, not source reuse.
+
+The current web server remains a truthful shell. C03 adds the actual Go runtime and a unified local process supervisor through setup/start; C03 includes engine smoke tests; C06 adds domain integration tests and CI. Providers: none. Exact compiler/provider/image/rule/grammar versions, licenses and digests are resolved from official releases at C02, not guessed from historical v7 pins. Full v1 initially supports the measured Linux local profile; hosting, multi-user SaaS, native stores and extra platforms are separate validated extensions.
+
+Database schemas, migrations, .env files and Dockerfiles remain protected. Existing compatible database adapters may be used without schema changes, including RiskWeft's optional Laravel API. Default local service metadata may use a bounded versioned manifest/immutable-file repository port rather than adding a separate SQL service; browser RiskWeft retains local IndexedDB/portable exports, file viewers use portable reports, OpenBao owns secret bytes and DuckDB queries immutable Parquet. If a protected change is genuinely unavoidable, the exact task stays blocked; do not silently edit it or fake durable success.
+
+For a file port, C05 proves one local writer, bounded state, staged/hash-checked durable bytes, one atomic versioned manifest publication, directory flush and acknowledgement only after commit. Durable job/idempotency state shares that visible transaction. Reconcile orphan staging and missing references; reject disk-full/lock/recovery failures. Projections remain rebuildable. This is a bounded single-host adapter, not a custom distributed database; filesystem/platform guarantees require actual tests.
+
+Local-demo uses isolated synthetic inputs/providers. Local-private must prove actual identity, object/provider permission, secret redaction, expiry/revocation and recovery. Do not execute uploaded source/arbitrary shell or expose public runtime admission by a frontend flag. Rootless containers alone are not a public multi-tenant trust boundary.
+
+C30 proves full clone-to-value plus restart/restore after C01-C30. C39 checks actual C01-C38 evidence; C40 publishes authorized full source/artifacts and proves a clean installed core workflow. The historical W web evidence is distinct from C engine readiness; customer demand remains separate and cannot be fabricated.

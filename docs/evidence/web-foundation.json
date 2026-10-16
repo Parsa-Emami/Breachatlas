@@ -1,0 +1,87 @@
+{
+  "project": "BreachAtlas",
+  "date": "2026-10-15",
+  "scope": "web foundation; domain engines not certified",
+  "passed": true,
+  "source_identity": "sha256:47ebf6cce4a30f23c5612e678440b782215adb0997aff1fbf7ac947e5a305edc",
+  "identity_reproduction": "python3 scripts/source_identity.py --check",
+  "web_tasks_verified": [
+    "W01",
+    "W02",
+    "W03",
+    "W04",
+    "W05"
+  ],
+  "base_commit": "54076d0b742c825e61be00553fcc0b1b32d52ac0",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "python": "3.12.14",
+    "playwright": "1.64.1",
+    "chromium": "153.0.8010.0",
+    "browser_install_note": "Playwright CDN download failed in this environment; tests ran with the explicit WEB_TEST_CHROMIUM override using a Chromium binary from @sparticuz/chromium 153.0.0. CI retains the managed-browser install path."
+  },
+  "commands": [
+    {
+      "command": "npm ci --ignore-scripts --offline --no-audit --no-fund",
+      "exit_code": 0,
+      "output": "\nadded 26 packages in 2s\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "\n> @parsa-emami/breachatlas-web@0.0.1 check\n> npm run validate:plan && npm run build && npm test\n\n\n> @parsa-emami/breachatlas-web@0.0.1 validate:plan\n> python3 scripts/plan.py validate\n\nPLAN VALIDATION PASSED — 40 intents, coverage and progress checked; no application runtime tests performed\n\n> @parsa-emami/breachatlas-web@0.0.1 build\n> npm run prepare:web && npm run typecheck && vite build --config apps/web/vite.config.ts\n\n\n> @parsa-emami/breachatlas-web@0.0.1 prepare:web\n> node scripts/generate-web-data.mjs\n\n\n> @parsa-emami/breachatlas-web@0.0.1 typecheck\n> tsc -p tsconfig.json\n\nvite v8.3.4 building client environment for production...\ntransforming...\n✓ 18 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/web/index.html                   0.78 kB │ gzip:  0.47 kB\ndist/web/assets/index-QSskK8xr.css    4.36 kB │ gzip:  1.62 kB\ndist/web/assets/index-Cj8cgGXg.js   239.99 kB │ gzip: 75.58 kB\n\n✓ built in 224ms\n\n> @parsa-emami/breachatlas-web@0.0.1 test\n> node --test tests/web/*.test.mjs\n\n✔ public configuration fails closed on engine flags, external endpoints, unknown keys and project mismatch (1.494661ms)\n✔ preview rejects hostile structure, excessive UTF-8 size and excessive complexity (2.155812ms)\n✔ HTTP isolation, cache rules, health semantics, methods, traversal and symlink containment (119.527581ms)\n✔ generated project and runtime identity agree with exactly forty original product tasks (3.031104ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 285.573623\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED\nChecked 66 JSON files and repository contract invariants.\n"
+    },
+    {
+      "command": "npm run package:web",
+      "exit_code": 0,
+      "output": "\n> @parsa-emami/breachatlas-web@0.0.1 package:web\n> node scripts/package-web.mjs\n\nPackaged web-only release; source dirty=true; engineReady=false\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "command": "WEB_TEST_CHROMIUM=/workspace/scratch/60d0d4d1343a/browser-runtime/chromium npm run test:browser",
+      "exit_code": 0,
+      "output": "\n> @parsa-emami/breachatlas-web@0.0.1 test:browser\n> playwright test\n\n\nRunning 2 tests using 1 worker\n\n  ✓  1 tests/browser/workspace.spec.ts:2:1 › workspace, local preview, navigation and roadmap filters work (368ms)\n  ✓  2 tests/browser/workspace.spec.ts:24:1 › configuration failure blocks workspace startup (131ms)\n\n  2 passed (1.6s)\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n[WebServer] (node:169) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n[WebServer] npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n[WebServer] (node:182) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)\n(node:194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n"
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "\n> @parsa-emami/breachatlas-web@0.0.1 check\n> npm run validate:plan && npm run build && npm test\n\n\n> @parsa-emami/breachatlas-web@0.0.1 validate:plan\n> python3 scripts/plan.py validate\n\nPLAN VALIDATION PASSED — 40 intents, coverage and progress checked; no application runtime tests performed\n\n> @parsa-emami/breachatlas-web@0.0.1 build\n> npm run prepare:web && npm run typecheck && vite build --config apps/web/vite.config.ts\n\n\n> @parsa-emami/breachatlas-web@0.0.1 prepare:web\n> node scripts/generate-web-data.mjs\n\n\n> @parsa-emami/breachatlas-web@0.0.1 typecheck\n> tsc -p tsconfig.json\n\nvite v8.3.4 building client environment for production...\ntransforming...\n✓ 18 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/web/index.html                   0.78 kB │ gzip:  0.47 kB\ndist/web/assets/index-QSskK8xr.css    4.36 kB │ gzip:  1.62 kB\ndist/web/assets/index-BCUt4HsG.js   239.97 kB │ gzip: 75.58 kB\n\n✓ built in 205ms\n\n> @parsa-emami/breachatlas-web@0.0.1 test\n> node --test tests/web/*.test.mjs\n\n✔ public configuration fails closed on engine flags, external endpoints, unknown keys and project mismatch (2.064854ms)\n✔ preview rejects hostile structure, excessive UTF-8 size and excessive complexity (1.964506ms)\n✔ HTTP isolation, cache rules, health semantics, methods, traversal and symlink containment (129.569609ms)\n✔ generated project and runtime identity agree with exactly forty original product tasks (3.802753ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 257.829393\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "command": "npm run package:web",
+      "exit_code": 0,
+      "output": "\n> @parsa-emami/breachatlas-web@0.0.1 package:web\n> node scripts/package-web.mjs\n\nPackaged web-only release; source dirty=true; engineReady=false\nnpm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n"
+    },
+    {
+      "command": "python3 scripts/plan.py validate",
+      "exit_code": 0,
+      "output": "PLAN VALIDATION PASSED — 40 intents, coverage and progress checked; no application runtime tests performed\n"
+    },
+    {
+      "command": "python3 scripts/source_identity.py --check",
+      "exit_code": 0,
+      "output": "Source identity verified\n"
+    }
+  ],
+  "results": {
+    "node_tests_passed": 4,
+    "browser_tests_passed": 2,
+    "production_build": true,
+    "web_package": true,
+    "original_contract_validation": true,
+    "domain_tests": "not run",
+    "host_deployment": "not performed",
+    "remote_ci": "pending commit",
+    "standalone_artifact_smoke": "Artifact checksums, standalone startup, web readiness, HTML and API rejection passed."
+  },
+  "limitations": [
+    "Domain C01-C40 milestones are not verified by these web tests.",
+    "Nginx/systemd are supplied templates; live TLS admission and host recovery are W08.",
+    "RiskWeft Laravel code is preserved; PHP/Composer and database integration were not executed."
+  ]
+}
