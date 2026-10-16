@@ -98,5 +98,17 @@
     "source": "apps/web/src/main.tsx",
     "existing_backend": null
   },
-  "web_version": "0.0.1"
+  "web_version": "0.0.1",
+  "open_source": {
+    "license": "Apache-2.0",
+    "core_paid_account_required": false,
+    "owned_domain_required": false,
+    "sibling_clone_required": false,
+    "setup": "npm run setup",
+    "start": "npm start",
+    "usable_at": "C30",
+    "complete_v1_at": "C40",
+    "core_ready": false,
+    "architecture": "docs/architecture/ADR-0003-open-source-local-first.md"
+  }
 }

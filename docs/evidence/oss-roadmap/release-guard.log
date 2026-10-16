@@ -1,0 +1,6 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 release:check
+> node scripts/roadmap.mjs release-check
+
+NOT RELEASE READY: actual C01-C38 and complete clone-to-value evidence required. Missing: C01, C02, C03, C04, C05, C06, C07, C08, C09, C10, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25, C26, C27, C28, C29, C30, C31, C32, C33, C34, C35, C36, C37, C38

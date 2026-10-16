@@ -1,0 +1,37 @@
+{
+  "project": "BreachAtlas",
+  "status": "planned acceptance contract; not executed domain proof",
+  "input": "repository-authored synthetic licensed fixtures",
+  "steps": [
+    "Upload synthetic evidence",
+    "seal",
+    "add custody",
+    "parse bounded timeline",
+    "hold/delete negative test",
+    "export",
+    "verify on another host with external trust",
+    "recover consistency."
+  ],
+  "expected_invariants": [
+    "Sealed source bytes never modified",
+    "Legal hold takes precedence over deletion",
+    "Raw timestamp and confidence survive normalization"
+  ],
+  "negative_uat": [
+    "evidence را upload/seal کن؛ byte عوض‌شده verifier را شکست دهد",
+    "hold فعال اجازهٔ delete و expire ندهد",
+    "export در دستگاه جدا بدون سرور با trust key مستقل بررسی شود و timezone خام حفظ شود"
+  ],
+  "clean_host_commands": [
+    "git clone https://github.com/Parsa-Emami/Breachatlas.git",
+    "cd Breachatlas",
+    "npm run setup",
+    "npm start"
+  ],
+  "requires_at_C30": [
+    "real engine and required local providers",
+    "the entire workflow",
+    "restart and restore",
+    "no paid/cloud account or sibling clone"
+  ]
+}

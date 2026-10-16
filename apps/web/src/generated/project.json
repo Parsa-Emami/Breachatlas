@@ -23,21 +23,21 @@
   "tasks": [
     {
       "id": "C01",
-      "title": "docs(product): confirm personal use acceptance and demand hypotheses",
+      "title": "docs(product): freeze the open-source clone-to-value workflow",
       "stage": "foundation",
       "status": "planned",
       "acceptance": [
-        "Choose one owned real task, identify current workaround and record measured baseline; public demand remains unvalidated."
+        "Define one repository-owned synthetic reference workflow, expected results and failure cases. No customer interview, paid account, external pilot count or market-validation claim is required."
       ],
       "dependsOn": []
     },
     {
       "id": "C02",
-      "title": "chore(toolchain): verify supported versions and lock dependencies",
+      "title": "chore(toolchain): lock reproducible open-source resources",
       "stage": "foundation",
       "status": "planned",
       "acceptance": [
-        "Official support/release URLs and verification date exist for each selected dependency; no future or assumed version pin."
+        "Record exact supported runtime, engine, provider/image, grammar, rule and fixture versions/digests, licenses and official release sources. Use real dependency lockfiles and preserve a source-build route."
       ],
       "dependsOn": [
         "C01"
@@ -45,12 +45,11 @@
     },
     {
       "id": "C03",
-      "title": "chore(app): initialize selected minimal runtime",
+      "title": "feat(runtime): implement unified local engine setup and launch",
       "stage": "foundation",
       "status": "in_progress",
       "acceptance": [
-        "Fresh checkout boots minimal CLI or local UI; do not run legacy Laravel/PostgreSQL bootstrap.",
-        "Web entry point is mandatory. W01-W05 supply the tested shell; complete engine obligations before verifying C03."
+        "npm run setup prepares the actual selected local engine and npm start supervises the web workspace and loopback engine with clean shutdown. Minimal health does not imply completed business features; no second undocumented terminal is required."
       ],
       "dependsOn": [
         "C02"
@@ -58,11 +57,11 @@
     },
     {
       "id": "C04",
-      "title": "feat(contracts): freeze typed local and transport contracts",
+      "title": "feat(contracts): define typed versioned domain inputs and results",
       "stage": "foundation",
       "status": "planned",
       "acceptance": [
-        "Inputs, errors, output, schema versions, timeout and compatibility behavior are typed with positive/negative fixtures."
+        "Implement exact typed domain inputs, output/error codes, size/time/cancellation limits and positive/negative compatibility fixtures. Generic nested JSON is not a domain contract. No database schema change is allowed."
       ],
       "dependsOn": [
         "C03"
@@ -70,11 +69,11 @@
     },
     {
       "id": "C05",
-      "title": "feat(storage): implement minimal authoritative storage adapter",
+      "title": "feat(storage): prove recoverable local authoritative writes",
       "stage": "foundation",
       "status": "planned",
       "acceptance": [
-        "Authority, atomic write boundary and recovery mechanism match selected profile; storage loss test has actionable result."
+        "Use ADR-0003 storage ports, a bounded single writer, atomic visible state, stable operation IDs and tested interrupted/disk-full/replay recovery. No database schema, migration, .env or Dockerfile changes."
       ],
       "dependsOn": [
         "C04"
@@ -82,11 +81,11 @@
     },
     {
       "id": "C06",
-      "title": "ci(checks): run actual runtime build and foundational tests",
+      "title": "ci(engine): verify the actual engine from a clean checkout",
       "stage": "foundation",
       "status": "planned",
       "acceptance": [
-        "Clean-checkout build, formatting and contract/invariant tests pass; plan validation is never reported as application testing."
+        "Build and test the actual selected engine, typed contracts and storage using pinned local open-source providers where relevant. Add exact engine test commands and collect the listed test directories. Shell-only tests cannot verify an engine."
       ],
       "dependsOn": [
         "C05"
@@ -334,11 +333,11 @@
     },
     {
       "id": "C27",
-      "title": "test(security): close abuse and authorization release gaps",
+      "title": "test(security): prove project abuse and authorization boundaries",
       "stage": "private-release",
       "status": "planned",
       "acceptance": [
-        "Run project-specific negative UAT plus XSS/import/auth checks for enabled surfaces; document unsupported attack surface and unresolved findings."
+        "Execute this project's negative UAT, XSS/import and object/provider authorization tests for every enabled surface. Fix critical/high findings or block the affected supported profile."
       ],
       "dependsOn": [
         "C26"
@@ -346,11 +345,11 @@
     },
     {
       "id": "C28",
-      "title": "perf(budgets): measure target workload and overload behavior",
+      "title": "perf(local): measure bounded target and overload workloads",
       "stage": "private-release",
       "status": "planned",
       "acceptance": [
-        "Record hardware, OS, source digest, workload, p50/p95/p99 where meaningful, CPU, RSS, storage growth, cancellation and saturation; lower supported limits if targets fail."
+        "Record hardware, OS, source and fixture identities, latency/CPU/RSS/disk, cancellation and saturation for the target and an over-limit workload. Publish only observed limits and reduce unsupported targets."
       ],
       "dependsOn": [
         "C27"
@@ -358,11 +357,11 @@
     },
     {
       "id": "C29",
-      "title": "feat(operations): expose health diagnostics and bounded logs",
+      "title": "feat(operations): expose real engine readiness and redacted diagnostics",
       "stage": "private-release",
       "status": "planned",
       "acceptance": [
-        "Local health/status path identifies storage/job/provider failure; sensitive content is absent from synthetic log sentinel test."
+        "Separate web health from engine, authoritative storage and required provider readiness. Failures are visible; logs are bounded and exclude synthetic secret/credential sentinels."
       ],
       "dependsOn": [
         "C28"
@@ -370,11 +369,11 @@
     },
     {
       "id": "C30",
-      "title": "test(recovery): prove personal backup restore and private install",
+      "title": "test(acceptance): prove full local usability from git clone",
       "stage": "private-release",
       "status": "planned",
       "acceptance": [
-        "Fresh machine/browser install and restore completes project UAT; personal deployment remains private until its relevant safety gates pass."
+        "On a clean supported Linux host, git clone -> npm run setup -> npm start completes this project's full reference workflow, negative cases, restart and restore with verified C01-C30 evidence. This is the first locally usable supported product."
       ],
       "dependsOn": [
         "C29"
@@ -382,11 +381,11 @@
     },
     {
       "id": "C31",
-      "title": "build(packaging): create versioned installable artifacts",
+      "title": "build(release): package complete reproducible open-source artifacts",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Static/CLI/container artifact matches chosen distribution; SBOM, licenses, checksums and provenance truthfully reflect what is built."
+        "Package the actual engine, web UI and offline rules/resources, source archive/build recipes, SBOM, upstream notices, checksums and provenance. A web-only artifact cannot satisfy this complete-product task."
       ],
       "dependsOn": [
         "C30"
@@ -394,11 +393,11 @@
     },
     {
       "id": "C32",
-      "title": "feat(web): configure domain tls and isolated public demo",
+      "title": "feat(network): harden local launch and optional private hosting",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Domain/HTTPS/cookies/CSP and private-origin policy are checked; public demo contains synthetic data only and dangerous runtime features are disabled."
+        "Local operation needs no owned public domain. Prove loopback/origin/cache boundaries and document optional TLS/private ingress without exposing engine work by default."
       ],
       "dependsOn": [
         "C31"
@@ -406,11 +405,11 @@
     },
     {
       "id": "C33",
-      "title": "test(ux): verify accessibility mobile and update behavior",
+      "title": "test(ux): verify keyboard mobile failures and compatible updates",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Keyboard/table alternative, 360px through 1440px layouts, empty/error/offline states and N-1 data upgrade fixtures work on documented supported platforms."
+        "Complete the actual reference workflow with keyboard/table equivalents at 360px and 1440px, invalid/empty/interrupted/provider-outage cases and N-1 data/export fixtures. Advertise only observed supported platforms."
       ],
       "dependsOn": [
         "C32"
@@ -418,11 +417,11 @@
     },
     {
       "id": "C34",
-      "title": "docs(release): publish english usage limits and support contract",
+      "title": "docs(oss): complete installation usage contribution and support guides",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "New user completes one documented task; English install/use/privacy/limits/support pages include owner contact supplied by maintainer and actual evidence links."
+        "A fresh reader completes the core task from public instructions. Document source builds, licenses, data/limits/privacy/recovery/support and a confirmed vulnerability reporting route without mandatory cloud or paid entitlements."
       ],
       "dependsOn": [
         "C33"
@@ -430,11 +429,11 @@
     },
     {
       "id": "C35",
-      "title": "test(release): exercise signed artifact and clean upgrade paths",
+      "title": "test(distribution): verify signed artifacts and data-safe upgrades",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Install artifact from clean environment; verify signer with independently trusted key/identity; supported upgrade and rollback preserve latest valid data."
+        "Verify integrity and authenticity against independently trusted release identity/key. Install, upgrade and roll back on supported hosts without discarding newer accepted data; maintain the documented source-build alternative."
       ],
       "dependsOn": [
         "C34"
@@ -442,11 +441,11 @@
     },
     {
       "id": "C36",
-      "title": "docs(beta): record independent pilot feedback and beta gate",
+      "title": "test(onboarding): repeat clone-to-value independently",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Target: 5 relevant trials, 3 complete core task and 2 return for real repeat use; if unavailable continue personal release and mark demand unvalidated rather than inventing pilots."
+        "A separate clean environment or independent contributor follows only the public guide and completes the actual core workflow. Record observed effort and failures; customer demand and five pilots are not prerequisites for OSS usability."
       ],
       "dependsOn": [
         "C35"
@@ -454,11 +453,11 @@
     },
     {
       "id": "C37",
-      "title": "fix(beta): resolve evidence backed pilot blockers",
+      "title": "fix(acceptance): resolve observed installation and workflow blockers",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Fix observed failures, re-run affected checks, record remaining limitations; if no pilots, use observed personal UAT issues and retain unvalidated market label."
+        "Fix actual C30/C33/C35/C36 failures with targeted regressions and repeat affected checks. Keep unresolved blockers explicit; never invent feedback or weaken an invariant to claim completion."
       ],
       "dependsOn": [
         "C36"
@@ -466,11 +465,11 @@
     },
     {
       "id": "C38",
-      "title": "docs(service): freeze retention portability quotas and support policy",
+      "title": "docs(release): freeze local privacy limits and maintenance policy",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "For public service state data location, deletion/export rules, quotas, expected support and outage behavior; paid billing and SLA are not enabled without separate ADR."
+        "Document local data locations, export/deletion/retention/backup/recovery, supported profiles and maintenance/dependency policy. No required hosted subscription, paid core feature or unearned SLA."
       ],
       "dependsOn": [
         "C37"
@@ -478,11 +477,11 @@
     },
     {
       "id": "C39",
-      "title": "ci(release): verify v1 gate from clean source tree",
+      "title": "ci(release): enforce evidence-backed open-source v1 readiness",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Every mandatory requirement has actual passed evidence; no critical open security/recovery issue; release profile and demand status are explicit."
+        "Verify actual evidence for C01-C38, full clone-to-value, complete source/engine packaging, dependency/fixture licenses and supported-profile security/recovery. Planning templates, missing proofs and wrong-source evidence fail the release gate."
       ],
       "dependsOn": [
         "C38"
@@ -490,11 +489,11 @@
     },
     {
       "id": "C40",
-      "title": "chore(release): publish v1 artifacts and monitor first use",
+      "title": "chore(release): publish and install the verified open-source v1",
       "stage": "public-release",
       "status": "planned",
       "acceptance": [
-        "Release only verified profile artifacts, run installed smoke test, record actual version/source digest and follow up support/rollback; never publish fabricated claims."
+        "Use a maintainer-authorized publication workflow to publish the verified source/tag and full artifacts. Install the actual published version on a clean host and complete the same core task; retain real source/version, results and rollback evidence."
       ],
       "dependsOn": [
         "C39"

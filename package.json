@@ -18,8 +18,13 @@
     "test": "node --test tests/web/*.test.mjs",
     "test:browser": "playwright test",
     "package:web": "node scripts/package-web.mjs",
-    "validate:plan": "python3 scripts/plan.py validate",
-    "check": "npm run validate:plan && npm run build && npm test"
+    "validate:plan": "node scripts/roadmap.mjs validate",
+    "check": "npm run validate:plan && npm run build && npm test",
+    "setup": "node scripts/oss-bootstrap.mjs setup",
+    "doctor": "node scripts/oss-bootstrap.mjs doctor",
+    "plan": "node scripts/roadmap.mjs",
+    "release:check": "node scripts/roadmap.mjs release-check",
+    "test:clone": "node scripts/clone-smoke.mjs"
   },
   "dependencies": {
     "react": "19.3.1",

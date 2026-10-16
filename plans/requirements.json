@@ -4,7 +4,7 @@
     {
       "id": "N01",
       "kind": "engineering-release",
-      "description": "Choose one owned real task, identify current workaround and record measured baseline; public demand remains unvalidated.",
+      "description": "Define one repository-owned synthetic reference workflow, expected results and failure cases. No customer interview, paid account, external pilot count or market-validation claim is required.",
       "mandatory": true,
       "planned_commit": "C01",
       "evidence_path": "docs/evidence/C01.json",
@@ -13,7 +13,7 @@
     {
       "id": "N02",
       "kind": "engineering-release",
-      "description": "Official support/release URLs and verification date exist for each selected dependency; no future or assumed version pin.",
+      "description": "Record exact supported runtime, engine, provider/image, grammar, rule and fixture versions/digests, licenses and official release sources. Use real dependency lockfiles and preserve a source-build route.",
       "mandatory": true,
       "planned_commit": "C02",
       "evidence_path": "docs/evidence/C02.json",
@@ -22,7 +22,7 @@
     {
       "id": "N03",
       "kind": "engineering-release",
-      "description": "Fresh checkout boots minimal CLI or local UI; do not run legacy Laravel/PostgreSQL bootstrap.",
+      "description": "npm run setup prepares the actual selected local engine and npm start supervises the web workspace and loopback engine with clean shutdown. Minimal health does not imply completed business features; no second undocumented terminal is required.",
       "mandatory": true,
       "planned_commit": "C03",
       "evidence_path": "docs/evidence/C03.json",
@@ -31,7 +31,7 @@
     {
       "id": "N04",
       "kind": "engineering-release",
-      "description": "Inputs, errors, output, schema versions, timeout and compatibility behavior are typed with positive/negative fixtures.",
+      "description": "Implement exact typed domain inputs, output/error codes, size/time/cancellation limits and positive/negative compatibility fixtures. Generic nested JSON is not a domain contract. No database schema change is allowed.",
       "mandatory": true,
       "planned_commit": "C04",
       "evidence_path": "docs/evidence/C04.json",
@@ -40,7 +40,7 @@
     {
       "id": "N05",
       "kind": "engineering-release",
-      "description": "Authority, atomic write boundary and recovery mechanism match selected profile; storage loss test has actionable result.",
+      "description": "Use ADR-0003 storage ports, a bounded single writer, atomic visible state, stable operation IDs and tested interrupted/disk-full/replay recovery. No database schema, migration, .env or Dockerfile changes.",
       "mandatory": true,
       "planned_commit": "C05",
       "evidence_path": "docs/evidence/C05.json",
@@ -49,7 +49,7 @@
     {
       "id": "N06",
       "kind": "engineering-release",
-      "description": "Clean-checkout build, formatting and contract/invariant tests pass; plan validation is never reported as application testing.",
+      "description": "Build and test the actual selected engine, typed contracts and storage using pinned local open-source providers where relevant. Add exact engine test commands and collect the listed test directories. Shell-only tests cannot verify an engine.",
       "mandatory": true,
       "planned_commit": "C06",
       "evidence_path": "docs/evidence/C06.json",
@@ -238,7 +238,7 @@
     {
       "id": "N27",
       "kind": "engineering-release",
-      "description": "Run project-specific negative UAT plus XSS/import/auth checks for enabled surfaces; document unsupported attack surface and unresolved findings.",
+      "description": "Execute this project's negative UAT, XSS/import and object/provider authorization tests for every enabled surface. Fix critical/high findings or block the affected supported profile.",
       "mandatory": true,
       "planned_commit": "C27",
       "evidence_path": "docs/evidence/C27.json",
@@ -247,7 +247,7 @@
     {
       "id": "N28",
       "kind": "engineering-release",
-      "description": "Record hardware, OS, source digest, workload, p50/p95/p99 where meaningful, CPU, RSS, storage growth, cancellation and saturation; lower supported limits if targets fail.",
+      "description": "Record hardware, OS, source and fixture identities, latency/CPU/RSS/disk, cancellation and saturation for the target and an over-limit workload. Publish only observed limits and reduce unsupported targets.",
       "mandatory": true,
       "planned_commit": "C28",
       "evidence_path": "docs/evidence/C28.json",
@@ -256,7 +256,7 @@
     {
       "id": "N29",
       "kind": "engineering-release",
-      "description": "Local health/status path identifies storage/job/provider failure; sensitive content is absent from synthetic log sentinel test.",
+      "description": "Separate web health from engine, authoritative storage and required provider readiness. Failures are visible; logs are bounded and exclude synthetic secret/credential sentinels.",
       "mandatory": true,
       "planned_commit": "C29",
       "evidence_path": "docs/evidence/C29.json",
@@ -265,7 +265,7 @@
     {
       "id": "N30",
       "kind": "engineering-release",
-      "description": "Fresh machine/browser install and restore completes project UAT; personal deployment remains private until its relevant safety gates pass.",
+      "description": "On a clean supported Linux host, git clone -> npm run setup -> npm start completes this project's full reference workflow, negative cases, restart and restore with verified C01-C30 evidence. This is the first locally usable supported product.",
       "mandatory": true,
       "planned_commit": "C30",
       "evidence_path": "docs/evidence/C30.json",
@@ -274,7 +274,7 @@
     {
       "id": "N31",
       "kind": "engineering-release",
-      "description": "Static/CLI/container artifact matches chosen distribution; SBOM, licenses, checksums and provenance truthfully reflect what is built.",
+      "description": "Package the actual engine, web UI and offline rules/resources, source archive/build recipes, SBOM, upstream notices, checksums and provenance. A web-only artifact cannot satisfy this complete-product task.",
       "mandatory": true,
       "planned_commit": "C31",
       "evidence_path": "docs/evidence/C31.json",
@@ -283,7 +283,7 @@
     {
       "id": "N32",
       "kind": "engineering-release",
-      "description": "Domain/HTTPS/cookies/CSP and private-origin policy are checked; public demo contains synthetic data only and dangerous runtime features are disabled.",
+      "description": "Local operation needs no owned public domain. Prove loopback/origin/cache boundaries and document optional TLS/private ingress without exposing engine work by default.",
       "mandatory": true,
       "planned_commit": "C32",
       "evidence_path": "docs/evidence/C32.json",
@@ -292,7 +292,7 @@
     {
       "id": "N33",
       "kind": "engineering-release",
-      "description": "Keyboard/table alternative, 360px through 1440px layouts, empty/error/offline states and N-1 data upgrade fixtures work on documented supported platforms.",
+      "description": "Complete the actual reference workflow with keyboard/table equivalents at 360px and 1440px, invalid/empty/interrupted/provider-outage cases and N-1 data/export fixtures. Advertise only observed supported platforms.",
       "mandatory": true,
       "planned_commit": "C33",
       "evidence_path": "docs/evidence/C33.json",
@@ -301,7 +301,7 @@
     {
       "id": "N34",
       "kind": "engineering-release",
-      "description": "New user completes one documented task; English install/use/privacy/limits/support pages include owner contact supplied by maintainer and actual evidence links.",
+      "description": "A fresh reader completes the core task from public instructions. Document source builds, licenses, data/limits/privacy/recovery/support and a confirmed vulnerability reporting route without mandatory cloud or paid entitlements.",
       "mandatory": true,
       "planned_commit": "C34",
       "evidence_path": "docs/evidence/C34.json",
@@ -310,7 +310,7 @@
     {
       "id": "N35",
       "kind": "engineering-release",
-      "description": "Install artifact from clean environment; verify signer with independently trusted key/identity; supported upgrade and rollback preserve latest valid data.",
+      "description": "Verify integrity and authenticity against independently trusted release identity/key. Install, upgrade and roll back on supported hosts without discarding newer accepted data; maintain the documented source-build alternative.",
       "mandatory": true,
       "planned_commit": "C35",
       "evidence_path": "docs/evidence/C35.json",
@@ -319,7 +319,7 @@
     {
       "id": "N36",
       "kind": "engineering-release",
-      "description": "Target: 5 relevant trials, 3 complete core task and 2 return for real repeat use; if unavailable continue personal release and mark demand unvalidated rather than inventing pilots.",
+      "description": "A separate clean environment or independent contributor follows only the public guide and completes the actual core workflow. Record observed effort and failures; customer demand and five pilots are not prerequisites for OSS usability.",
       "mandatory": true,
       "planned_commit": "C36",
       "evidence_path": "docs/evidence/C36.json",
@@ -328,7 +328,7 @@
     {
       "id": "N37",
       "kind": "engineering-release",
-      "description": "Fix observed failures, re-run affected checks, record remaining limitations; if no pilots, use observed personal UAT issues and retain unvalidated market label.",
+      "description": "Fix actual C30/C33/C35/C36 failures with targeted regressions and repeat affected checks. Keep unresolved blockers explicit; never invent feedback or weaken an invariant to claim completion.",
       "mandatory": true,
       "planned_commit": "C37",
       "evidence_path": "docs/evidence/C37.json",
@@ -337,7 +337,7 @@
     {
       "id": "N38",
       "kind": "engineering-release",
-      "description": "For public service state data location, deletion/export rules, quotas, expected support and outage behavior; paid billing and SLA are not enabled without separate ADR.",
+      "description": "Document local data locations, export/deletion/retention/backup/recovery, supported profiles and maintenance/dependency policy. No required hosted subscription, paid core feature or unearned SLA.",
       "mandatory": true,
       "planned_commit": "C38",
       "evidence_path": "docs/evidence/C38.json",
@@ -346,7 +346,7 @@
     {
       "id": "N39",
       "kind": "engineering-release",
-      "description": "Every mandatory requirement has actual passed evidence; no critical open security/recovery issue; release profile and demand status are explicit.",
+      "description": "Verify actual evidence for C01-C38, full clone-to-value, complete source/engine packaging, dependency/fixture licenses and supported-profile security/recovery. Planning templates, missing proofs and wrong-source evidence fail the release gate.",
       "mandatory": true,
       "planned_commit": "C39",
       "evidence_path": "docs/evidence/C39.json",
@@ -355,7 +355,7 @@
     {
       "id": "N40",
       "kind": "engineering-release",
-      "description": "Release only verified profile artifacts, run installed smoke test, record actual version/source digest and follow up support/rollback; never publish fabricated claims.",
+      "description": "Use a maintainer-authorized publication workflow to publish the verified source/tag and full artifacts. Install the actual published version on a clean host and complete the same core task; retain real source/version, results and rollback evidence.",
       "mandatory": true,
       "planned_commit": "C40",
       "evidence_path": "docs/evidence/C40.json",

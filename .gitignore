@@ -42,3 +42,8 @@ node_modules/
 dist/
 playwright-report/
 test-results/
+
+vendor/
+apps/control-plane/build/
+.local-data/
+.cache/

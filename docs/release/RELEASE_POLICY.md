@@ -1,3 +1,5 @@
+> Current OSS delivery/resources/storage/release policy is ADR-0003-open-source-local-first.md and DEFINITION_OF_DONE.md. The older planning context below is superseded where it conflicts; business invariants remain applicable.
+
 # Delivery, domain and release policy — v0
 
 ## Distribution choice

@@ -1,0 +1,1 @@
+Follow AGENTS.md and docs/agents/EXECUTION_CONTRACT.md. Read the complete dependency-ready C task. Do not modify protected DB/migration/.env/Dockerfile files, invent verification or replace required behavior with a passing stub.

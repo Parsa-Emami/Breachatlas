@@ -1,0 +1,55 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 check
+> npm run validate:plan && npm run build && npm test
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 validate:plan
+> node scripts/roadmap.mjs validate
+
+Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred.
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 build
+> npm run prepare:web && npm run typecheck && vite build --config apps/web/vite.config.ts
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 prepare:web
+> node scripts/generate-web-data.mjs
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 typecheck
+> tsc -p tsconfig.json
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 18 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/web/index.html                   0.78 kB │ gzip:  0.47 kB
+dist/web/assets/index-QSskK8xr.css    4.36 kB │ gzip:  1.62 kB
+dist/web/assets/index-BATZ5r9I.js   241.33 kB │ gzip: 76.00 kB
+
+✓ built in 160ms
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @parsa-emami/breachatlas-web@0.0.1 test
+> node --test tests/web/*.test.mjs
+
+✔ public configuration fails closed on engine flags, external endpoints, unknown keys and project mismatch (1.944251ms)
+✔ preview rejects hostile structure, excessive UTF-8 size and excessive complexity (1.626294ms)
+✔ HTTP isolation, cache rules, health semantics, methods, traversal and symlink containment (85.842456ms)
+✔ generated project and runtime identity agree with exactly forty original product tasks (1.587946ms)
+✔ setup validates toolchain/options and stops at the first failed install (1.580285ms)
+✔ roadmap rejects absent resources, escaping paths and unproved completion (19.622216ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 201.66658

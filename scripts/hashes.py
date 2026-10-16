@@ -4,7 +4,7 @@ import hashlib,sys
 ROOT=Path(__file__).resolve().parents[1]
 TARGET=ROOT/'SHA256SUMS.txt'
 def selected():
-    return sorted(p for p in ROOT.rglob('*') if p.is_file() and p!=TARGET and not any(x in p.relative_to(ROOT).parts for x in ['.git','node_modules','target','dist','.venv','__pycache__','test-results','playwright-report']) and p.suffix!='.pyc')
+    return sorted(p for p in ROOT.rglob('*') if p.is_file() and p!=TARGET and not any(x in p.relative_to(ROOT).parts for x in ['.git','node_modules','target','dist','.venv','__pycache__','test-results','playwright-report','vendor','build','.cache','.local-data']) and p.suffix!='.pyc')
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 if len(sys.argv)>1 and sys.argv[1]=='--write':
     TARGET.write_text(''.join(digest(p)+'  '+p.relative_to(ROOT).as_posix()+'\n' for p in selected()));print('Wrote SHA256SUMS.txt');sys.exit(0)

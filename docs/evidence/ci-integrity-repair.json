@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-16",
+  "passed": true,
+  "planning_template": false,
+  "scope": "CI integrity repair and metadata/web regressions only; core tasks are not certified",
+  "base_commit": "45cd03fb33ff6753f8d448ce0532a3e0299231e7",
+  "source_identity": "sha256:0a8f32d12bc8f48f58d3847b2f1ed952fc7ab2209d9ea8315ef671af500fa75d",
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -p test_*.py -v",
+      "exit_code": 0,
+      "output": "docs/evidence/ci-repair/integrity-regressions.log"
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "docs/evidence/ci-repair/web-check.log"
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "docs/evidence/ci-repair/contracts.log"
+    }
+  ],
+  "historical_evidence_policy": "Verify oss-roadmap.json in its original committed Git tree. Test current code in the actual new CI jobs.",
+  "regression_cases": [
+    "committed workflow/source changes keep historical evidence bound to its original tree",
+    "uncommitted workflow edits fail",
+    "corrupt historical checksums fail",
+    "forged historical source identity fails",
+    "shallow history fails with recovery guidance",
+    "untracked source fails"
+  ],
+  "runtime_tests_certified_by_source_inventory": false,
+  "core_tasks_verified": [],
+  "next_task": "C01"
+}
