@@ -21,6 +21,8 @@ export function createWebServer({ root, config, projectId }) {
       res.writeHead(status, { 'Content-Type': type, 'Content-Length': Buffer.byteLength(body) });
       res.end(req.method === 'HEAD' ? undefined : body);
     };
+    const localAuthority = /^(?:localhost|127\.0\.0\.1|\[::1\])(?::([0-9]{1,5}))?$/i.exec(req.headers.host ?? '');
+    if (!localAuthority || (localAuthority[1] && (Number(localAuthority[1]) < 1 || Number(localAuthority[1]) > 65535))) { send(403, '{"error":"invalid_host"}'); return; }
     if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); send(405, '{"error":"method_not_allowed"}'); return; }
     let path;
     try {

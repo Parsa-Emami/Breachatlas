@@ -4,6 +4,7 @@ import { mkdtemp, mkdir, writeFile, rm, symlink, readFile } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { once } from 'node:events';
+import { request as httpRequest } from 'node:http';
 import { createWebServer } from '../../scripts/serve-web.mjs';
 import { validateRuntimeConfig } from '../../apps/web/src/lib/runtime-config.mjs';
 import { inspectJson } from '../../apps/web/src/lib/preview.mjs';
@@ -33,6 +34,16 @@ test('HTTP isolation, cache rules, health semantics, methods, traversal and syml
   server.listen(0, '127.0.0.1'); await once(server, 'listening');
   const base = `http://127.0.0.1:${server.address().port}`;
   t.after(async () => { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); await rm(dir, { recursive: true }); });
+  const withHost = host => new Promise((resolve, reject) => {
+    const request = httpRequest(base + '/healthz', { headers: { Host: host } }, response => {
+      response.resume(); response.on('end', () => resolve(response.statusCode));
+    });
+    request.on('error', reject); request.end();
+  });
+  assert.equal(await withHost('attacker.example'), 403);
+  assert.equal(await withHost('127.0.0.1.evil.example'), 403);
+  assert.equal(await withHost('localhost:' + server.address().port), 200);
+  assert.equal(await withHost('[::1]:' + server.address().port), 200);
   const index = await fetch(base);
   assert.equal(index.status, 200); assert.match(await index.text(), /workspace/);
   assert.equal(index.headers.get('cache-control'), 'no-store');
