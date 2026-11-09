@@ -1,0 +1,23 @@
+{
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0001",
+  "events": [
+    {
+      "event_id": "cust-0001",
+      "timestamp": "2026-10-15T08:20:00+03:30",
+      "action": "acquire_and_seal",
+      "actor": "analyst@breachatlas.local",
+      "parent_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "event_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "event_id": "cust-0002",
+      "timestamp": "2026-10-15T08:25:00+03:30",
+      "action": "store_immutable",
+      "actor": "engine@breachatlas.local",
+      "parent_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "event_hash": "a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef0"
+    }
+  ],
+  "custody_root": "a1b2c3d4e5f60718293a4b5c6d7e8f90123456789abcdef0123456789abcdef0"
+}

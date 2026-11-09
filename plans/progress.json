@@ -6,10 +6,12 @@
   "commits": [
     {
       "id": "C01",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C01.json"
+      ],
+      "source_identity": "sha256:b1d8e1215b04ca5154366ebce99395f87b8f0a2ba1853d9e26a27e7d70425c2d",
+      "notes": "Frozen repository-owned synthetic reference workflow, domain invariants, fixtures, and self-contained validator."
     },
     {
       "id": "C02",

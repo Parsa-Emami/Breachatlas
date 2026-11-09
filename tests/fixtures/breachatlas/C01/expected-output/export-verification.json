@@ -1,0 +1,9 @@
+{
+  "bundle_version": "1.0.0",
+  "verified": true,
+  "evidence_integrity": "MATCH",
+  "custody_root_integrity": "MATCH",
+  "signature_valid": true,
+  "raw_timestamps_preserved": true,
+  "requires_server": false
+}

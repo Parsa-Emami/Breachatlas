@@ -1,0 +1,60 @@
+{
+  "task": "C01",
+  "provenance": "repository-authored synthetic benchmark data",
+  "license": "Apache-2.0",
+  "fixture_directory": "tests/fixtures/breachatlas/C01/",
+  "files": {
+    "expected-output/custody-verification.json": {
+      "sha256": "c558b7c771cf8e39d80cf15a522cd1e50fc6930d8b2e8d55405db4a024b88e74",
+      "size_bytes": 221
+    },
+    "expected-output/export-verification.json": {
+      "sha256": "025cacf73da2154ac9c5e2a04044b0e152634e7bff5004f08d3412e1d2c94576",
+      "size_bytes": 213
+    },
+    "expected-output/sealed-manifest.json": {
+      "sha256": "3ab514d03f150daf292f825f2743fabdf093934e840d8389791b01912a97af78",
+      "size_bytes": 284
+    },
+    "invalid/active-hold-deletion.json": {
+      "sha256": "d1f470ed85845166637eaad45376950d52b8fe65c20c212e6bad14a21d4fe30f",
+      "size_bytes": 266
+    },
+    "invalid/hash-mismatch-manifest.json": {
+      "sha256": "8e8b8cbe0e510a7957f3db4f9a7f35756076537d8c619bba91c4519056a8d5cd",
+      "size_bytes": 329
+    },
+    "invalid/invalid-signature-export.json": {
+      "sha256": "ad9be2dd4618072143a4fe97130dc22666a859bb68e18a98a7c53f41cf5eaf90",
+      "size_bytes": 453
+    },
+    "invalid/tampered-evidence.log": {
+      "sha256": "e9b99d77589559bcbcc6154463ada0a75346bca2124405dd7ab4984f74027bc9",
+      "size_bytes": 417
+    },
+    "positive/custody.json": {
+      "sha256": "c7c8ca5d0ee1e9dba9a3452e2dcc5e2ab359aa9a4a4dd945ea2f92c54dffbde6",
+      "size_bytes": 864
+    },
+    "positive/evidence-001.log": {
+      "sha256": "54cf8cee54db0bd7fdb5827a2b412403adfe146292a275101b9f9af213829e62",
+      "size_bytes": 417
+    },
+    "positive/export-bundle.json": {
+      "sha256": "e9bb71705d1ca64e4bd23f7ae5b253600b30b83b933528c23413459ce489d580",
+      "size_bytes": 465
+    },
+    "positive/legal-hold.json": {
+      "sha256": "8f8381e0c577c029574df0fccfcceff8624c36c3bc289bc750b66427fbb36056",
+      "size_bytes": 331
+    },
+    "positive/manifest.json": {
+      "sha256": "cd5f5251a646a0cf0e3284ae7d195a93556f0ea57f266fa2bb5d9428713c5c6e",
+      "size_bytes": 329
+    },
+    "positive/timeline.json": {
+      "sha256": "f45ecda5bead62d608f57425d5e6d7e4e182c67b040b356c1141090da82a8702",
+      "size_bytes": 1125
+    }
+  }
+}

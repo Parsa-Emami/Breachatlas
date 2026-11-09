@@ -1,0 +1,37 @@
+{
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0001",
+  "records_count": 3,
+  "events": [
+    {
+      "event_id": "tl-001",
+      "raw_timestamp": "2026-10-15T08:14:22+03:30",
+      "normalized_timestamp": "2026-10-15T04:44:22Z",
+      "timezone_offset": "+03:30",
+      "confidence": 1.0,
+      "source_line": 1,
+      "event_type": "ssh_login",
+      "summary": "Accepted publickey for analyst from 192.0.2.10 port 54820"
+    },
+    {
+      "event_id": "tl-002",
+      "raw_timestamp": "2026-10-15T08:14:25+03:30",
+      "normalized_timestamp": "2026-10-15T04:44:25Z",
+      "timezone_offset": "+03:30",
+      "confidence": 0.95,
+      "source_line": 2,
+      "event_type": "sudo_command",
+      "summary": "COMMAND=/usr/bin/tar -czf /evidence/capture.tar.gz /var/log"
+    },
+    {
+      "event_id": "tl-003",
+      "raw_timestamp": "2026-10-15T08:15:01+03:30",
+      "normalized_timestamp": "2026-10-15T04:45:01Z",
+      "timezone_offset": "+03:30",
+      "confidence": 1.0,
+      "source_line": 3,
+      "event_type": "ssh_logout",
+      "summary": "Received disconnect from 192.0.2.10 port 54820"
+    }
+  ]
+}

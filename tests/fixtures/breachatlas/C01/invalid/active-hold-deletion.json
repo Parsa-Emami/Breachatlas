@@ -1,0 +1,9 @@
+{
+  "request_id": "req-del-001",
+  "action": "delete_evidence",
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0001",
+  "active_hold_id": "hold-2026-001",
+  "expected_result": "REJECTED_ACTIVE_LEGAL_HOLD",
+  "expected_error_code": "ERR_LEGAL_HOLD_ACTIVE"
+}

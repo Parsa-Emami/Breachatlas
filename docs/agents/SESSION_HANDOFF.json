@@ -1,20 +1,22 @@
 {
   "project": "BreachAtlas",
-  "date": "2026-10-16",
-  "base_commit": "45cd03fb33ff6753f8d448ce0532a3e0299231e7",
-  "scope": "Repair CI for all main and Dependabot heads: historical source records, exact current Git checkout and real regression tests",
-  "core_tasks_verified": [],
-  "commands": [
-    "python3 -m unittest discover -s tests/engineering -p 'test_*.py' -v",
-    "python3 scripts/verify_ci_source.py",
-    "npm run check",
-    "npm run test:clone"
+  "date": "2026-11-09",
+  "base_commit": "237d66f6e872957b8c8d8b28cf9ea516eaae401e",
+  "scope": "C01: Freeze open-source clone-to-value reference workflow, domain invariants, synthetic fixtures, and self-contained reference validator",
+  "core_tasks_verified": [
+    "C01"
   ],
-  "validation_results": "docs/evidence/ci-integrity-repair.json",
-  "final_source_identity": "Read the source_identity in docs/evidence/oss-roadmap.json; it excludes evidence and SHA256SUMS.txt to avoid recursive hashing. This is a source digest, not a fabricated remote commit ID.",
+  "commands": [
+    "node scripts/verify-reference.mjs",
+    "npm run validate:plan",
+    "npm run check",
+    "python3 scripts/validate_repo.py"
+  ],
+  "validation_results": "docs/evidence/C01.json",
+  "final_source_identity": "sha256:b1d8e1215b04ca5154366ebce99395f87b8f0a2ba1853d9e26a27e7d70425c2d",
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C01",
+  "next_task": "C02",
   "next_command": "npm run plan -- next",
-  "continuation": "See docs/engineering/CI_SOURCE_INTEGRITY.md for source proof scope. Historical evidence retains its original source; current runtime results are the actual new CI jobs. Core implementation remains at the existing next task."
+  "continuation": "C01 completed and verified. Reference workflow and fixtures frozen. Next step is C02: lock reproducible open-source resources in docs/engineering/toolchain-lock.json and implement scripts/verify-resources.mjs."
 }

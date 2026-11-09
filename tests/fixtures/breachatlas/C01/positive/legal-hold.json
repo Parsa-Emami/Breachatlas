@@ -1,0 +1,11 @@
+{
+  "hold_id": "hold-2026-001",
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0001",
+  "status": "active",
+  "placed_by": "legal-counsel@breachatlas.local",
+  "placed_at": "2026-10-15T09:00:00+03:30",
+  "reason": "Statutory retention for incident response audit",
+  "blocks_deletion": true,
+  "blocks_expiration": true
+}

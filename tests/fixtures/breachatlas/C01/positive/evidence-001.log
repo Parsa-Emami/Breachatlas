@@ -1,0 +1,3 @@
+2026-10-15T08:14:22+03:30 auth-srv sshd[1042]: Accepted publickey for analyst from 192.0.2.10 port 54820 ssh2: ED25519 SHA256:synthKeyAnalyst1
+2026-10-15T08:14:25+03:30 auth-srv sudo: analyst : TTY=pts/0 ; PWD=/home/analyst ; USER=root ; COMMAND=/usr/bin/tar -czf /evidence/capture.tar.gz /var/log
+2026-10-15T08:15:01+03:30 auth-srv sshd[1042]: Received disconnect from 192.0.2.10 port 54820:11: disconnected by user

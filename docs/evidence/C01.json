@@ -1,0 +1,48 @@
+{
+  "commit_id": "C01",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Frozen specification, domain invariants, synthetic fixtures, and self-contained reference validator; engine execution is planned for C03+",
+  "passed": true,
+  "source_identity": "sha256:b1d8e1215b04ca5154366ebce99395f87b8f0a2ba1853d9e26a27e7d70425c2d",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "python": "3.14.4",
+    "os": "linux",
+    "hardware": "target 2 vCPU / 4096 MiB RAM / 20480 MiB disk (unmeasured planning target)"
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C01/",
+    "provenance": "repository-authored synthetic benchmark data",
+    "license": "Apache-2.0"
+  },
+  "commands": [
+    {
+      "command": "node scripts/verify-reference.mjs",
+      "exit_code": 0,
+      "output": "REFERENCE WORKFLOW CONTRACT VALIDATION PASSED: all 8 steps, invariants, fixtures, and 8 negative regression tests verified."
+    },
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "All plan validations, build, and 9 unit tests passed."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N01",
+      "acceptance": "Define one repository-owned synthetic reference workflow, expected results and failure cases. No customer interview, paid account, external pilot count or market-validation claim is required.",
+      "status": "passed"
+    }
+  ],
+  "observed_limitations": [
+    "Domain engine is planned for C03; C01 evidence certifies only the frozen contract, synthetic fixtures, and reference validator."
+  ],
+  "rollback_or_recovery_observation": "Revert the isolated source change if incompatible data is accepted."
+}

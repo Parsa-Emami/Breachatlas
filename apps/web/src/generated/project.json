@@ -25,7 +25,7 @@
       "id": "C01",
       "title": "docs(product): freeze the open-source clone-to-value workflow",
       "stage": "foundation",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Define one repository-owned synthetic reference workflow, expected results and failure cases. No customer interview, paid account, external pilot count or market-validation claim is required."
       ],
