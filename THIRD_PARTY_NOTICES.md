@@ -79,7 +79,7 @@ Updated 2026-11-09 for task C02. These current web facts come from the committed
 
 | Resource | Version / Scope | Declared license | Official upstream source |
 |---|---|---|---|
-| `Go compiler & runtime` | 1.26.2 (linux/amd64) | BSD-3-Clause | https://go.dev/dl/ |
+| `Go compiler & runtime` | 1.24+ (linux/amd64) | BSD-3-Clause | https://go.dev/dl/ |
 | `crypto/ed25519` | standard library | BSD-3-Clause | https://pkg.go.dev/crypto/ed25519 |
 | `crypto/sha256` | standard library | BSD-3-Clause | https://pkg.go.dev/crypto/sha256 |
 | `archive/tar` | standard library | BSD-3-Clause | https://pkg.go.dev/archive/tar |

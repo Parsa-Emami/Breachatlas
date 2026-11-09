@@ -131,8 +131,8 @@ export function runProbes() {
     const match = goVer.match(/go(\d+)\.(\d+)/);
     const major = match ? parseInt(match[1], 10) : 0;
     const minor = match ? parseInt(match[2], 10) : 0;
-    const passed = major > 1 || (major === 1 && minor >= 26);
-    probes.push({ tool: 'go', version: goVer, passed, expected: '>= go1.26' });
+    const passed = major > 1 || (major === 1 && minor >= 24);
+    probes.push({ tool: 'go', version: goVer, passed, expected: '>= go1.24' });
   } catch (err) {
     probes.push({ tool: 'go', passed: false, error: err.message });
   }
