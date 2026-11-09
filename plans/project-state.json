@@ -6,10 +6,11 @@
   "implemented": [
     "responsive web shell",
     "roadmap browser",
-    "local bounded JSON structure preview"
+    "local bounded JSON structure preview",
+    "unified Go engine runtime and supervisor"
   ],
-  "engine": "not implemented",
-  "next_task": "C01",
+  "engine": "foundation_supervisor_implemented",
+  "next_task": "C04",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

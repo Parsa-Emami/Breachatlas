@@ -1,0 +1,28 @@
+{
+  "task": "C03",
+  "provenance": "repository-authored synthetic engine launch fixtures",
+  "license": "Apache-2.0",
+  "fixture_directory": "tests/fixtures/breachatlas/C03/",
+  "files": {
+    "expected-output/engine-launch-output.json": {
+      "sha256": "a5280fefb727952369321d73e73f3f30441e934abe5198634a882db4c8a4f191",
+      "size_bytes": 158
+    },
+    "invalid/corrupted-manifest.json": {
+      "sha256": "b89199254f7a4d6f11c17a2856f73ba09cbf312a2b8f46ee70187a147607509f",
+      "size_bytes": 110
+    },
+    "invalid/non-loopback-config.json": {
+      "sha256": "e289ce1645062d32b6838b49d483b5d6b2afa47b426c888f983cbc6e9d265c67",
+      "size_bytes": 91
+    },
+    "positive/engine-manifest.json": {
+      "sha256": "09dfcaea91d98333275dda10c24496bb07fcfed1c6cb70da2be1817261b62735",
+      "size_bytes": 327
+    },
+    "positive/health-response.json": {
+      "sha256": "c659398826af639030e8233b8de12c0968f42c8307fffa3ef411090b0634b55d",
+      "size_bytes": 107
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "case_id": "case-2026-003",
+  "evidence_id": "ev-2026-0003",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "size_bytes": 0,
+  "media_type": "text/plain",
+  "acquired_at": "2026-11-09T14:30:00+03:30",
+  "custody_root": "f0e1d2c3b4a5968778695a4b3c2d1e0ff0e1d2c3b4a5968778695a4b3c2d1e0f"
+}

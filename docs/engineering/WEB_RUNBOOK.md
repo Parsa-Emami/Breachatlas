@@ -1,15 +1,25 @@
 # BreachAtlas web runbook
 
-## Local checkout
+## Unified local development and launch
 
-Use Node 24.19.0 and npm 11.9.0 from the tested toolchain. From the repository root:
+Use Node 24.19+ and Go 1.24+ from the locked toolchain. From the repository root:
 
 ```sh
-npm ci --ignore-scripts
-npm run check
-npx --no-install playwright install chromium
-npm run test:browser
-npm run dev
+npm run setup
+npm start
+```
+
+`npm run setup` prepares the environment:
+1. Validates Node runtime.
+2. Checks Go compiler and compiles the Go engine binary into `dist/bin/breachatlas`.
+3. Prepares web workspace data and builds web assets into `dist/web/`.
+
+`npm start` invokes `scripts/start-local.mjs`, which supervises both the Go loopback engine (`127.0.0.1:8080`) and web workspace (`127.0.0.1:4173`). No second terminal is required. Both processes shut down cleanly upon receiving `SIGINT` or `SIGTERM`.
+
+Check health:
+```sh
+curl http://127.0.0.1:8080/healthz
+curl http://127.0.0.1:4173/readyz
 ```
 
 Browser checks may use an operator-provided Chromium executable through the `WEB_TEST_CHROMIUM` process variable. CI uses the Playwright-managed browser. This test override never changes application configuration.

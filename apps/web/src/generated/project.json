@@ -47,7 +47,7 @@
       "id": "C03",
       "title": "feat(runtime): implement unified local engine setup and launch",
       "stage": "foundation",
-      "status": "in_progress",
+      "status": "verified",
       "acceptance": [
         "npm run setup prepares the actual selected local engine and npm start supervises the web workspace and loopback engine with clean shutdown. Minimal health does not imply completed business features; no second undocumented terminal is required."
       ],

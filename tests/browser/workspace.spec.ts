@@ -27,3 +27,8 @@ test('configuration failure blocks workspace startup', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Workspace unavailable' })).toBeVisible();
   await expect(page.getByLabel('Choose JSON file')).toHaveCount(0);
 });
+test('unified local runtime shows engine supervisor status and healthy workspace', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await expect(page.getByLabel('Availability')).toContainText('unified local engine supervisor');
+});

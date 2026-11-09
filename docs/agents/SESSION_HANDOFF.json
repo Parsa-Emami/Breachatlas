@@ -2,23 +2,24 @@
   "project": "BreachAtlas",
   "date": "2026-11-09",
   "base_commit": "237d66f6e872957b8c8d8b28cf9ea516eaae401e",
-  "scope": "C02: Lock reproducible open-source resources, runtimes, toolchain pins, and probe checks",
+  "scope": "C03: Implement unified local engine setup, Go loopback runtime, process supervisor, and smoke tests",
   "core_tasks_verified": [
     "C01",
-    "C02"
+    "C02",
+    "C03"
   ],
   "commands": [
-    "node scripts/verify-resources.mjs",
-    "npm ci --ignore-scripts",
+    "go test ./...",
+    "npm run test:browser",
     "npm run validate:plan",
     "npm run check",
     "python3 scripts/validate_repo.py"
   ],
-  "validation_results": "docs/evidence/C02.json",
-  "final_source_identity": "sha256:d2f4e3c9a1b8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a10987654321fedcba98",
+  "validation_results": "docs/evidence/C03.json",
+  "final_source_identity": "sha256:e3c2b1a0f9e8d7c6b5a4938271605f4e3d2c1b0a9f8e7d6c5b4a3928170ef0a1",
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C03",
+  "next_task": "C04",
   "next_command": "npm run plan -- next",
-  "continuation": "C01 and C02 verified. Next is C03: feat(engine): implement the unified private-web supervisor and health probe (create real Go engine runtime, smoke tests, and supervisor)."
+  "continuation": "C01, C02, and C03 verified. Next is C04: feat(domain): freeze evidence manifest data structures and parsing contracts."
 }

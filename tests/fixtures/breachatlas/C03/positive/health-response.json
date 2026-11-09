@@ -1,0 +1,6 @@
+{
+  "status": "ok",
+  "service": "breachatlas-engine",
+  "version": "0.0.1",
+  "scope": "local-loopback"
+}

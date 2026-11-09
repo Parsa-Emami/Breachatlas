@@ -1,0 +1,8 @@
+{
+  "service": "breachatlas-unified-supervisor",
+  "host": "127.0.0.1",
+  "webPort": 4173,
+  "enginePort": 8080,
+  "status": "ready",
+  "engineReady": true
+}
