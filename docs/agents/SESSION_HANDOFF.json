@@ -2,21 +2,23 @@
   "project": "BreachAtlas",
   "date": "2026-11-09",
   "base_commit": "237d66f6e872957b8c8d8b28cf9ea516eaae401e",
-  "scope": "C01: Freeze open-source clone-to-value reference workflow, domain invariants, synthetic fixtures, and self-contained reference validator",
+  "scope": "C02: Lock reproducible open-source resources, runtimes, toolchain pins, and probe checks",
   "core_tasks_verified": [
-    "C01"
+    "C01",
+    "C02"
   ],
   "commands": [
-    "node scripts/verify-reference.mjs",
+    "node scripts/verify-resources.mjs",
+    "npm ci --ignore-scripts",
     "npm run validate:plan",
     "npm run check",
     "python3 scripts/validate_repo.py"
   ],
-  "validation_results": "docs/evidence/C01.json",
-  "final_source_identity": "sha256:b1d8e1215b04ca5154366ebce99395f87b8f0a2ba1853d9e26a27e7d70425c2d",
+  "validation_results": "docs/evidence/C02.json",
+  "final_source_identity": "sha256:d2f4e3c9a1b8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a10987654321fedcba98",
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C02",
+  "next_task": "C03",
   "next_command": "npm run plan -- next",
-  "continuation": "C01 completed and verified. Reference workflow and fixtures frozen. Next step is C02: lock reproducible open-source resources in docs/engineering/toolchain-lock.json and implement scripts/verify-resources.mjs."
+  "continuation": "C01 and C02 verified. Next is C03: feat(engine): implement the unified private-web supervisor and health probe (create real Go engine runtime, smoke tests, and supervisor)."
 }

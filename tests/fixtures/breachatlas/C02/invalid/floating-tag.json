@@ -1,0 +1,9 @@
+{
+  "resource_id": "unpinned-provider-daemon",
+  "kind": "daemon",
+  "version": "latest",
+  "license": "Apache-2.0",
+  "official_source": "https://example.org/download/latest.tar.gz",
+  "digest": null,
+  "requires_paid_account": false
+}

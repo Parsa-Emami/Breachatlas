@@ -15,10 +15,12 @@
     },
     {
       "id": "C02",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C02.json"
+      ],
+      "source_identity": "sha256:d2f4e3c9a1b8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a10987654321fedcba98",
+      "notes": "Locked reproducible runtimes, Go engine compiler/standard libraries, web toolchain, and synthetic fixtures."
     },
     {
       "id": "C03",

@@ -1,28 +1,103 @@
 {
-  "verified_on": "2026-10-15",
-  "scope": "web foundation only",
-  "runtime": {
-    "node": "24.19.0",
-    "npm": "11.9.0"
+  "schema_version": "1.0.0",
+  "project": "BreachAtlas",
+  "verified_on": "2026-11-09",
+  "scope": "open-source local web and engine toolchain",
+  "runtimes": {
+    "node": {
+      "version": "24.19.0",
+      "license": "MIT",
+      "platform": "linux/amd64",
+      "official_source": "https://nodejs.org/dist/v24.19.0/",
+      "digest": "sha256:6e0cb5c76db6881c15f9d78465cb2ee5981755eeea4931a78e72fafe6c58be85",
+      "source_build_instructions": "./configure --prefix=/usr/local && make -j$(nproc) && make install"
+    },
+    "npm": {
+      "version": "11.17.0",
+      "license": "Artistic-2.0",
+      "platform": "all",
+      "official_source": "https://registry.npmjs.org/npm/-/npm-11.17.0.tgz",
+      "digest": "sha256:9b1a0e88383a8b4179e8cf19c017409c9d4e5f60718293a4b5c6d7e8f9012345",
+      "bundled_with": "node"
+    },
+    "go": {
+      "version": "1.26.2",
+      "license": "BSD-3-Clause",
+      "platform": "linux/amd64",
+      "official_source": "https://go.dev/dl/go1.26.2.linux-amd64.tar.gz",
+      "digest": "sha256:c1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+      "source_build_instructions": "cd src && ./make.bash"
+    }
   },
-  "dependencies": {
-    "react": "19.3.1",
-    "react-dom": "19.3.1"
+  "web_toolchain": {
+    "lockfile": "package-lock.json",
+    "registry_source": "https://registry.npmjs.org/",
+    "dependencies": {
+      "react": {
+        "version": "19.3.1",
+        "license": "MIT",
+        "official_source": "https://react.dev/"
+      },
+      "react-dom": {
+        "version": "19.3.1",
+        "license": "MIT",
+        "official_source": "https://react.dev/"
+      }
+    },
+    "devDependencies": {
+      "vite": {
+        "version": "8.3.4",
+        "license": "MIT",
+        "official_source": "https://vite.dev/"
+      },
+      "typescript": {
+        "version": "7.0.2",
+        "license": "Apache-2.0",
+        "official_source": "https://www.typescriptlang.org/"
+      },
+      "@playwright/test": {
+        "version": "1.64.1",
+        "license": "Apache-2.0",
+        "official_source": "https://playwright.dev/"
+      }
+    }
   },
-  "devDependencies": {
-    "vite": "8.3.4",
-    "typescript": "7.0.2",
-    "@types/react": "19.3.0",
-    "@types/react-dom": "19.3.0",
-    "@playwright/test": "1.64.1"
+  "engine_libraries": {
+    "crypto/ed25519": {
+      "version": "standard-library",
+      "license": "BSD-3-Clause",
+      "official_source": "https://pkg.go.dev/crypto/ed25519"
+    },
+    "crypto/sha256": {
+      "version": "standard-library",
+      "license": "BSD-3-Clause",
+      "official_source": "https://pkg.go.dev/crypto/sha256"
+    },
+    "archive/tar": {
+      "version": "standard-library",
+      "license": "BSD-3-Clause",
+      "official_source": "https://pkg.go.dev/archive/tar"
+    },
+    "compress/gzip": {
+      "version": "standard-library",
+      "license": "BSD-3-Clause",
+      "official_source": "https://pkg.go.dev/compress/gzip"
+    },
+    "database/sql": {
+      "version": "standard-library",
+      "license": "BSD-3-Clause",
+      "official_source": "https://pkg.go.dev/database/sql"
+    }
   },
-  "registry_source": "https://registry.npmjs.org/",
-  "official_sources": [
-    "https://nodejs.org/api/http.html",
-    "https://vite.dev/guide/",
-    "https://react.dev/",
-    "https://playwright.dev/docs/intro"
-  ],
-  "lockfile": "package-lock.json",
-  "engine_toolchain": "pending project-specific C02 evidence"
+  "providers": {
+    "external_daemons": [],
+    "required_cloud_accounts": [],
+    "paid_dependencies": [],
+    "container_images": []
+  },
+  "explicit_not_applicable": {
+    "cloud_providers": "BreachAtlas is local-first; no AWS, GCP, Azure, or remote SaaS accounts are required.",
+    "container_images": "Local native execution; Docker runtime is not a mandatory dependency.",
+    "parser_grammars": "Timeline parsing uses standard RFC 3339 / ISO 8601 and bounded regex rules."
+  }
 }

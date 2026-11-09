@@ -1,0 +1,9 @@
+{
+  "resource_id": "corrupted-artifact",
+  "kind": "archive",
+  "version": "2.1.0",
+  "license": "MIT",
+  "official_source": "https://example.org/artifact-2.1.0.tar.gz",
+  "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "expected_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+}

@@ -1,0 +1,9 @@
+{
+  "resource_id": "mandatory-cloud-service",
+  "kind": "cloud_saas",
+  "version": "v1",
+  "license": "Proprietary",
+  "official_source": "https://cloud.example.com/paid-api",
+  "digest": "sha256:1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff",
+  "requires_paid_account": true
+}

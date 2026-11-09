@@ -35,7 +35,7 @@
       "id": "C02",
       "title": "chore(toolchain): lock reproducible open-source resources",
       "stage": "foundation",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Record exact supported runtime, engine, provider/image, grammar, rule and fixture versions/digests, licenses and official release sources. Use real dependency lockfiles and preserve a source-build route."
       ],

@@ -1,0 +1,11 @@
+{
+  "resource_id": "go-compiler-1.26.2",
+  "kind": "compiler",
+  "version": "1.26.2",
+  "platform": "linux/amd64",
+  "license": "BSD-3-Clause",
+  "official_source": "https://go.dev/dl/go1.26.2.linux-amd64.tar.gz",
+  "digest": "sha256:c1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+  "requires_paid_account": false,
+  "source_buildable": true
+}

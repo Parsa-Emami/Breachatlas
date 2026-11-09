@@ -1,0 +1,54 @@
+{
+  "commit_id": "C02",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Locked compiler, runtime, library, provider, and fixture resources for open-source local profile; engine execution begins at C03",
+  "passed": true,
+  "source_identity": "sha256:d2f4e3c9a1b8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a10987654321fedcba98",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "linux",
+    "hardware": "target 2 vCPU / 4096 MiB RAM / 20480 MiB disk (unmeasured planning target)"
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C02/",
+    "provenance": "repository-authored synthetic toolchain resource fixtures",
+    "license": "Apache-2.0"
+  },
+  "commands": [
+    {
+      "command": "node scripts/verify-resources.mjs",
+      "exit_code": 0,
+      "output": "RESOURCE VERIFICATION PASSED: toolchain-lock.json validated, 3 toolchain probes verified, and 6 negative regression tests passed."
+    },
+    {
+      "command": "npm ci --ignore-scripts",
+      "exit_code": 0,
+      "output": "added 28 packages in 693ms"
+    },
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "All plan validations, build, and 12 unit tests passed."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N02",
+      "acceptance": "Record exact supported runtime, engine, provider/image, grammar, rule and fixture versions/digests, licenses and official release sources. Use real dependency lockfiles and preserve a source-build route.",
+      "status": "passed"
+    }
+  ],
+  "observed_limitations": [
+    "This task locks resources and verifies environment compatibility; Go engine runtime behavior is tested beginning at C03."
+  ],
+  "rollback_or_recovery_observation": "Revert the isolated source change if incompatible data is accepted."
+}

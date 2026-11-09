@@ -1,0 +1,32 @@
+{
+  "task": "C02",
+  "provenance": "repository-authored synthetic toolchain resource fixtures",
+  "license": "Apache-2.0",
+  "fixture_directory": "tests/fixtures/breachatlas/C02/",
+  "files": {
+    "expected-output/resource-verification.json": {
+      "sha256": "a85b7fc907efc71c874d8c57434f59f01e1bd8727c636be4349aa066e40cde6a",
+      "size_bytes": 215
+    },
+    "invalid/digest-mismatch.json": {
+      "sha256": "d22ff69e6bd9da1e90866e47c4ee5abe407ea0cdc60fb8bb12dd1938ad2061ec",
+      "size_bytes": 354
+    },
+    "invalid/floating-tag.json": {
+      "sha256": "5358ba8cbd2072fddc24781eb28b9f364ad330a84e0d465b52b6c2a36889d5d2",
+      "size_bytes": 237
+    },
+    "invalid/mandatory-paid-provider.json": {
+      "sha256": "3e598e14af4ae450f8f7aeaeafae1cab9b20f10529cb0aac59dcd08385f27d19",
+      "size_bytes": 297
+    },
+    "invalid/missing-source-license.json": {
+      "sha256": "0c9fdb379cb8be78052aafd57e0d4e0de7400432890f1812cf7a8b7a2ecbda28",
+      "size_bytes": 213
+    },
+    "positive/valid-toolchain.json": {
+      "sha256": "3604af2884d009721b75ea5797b27187f9c000003af4d245f4210b4b33576283",
+      "size_bytes": 364
+    }
+  }
+}

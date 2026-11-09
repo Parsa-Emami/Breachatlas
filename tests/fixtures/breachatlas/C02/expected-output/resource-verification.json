@@ -1,0 +1,12 @@
+{
+  "verified": true,
+  "scope": "open-source-local-profile",
+  "runtimes_locked": [
+    "node",
+    "npm",
+    "go"
+  ],
+  "floating_tags_detected": 0,
+  "paid_providers_required": false,
+  "missing_licenses": 0
+}

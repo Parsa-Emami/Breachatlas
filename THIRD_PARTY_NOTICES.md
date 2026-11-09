@@ -1,6 +1,6 @@
 # Third-party inventory
 
-Updated 2026-10-16. These current web facts come from the committed npm lockfile. Complete distributed notices/license texts and SBOM are C31 work; this index is not compliance certification.
+Updated 2026-11-09 for task C02. These current web facts come from the committed npm lockfile, and engine facts from the locked Go toolchain. Complete distributed notices/license texts and SBOM are C31 work; this index is an inventory of locked third-party resources.
 
 | Resource | Version | Declared license |
 |---|---|---|
@@ -75,9 +75,15 @@ Updated 2026-10-16. These current web facts come from the committed npm lockfile
 | `typescript` | 7.0.2 | Apache-2.0 |
 | `vite` | 8.3.4 | MIT |
 
-## Planned engine resources
+## Locked engine resources (Go toolchain)
 
-- https://pkg.go.dev/crypto/ed25519
-- https://go.dev/doc/
+| Resource | Version / Scope | Declared license | Official upstream source |
+|---|---|---|---|
+| `Go compiler & runtime` | 1.26.2 (linux/amd64) | BSD-3-Clause | https://go.dev/dl/ |
+| `crypto/ed25519` | standard library | BSD-3-Clause | https://pkg.go.dev/crypto/ed25519 |
+| `crypto/sha256` | standard library | BSD-3-Clause | https://pkg.go.dev/crypto/sha256 |
+| `archive/tar` | standard library | BSD-3-Clause | https://pkg.go.dev/archive/tar |
+| `compress/gzip` | standard library | BSD-3-Clause | https://pkg.go.dev/compress/gzip |
+| `database/sql` | standard library | BSD-3-Clause | https://pkg.go.dev/database/sql |
 
-Resolve exact pins and licenses at C02; upstream resources are not claimed installed by this document.
+All locked engine resources are available under compatible open-source licenses (BSD-3-Clause, Apache-2.0, MIT). No proprietary service, paid account, or external daemon is required.
