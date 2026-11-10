@@ -20,6 +20,23 @@ npm start
 
 Open http://127.0.0.1:4173. The workspace offers a roadmap, local JSON preview and [evidence manifest validation](contracts/README.md) through the loopback engine. The current workspace runs with Git, Node and Go. [Clone guide](docs/engineering/CLONE_TO_RUN.md).
 
+### Verify the local workspace
+
+After setup, run:
+
+```sh
+npm run doctor
+npm run check
+```
+
+The doctor reports the actual local engine and web build state. The check command
+validates the current roadmap, builds the workspace and runs automated tests.
+If port 4173 is already occupied, use `npm start -- --port 4301`.
+The current JSON preview and manifest validator are **not** a completed incident
+evidence or chain-of-custody platform; do not upload private incident records
+or production secrets. See the [current implementation boundary](docs/engineering/CLONE_TO_RUN.md#runnable-today).
+
+
 ## Full product endpoint
 
 Upload synthetic evidence -> seal -> add custody -> parse bounded timeline -> hold/delete negative test -> export -> verify on another host with external trust -> recover consistency.
