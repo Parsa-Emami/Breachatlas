@@ -2,53 +2,61 @@
   "commit_id": "C03",
   "planning_template": false,
   "project": "BreachAtlas",
-  "scope": "Unified local engine setup, Go loopback runtime, and process supervisor; domain business logic begins at C04",
+  "scope": "Reverification of unified local Go engine startup and process supervision",
   "passed": true,
-  "source_identity": "sha256:e3c2b1a0f9e8d7c6b5a4938271605f4e3d2c1b0a9f8e7d6c5b4a3928170ef0a1",
+  "source_commit": "f550fe97c989c3ec05171dbfd184dd7f5288faab",
+  "source_tree": "9c6e38ee97d311dc6a840f7508ccfff5387e37f3",
+  "source_identity": "sha256:b76b06337c04dfe4b70085193922a16ec60a31d9b08bda152d4deaed0304876b",
   "environment": {
-    "node": "24.19.0",
-    "npm": "11.17.0",
+    "node": "24.22.1",
+    "npm": "11.9.0",
     "go": "1.26.2",
-    "python": "3.14.4",
-    "os": "linux",
-    "hardware": "target 2 vCPU / 4096 MiB RAM / 20480 MiB disk (unmeasured planning target)"
+    "also_tested_go": "1.24.0",
+    "python": "3.12.14",
+    "os": "Linux x86_64",
+    "providers": []
   },
   "fixtures": {
     "path": "tests/fixtures/breachatlas/C03/",
-    "provenance": "repository-authored synthetic engine launch fixtures",
-    "license": "Apache-2.0"
+    "license": "Apache-2.0",
+    "provenance_sha256": "3e8953a47d7e91e037c9b0a2a62abc0b8de68ef11607185a094d53b147af15c2"
   },
   "commands": [
     {
-      "command": "npm run validate:plan",
+      "command": "go test -race -count=1 ./...",
       "exit_code": 0,
-      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
-    },
-    {
-      "command": "go test ./...",
-      "exit_code": 0,
-      "output": "PASS ok github.com/Parsa-Emami/Breachatlas/cmd/breachatlas"
-    },
-    {
-      "command": "npm run test:browser",
-      "exit_code": 0,
-      "output": "3 passed in playwright browser workflow"
+      "output": "Engine tests passed, including request deadline, actual occupied port, and graceful shutdown."
     },
     {
       "command": "npm run check",
       "exit_code": 0,
-      "output": "Plan validation, typecheck, build, and 16 unit tests passed."
+      "output": "Plan validation, TypeScript check and build passed. Node tests: 28 passed, zero failed."
+    },
+    {
+      "command": "npm run test:browser",
+      "exit_code": 0,
+      "output": "4 passed (2.4s). The manifest browser test checked a valid manifest and an unsupported version through the local engine.",
+      "workflow": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
+    },
+    {
+      "command": "npm run test:clone",
+      "exit_code": 0,
+      "output": "Real Git clone of tree 9c6e38ee97d311dc6a840f7508ccfff5387e37f3, npm run setup, and web startup passed. Core readiness remained false.",
+      "workflow": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
     }
   ],
   "results": [
     {
       "requirement": "N03",
-      "acceptance": "npm run setup prepares the actual selected local engine and npm start supervises the web workspace and loopback engine with clean shutdown. Minimal health does not imply completed business features; no second undocumented terminal is required.",
-      "status": "passed"
+      "status": "passed",
+      "observations": [
+        "Setup compiled the engine. Startup confirmed the spawned engine owned its listener before opening the web port.",
+        "Occupied engine and web ports, unavailable executable, and cancelled startup failed explicitly. Unexpected child exit closed the web listener."
+      ]
     }
   ],
   "observed_limitations": [
-    "Minimal health and version endpoints are implemented; case management and domain evidence analysis endpoints begin in C04."
+    "C03 covers process lifecycle and health. C04 covers manifest validation."
   ],
-  "rollback_or_recovery_observation": "Revert the isolated source change if incompatible data is accepted."
+  "rollback_or_recovery_observation": "The verified changes introduce no persisted domain state."
 }

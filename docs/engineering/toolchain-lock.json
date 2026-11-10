@@ -8,8 +8,8 @@
       "version": "24.19.0",
       "license": "MIT",
       "platform": "linux/amd64",
-      "official_source": "https://nodejs.org/dist/v24.19.0/",
-      "digest": "sha256:6e0cb5c76db6881c15f9d78465cb2ee5981755eeea4931a78e72fafe6c58be85",
+      "official_source": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-linux-x64.tar.xz",
+      "digest": "sha256:14b342e71204f811bde6153be8e04b62aef63c236fef92b55f9c83154b409647",
       "source_build_instructions": "./configure --prefix=/usr/local && make -j$(nproc) && make install"
     },
     "npm": {
@@ -17,7 +17,7 @@
       "license": "Artistic-2.0",
       "platform": "all",
       "official_source": "https://registry.npmjs.org/npm/-/npm-11.17.0.tgz",
-      "digest": "sha256:9b1a0e88383a8b4179e8cf19c017409c9d4e5f60718293a4b5c6d7e8f9012345",
+      "digest": "sha256:b290bbb35b9e72c3ef84edbe041f28c4479c4d9ee79f555817b8caafe7ce4bba",
       "bundled_with": "node"
     },
     "go": {
@@ -25,8 +25,8 @@
       "minimum_version": "1.24.0",
       "license": "BSD-3-Clause",
       "platform": "linux/amd64",
-      "official_source": "https://go.dev/dl/",
-      "digest": "sha256:c1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+      "official_source": "https://go.dev/dl/go1.24.0.linux-amd64.tar.gz",
+      "digest": "sha256:dea9ca38a0b852a74e81c26134671af7c0fbe65d81b0dc1c5bfe22cf7d4c8858",
       "source_build_instructions": "cd src && ./make.bash"
     }
   },

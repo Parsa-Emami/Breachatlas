@@ -51,8 +51,18 @@ func isLoopbackHost(host string) bool {
 	return ip != nil && ip.IsLoopback()
 }
 
+func isLoopbackAuthority(authority string) bool {
+	host, port, err := net.SplitHostPort(authority)
+	if err != nil {
+		return authority == "[::1]" || !strings.ContainsAny(authority, ":[]") && isLoopbackHost(authority)
+	}
+	number, err := strconv.ParseUint(port, 10, 16)
+	return err == nil && number != 0 && isLoopbackHost(host)
+}
+
 func NewMux() http.Handler {
 	mux := http.NewServeMux()
+	mux.HandleFunc("/api/v1/evidence-manifests/validate", validateManifest)
 
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet && r.Method != http.MethodHead {
@@ -117,11 +127,7 @@ func NewMux() http.Handler {
 	// Wrap with security middleware
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// Host validation: must be loopback
-		host := r.Host
-		if colon := strings.LastIndex(host, ":"); colon != -1 {
-			host = host[:colon]
-		}
-		if !isLoopbackHost(host) {
+		if !isLoopbackAuthority(r.Host) {
 			http.Error(w, `{"error":"invalid_host"}`, http.StatusForbidden)
 			return
 		}
@@ -232,12 +238,12 @@ func Run(args []string, stdout, stderr io.Writer, readyChan chan<- struct{}) int
 	fmt.Fprintf(stdout, `{"service":"%s","version":"%s","host":"%s","port":%d,"status":"listening"}`+"\n",
 		ServiceName, EngineVersion, cfg.Host, cfg.Port)
 
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
+	defer signal.Stop(quit)
 	if readyChan != nil {
 		close(readyChan)
 	}
-
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 
 	select {
 	case sig := <-quit:

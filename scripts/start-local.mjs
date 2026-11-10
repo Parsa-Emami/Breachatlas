@@ -1,62 +1,49 @@
 #!/usr/bin/env node
+import { createInterface } from 'node:readline';
 import { spawn } from 'node:child_process';
 import { readFile, access, stat } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import http from 'node:http';
+import { constants } from 'node:fs';
 import { createWebServer } from './serve-web.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 
 export async function checkEngineHealth(host, port, timeoutMs = 5000) {
-  const start = Date.now();
-  const url = `http://${host}:${port}/healthz`;
-
-  while (Date.now() - start < timeoutMs) {
-    try {
-      const ok = await new Promise(resolvePromise => {
-        const req = http.get(url, { timeout: 1000 }, res => {
-          let data = '';
-          res.on('data', chunk => { data += chunk; });
-          res.on('end', () => {
-            if (res.statusCode === 200) {
-              try {
-                const parsed = JSON.parse(data);
-                resolvePromise(parsed.status === 'ok');
-              } catch {
-                resolvePromise(false);
-              }
-            } else {
-              resolvePromise(false);
-            }
-          });
-        });
-        req.on('error', () => resolvePromise(false));
-      });
-      if (ok) return true;
-    } catch {}
-    await new Promise(r => setTimeout(r, 100));
+  const hostname = host.includes(':') ? `[${host}]` : host;
+  try {
+    const response = await fetch(`http://${hostname}:${port}/healthz`, {
+      redirect: 'error', signal: AbortSignal.timeout(timeoutMs)
+    });
+    if (!response.ok) {
+      await response.body?.cancel();
+      return false;
+    }
+    const health = await response.json();
+    return health.status === 'ok' && health.service === 'breachatlas-engine';
+  } catch {
+    return false;
   }
-  return false;
 }
 
 export async function ensureEngineBinary(binaryPath) {
   try {
-    await access(binaryPath);
+    await access(binaryPath, constants.X_OK);
     return true;
   } catch {
-    // Attempt build with go
-    const build = spawn('go', ['build', '-o', binaryPath, './cmd/breachatlas'], { cwd: root, stdio: 'pipe' });
-    const code = await new Promise(resolvePromise => build.on('close', resolvePromise));
-    return code === 0;
+    const build = spawn('go', ['build', '-o', binaryPath, './cmd/breachatlas'], { cwd: root, stdio: 'ignore' });
+    return new Promise(resolvePromise => {
+      build.once('error', () => resolvePromise(false));
+      build.once('close', code => resolvePromise(code === 0));
+    });
   }
 }
 
 export async function startSupervisor(options = {}) {
-  const host = options.host || '127.0.0.1';
-  const webPort = parseInt(options.port || '4173', 10);
-  const enginePort = parseInt(options.enginePort || '8080', 10);
+  const host = options.host ?? '127.0.0.1';
+  const webPort = Number(options.port ?? '4173');
+  const enginePort = Number(options.enginePort ?? '8080');
   const webRoot = resolve(root, options.root || 'dist/web');
   const configPath = resolve(root, options.config || 'ops/web/runtime-config.json');
   const engineBinary = resolve(root, options.engineBin || 'dist/bin/breachatlas');
@@ -64,45 +51,77 @@ export async function startSupervisor(options = {}) {
   if (!['127.0.0.1', '::1', 'localhost'].includes(host)) {
     throw new Error(`Supervisor strictly forbids non-loopback host "${host}".`);
   }
-
-  // 1. Ensure engine binary is available
-  const built = await ensureEngineBinary(engineBinary);
-  if (!built) {
-    throw new Error(`Failed to locate or build Go engine binary at ${engineBinary}.`);
+  if (![webPort, enginePort].every(port => Number.isInteger(port) && port > 0 && port <= 65535)) {
+    throw new Error('Web and engine ports must be integers from 1 to 65535.');
   }
 
-  // 2. Spawn Go engine
-  const engineProcess = spawn(engineBinary, ['--host', host, '--port', String(enginePort)], {
-    cwd: root,
-    stdio: options.engineStdio || 'inherit'
-  });
-
-  let engineExited = false;
-  let exitCode = null;
-  engineProcess.on('exit', code => {
-    engineExited = true;
-    exitCode = code;
-  });
-
-  // 3. Wait for engine health
-  const healthy = await checkEngineHealth(host, enginePort, options.healthTimeoutMs || 5000);
-  if (!healthy) {
-    try { engineProcess.kill('SIGKILL'); } catch {}
-    throw new Error(`Go engine failed to report healthy on ${host}:${enginePort} within timeout.`);
-  }
-
-  // 4. Start web server
+  options.signal?.throwIfAborted();
   const product = JSON.parse(await readFile(resolve(root, 'ops/web/brand.json'), 'utf8'));
   const config = JSON.parse(await readFile(configPath, 'utf8'));
   await stat(resolve(webRoot, 'index.html'));
-
-  const webServer = createWebServer({ root: webRoot, config, projectId: product.slug });
+  const webServer = createWebServer({ root: webRoot, config, projectId: product.slug, manifestEngine: { hostname: host, port: enginePort } });
   webServer.maxRequestsPerSocket = 1000;
 
-  await new Promise((resolvePromise, rejectPromise) => {
-    webServer.once('error', rejectPromise);
-    webServer.listen(webPort, host, resolvePromise);
+  if (!await ensureEngineBinary(engineBinary)) {
+    throw new Error(`Failed to locate or build Go engine binary at ${engineBinary}.`);
+  }
+  options.signal?.throwIfAborted();
+
+  const engineProcess = spawn(engineBinary, ['--host', host, '--port', String(enginePort)], {
+    cwd: root, stdio: ['ignore', 'pipe', options.engineStdio || 'inherit']
   });
+  if (options.engineStdio !== 'ignore') engineProcess.stdout.pipe(process.stdout, { end: false });
+  let exited = false;
+  const engineExit = new Promise(resolvePromise => {
+    engineProcess.once('error', error => { exited = true; resolvePromise(error.message); });
+    engineProcess.once('exit', (code, signal) => { exited = true; resolvePromise(signal ?? code); });
+  });
+
+  let closing;
+  const shutdown = () => closing ??= (async () => {
+    const webClosed = new Promise(resolvePromise => webServer.close(resolvePromise));
+    webServer.closeAllConnections();
+    if (!exited) {
+      engineProcess.kill('SIGTERM');
+      const timer = setTimeout(() => engineProcess.kill('SIGKILL'), 3000);
+      await engineExit;
+      clearTimeout(timer);
+    }
+    await webClosed;
+  })();
+
+  const lines = createInterface({ input: engineProcess.stdout });
+  const signal = AbortSignal.any([AbortSignal.timeout(options.healthTimeoutMs ?? 5000), ...(options.signal ? [options.signal] : [])]);
+  let abort;
+  const cancelled = new Promise((_, reject) => {
+    abort = () => reject(new Error('Go engine startup cancelled or timed out.', { cause: signal.reason }));
+    if (signal.aborted) abort();
+    else signal.addEventListener('abort', abort, { once: true });
+  });
+  const ready = new Promise(resolvePromise => {
+    lines.on('line', line => {
+      try {
+        const status = JSON.parse(line);
+        if (status.service === 'breachatlas-engine' && status.status === 'listening' && status.port === enginePort) resolvePromise();
+      } catch {}
+    });
+  });
+  const prematureExit = engineExit.then(status => { throw new Error(`Go engine exited during startup (${status}).`); });
+
+  try {
+    await Promise.race([ready, cancelled, prematureExit]);
+    await Promise.race([new Promise((resolvePromise, reject) => {
+      webServer.once('error', reject);
+      webServer.listen(webPort, host, resolvePromise);
+    }), cancelled, prematureExit]);
+  } catch (error) {
+    await shutdown();
+    throw error;
+  } finally {
+    signal.removeEventListener('abort', abort);
+    lines.close();
+    engineProcess.stdout.resume();
+  }
 
   const state = {
     service: `${product.slug}-unified-supervisor`,
@@ -112,27 +131,8 @@ export async function startSupervisor(options = {}) {
     status: 'ready',
     engineReady: true
   };
-
-  const shutdown = async () => {
-    // Close web server
-    await new Promise(r => webServer.close(r));
-    // Terminate engine child process
-    if (!engineExited) {
-      engineProcess.kill('SIGTERM');
-      await new Promise(r => {
-        const timer = setTimeout(() => {
-          if (!engineExited) engineProcess.kill('SIGKILL');
-          r();
-        }, 3000);
-        engineProcess.once('exit', () => {
-          clearTimeout(timer);
-          r();
-        });
-      });
-    }
-  };
-
-  return { state, webServer, engineProcess, shutdown };
+  void engineExit.then(shutdown);
+  return { state, webServer, engineProcess, engineExit, shutdown };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
@@ -155,8 +155,14 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     options[key] = args[i + 1];
   }
 
+  const startup = new AbortController();
+  options.signal = startup.signal;
+  const signals = ['SIGINT', 'SIGTERM'];
+  const cancelStartup = () => startup.abort();
+  for (const signal of signals) process.once(signal, cancelStartup);
   try {
     const supervisor = await startSupervisor(options);
+    for (const signal of signals) process.removeListener(signal, cancelStartup);
     console.log(JSON.stringify(supervisor.state));
 
     let stopping = false;
@@ -168,9 +174,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       process.exit(0);
     };
 
-    for (const sig of ['SIGINT', 'SIGTERM']) {
-      process.once(sig, () => onSignal(sig));
-    }
+    for (const sig of signals) process.once(sig, () => onSignal(sig));
+    void supervisor.engineExit.then(async status => {
+      if (stopping) return;
+      console.error(`Go engine exited unexpectedly (${status}).`);
+      await supervisor.shutdown();
+      process.exit(1);
+    });
   } catch (err) {
     console.error(err.message);
     process.exit(1);

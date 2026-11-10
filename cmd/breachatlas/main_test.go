@@ -6,6 +6,7 @@ import (
 	"net"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"syscall"
 	"testing"
 	"time"
@@ -156,10 +157,9 @@ func TestOccupiedPort(t *testing.T) {
 
 	var stdout, stderr bytes.Buffer
 	ready := make(chan struct{})
-	code := Run([]string{"--host", "127.0.0.1", "--port", bytes.NewBufferString(string(rune(port))).String()}, &stdout, &stderr, ready)
-	// Passing invalid string or occupied port returns 1
-	if code == 0 {
-		t.Error("expected failure on occupied/invalid port, got code 0")
+	code := Run([]string{"--host", "127.0.0.1", "--port", strconv.Itoa(port)}, &stdout, &stderr, ready)
+	if code != 1 || !bytes.Contains(stderr.Bytes(), []byte("Failed to listen")) {
+		t.Fatalf("expected bind failure, got exit %d and %q", code, stderr.String())
 	}
 }
 

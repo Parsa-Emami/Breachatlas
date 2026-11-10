@@ -1,25 +1,63 @@
 {
   "project": "BreachAtlas",
-  "date": "2026-11-09",
-  "base_commit": "237d66f6e872957b8c8d8b28cf9ea516eaae401e",
-  "scope": "C03: Implement unified local engine setup, Go loopback runtime, process supervisor, and smoke tests",
+  "date": "2026-11-10",
+  "base_commit": "687163be9c157f2a97bd2131fc5c2ef48e7d5f33",
+  "verified_source_commit": "f550fe97c989c3ec05171dbfd184dd7f5288faab",
+  "verified_source_tree": "9c6e38ee97d311dc6a840f7508ccfff5387e37f3",
+  "final_source_identity": "sha256:b76b06337c04dfe4b70085193922a16ec60a31d9b08bda152d4deaed0304876b",
+  "scope": "C04 versioned manifest validation plus C02 archive checksum and C03 supervisor corrections",
   "core_tasks_verified": [
     "C01",
     "C02",
-    "C03"
+    "C03",
+    "C04"
   ],
-  "commands": [
-    "go test ./...",
-    "npm run test:browser",
-    "npm run validate:plan",
-    "npm run check",
-    "python3 scripts/validate_repo.py"
+  "changed_paths": [
+    "README.md",
+    "apps/web/src/ManifestValidation.tsx",
+    "apps/web/src/main.tsx",
+    "cmd/breachatlas/main.go",
+    "cmd/breachatlas/main_test.go",
+    "cmd/breachatlas/manifest.go",
+    "cmd/breachatlas/manifest_test.go",
+    "contracts/README.md",
+    "contracts/input.schema.json",
+    "contracts/result.schema.json",
+    "docs/engineering/CLONE_TO_RUN.md",
+    "docs/engineering/ENGINE_LAUNCH.md",
+    "docs/engineering/toolchain-lock.json",
+    "internal/evidence/manifest.go",
+    "package.json",
+    "scripts/serve-web.mjs",
+    "scripts/start-local.mjs",
+    "tests/browser/workspace.spec.ts",
+    "tests/contracts/domain-contracts.test.mjs",
+    "tests/fixtures/breachatlas/C02/positive/valid-toolchain.json",
+    "tests/fixtures/breachatlas/C02/provenance.json",
+    "tests/fixtures/breachatlas/C04/expected-output/outcomes.json",
+    "tests/fixtures/breachatlas/C04/invalid/invalid-timestamp.json",
+    "tests/fixtures/breachatlas/C04/invalid/malformed.json.txt",
+    "tests/fixtures/breachatlas/C04/invalid/missing-field.json",
+    "tests/fixtures/breachatlas/C04/invalid/oversized-evidence.json",
+    "tests/fixtures/breachatlas/C04/invalid/unsafe-identifier.json",
+    "tests/fixtures/breachatlas/C04/invalid/unsupported-version.json",
+    "tests/fixtures/breachatlas/C04/positive/manifest.json",
+    "tests/fixtures/breachatlas/C04/provenance.json",
+    "tests/web/local-launch.test.mjs"
   ],
-  "validation_results": "docs/evidence/C03.json",
-  "final_source_identity": "sha256:e3c2b1a0f9e8d7c6b5a4938271605f4e3d2c1b0a9f8e7d6c5b4a3928170ef0a1",
+  "validation_results": [
+    "docs/evidence/C02.json",
+    "docs/evidence/C03.json",
+    "docs/evidence/C04.json"
+  ],
+  "ci": {
+    "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
+    "plan": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858579",
+    "web": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
+  },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C04",
+  "next_task": "C05",
   "next_command": "npm run plan -- next",
-  "continuation": "C01, C02, and C03 verified. Next is C04: feat(domain): freeze evidence manifest data structures and parsing contracts."
+  "continuation": "Implement the recoverable local storage adapter and verify disk-full, interrupted write and replay behavior."
 }

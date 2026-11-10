@@ -5,8 +5,49 @@ import { pathToFileURL } from 'node:url';
 import { validateRuntimeConfig } from '../apps/web/src/lib/runtime-config.mjs';
 
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
+const manifestPath = '/api/v1/evidence-manifests/validate';
+
+function relayManifest(req, res, engine, send) {
+  const fail = (status, code) => send(status, JSON.stringify({ schema_version: '1', status: 'error', error: { code } }));
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    fail(405, 'method_not_allowed');
+    return;
+  }
+  if (req.headers['sec-fetch-site'] === 'cross-site' ||
+      (req.headers.origin && req.headers.origin !== `http://${req.headers.host}` && req.headers.origin !== `https://${req.headers.host}`)) {
+    fail(403, 'origin_not_allowed');
+    return;
+  }
+  if (!engine) {
+    fail(503, 'engine_unavailable');
+    return;
+  }
+
+  const headers = { 'content-type': req.headers['content-type'] ?? '' };
+  for (const name of ['content-length', 'content-encoding']) {
+    if (req.headers[name] !== undefined) headers[name] = req.headers[name];
+  }
+  const signal = AbortSignal.timeout(3500);
+  const upstream = http.request({ ...engine, path: manifestPath, method: 'POST', headers, signal }, response => {
+    res.writeHead(response.statusCode ?? 502, { 'Content-Type': 'application/json; charset=utf-8' });
+    response.on('error', () => res.destroy());
+    response.pipe(res);
+  });
+  upstream.on('error', () => {
+    if (res.destroyed) return;
+    if (res.headersSent) res.destroy();
+    else if (signal.aborted) fail(408, 'request_timeout');
+    else fail(503, 'engine_unavailable');
+  });
+  res.on('close', () => {
+    if (!res.writableFinished || !req.complete) upstream.destroy();
+  });
+  req.pipe(upstream);
+}
+
 const csp = "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'";
-export function createWebServer({ root, config, projectId }) {
+export function createWebServer({ root, config, projectId, manifestEngine }) {
   const valid = validateRuntimeConfig(config, projectId);
   const publicRoot = resolve(root);
   const within = path => { const diff = relative(publicRoot, path); return diff !== '..' && !diff.startsWith('../') && !isAbsolute(diff); };
@@ -23,6 +64,7 @@ export function createWebServer({ root, config, projectId }) {
     };
     const localAuthority = /^(?:localhost|127\.0\.0\.1|\[::1\])(?::([0-9]{1,5}))?$/i.exec(req.headers.host ?? '');
     if (!localAuthority || (localAuthority[1] && (Number(localAuthority[1]) < 1 || Number(localAuthority[1]) > 65535))) { send(403, '{"error":"invalid_host"}'); return; }
+    if (req.url === manifestPath) { relayManifest(req, res, manifestEngine, send); return; }
     if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); send(405, '{"error":"method_not_allowed"}'); return; }
     let path;
     try {

@@ -32,3 +32,11 @@ test('unified local runtime shows engine supervisor status and healthy workspace
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(page.getByLabel('Availability')).toContainText('unified local engine supervisor');
 });
+test('manifest validation reaches the local engine and returns typed errors', async ({ page }) => {
+  await page.goto('/');
+  const file = page.getByLabel('Validate manifest');
+  await file.setInputFiles('tests/fixtures/breachatlas/C04/positive/manifest.json');
+  await expect(page.getByRole('status')).toHaveText('Valid manifest for ev-2026-0001 in case-2026-001.');
+  await file.setInputFiles('tests/fixtures/breachatlas/C04/invalid/unsupported-version.json');
+  await expect(page.getByRole('alert')).toContainText('Use evidence manifest schema version 1.');
+});
