@@ -83,7 +83,7 @@
       "id": "C06",
       "title": "ci(engine): verify the actual engine from a clean checkout",
       "stage": "foundation",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Build and test the actual selected engine, typed contracts and storage using pinned local open-source providers where relevant. Add exact engine test commands and collect the listed test directories. Shell-only tests cannot verify an engine."
       ],

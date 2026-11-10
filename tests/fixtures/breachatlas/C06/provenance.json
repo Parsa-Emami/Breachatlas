@@ -1,0 +1,12 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic clean-checkout CI engine fixtures for C06 integrity, signer, and revision verification.",
+  "sha256": {
+    "expected-output/outcomes.json": "39e9ab3343804b845bee2087b1df884293198045fe403f2cb39b14052126e46b",
+    "invalid/missing-evidence.json": "eb58f2fbd26cd83f5e7286a1879ee36aaeddde13d7a1aef58d988577808a52ce",
+    "invalid/modified-byte.json": "630cc4c6a532f37f8f1bdfbbd5cd30aaf25c5f97811b7f2360f3dee0084eaf69",
+    "invalid/replayed-revision.json": "fe1225a2a946dce537ebeb789b592e56d7a0caa580da1c762bbd977a3c6e1184",
+    "invalid/untrusted-signer.json": "26453506c039d043fa1da7caa3cfe9b9409a9480b6e28f3284800339a8541b17",
+    "positive/signed-authority.json": "288795efd3f7b3e694e0db5d0944b6e1fb7f89bcb4662123d8fdb8993ac47f77"
+  }
+}

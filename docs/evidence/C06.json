@@ -1,0 +1,85 @@
+{
+  "commit_id": "C06",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Clean-checkout Go engine build, fail-closed CI test collection (.github/workflows/runtime.yml), test discovery documentation (docs/engineering/ENGINE_TESTS.md), and C06 security/integrity integration tests",
+  "passed": true,
+  "source_commit": "b9b2298f8af95439d9951e88312cd4d18d7b733b",
+  "source_tree": "0a3d8fbdf711c5b3b4621cd7c2d408861308a6d8",
+  "source_identity": "sha256:e9f88e4292c83fbe02508f3985ea6b1a7b7aa511c827493efc34a06c37b9d15b",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C06/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "0daaaa188636b43744cd1089d993859066cd00691d85d13be8ce0ccfa215346c"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go build -o dist/bin/breachatlas ./cmd/breachatlas && dist/bin/breachatlas --version",
+      "exit_code": 0,
+      "output": "breachatlas-engine 0.0.1"
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -v -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all 11 tests in cmd/breachatlas and all 12 test suites (including C05 & C06 fixture subtests) in tests."
+    },
+    {
+      "command": "go test -v -race -count=1 -json ./... (CI collection check)",
+      "exit_code": 0,
+      "output": "Verified collected Go engine tests: {'github.com/Parsa-Emami/Breachatlas/cmd/breachatlas': 11, 'github.com/Parsa-Emami/Breachatlas/tests': 28}."
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "npm run test:clone",
+      "exit_code": 0,
+      "output": "Real git clone -> npm run setup -> web startup passed (coreReady: false)."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked JSON files and repository contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N06",
+      "status": "passed",
+      "observations": [
+        "Added .github/workflows/runtime.yml with 40-char SHA-pinned actions (checkout, setup-go, setup-node) and fail-closed Go test collection enforcement.",
+        "Documented exact test packages, local commands, and CI collection policy in docs/engineering/ENGINE_TESTS.md.",
+        "C06 integration tests verify that a 1-byte payload modification fails with ErrDigestMismatch without modifying manifest generation.",
+        "Missing committed evidence blob fails recovery explicitly with ErrMissingReference.",
+        "Untrusted/wrong Ed25519 signer is rejected with ErrInvalidSignature before commit.",
+        "Expired/stale/replayed revision fails with ErrExpiredIdentity or conflict rejection and cannot replace accepted authority.",
+        "Sealed source bytes remain immutable across all negative tests.",
+        "Clean-checkout clone smoke test (npm run test:clone) builds the Go engine binary and web workspace from a fresh Git clone."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "GitHub Actions runtime workflow execution on GitHub runners occurs upon push/PR; all workflow steps were verified locally."
+  ],
+  "rollback_or_recovery_observation": "Revert .github/workflows/runtime.yml, docs/engineering/ENGINE_TESTS.md, tests/engine_ci_test.go, and C06 fixtures/evidence. No runtime state schema or protected files are modified."
+}

@@ -1,0 +1,104 @@
+name: runtime
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: runtime-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-engine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+
+      - name: Setup Go toolchain
+        uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Setup Node.js toolchain
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install locked Node dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Validate roadmap and repository contracts
+        run: |
+          npm run validate:plan
+          python3 scripts/validate_repo.py
+
+      - name: Build Go engine and verify static analysis
+        run: |
+          go build -o dist/bin/breachatlas ./cmd/breachatlas
+          dist/bin/breachatlas --version
+          go vet ./...
+
+      - name: Run Go engine and storage tests with collection enforcement
+        run: |
+          set -euo pipefail
+          go test -v -race -count=1 -json ./... | tee /tmp/go-test-events.jsonl
+          python3 - <<'PY'
+          import json
+          import sys
+
+          events = [json.loads(line) for line in open("/tmp/go-test-events.jsonl", encoding="utf-8") if line.strip()]
+          required_packages = {
+              "github.com/Parsa-Emami/Breachatlas/cmd/breachatlas",
+              "github.com/Parsa-Emami/Breachatlas/tests",
+          }
+          pkg_passes = {pkg: 0 for pkg in required_packages}
+          test_passes = {pkg: 0 for pkg in required_packages}
+          failures = []
+
+          for ev in events:
+              pkg = ev.get("Package")
+              action = ev.get("Action")
+              test_name = ev.get("Test")
+              if action == "fail":
+                  failures.append((pkg, test_name))
+              elif action == "skip" and test_name:
+                  failures.append((pkg, f"skipped:{test_name}"))
+              elif action == "pass" and pkg in required_packages:
+                  if test_name:
+                      test_passes[pkg] += 1
+                  else:
+                      pkg_passes[pkg] += 1
+
+          if failures:
+              print(f"ERROR: Failing or skipped tests detected: {failures}", file=sys.stderr)
+              sys.exit(1)
+
+          for pkg in sorted(required_packages):
+              if pkg_passes[pkg] < 1 or test_passes[pkg] < 1:
+                  print(
+                      f"ERROR: Expected collected tests in {pkg} (pkg_passes={pkg_passes[pkg]}, test_passes={test_passes[pkg]})",
+                      file=sys.stderr,
+                  )
+                  sys.exit(1)
+
+          print("Verified collected Go engine tests:", test_passes)
+          PY
+
+      - name: Build web assets and run contract tests against real engine
+        run: |
+          npm run build
+          npm test
+
+      - name: Verify clean checkout clone-to-run smoke test
+        run: npm run test:clone

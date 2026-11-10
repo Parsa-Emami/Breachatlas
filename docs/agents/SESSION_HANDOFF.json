@@ -1,57 +1,52 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-10",
-  "base_commit": "a61834d3d8369492ad4bedab753d49e6bf2f3d72",
-  "verified_source_commit": "a61834d3d8369492ad4bedab753d49e6bf2f3d72",
-  "verified_source_tree": "52de3256ad4005600f22cbcd299138ce5a0df55f",
-  "final_source_identity": "sha256:6a3dbe19eb0661663d6b0aa50b27844ccbdf850a8f5bad274c410233fd6327e0",
-  "scope": "C05 recoverable local authoritative writes port per ADR-0003",
+  "base_commit": "b9b2298f8af95439d9951e88312cd4d18d7b733b",
+  "verified_source_commit": "b9b2298f8af95439d9951e88312cd4d18d7b733b",
+  "verified_source_tree": "0a3d8fbdf711c5b3b4621cd7c2d408861308a6d8",
+  "final_source_identity": "sha256:e9f88e4292c83fbe02508f3985ea6b1a7b7aa511c827493efc34a06c37b9d15b",
+  "scope": "C06 clean-checkout Go engine CI verification and fail-closed test collection",
   "core_tasks_verified": [
     "C01",
     "C02",
     "C03",
     "C04",
-    "C05"
+    "C05",
+    "C06"
   ],
   "changed_paths": [
+    ".github/workflows/runtime.yml",
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/architecture/STORAGE_PROOF.md",
-    "docs/evidence/C05.json",
-    "internal/storage/adapter.go",
+    "docs/engineering/ENGINE_TESTS.md",
+    "docs/evidence/C06.json",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C05/expected-output/outcomes.json",
-    "tests/fixtures/breachatlas/C05/invalid/corrupted-payload.json",
-    "tests/fixtures/breachatlas/C05/invalid/expired-identity.json",
-    "tests/fixtures/breachatlas/C05/invalid/forged-header.json",
-    "tests/fixtures/breachatlas/C05/invalid/forged-signature.json",
-    "tests/fixtures/breachatlas/C05/invalid/missing-identity.json",
-    "tests/fixtures/breachatlas/C05/invalid/oversized-payload.json",
-    "tests/fixtures/breachatlas/C05/invalid/replayed-identity.json",
-    "tests/fixtures/breachatlas/C05/invalid/scope-mismatch.json",
-    "tests/fixtures/breachatlas/C05/invalid/tampered-sealed-bytes.json",
-    "tests/fixtures/breachatlas/C05/invalid/unauthorized-role.json",
-    "tests/fixtures/breachatlas/C05/invalid/unavailable-provider.json",
-    "tests/fixtures/breachatlas/C05/invalid/widened-path.json",
-    "tests/fixtures/breachatlas/C05/positive/authoritative-write.json",
-    "tests/fixtures/breachatlas/C05/provenance.json",
-    "tests/storage_test.go"
+    "tests/engine_ci_test.go",
+    "tests/fixtures/breachatlas/C06/expected-output/outcomes.json",
+    "tests/fixtures/breachatlas/C06/invalid/missing-evidence.json",
+    "tests/fixtures/breachatlas/C06/invalid/modified-byte.json",
+    "tests/fixtures/breachatlas/C06/invalid/replayed-revision.json",
+    "tests/fixtures/breachatlas/C06/invalid/untrusted-signer.json",
+    "tests/fixtures/breachatlas/C06/positive/signed-authority.json",
+    "tests/fixtures/breachatlas/C06/provenance.json"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
     "docs/evidence/C03.json",
     "docs/evidence/C04.json",
-    "docs/evidence/C05.json"
+    "docs/evidence/C05.json",
+    "docs/evidence/C06.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
     "plan": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858579",
-    "web": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
+    "web": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563",
+    "runtime": ".github/workflows/runtime.yml (pinned SHA CI workflow added in C06)"
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C06",
+  "next_task": "C07",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C06 engine CI and integration verification on clean checkouts."
+  "continuation": "Implement C07 analyst case and evidence aggregates (internal/cases/model.go and tests/case_test.go)."
 }

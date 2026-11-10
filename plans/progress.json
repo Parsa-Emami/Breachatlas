@@ -51,10 +51,12 @@
     },
     {
       "id": "C06",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C06.json"
+      ],
+      "source_identity": "sha256:e9f88e4292c83fbe02508f3985ea6b1a7b7aa511c827493efc34a06c37b9d15b",
+      "notes": "Clean-checkout Go engine build, fail-closed CI test collection (.github/workflows/runtime.yml), test discovery documentation (docs/engineering/ENGINE_TESTS.md), and C06 security/integrity integration tests verified."
     },
     {
       "id": "C07",

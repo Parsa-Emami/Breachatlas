@@ -1,0 +1,15 @@
+{
+  "operation_id": "op-2026-c06-001",
+  "trusted_public_key": "250475a7d3532dca0d8a401f977886dded9ad1ecf861da37ed1313f7256da922",
+  "manifest": {
+    "schema_version": "1",
+    "case_id": "case-2026-001",
+    "evidence_id": "ev-2026-c06-001",
+    "sha256": "54cf8cee54db0bd7fdb5827a2b412403adfe146292a275101b9f9af213829e62",
+    "size_bytes": 417,
+    "media_type": "text/plain",
+    "acquired_at": "2026-10-15T08:14:22.123+03:30",
+    "custody_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scenario": "delete_committed_blob_before_recovery"
+}
