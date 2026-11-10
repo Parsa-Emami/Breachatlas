@@ -1,16 +1,17 @@
 {
   "project": "BreachAtlas",
-  "reviewed_commit": "49a8400f646ba2eca631b306605e11e96ca66acf",
+  "reviewed_commit": "f550fe97c989c3ec05171dbfd184dd7f5288faab",
   "readiness": "WEB_FOUNDATION",
   "core_ready": false,
   "implemented": [
     "responsive web shell",
     "roadmap browser",
     "local bounded JSON structure preview",
-    "unified Go engine runtime and supervisor"
+    "unified Go engine runtime and supervisor",
+    "version 1 evidence manifest validation in the loopback engine and web workspace"
   ],
-  "engine": "foundation_supervisor_implemented",
-  "next_task": "C04",
+  "engine": "manifest_validation_implemented",
+  "next_task": "C05",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

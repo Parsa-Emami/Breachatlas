@@ -1,0 +1,90 @@
+{
+  "commit_id": "C04",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Typed evidence manifest validation through the real local engine and web workspace",
+  "passed": true,
+  "source_commit": "f550fe97c989c3ec05171dbfd184dd7f5288faab",
+  "source_tree": "9c6e38ee97d311dc6a840f7508ccfff5387e37f3",
+  "source_identity": "sha256:b76b06337c04dfe4b70085193922a16ec60a31d9b08bda152d4deaed0304876b",
+  "environment": {
+    "node": "24.22.1",
+    "npm": "11.9.0",
+    "go": "1.26.2",
+    "also_tested_go": "1.24.0",
+    "python": "3.12.14",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C04/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "7a7ac18e47a86456959190c0887a1797dc15786bcbaf97fcc85f4a14745f17af"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred.",
+      "workflow": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Engine tests passed, including request deadline, actual occupied port, and graceful shutdown."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed on Go 1.24.0, including the request deadline."
+    },
+    {
+      "command": "npm run test:contracts",
+      "exit_code": 0,
+      "output": "8 tests passed on Go 1.24.0. Fixtures, size, transport, and restart checks exercised the actual Go engine through the web relay."
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check and build passed. Node tests: 28 passed, zero failed."
+    },
+    {
+      "command": "npm run test:browser",
+      "exit_code": 0,
+      "output": "4 passed (2.4s). The manifest browser test checked a valid manifest and an unsupported version through the local engine.",
+      "workflow": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
+    },
+    {
+      "command": "npm run test:clone",
+      "exit_code": 0,
+      "output": "Real Git clone of tree 9c6e38ee97d311dc6a840f7508ccfff5387e37f3, npm run setup, and web startup passed. Core readiness remained false.",
+      "workflow": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED",
+      "workflow": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665"
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N04",
+      "status": "passed",
+      "observations": [
+        "The engine accepted the version 1 fixture and returned its input digest and typed evidence identifiers.",
+        "Malformed input, duplicate and missing fields, unsupported version, unsafe identifiers, invalid timestamps, wrong origin and oversized bodies failed explicitly.",
+        "A slow request returned request_timeout. Restart preserved the manifest result, and validation left the synthetic evidence bytes intact."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "The endpoint validates manifest metadata in memory. Durable writes and recovery belong to C05."
+  ],
+  "rollback_or_recovery_observation": "Revert this stateless validation change to remove its endpoint. No manifest or evidence file is written."
+}

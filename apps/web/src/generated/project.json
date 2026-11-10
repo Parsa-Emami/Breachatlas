@@ -59,7 +59,7 @@
       "id": "C04",
       "title": "feat(contracts): define typed versioned domain inputs and results",
       "stage": "foundation",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Implement exact typed domain inputs, output/error codes, size/time/cancellation limits and positive/negative compatibility fixtures. Generic nested JSON is not a domain contract. No database schema change is allowed."
       ],

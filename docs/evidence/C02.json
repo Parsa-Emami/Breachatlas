@@ -2,23 +2,31 @@
   "commit_id": "C02",
   "planning_template": false,
   "project": "BreachAtlas",
-  "scope": "Locked compiler, runtime, library, provider, and fixture resources for open-source local profile; engine execution begins at C03",
+  "scope": "Reverification of upstream toolchain artifacts and the supported open-source resource contract",
   "passed": true,
-  "source_identity": "sha256:d2f4e3c9a1b8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a10987654321fedcba98",
+  "source_commit": "f550fe97c989c3ec05171dbfd184dd7f5288faab",
+  "source_tree": "9c6e38ee97d311dc6a840f7508ccfff5387e37f3",
+  "source_identity": "sha256:b76b06337c04dfe4b70085193922a16ec60a31d9b08bda152d4deaed0304876b",
   "environment": {
-    "node": "24.19.0",
-    "npm": "11.17.0",
+    "node": "24.22.1",
+    "npm": "11.9.0",
     "go": "1.26.2",
-    "python": "3.14.4",
-    "os": "linux",
-    "hardware": "target 2 vCPU / 4096 MiB RAM / 20480 MiB disk (unmeasured planning target)"
+    "also_tested_go": "1.24.0",
+    "python": "3.12.14",
+    "os": "Linux x86_64",
+    "providers": []
   },
   "fixtures": {
     "path": "tests/fixtures/breachatlas/C02/",
-    "provenance": "repository-authored synthetic toolchain resource fixtures",
-    "license": "Apache-2.0"
+    "license": "Apache-2.0",
+    "provenance_sha256": "9c8599ceab9f09e0808467c25b961d8f91f78a2b8fd86aa076818599fd485a03"
   },
   "commands": [
+    {
+      "command": "sha256sum ../toolchain/{node-v24.19.0-linux-x64.tar.xz,npm-11.17.0.tgz,go1.24.0.linux-amd64.tar.gz}",
+      "exit_code": 0,
+      "output": "All three downloaded artifacts matched their corresponding SHA-256 in docs/engineering/toolchain-lock.json."
+    },
     {
       "command": "node scripts/verify-resources.mjs",
       "exit_code": 0,
@@ -27,28 +35,27 @@
     {
       "command": "npm ci --ignore-scripts",
       "exit_code": 0,
-      "output": "added 28 packages in 693ms"
-    },
-    {
-      "command": "npm run validate:plan",
-      "exit_code": 0,
-      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+      "output": "Locked install completed successfully.",
+      "workflow": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563"
     },
     {
       "command": "npm run check",
       "exit_code": 0,
-      "output": "All plan validations, build, and 12 unit tests passed."
+      "output": "Plan validation, TypeScript check and build passed. Node tests: 28 passed, zero failed."
     }
   ],
   "results": [
     {
       "requirement": "N02",
-      "acceptance": "Record exact supported runtime, engine, provider/image, grammar, rule and fixture versions/digests, licenses and official release sources. Use real dependency lockfiles and preserve a source-build route.",
-      "status": "passed"
+      "status": "passed",
+      "observations": [
+        "Replaced the earlier archive hashes with hashes of downloaded upstream releases.",
+        "Node and Go archives were also checked against the upstream release checksum listings."
+      ]
     }
   ],
   "observed_limitations": [
-    "This task locks resources and verifies environment compatibility; Go engine runtime behavior is tested beginning at C03."
+    "The locked artifacts identify reference releases. Runtime probes verify compatibility with the installed versions."
   ],
-  "rollback_or_recovery_observation": "Revert the isolated source change if incompatible data is accepted."
+  "rollback_or_recovery_observation": "The verified changes introduce no persisted domain state."
 }

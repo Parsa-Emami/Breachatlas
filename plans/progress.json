@@ -19,8 +19,8 @@
       "evidence": [
         "docs/evidence/C02.json"
       ],
-      "source_identity": "sha256:d2f4e3c9a1b8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a10987654321fedcba98",
-      "notes": "Locked reproducible runtimes, Go engine compiler/standard libraries, web toolchain, and synthetic fixtures."
+      "source_identity": "sha256:b76b06337c04dfe4b70085193922a16ec60a31d9b08bda152d4deaed0304876b",
+      "notes": "Reverified exact archive digests against downloaded upstream releases."
     },
     {
       "id": "C03",
@@ -28,15 +28,17 @@
       "evidence": [
         "docs/evidence/C03.json"
       ],
-      "source_identity": "sha256:e3c2b1a0f9e8d7c6b5a4938271605f4e3d2c1b0a9f8e7d6c5b4a3928170ef0a1",
-      "notes": "Unified local supervisor and Go engine loopback runtime implemented and verified."
+      "source_identity": "sha256:b76b06337c04dfe4b70085193922a16ec60a31d9b08bda152d4deaed0304876b",
+      "notes": "Reverified the Go engine and supervisor, including occupied ports, child exit and startup cancellation."
     },
     {
       "id": "C04",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C04.json"
+      ],
+      "source_identity": "sha256:b76b06337c04dfe4b70085193922a16ec60a31d9b08bda152d4deaed0304876b",
+      "notes": "Version 1 manifest validation verified through the Go engine and browser with typed error, request limit and restart coverage."
     },
     {
       "id": "C05",
