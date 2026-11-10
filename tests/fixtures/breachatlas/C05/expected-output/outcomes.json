@@ -1,0 +1,58 @@
+{
+  "positive/authoritative-write.json": {
+    "status": "committed",
+    "operation_id": "op-2026-c05-001",
+    "case_id": "case-2026-001",
+    "evidence_id": "ev-2026-0001",
+    "sha256": "54cf8cee54db0bd7fdb5827a2b412403adfe146292a275101b9f9af213829e62",
+    "size_bytes": 417
+  },
+  "invalid/missing-identity.json": {
+    "status": "error",
+    "code": "missing_identity"
+  },
+  "invalid/expired-identity.json": {
+    "status": "error",
+    "code": "expired_identity"
+  },
+  "invalid/replayed-identity.json": {
+    "status": "error",
+    "code": "replayed_identity"
+  },
+  "invalid/scope-mismatch.json": {
+    "status": "error",
+    "code": "scope_mismatch"
+  },
+  "invalid/forged-signature.json": {
+    "status": "error",
+    "code": "invalid_signature"
+  },
+  "invalid/unauthorized-role.json": {
+    "status": "error",
+    "code": "unauthorized_role"
+  },
+  "invalid/widened-path.json": {
+    "status": "error",
+    "code": "widened_path"
+  },
+  "invalid/unavailable-provider.json": {
+    "status": "error",
+    "code": "unavailable_provider"
+  },
+  "invalid/forged-header.json": {
+    "status": "error",
+    "code": "forged_header"
+  },
+  "invalid/corrupted-payload.json": {
+    "status": "error",
+    "code": "digest_mismatch"
+  },
+  "invalid/oversized-payload.json": {
+    "status": "error",
+    "code": "payload_too_large"
+  },
+  "invalid/tampered-sealed-bytes.json": {
+    "status": "error",
+    "code": "sealed_bytes_immutable"
+  }
+}

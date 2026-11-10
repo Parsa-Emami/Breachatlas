@@ -8,10 +8,11 @@
     "roadmap browser",
     "local bounded JSON structure preview",
     "unified Go engine runtime and supervisor",
-    "version 1 evidence manifest validation in the loopback engine and web workspace"
+    "version 1 evidence manifest validation in the loopback engine and web workspace",
+    "recoverable local authoritative writes storage port"
   ],
-  "engine": "manifest_validation_implemented",
-  "next_task": "C05",
+  "engine": "storage_port_implemented",
+  "next_task": "C06",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

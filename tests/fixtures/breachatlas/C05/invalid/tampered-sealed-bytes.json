@@ -1,0 +1,22 @@
+{
+  "operation_id": "op-2026-c05-009",
+  "manifest": {
+    "schema_version": "1",
+    "case_id": "case-2026-001",
+    "evidence_id": "ev-2026-0001",
+    "sha256": "33c616183a06dfd74618f19ec8f5dc6b326a86e96a6c7338f78917deebd48ed0",
+    "size_bytes": 51,
+    "media_type": "text/plain",
+    "acquired_at": "2026-10-15T08:14:22.123+03:30",
+    "custody_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "payload_utf8": "TAMPERED_CONTENT_FOR_SEALED_EVIDENCE_INVARIANT_TEST",
+  "identity": {
+    "principal": "analyst-2026",
+    "role": "analyst",
+    "case_scope": "case-2026-001",
+    "public_key": "ff208777c3115d4eaec333c136a59d38f8e5bd95d33422c46442b9366ed0cf08",
+    "expires_at": "2028-01-01T00:00:00Z",
+    "signature": "705ab30c4a6f56ca0c81240684883191500e2468754076c2322db7375fb8b2046ce815f03e52a06f88458e6f66e0424affb58eed734675acf9e7755982456f08"
+  }
+}

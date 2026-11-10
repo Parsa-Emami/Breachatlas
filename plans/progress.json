@@ -42,10 +42,12 @@
     },
     {
       "id": "C05",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C05.json"
+      ],
+      "source_identity": "sha256:6a3dbe19eb0661663d6b0aa50b27844ccbdf850a8f5bad274c410233fd6327e0",
+      "notes": "Recoverable local authoritative writes port implemented and verified with single writer exclusivity, bounded state, atomic visible manifest, idempotency, auth precedence, path containment, streaming recovery, interrupted/disk-full recovery and negative cases."
     },
     {
       "id": "C06",

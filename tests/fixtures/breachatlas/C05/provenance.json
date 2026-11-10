@@ -1,0 +1,20 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic authoritative write requests, Ed25519 identity credentials, and expected outcomes.",
+  "sha256": {
+    "expected-output/outcomes.json": "44aaab4fcce1840e3764704572e4bfc070742257f46c29d26a6dfe375170f3ee",
+    "invalid/corrupted-payload.json": "d970ba011564b5d934f67bb2f7d7a616c95560db0c11d407223d8d1c2d693712",
+    "invalid/expired-identity.json": "b70e6797143aafae4542465cdee37aba5a8bacf0ac6a3694770c6e9887466d22",
+    "invalid/forged-header.json": "d69d219d22f9db4a6185e5a1d823d2fcc01c969583bfd3164c164b2027c16f71",
+    "invalid/forged-signature.json": "a270dbf93f37a37832fa05e8a104a0a142e9d2466f4cc5737e75af4a3a16148c",
+    "invalid/missing-identity.json": "0fdb09d41699898784866d471eb390ce7db014b314cad366ebf01b605e87830c",
+    "invalid/oversized-payload.json": "e00d4b7924ec502ef5c2c657eec359718996d37edf7cbf63e4a71189b3d704c6",
+    "invalid/replayed-identity.json": "31730724b55c6a47fec047e227fd8ed960ad901999bf90af00608e2cc3778ff8",
+    "invalid/scope-mismatch.json": "d58887901fde700c0a9a0fb3f0269c2a0e27fb2715d8ab7cc048479d4880266c",
+    "invalid/tampered-sealed-bytes.json": "822e4b0e336cc9440feba62b48c52fffd8f17e32bc25abb26997658b2ff80700",
+    "invalid/unauthorized-role.json": "b10c3ca07c640c17a4ede9bb105ba4382a767266ba7bd6c3d76d5bcdd4e42938",
+    "invalid/unavailable-provider.json": "be24c29c680429bfe2dcef6c97d3c59660e288f020013c688c12757611833a45",
+    "invalid/widened-path.json": "24481176bc6f4b1e40036b058d11210c0811a61f3816c8b7e5bdbd7883e0c1ca",
+    "positive/authoritative-write.json": "5d50183844eae786c62b55bf1768b3dca9081fbb292dc641b9aa84d9671eb3b2"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "commit_id": "C05",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Recoverable local authoritative writes port adhering to ADR-0003 with single writer exclusivity, bounded state, atomic visible manifest, idempotency, auth-before-idempotency precedence, path containment, provider/header guards, streaming recovery, interrupted/disk-full recovery and negative cases",
+  "passed": true,
+  "source_commit": "a61834d3d8369492ad4bedab753d49e6bf2f3d72",
+  "source_identity": "sha256:6a3dbe19eb0661663d6b0aa50b27844ccbdf850a8f5bad274c410233fd6327e0",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C05/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "ce0e828e601bc0b6603a05174770ececd83845a1d2207ef14dab1a64efb1d47c"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go test -v -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Engine and storage tests passed, including single-writer exclusivity, idempotency, interrupted write, disk-full recovery, reference integrity, auth precedence, path traversal guards, corrupted manifest recovery, and all 12 negative cases."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "npm test",
+      "exit_code": 0,
+      "output": "All 29 web/contract tests passed."
+    },
+    {
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked 130 JSON files and repository contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N05",
+      "status": "passed",
+      "observations": [
+        "The storage port enforces single-writer process exclusivity using flock and mutex serialization.",
+        "Writes are two-phase: staged into temporary files, hash-checked against declared SHA-256, synced, and atomically renamed into immutable blobs.",
+        "The state manifest is updated atomically using a versioned generation counter and directory fsync, with client acknowledgement strictly post-commit.",
+        "Identity authorization strictly precedes idempotency resolution, ensuring unauthenticated or forged requests cannot probe committed operations or trigger replay outcomes.",
+        "Stable operation IDs share the visible transaction; replayed operations return previously committed metadata without duplicating side effects, and parameter conflicts are rejected.",
+        "Strict path containment prevents path traversal in operation, case, or evidence identifiers (ErrWidenedPath).",
+        "Replayed identity signatures, external/unavailable identity providers, and forged escalation headers fail before any sensitive side effect.",
+        "Recovery reconciles orphan staging files left by interrupted writes and performs streaming O(1) memory verification of referential integrity across all committed blobs.",
+        "Corrupted manifests and unsupported schema versions fail recovery cleanly with typed ErrCorruptedManifest.",
+        "Simulated disk-full and interrupted writes leave visible state unmodified.",
+        "Sealed source bytes are strictly immutable and cannot be overwritten."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "The storage adapter is an engine storage port. Aggregates for analyst cases and evidence workflows are introduced in C07."
+  ],
+  "rollback_or_recovery_observation": "Revert the storage adapter and proof documents. Staged temporary files and uncommitted operations leave no persistent state."
+}

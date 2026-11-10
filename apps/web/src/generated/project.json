@@ -71,7 +71,7 @@
       "id": "C05",
       "title": "feat(storage): prove recoverable local authoritative writes",
       "stage": "foundation",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Use ADR-0003 storage ports, a bounded single writer, atomic visible state, stable operation IDs and tested interrupted/disk-full/replay recovery. No database schema, migration, .env or Dockerfile changes."
       ],
