@@ -5,8 +5,8 @@
   "minimum_version": "1.24.0",
   "platform": "linux/amd64",
   "license": "BSD-3-Clause",
-  "official_source": "https://go.dev/dl/",
-  "digest": "sha256:c1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+  "official_source": "https://go.dev/dl/go1.24.0.linux-amd64.tar.gz",
+  "digest": "sha256:dea9ca38a0b852a74e81c26134671af7c0fbe65d81b0dc1c5bfe22cf7d4c8858",
   "requires_paid_account": false,
   "source_buildable": true
 }

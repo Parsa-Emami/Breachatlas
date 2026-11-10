@@ -5,11 +5,11 @@
 [CI source integrity and dependency updates](docs/engineering/CI_SOURCE_INTEGRITY.md)
 
 
-Open-source local-first web application under [Apache-2.0](LICENSE). **Current implementation: web foundation; complete domain workflow pending.**
+Open-source local-first web application under [Apache-2.0](LICENSE). **Current implementation: local Go runtime and evidence manifest validation.**
 
 ## Clone and run the current workspace
 
-Prerequisites: Git and Node 24.19+ within Node 24 (npm included).
+Prerequisites are Git, Node 24.19+ within Node 24 (npm included), and Go 1.24+.
 
 ```sh
 git clone https://github.com/Parsa-Emami/Breachatlas.git
@@ -18,7 +18,7 @@ npm run setup
 npm start
 ```
 
-Open http://127.0.0.1:4173. Current features are a roadmap browser and local bounded JSON structure preview. No Python, database, paid/cloud account, public domain or sibling clone is needed for this shell. It does not run the domain engine. [Clone guide](docs/engineering/CLONE_TO_RUN.md).
+Open http://127.0.0.1:4173. The workspace offers a roadmap, local JSON preview and [evidence manifest validation](contracts/README.md) through the loopback engine. The current workspace runs with Git, Node and Go. [Clone guide](docs/engineering/CLONE_TO_RUN.md).
 
 ## Full product endpoint
 

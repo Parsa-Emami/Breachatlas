@@ -1,0 +1,14 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic manifest for the C01 synthetic evidence log.",
+  "sha256": {
+    "expected-output/outcomes.json": "803d93194a9898542e4a55ae7310729529332c7c2b91f3975f4dec685ecee361",
+    "invalid/invalid-timestamp.json": "ef113b9a40c212911fc1ed1b9c1470acbc4e34584beffca583f298013d002b1c",
+    "invalid/malformed.json.txt": "2be83f43883d0eefdc05160c9e5103cb46d7178ab65d0cf44097f2f88d304146",
+    "invalid/missing-field.json": "10e325c800544a89a9addd30a423ff5d199d22747899c5b9841e89e4d75c6244",
+    "invalid/oversized-evidence.json": "4a2d95e0fbbfd40e4fdd2729c35c39283f42300a4266bd7c99078ef386b27eac",
+    "invalid/unsafe-identifier.json": "87f5295ccde908a3ee4f19b59486da5ef08e16925f650af45013c5808b2131cc",
+    "invalid/unsupported-version.json": "d7df1cf657aff052102e383b474a8840967187c5898aa4a324e7f5635c2b570c",
+    "positive/manifest.json": "8e288bf1d6d6f56ca7166dabd18d8c082aacdaf7c10b0696f3f91a5740b03af2"
+  }
+}

@@ -6,7 +6,7 @@ Updated for task **C03**: unified local engine setup and launch.
 
 BreachAtlas operates under a local-first single-host architecture (`ADR-0003`). The unified process supervisor `scripts/start-local.mjs` orchestrates both the Go engine and the web server without requiring multiple terminal windows:
 
-$$\text{npm start} \longrightarrow \text{start-local.mjs (Supervisor)} \begin{cases} \longrightarrow \text{Spawn Go Engine } (\text{127.0.0.1:8080}) \longrightarrow \text{Wait for /healthz} \\ \longrightarrow \text{Start Web Server } (\text{127.0.0.1:4173}) \end{cases}$$
+$$\text{npm start} \longrightarrow \text{start-local.mjs (Supervisor)} \begin{cases} \longrightarrow \text{Spawn Go Engine } (\text{127.0.0.1:8080}) \longrightarrow \text{Wait for child bind confirmation} \\ \longrightarrow \text{Start Web Server } (\text{127.0.0.1:4173}) \end{cases}$$
 
 ## Process Hierarchy & Lifecycle
 
@@ -16,7 +16,7 @@ $$\text{npm start} \longrightarrow \text{start-local.mjs (Supervisor)} \begin{ca
 2. **Engine Launch**:
    - Ensures binary `dist/bin/breachatlas` exists (or builds it on the fly).
    - Spawns child process: `dist/bin/breachatlas --host 127.0.0.1 --port 8080`.
-   - Polls `http://127.0.0.1:8080/healthz` until healthy (or times out after 5 seconds).
+   - Waits up to five seconds for the spawned child to confirm a successful bind. A response from a different process on the engine port cannot satisfy startup.
 3. **Web Server Launch**:
    - Starts HTTP server on loopback port `4173` serving the web assets.
 4. **Signal Propagation & Clean Shutdown**:

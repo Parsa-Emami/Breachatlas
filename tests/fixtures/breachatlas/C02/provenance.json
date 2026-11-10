@@ -25,8 +25,8 @@
       "size_bytes": 213
     },
     "positive/valid-toolchain.json": {
-      "sha256": "4a44e26b923fb7afc2d86847888690d8d84e09d52db9fb5516abbfaae854615e",
-      "size_bytes": 366
+      "sha256": "69f0457f6a8c2b9b6541d1f86d54e1f86b4516196a993171389d4cd7bb4da529",
+      "size_bytes": 393
     }
   }
 }

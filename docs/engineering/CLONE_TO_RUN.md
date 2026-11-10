@@ -2,7 +2,7 @@
 
 ## Runnable today
 
-Install Git and Node 24.19+ within Node 24 (npm bundled), then:
+Install Git, Node 24.19+ within Node 24 (npm bundled), and Go 1.24+.
 
 ```sh
 git clone https://github.com/Parsa-Emami/Breachatlas.git
@@ -11,9 +11,9 @@ npm run setup
 npm start
 ```
 
-Open http://127.0.0.1:4173. Setup installs the committed web lockfile with lifecycle scripts disabled, stops on errors and builds the workspace. No Python, Go, Rust, PHP, database, cloud account or domain is needed for the current web shell. It previews JSON structure locally and browses the roadmap; it does not implement the full domain product.
+Open http://127.0.0.1:4173. Setup installs the committed web lockfile with lifecycle scripts disabled, builds the workspace and compiles the Go engine. The browser can preview JSON in memory, browse the roadmap and validate versioned evidence manifests through the loopback engine.
 
-`npm run setup -- --check` shows preparation without changes. `--skip-install` builds using already installed dependencies. `npm run doctor` reports actual web/core state. `npm run release:check` deliberately exits 2 until full evidence is ready. Ctrl+C stops the current web process. Ports can be selected with `npm start -- --port 4301` when running multiple projects.
+`npm run setup -- --check` shows preparation without changes. `--skip-install` builds using already installed dependencies. `npm run doctor` reports actual web/core state. `npm run release:check` deliberately exits 2 until full evidence is ready. Ctrl+C stops both supervised processes. Ports can be selected with `npm start -- --port 4301` when running multiple projects.
 
 ## Full-product contract to implement
 
@@ -27,6 +27,7 @@ Local resources: none beyond the selected runtime. Hardware target: 2 vCPU / 409
 
 ```sh
 npm run check
+go test ./...
 npx --no-install playwright install chromium
 npm run test:browser
 npm run test:clone

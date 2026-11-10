@@ -1,0 +1,10 @@
+{
+  "schema_version": "2",
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0001",
+  "sha256": "54cf8cee54db0bd7fdb5827a2b412403adfe146292a275101b9f9af213829e62",
+  "size_bytes": 417,
+  "media_type": "text/plain",
+  "acquired_at": "2026-10-15T08:14:22.123+03:30",
+  "custody_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

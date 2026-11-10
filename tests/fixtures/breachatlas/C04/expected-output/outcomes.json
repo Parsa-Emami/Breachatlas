@@ -1,0 +1,39 @@
+{
+  "positive/manifest.json": {
+    "http": 200,
+    "status": "valid",
+    "result": {
+      "case_id": "case-2026-001",
+      "evidence_id": "ev-2026-0001"
+    }
+  },
+  "invalid/unsupported-version.json": {
+    "http": 422,
+    "code": "unsupported_version",
+    "field": "schema_version"
+  },
+  "invalid/unsafe-identifier.json": {
+    "http": 422,
+    "code": "invalid_field",
+    "field": "case_id"
+  },
+  "invalid/missing-field.json": {
+    "http": 422,
+    "code": "missing_field",
+    "field": "custody_root"
+  },
+  "invalid/invalid-timestamp.json": {
+    "http": 422,
+    "code": "invalid_field",
+    "field": "acquired_at"
+  },
+  "invalid/oversized-evidence.json": {
+    "http": 422,
+    "code": "invalid_field",
+    "field": "size_bytes"
+  },
+  "invalid/malformed.json.txt": {
+    "http": 400,
+    "code": "invalid_json"
+  }
+}
