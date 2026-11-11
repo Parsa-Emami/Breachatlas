@@ -1,0 +1,61 @@
+{
+  "schema_version": "1",
+  "task": "C17",
+  "requirement": "F11",
+  "invariants": [
+    "raw_timestamp_preserved",
+    "confidence_preserved",
+    "unknown_zone_explicit_no_fabricated_utc",
+    "dst_ambiguity_explicit_with_candidate_utcs_no_fabricated_utc",
+    "dst_nonexistent_gap_explicit_no_fabricated_utc",
+    "sealed_source_bytes_never_modified"
+  ],
+  "expected_positive": {
+    "ev-ts-001": {
+      "normalized_timestamp": "2026-10-15T04:44:22Z",
+      "timezone_status": "explicit_offset",
+      "timezone_offset": "+03:30",
+      "confidence": 1.0
+    },
+    "ev-ts-002": {
+      "normalized_timestamp": "2026-10-15T15:14:25.125Z",
+      "timezone_status": "explicit_offset",
+      "timezone_offset": "-07:00",
+      "confidence": 0.95
+    },
+    "ev-unknown-zoneless": {
+      "normalized_timestamp": "",
+      "timezone_status": "unknown_zone",
+      "timezone_offset": "unknown",
+      "confidence": 0.4
+    },
+    "ev-unknown-rfc3339-neg00": {
+      "normalized_timestamp": "",
+      "timezone_status": "unknown_zone",
+      "timezone_offset": "unknown",
+      "confidence": 0.3
+    },
+    "ev-dst-fallback": {
+      "normalized_timestamp": "",
+      "timezone_status": "dst_ambiguous",
+      "timezone_offset": "ambiguous",
+      "candidate_utcs": [
+        "2026-11-01T05:30:00Z",
+        "2026-11-01T06:30:00Z"
+      ],
+      "confidence": 0.85
+    },
+    "ev-dst-springforward": {
+      "normalized_timestamp": "",
+      "timezone_status": "dst_nonexistent",
+      "timezone_offset": "nonexistent",
+      "confidence": 0.5
+    },
+    "ev-iana-exact": {
+      "normalized_timestamp": "2026-06-15T16:00:00Z",
+      "timezone_status": "iana_zone",
+      "timezone_offset": "-04:00",
+      "confidence": 0.98
+    }
+  }
+}

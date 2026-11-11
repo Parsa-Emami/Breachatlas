@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "3aa7c42b2925b317ced46a8014f9f6bc0224bcd7",
-  "verified_source_commit": "3aa7c42b2925b317ced46a8014f9f6bc0224bcd7",
-  "verified_source_tree": "d466f79f58e15c5ecd0c213bf563ae2aca26b59c",
-  "scope": "C16 derived artifact provenance manifests binding derived output payloads to sealed input hashes, allowlisted tool versions, deterministic config hashes, optional Ed25519 attestation, atomic persistence, and restart recovery",
+  "base_commit": "b3ef0462fc497dd4314b29e896ed5beef35d60ff",
+  "verified_source_commit": "b3ef0462fc497dd4314b29e896ed5beef35d60ff",
+  "verified_source_tree": "b0e36bb94a6fe82e336614eab68e5d39e9e66705",
+  "scope": "C17 timestamp normalization preserving raw_timestamp and confidence while leaving unknown zones, RFC3339 -00:00, DST fall-back ambiguity, and DST spring-forward gaps explicit rather than fabricating UTC, plus durable atomic TimeStore import/restart recovery",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -21,27 +21,26 @@
     "C13",
     "C14",
     "C15",
-    "C16"
+    "C16",
+    "C17"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C16.json",
-    "internal/artifacts/manifest.go",
+    "docs/evidence/C17.json",
+    "internal/timeline/time.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C16/expected-output/provenance-outcomes.json",
-    "tests/fixtures/breachatlas/C16/invalid/interrupted-staging-commit.json",
-    "tests/fixtures/breachatlas/C16/invalid/invalid-signature.json",
-    "tests/fixtures/breachatlas/C16/invalid/malformed-config-hash.json",
-    "tests/fixtures/breachatlas/C16/invalid/missing-sealed-prerequisite.json",
-    "tests/fixtures/breachatlas/C16/invalid/missing-tool-version.json",
-    "tests/fixtures/breachatlas/C16/invalid/tampered-input-hash.json",
-    "tests/fixtures/breachatlas/C16/invalid/tampered-output-bytes.json",
-    "tests/fixtures/breachatlas/C16/positive/derived-csv-provenance.json",
-    "tests/fixtures/breachatlas/C16/positive/derived-json-signed-provenance.json",
-    "tests/fixtures/breachatlas/C16/provenance.json",
-    "tests/provenance_test.go"
+    "tests/fixtures/breachatlas/C17/expected-output/time-outcomes.json",
+    "tests/fixtures/breachatlas/C17/invalid/interrupted-import.json",
+    "tests/fixtures/breachatlas/C17/invalid/malformed-timestamp.json",
+    "tests/fixtures/breachatlas/C17/invalid/oversized-batch.json",
+    "tests/fixtures/breachatlas/C17/invalid/traversal-identifier.json",
+    "tests/fixtures/breachatlas/C17/invalid/unsupported-version.json",
+    "tests/fixtures/breachatlas/C17/positive/ambiguous-and-unknown-zone-events.json",
+    "tests/fixtures/breachatlas/C17/positive/explicit-offset-events.json",
+    "tests/fixtures/breachatlas/C17/provenance.json",
+    "tests/time_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -58,7 +57,8 @@
     "docs/evidence/C13.json",
     "docs/evidence/C14.json",
     "docs/evidence/C15.json",
-    "docs/evidence/C16.json"
+    "docs/evidence/C16.json",
+    "docs/evidence/C17.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -68,7 +68,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C17",
+  "next_task": "C18",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C17."
+  "continuation": "Implement C18."
 }

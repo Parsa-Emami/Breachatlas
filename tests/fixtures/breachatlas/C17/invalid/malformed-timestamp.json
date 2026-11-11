@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c17-malformed",
+  "batch_id": "batch-c17-malformed",
+  "case_id": "case-c17-neg",
+  "events": [
+    {
+      "event_id": "ev-bad-ts",
+      "raw_timestamp": "not-a-valid-timestamp-at-all",
+      "source_line": 1
+    }
+  ]
+}

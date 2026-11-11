@@ -1,0 +1,25 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c17-explicit-001",
+  "batch_id": "batch-c17-explicit-001",
+  "case_id": "case-c17-001",
+  "evidence_id": "ev-c17-001",
+  "events": [
+    {
+      "event_id": "ev-ts-001",
+      "raw_timestamp": "2026-10-15T08:14:22+03:30",
+      "source_confidence": 1.0,
+      "source_line": 1,
+      "event_type": "ssh_login",
+      "summary": "Accepted publickey"
+    },
+    {
+      "event_id": "ev-ts-002",
+      "raw_timestamp": "2026-10-15 08:14:25.125-07:00",
+      "source_confidence": 0.95,
+      "source_line": 2,
+      "event_type": "sudo_command",
+      "summary": "tar archive evidence"
+    }
+  ]
+}

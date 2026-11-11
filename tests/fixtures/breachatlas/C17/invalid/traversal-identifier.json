@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c17-trav",
+  "batch_id": "../escape-batch",
+  "case_id": "case-c17-neg",
+  "events": [
+    {
+      "event_id": "ev-trav",
+      "raw_timestamp": "2026-10-15T08:14:22Z"
+    }
+  ]
+}

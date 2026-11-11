@@ -1,0 +1,15 @@
+{
+  "task": "C17",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic timestamp normalization and DST ambiguity fixtures",
+  "sha256": {
+    "expected-output/time-outcomes.json": "960e76b9a6ed7496533d660bb8725f59e009dae4323b7a7efa5cc7193f8ea51c",
+    "invalid/interrupted-import.json": "608749ab0d638498bc78333e16730b2d473c39aab04f1dd120268dc6172c97a8",
+    "invalid/malformed-timestamp.json": "540035a6883545eb1302c9abdb985ea8583a950bdcd2ce4a6cff1a41a88e8eac",
+    "invalid/oversized-batch.json": "4288b611b88bdc5efee33b8929ef56c3d2fcecf0d057c93a7f371b165321c107",
+    "invalid/traversal-identifier.json": "75442dafd9f328afbc49c3b7d84a67bc90e55c2af76c627bff1811c54005733f",
+    "invalid/unsupported-version.json": "3dbe5fde94837615ca74e92b0d9e2ed391315667c8d5d0a3d8d64d74388b6379",
+    "positive/ambiguous-and-unknown-zone-events.json": "43a4fa5bb038e542399e753b54b63dd786f81d1b33c2d06640ffc550ac8504f2",
+    "positive/explicit-offset-events.json": "0ef0e280a71519dcc4d820bc4e35c590014ecfebc13b296fe8197a735092f39b"
+  }
+}

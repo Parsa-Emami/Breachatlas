@@ -20,10 +20,11 @@
     "legal holds blocking concurrent deletion and retention expiration with durable reason auditing and restart persistence",
     "fixed shipped allowlisted non-executing CSV and JSON analyzer interface with read-only sealed evidence binding",
     "bounded analyzer sandbox isolation with read-only sealed evidence, private 0700 scratch, network guard, and deadline enforcement",
-    "derived artifact provenance manifests bound to sealed input hashes, tool version, config hash, and Ed25519 attestation with atomic recovery"
+    "derived artifact provenance manifests bound to sealed input hashes, tool version, config hash, and Ed25519 attestation with atomic recovery",
+    "timestamp normalization preserving raw values and making unknown zones and DST ambiguity explicit without fabricating UTC"
   ],
-  "engine": "artifacts_provenance_verified",
-  "next_task": "C17",
+  "engine": "timeline_timestamps_verified",
+  "next_task": "C18",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

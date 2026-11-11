@@ -150,10 +150,12 @@
     },
     {
       "id": "C17",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C17.json"
+      ],
+      "source_identity": "sha256:ab0baeebcf85b0019b0a4291a0b4598d503cf72d42ada505312e32506774874b",
+      "notes": "Timestamp normalization preserving raw_timestamp and confidence while leaving unknown zones, RFC3339 -00:00, DST fall-back ambiguity (candidate_utcs), and DST spring-forward gaps explicit rather than fabricating UTC, plus atomic TimeStore import/restart recovery in internal/timeline/time.go and tests/time_test.go."
     },
     {
       "id": "C18",

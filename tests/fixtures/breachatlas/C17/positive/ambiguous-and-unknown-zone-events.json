@@ -1,0 +1,46 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c17-ambiguous-002",
+  "batch_id": "batch-c17-ambiguous-002",
+  "case_id": "case-c17-002",
+  "events": [
+    {
+      "event_id": "ev-unknown-zoneless",
+      "raw_timestamp": "2026-10-15T08:14:22",
+      "source_confidence": 0.4,
+      "source_line": 1,
+      "event_type": "syslog_untyped"
+    },
+    {
+      "event_id": "ev-unknown-rfc3339-neg00",
+      "raw_timestamp": "2026-10-15T08:14:22-00:00",
+      "source_confidence": 0.3,
+      "source_line": 2,
+      "event_type": "rfc3339_unknown_offset"
+    },
+    {
+      "event_id": "ev-dst-fallback",
+      "raw_timestamp": "2026-11-01T01:30:00",
+      "zone_hint": "America/New_York",
+      "source_confidence": 0.85,
+      "source_line": 3,
+      "event_type": "dst_overlap"
+    },
+    {
+      "event_id": "ev-dst-springforward",
+      "raw_timestamp": "2026-03-08T02:30:00",
+      "zone_hint": "America/New_York",
+      "source_confidence": 0.5,
+      "source_line": 4,
+      "event_type": "dst_gap"
+    },
+    {
+      "event_id": "ev-iana-exact",
+      "raw_timestamp": "2026-06-15T12:00:00",
+      "zone_hint": "America/New_York",
+      "source_confidence": 0.98,
+      "source_line": 5,
+      "event_type": "iana_unambiguous"
+    }
+  ]
+}

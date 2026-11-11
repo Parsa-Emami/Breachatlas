@@ -215,7 +215,7 @@
       "id": "C17",
       "title": "feat(timestamps): normalize times without losing raw values",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Unknown zone and DST ambiguity remain explicit rather than fabricated UTC."
       ],
