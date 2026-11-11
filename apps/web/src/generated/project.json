@@ -311,7 +311,7 @@
       "id": "C25",
       "title": "feat(retention): audit explicit evidence destruction",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "No automatic raw-evidence TTL; operator destruction respects hold and creates tombstone."
       ],

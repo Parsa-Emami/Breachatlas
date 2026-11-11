@@ -222,10 +222,12 @@
     },
     {
       "id": "C25",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C25.json"
+      ],
+      "source_identity": "sha256:ebeb2f47daa1c4143b69ee890fca83c78ec578d323ced731f03cd9ac2f7423bc",
+      "notes": "Explicit retention and evidence destruction store in internal/retention/destroy.go prohibiting automatic raw-evidence TTL (ErrAutoRawTTLForbidden), enforcing holds.Service legal hold precedence across restarts (ErrHoldActive), recording immutable cryptographic DELETED_TOMBSTONE records with optional Ed25519 attestation, atomic staging/restart recovery, idempotency, and append-only audit logs without modifying sealed source bytes (verified in tests/retention_test.go)."
     },
     {
       "id": "C26",

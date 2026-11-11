@@ -1,0 +1,36 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c25-ret-001",
+  "evidence_id": "ev-c25-001",
+  "hold_id": "hold-c25-001",
+  "policy_id": "pol-c25-no-auto-ttl",
+  "tombstone_id": "tomb-c25-001",
+  "operation_id": "op-c25-destroy-001",
+  "key_id": "ed25519-c25-ret-key1",
+  "provider": "local",
+  "payload": "{\"event\":\"sealed_auth_log\",\"host\":\"srv-01\",\"timestamp\":\"2026-10-16T08:30:00Z\"}\n",
+  "hold": {
+    "actor": "counsel-sara",
+    "timestamp": "2026-10-16T09:00:00Z",
+    "reason": "Regulatory preservation order pending audit"
+  },
+  "release": {
+    "actor": "counsel-sara",
+    "timestamp": "2026-10-16T10:00:00Z",
+    "reason": "Matter closed with documented written authorization"
+  },
+  "blocked_destroy": {
+    "operation_id": "op-c25-blocked-001",
+    "tombstone_id": "tomb-c25-blocked-001",
+    "operator": "operator-aria",
+    "timestamp": "2026-10-16T09:15:00Z",
+    "reason": "Premature cleanup request before legal hold clearance"
+  },
+  "allowed_destroy": {
+    "operation_id": "op-c25-destroy-001",
+    "tombstone_id": "tomb-c25-001",
+    "operator": "operator-aria",
+    "timestamp": "2026-10-16T10:30:00Z",
+    "reason": "Authorized post-release destruction under case retention closeout"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1",
+  "auto_raw_ttl_permitted": false,
+  "blocked_under_hold": {
+    "error": "ErrHoldActive",
+    "tombstone_created": false,
+    "sealed_bytes_intact": true,
+    "audit_action": "destruction_blocked",
+    "audit_outcome": "blocked"
+  },
+  "explicit_operator_destroyed": {
+    "state": "DELETED_TOMBSTONE",
+    "tombstone_created": true,
+    "sealed_bytes_intact": true,
+    "audit_action": "evidence_destroyed",
+    "audit_outcome": "allowed"
+  }
+}

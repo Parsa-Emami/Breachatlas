@@ -1,0 +1,10 @@
+{
+  "task": "C25",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic retention policy (no-auto-TTL), legal-hold precedence, explicit operator destruction tombstone, and negative prerequisite fixtures",
+  "sha256": {
+    "expected-output/retention-outcomes.json": "749bf54f2afb497f1413a75ab8b0387caf701109fcf8006b4d4c3cd8ea36a5a8",
+    "invalid/rejected-destruction-cases.json": "13d64def210eb541db156361dc9caec153cb00a0bdec8ca160e8b6bd9e3d3ccb",
+    "positive/explicit-destruction.json": "166158a3a1e01c1c0b05282d8fbfef35209a12d6ccd8ac37aaa18910db283779"
+  }
+}

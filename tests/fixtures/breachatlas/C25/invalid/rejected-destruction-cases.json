@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {
+      "name": "auto_raw_evidence_ttl_policy_forbidden",
+      "policy_id": "pol-bad-ttl",
+      "auto_delete_raw_evidence": true,
+      "raw_ttl_seconds": 86400,
+      "expected_error": "ErrAutoRawTTLForbidden"
+    },
+    {
+      "name": "automatic_ttl_destruction_request_forbidden",
+      "operation_id": "op-bad-autotll",
+      "automatic_ttl": true,
+      "explicit_approval": false,
+      "expected_error": "ErrAutoRawTTLForbidden"
+    },
+    {
+      "name": "missing_explicit_operator_approval",
+      "operation_id": "op-bad-unapproved",
+      "automatic_ttl": false,
+      "explicit_approval": false,
+      "expected_error": "ErrExplicitApprovalRequired"
+    },
+    {
+      "name": "missing_sealed_prerequisite",
+      "evidence_id": "ev-c25-missing",
+      "operation_id": "op-bad-missing-seal",
+      "expected_error": "ErrMissingPrerequisite"
+    },
+    {
+      "name": "unavailable_remote_provider",
+      "provider": "s3-remote-retention",
+      "operation_id": "op-bad-provider",
+      "expected_error": "ErrUnavailableProvider"
+    },
+    {
+      "name": "missing_operator_attribution",
+      "operator": "",
+      "reason": "Cleanup without operator",
+      "operation_id": "op-bad-operator",
+      "expected_error": "ErrInvalidRetention"
+    }
+  ]
+}
