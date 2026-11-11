@@ -1,0 +1,8 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c18-missing",
+  "case_id": "case-c18-neg",
+  "artifact_id": "art-does-not-exist",
+  "provider": "local",
+  "expected_error": "ErrMissingPrerequisite"
+}

@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "b3ef0462fc497dd4314b29e896ed5beef35d60ff",
-  "verified_source_commit": "b3ef0462fc497dd4314b29e896ed5beef35d60ff",
-  "verified_source_tree": "b0e36bb94a6fe82e336614eab68e5d39e9e66705",
-  "scope": "C17 timestamp normalization preserving raw_timestamp and confidence while leaving unknown zones, RFC3339 -00:00, DST fall-back ambiguity, and DST spring-forward gaps explicit rather than fabricating UTC, plus durable atomic TimeStore import/restart recovery",
+  "base_commit": "e579cad1f126acee2112d90dd735fee5ad0e9c2a",
+  "verified_source_commit": "e579cad1f126acee2112d90dd735fee5ad0e9c2a",
+  "verified_source_tree": "f8a6fb6b6258deae619d70721eb41bc9bd0889d9",
+  "scope": "C18 stable derived EventIdentity indexing, deduplicating duplicate and reordered analyses across C16/C17/SealStore with deterministic timeline ordering and atomic restart recovery",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -22,25 +22,25 @@
     "C14",
     "C15",
     "C16",
-    "C17"
+    "C17",
+    "C18"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C17.json",
-    "internal/timeline/time.go",
+    "docs/evidence/C18.json",
+    "internal/timeline/index.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C17/expected-output/time-outcomes.json",
-    "tests/fixtures/breachatlas/C17/invalid/interrupted-import.json",
-    "tests/fixtures/breachatlas/C17/invalid/malformed-timestamp.json",
-    "tests/fixtures/breachatlas/C17/invalid/oversized-batch.json",
-    "tests/fixtures/breachatlas/C17/invalid/traversal-identifier.json",
-    "tests/fixtures/breachatlas/C17/invalid/unsupported-version.json",
-    "tests/fixtures/breachatlas/C17/positive/ambiguous-and-unknown-zone-events.json",
-    "tests/fixtures/breachatlas/C17/positive/explicit-offset-events.json",
-    "tests/fixtures/breachatlas/C17/provenance.json",
-    "tests/time_test.go"
+    "tests/fixtures/breachatlas/C18/expected-output/timeline-index-outcomes.json",
+    "tests/fixtures/breachatlas/C18/invalid/interrupted-index-commit.json",
+    "tests/fixtures/breachatlas/C18/invalid/malformed-records.json",
+    "tests/fixtures/breachatlas/C18/invalid/missing-derived-prerequisite.json",
+    "tests/fixtures/breachatlas/C18/invalid/unavailable-provider.json",
+    "tests/fixtures/breachatlas/C18/positive/duplicate-reordered-analysis.json",
+    "tests/fixtures/breachatlas/C18/positive/multi-zone-timeline-ordering.json",
+    "tests/fixtures/breachatlas/C18/provenance.json",
+    "tests/timeline_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -58,7 +58,8 @@
     "docs/evidence/C14.json",
     "docs/evidence/C15.json",
     "docs/evidence/C16.json",
-    "docs/evidence/C17.json"
+    "docs/evidence/C17.json",
+    "docs/evidence/C18.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -68,7 +69,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C18",
+  "next_task": "C19",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C18."
+  "continuation": "Implement C19."
 }

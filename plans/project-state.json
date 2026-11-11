@@ -21,10 +21,11 @@
     "fixed shipped allowlisted non-executing CSV and JSON analyzer interface with read-only sealed evidence binding",
     "bounded analyzer sandbox isolation with read-only sealed evidence, private 0700 scratch, network guard, and deadline enforcement",
     "derived artifact provenance manifests bound to sealed input hashes, tool version, config hash, and Ed25519 attestation with atomic recovery",
-    "timestamp normalization preserving raw values and making unknown zones and DST ambiguity explicit without fabricating UTC"
+    "timestamp normalization preserving raw values and making unknown zones and DST ambiguity explicit without fabricating UTC",
+    "stable derived event identity indexing deduplicating repeated and reordered analyses without mutating sealed source bytes"
   ],
-  "engine": "timeline_timestamps_verified",
-  "next_task": "C18",
+  "engine": "timeline_index_verified",
+  "next_task": "C19",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

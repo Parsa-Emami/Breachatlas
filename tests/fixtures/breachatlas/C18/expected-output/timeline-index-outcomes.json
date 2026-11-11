@@ -1,0 +1,18 @@
+{
+  "schema_version": "1",
+  "task": "C18",
+  "requirement": "F12",
+  "invariants": [
+    "duplicate_analysis_converges_to_zero_duplicates",
+    "reordered_analysis_converges_to_identical_sorted_timeline",
+    "stable_event_identity_independent_of_run_and_slice_order",
+    "restart_recovery_cleans_staging_and_preserves_deduplicated_index",
+    "sealed_source_bytes_never_modified"
+  ],
+  "negative_outcomes": {
+    "missing-derived-prerequisite.json": "ErrMissingPrerequisite",
+    "unavailable-provider.json": "ErrUnavailableProvider",
+    "malformed-records.json": "ErrMalformedPayload",
+    "interrupted-index-commit.json": "ErrInterrupted"
+  }
+}

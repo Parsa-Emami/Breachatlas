@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c18-malformed",
+  "case_id": "case-c18-neg",
+  "evidence_id": "ev-c18-neg",
+  "artifact_id": "art-c18-malformed",
+  "tool_version": "breachatlas-csv/1.0.0",
+  "records": [],
+  "expected_error": "ErrMalformedPayload"
+}

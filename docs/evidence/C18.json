@@ -1,0 +1,67 @@
+{
+  "commit_id": "C18",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Stable derived EventIdentity calculation and atomic EventIndexStore deduplicating repeated and reordered analyses across C16 artifacts, C17 timestamp normalization, and read-only SealStore evidence",
+  "passed": true,
+  "source_commit": "e579cad1f126acee2112d90dd735fee5ad0e9c2a",
+  "source_tree": "f8a6fb6b6258deae619d70721eb41bc9bd0889d9",
+  "source_identity": "sha256:24e1cd0ac071ac968e5f4bc8d0d8203ca70614a80ce07bdde486d0e07bb2a410",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C18/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "3eee58989a01bdd6f263ac634d4909f6809241bbf7b772d41c01f3da04cea6a0"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all 11 tests in cmd/breachatlas and all test suites in tests (C05 through C18, including all 5 C18 provenance, duplicate/reordered deduplication, negative prerequisite/provider/malformed/traversal/lock, interrupted restart recovery, sealed immutability, and race tests)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F12",
+      "status": "passed",
+      "observations": [
+        "ComputeEventIdentity in internal/timeline/index.go derives a canonical SHA-256 identity from case_id, sorted input_hashes, source_line, raw_timestamp, event_type, summary, and recursively canonicalized map/slice fields while excluding volatile run_id, artifact_id, and output slice index.",
+        "IndexDerivedArtifact and IndexRecords in EventIndexStore verify C16 derived artifacts and read-only SealStore inputs, normalize timestamps via C17 NormalizeTimestamp (preserving unknown_zone and DST ambiguity), and deduplicate identical EventIdentity entries across duplicate runs and reversed/reordered ingestion.",
+        "ListEntries returns deduplicated entries in a strict total canonical order independent of ingestion sequence.",
+        "Missing prerequisites (ErrMissingPrerequisite), unavailable providers (ErrUnavailableProvider), malformed/empty records (ErrMalformedPayload), unsupported versions (ErrUnsupportedVersion), path traversal/symlinks, exclusive lock contention, and interrupted commits (ErrInterrupted) fail closed without partial state.",
+        "Restarting EventIndexStore cleans orphan staging files, recovers prior committed entries intact, prevents duplicate insertion on repeat, and leaves sealed source bytes unmodified."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Bounded local timeline search queries and index rebuild orchestration (C19) are deferred to their planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/timeline/index.go, tests/timeline_test.go, tests/fixtures/breachatlas/C18, and docs/evidence/C18.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

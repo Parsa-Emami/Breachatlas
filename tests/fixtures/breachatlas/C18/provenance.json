@@ -1,0 +1,14 @@
+{
+  "task": "C18",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic timeline event identity and deduplication fixtures",
+  "sha256": {
+    "expected-output/timeline-index-outcomes.json": "07a5183567ae148c50a8801c9a1306012297b2c7a5d1db19e861f6c12069f116",
+    "invalid/interrupted-index-commit.json": "5641c80168226ef50dfa9f1c2eb42455dfc2ac5988d7b0e56c93decd84aeda73",
+    "invalid/malformed-records.json": "522058a3a830d64fad459ff52db56fbf1e55142a452cd2a0bf822dc11f388a68",
+    "invalid/missing-derived-prerequisite.json": "155ef6b2acf07335215dad9327361a017ce095a01e390467fbe30b8566e86265",
+    "invalid/unavailable-provider.json": "ac5dbf19ada1cdb96bf61432208104544c7944f79c39dfe8fd74ac6330044d47",
+    "positive/duplicate-reordered-analysis.json": "d23fe1bd46f9a27a2c8b0b06e9c60c993863e21b8a61d86c5f606fe88400263c",
+    "positive/multi-zone-timeline-ordering.json": "b4a1e6971cbf26fd1dbdb20b5717c92a5677642301e65435886c0c2c9afcbe87"
+  }
+}

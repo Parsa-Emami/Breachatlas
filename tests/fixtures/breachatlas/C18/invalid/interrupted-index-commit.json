@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c18-interrupt",
+  "case_id": "case-c18-recover",
+  "evidence_id": "ev-c18-recover",
+  "artifact_id": "art-c18-interrupt",
+  "media_type": "text/csv",
+  "payload": "timestamp,event_type,summary\n2026-10-15T09:00:00Z,process_exec,sha256sum\n",
+  "expected_error": "ErrInterrupted"
+}

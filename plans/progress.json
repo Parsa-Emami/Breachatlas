@@ -159,10 +159,12 @@
     },
     {
       "id": "C18",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C18.json"
+      ],
+      "source_identity": "sha256:24e1cd0ac071ac968e5f4bc8d0d8203ca70614a80ce07bdde486d0e07bb2a410",
+      "notes": "Stable derived EventIdentity calculation (canonical JSON + SHA-256 excluding volatile run/slice order), deduplicating EventIndexStore with C16/C17/SealStore integration, deterministic sorting, atomic persistence, and restart recovery in internal/timeline/index.go and tests/timeline_test.go."
     },
     {
       "id": "C19",

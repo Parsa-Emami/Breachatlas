@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c18-001",
+  "evidence_id": "ev-c18-csv-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "media_type": "text/csv",
+  "payload": "timestamp,event_type,summary,actor\n2026-10-15T08:14:22+03:30,ssh_login,Accepted publickey,alice\n2026-10-15T08:14:25+03:30,sudo_command,Ran tar archive,alice\n2026-10-15T08:15:01+03:30,ssh_logout,Disconnected,alice\n",
+  "expected_unique_entries": 3
+}

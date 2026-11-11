@@ -1,0 +1,32 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c18-002",
+  "evidence_id": "ev-c18-ord-002",
+  "artifact_id": "art-c18-ord-fwd",
+  "reordered_artifact_id": "art-c18-ord-rev",
+  "tool_version": "breachatlas-json/1.0.0",
+  "records": [
+    {
+      "source_line": 1,
+      "timestamp": "2026-10-15T08:14:22+03:30",
+      "event_type": "login",
+      "summary": "first chronological",
+      "fields": { "host": "web-01", "seq": 1 }
+    },
+    {
+      "source_line": 2,
+      "timestamp": "2026-10-15T08:16:00+03:30",
+      "event_type": "logout",
+      "summary": "second chronological",
+      "fields": { "host": "web-01", "seq": 2 }
+    },
+    {
+      "source_line": 3,
+      "timestamp": "2026-11-01T01:30:00",
+      "zone_hint": "America/New_York",
+      "event_type": "cron_overlap",
+      "summary": "explicit dst ambiguous entry",
+      "fields": { "host": "web-01", "seq": 3 }
+    }
+  ]
+}

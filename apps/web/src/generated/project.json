@@ -227,7 +227,7 @@
       "id": "C18",
       "title": "feat(timeline): index stable derived event identities",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Duplicate/reordered analysis cannot duplicate timeline entries."
       ],

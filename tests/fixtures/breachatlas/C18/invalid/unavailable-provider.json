@@ -1,0 +1,8 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c18-bad-provider",
+  "case_id": "case-c18-neg",
+  "artifact_id": "art-c18-neg",
+  "provider": "cloud-saas-analyzer",
+  "expected_error": "ErrUnavailableProvider"
+}
