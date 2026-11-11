@@ -1,0 +1,42 @@
+{
+  "schema_version": "1",
+  "cases": {
+    "positive/isolated-csv-analysis.json": {
+      "status": "success",
+      "network_blocked": true,
+      "read_only_verified": true,
+      "scratch_cleaned": true
+    },
+    "positive/isolated-json-analysis.json": {
+      "status": "success",
+      "network_blocked": true,
+      "read_only_verified": true,
+      "scratch_cleaned": true
+    },
+    "invalid/network-dial-rejected.json": {
+      "error": "network_forbidden"
+    },
+    "invalid/deadline-timeout.json": {
+      "error": "deadline_exceeded"
+    },
+    "invalid/scratch-traversal-escape.json": {
+      "error": "sandbox_escaped"
+    },
+    "invalid/scratch-quota-exceeded.json": {
+      "error": "scratch_limit_exceeded"
+    },
+    "invalid/evidence-mutation-blocked.json": {
+      "error": "evidence_write_forbidden"
+    },
+    "invalid/orphaned-scratch-interrupt.json": {
+      "action": "purged_by_clean_orphans"
+    }
+  },
+  "invariants": [
+    "Analyzers operate strictly read-only against sealed evidence with post-run digest verification",
+    "Outbound network dials are blocked fail-closed returning ErrNetworkForbidden",
+    "Private scratch directory is isolated with 0700 permissions and bounds on size and path traversal",
+    "Hanging or slow analyzers are terminated upon deadline expiry and their scratch freed",
+    "Interrupted runs leaving abandoned scratch directories are cleaned up by CleanOrphans without corrupting sealed evidence"
+  ]
+}

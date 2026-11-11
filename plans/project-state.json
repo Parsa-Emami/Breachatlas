@@ -18,10 +18,11 @@
     "append-only attributable custody ledger with actor/timestamp/reason tracking and hash chaining",
     "independent verification of signed externally stored custody roots, outside signer trust allowlisting, anti-rollback authority tracking, and ledger rewrite detection",
     "legal holds blocking concurrent deletion and retention expiration with durable reason auditing and restart persistence",
-    "fixed shipped allowlisted non-executing CSV and JSON analyzer interface with read-only sealed evidence binding"
+    "fixed shipped allowlisted non-executing CSV and JSON analyzer interface with read-only sealed evidence binding",
+    "bounded analyzer sandbox isolation with read-only sealed evidence, private 0700 scratch, network guard, and deadline enforcement"
   ],
-  "engine": "analyzers_contract_verified",
-  "next_task": "C15",
+  "engine": "analyzers_isolation_verified",
+  "next_task": "C16",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

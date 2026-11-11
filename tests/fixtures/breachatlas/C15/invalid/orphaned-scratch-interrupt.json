@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "run_id": "RUN-C15-ORPHAN-001",
+  "case_id": "CASE-C15-001",
+  "evidence_id": "EVID-C15-CSV-001",
+  "simulated_abandoned_directories": [
+    "run-abandoned-01",
+    "run-abandoned-02"
+  ],
+  "expected_action": "purged_by_clean_orphans"
+}

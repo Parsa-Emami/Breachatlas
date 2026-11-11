@@ -1,11 +1,11 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "9a635fa345eb10e966b3f53ce6227612a5ab91eb",
-  "verified_source_commit": "9a635fa345eb10e966b3f53ce6227612a5ab91eb",
-  "verified_source_tree": "6c6a3a72d7677ce0a8bf59a17bc5c8b3602b0269",
-  "final_source_identity": "sha256:1f8eafb8af37bce0d28fbdedbaf19a15426d411532c1f25fc203359d041a675e",
-  "scope": "C14 fixed allowlisted non-executing CSV and JSON analyzer interface, contract validation, sealed evidence read-only verification, and negative cases",
+  "base_commit": "3f863d6c2ec15ddee655c09445cc5aeb7e90ac4e",
+  "verified_source_commit": "3f863d6c2ec15ddee655c09445cc5aeb7e90ac4e",
+  "verified_source_tree": "a17ebb94c4e8d1b1533ac414aa3827d20f220c56",
+  "final_source_identity": "sha256:1cb65ebdecd4af3a2e92fb81be42fa0c7bf8b2b2fb0561c8172432ec9aa28a92",
+  "scope": "C15 bounded analyzer sandbox isolation, private 0700 scratch allocation with quota tracking, network dial guard, deadline enforcement, and read-only evidence byte immutability",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -20,26 +20,27 @@
     "C11",
     "C12",
     "C13",
-    "C14"
+    "C14",
+    "C15"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C14.json",
-    "internal/analyzers/provider.go",
+    "docs/evidence/C15.json",
+    "internal/analyzers/sandbox.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/analyzer_contract_test.go",
-    "tests/fixtures/breachatlas/C14/expected-output/outcomes.json",
-    "tests/fixtures/breachatlas/C14/invalid/executing-parser-rejected.json",
-    "tests/fixtures/breachatlas/C14/invalid/malformed-csv.json",
-    "tests/fixtures/breachatlas/C14/invalid/malformed-json.json",
-    "tests/fixtures/breachatlas/C14/invalid/missing-sealed-prerequisite.json",
-    "tests/fixtures/breachatlas/C14/invalid/unavailable-provider.json",
-    "tests/fixtures/breachatlas/C14/invalid/unlisted-analyzer.json",
-    "tests/fixtures/breachatlas/C14/positive/valid-csv-timeline.json",
-    "tests/fixtures/breachatlas/C14/positive/valid-json-events.json",
-    "tests/fixtures/breachatlas/C14/provenance.json"
+    "tests/fixtures/breachatlas/C15/expected-output/isolation-outcomes.json",
+    "tests/fixtures/breachatlas/C15/invalid/deadline-timeout.json",
+    "tests/fixtures/breachatlas/C15/invalid/evidence-mutation-blocked.json",
+    "tests/fixtures/breachatlas/C15/invalid/network-dial-rejected.json",
+    "tests/fixtures/breachatlas/C15/invalid/orphaned-scratch-interrupt.json",
+    "tests/fixtures/breachatlas/C15/invalid/scratch-quota-exceeded.json",
+    "tests/fixtures/breachatlas/C15/invalid/scratch-traversal-escape.json",
+    "tests/fixtures/breachatlas/C15/positive/isolated-csv-analysis.json",
+    "tests/fixtures/breachatlas/C15/positive/isolated-json-analysis.json",
+    "tests/fixtures/breachatlas/C15/provenance.json",
+    "tests/isolation_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -54,7 +55,8 @@
     "docs/evidence/C11.json",
     "docs/evidence/C12.json",
     "docs/evidence/C13.json",
-    "docs/evidence/C14.json"
+    "docs/evidence/C14.json",
+    "docs/evidence/C15.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -64,7 +66,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C15",
+  "next_task": "C16",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C15."
+  "continuation": "Implement C16."
 }

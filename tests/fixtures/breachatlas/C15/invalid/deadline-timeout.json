@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "run_id": "RUN-C15-TIME-001",
+  "case_id": "CASE-C15-001",
+  "evidence_id": "EVID-C15-CSV-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "timeout_ms": 10,
+  "simulated_hang_ms": 200,
+  "expected_failure": "deadline_exceeded"
+}

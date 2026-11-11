@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "run_id": "RUN-C15-QUOTA-001",
+  "case_id": "CASE-C15-001",
+  "evidence_id": "EVID-C15-CSV-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "scratch_limit_bytes": 1024,
+  "attempted_write_bytes": 4096,
+  "expected_failure": "scratch_limit_exceeded"
+}

@@ -132,10 +132,12 @@
     },
     {
       "id": "C15",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C15.json"
+      ],
+      "source_identity": "sha256:1cb65ebdecd4af3a2e92fb81be42fa0c7bf8b2b2fb0561c8172432ec9aa28a92",
+      "notes": "Bounded analyzer sandbox isolation, private 0700 scratch allocation with quota tracking, outbound network interception (ErrNetworkForbidden), execution deadline aborts, and read-only sealed evidence byte verification verified in internal/analyzers/sandbox.go and tests/isolation_test.go."
     },
     {
       "id": "C16",

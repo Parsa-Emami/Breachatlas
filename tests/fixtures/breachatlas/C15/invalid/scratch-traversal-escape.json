@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "run_id": "RUN-C15-ESC-001",
+  "case_id": "CASE-C15-001",
+  "evidence_id": "EVID-C15-CSV-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "escape_path": "../../../etc/shadow",
+  "expected_failure": "sandbox_escaped"
+}

@@ -191,7 +191,7 @@
       "id": "C15",
       "title": "feat(isolation): bound analyzer resources and filesystem access",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Read-only evidence, private scratch, no network and deadline are verified."
       ],

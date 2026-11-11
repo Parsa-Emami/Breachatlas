@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "run_id": "RUN-C15-CSV-001",
+  "case_id": "CASE-C15-001",
+  "evidence_id": "EVID-C15-CSV-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "media_type": "text/csv",
+  "payload": "timestamp,ip,action,status\n2026-11-11T10:00:00Z,192.168.1.10,login,success\n2026-11-11T10:05:00Z,192.168.1.11,data_export,granted\n",
+  "expected_record_count": 2,
+  "expected_network_blocked": true,
+  "expected_read_only": true
+}

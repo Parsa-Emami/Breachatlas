@@ -1,0 +1,71 @@
+{
+  "commit_id": "C15",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Bounded analyzer sandbox isolation, private 0700 scratch directory allocation with quota tracking and traversal guard, outbound network dial guard, strict deadline enforcement, and read-only sealed evidence post-analysis byte verification",
+  "passed": true,
+  "source_commit": "3f863d6c2ec15ddee655c09445cc5aeb7e90ac4e",
+  "source_tree": "a17ebb94c4e8d1b1533ac414aa3827d20f220c56",
+  "source_identity": "sha256:1cb65ebdecd4af3a2e92fb81be42fa0c7bf8b2b2fb0561c8172432ec9aa28a92",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C15/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "6384a2e9f3b63922f48c7cb4a89c16e7fa1fbacaa28e0e46f14e0ca94a70cecf"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -v -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all 11 tests in cmd/breachatlas and all test suites in tests (C05 through C15, including 8 C15 sandbox isolation, read-only evidence immutability, tamper-on-error precedence, scratch truncation recovery and quota/traversal, network guard, deadline enforcement, orphan recovery, prerequisite validation, and concurrent race tests)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked 220 JSON files and repository contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F09",
+      "status": "passed",
+      "observations": [
+        "NewSandbox and RunIsolated in internal/analyzers/sandbox.go enforce read-only evidence access via strict O_RDONLY open checks, failing closed with ErrEvidenceWriteForbidden on any write or non-read-only flag.",
+        "Pre- and post-analysis byte invariant verification asserts sealed evidence file size and SHA-256 digest are identical before and after execution; if sealed evidence is modified or deleted during execution, ErrEvidenceModified takes precedence over worker errors or deadline cancellations.",
+        "Private dedicated scratch directories are allocated with strict 0700 filesystem permissions, path traversal escapes (.. and absolute paths) are rejected fail-closed with ErrSandboxEscaped, symlinks pointing outside scratch are blocked, and disk usage is capped by MaxScratchBytes returning ErrScratchLimitExceeded.",
+        "ScratchController reclaims disk quota on file truncation and file removal, prevents raw OpenFile write bypasses, and guards against post-cleanup orphaned writes with cleaned state tracking.",
+        "NetworkGuard blocks outbound network connections fail-closed returning ErrNetworkForbidden on all Dial, DialContext, and HTTP requests.",
+        "Configured execution timeouts are strictly enforced; slow or hanging analyzers are aborted on context deadline expiry with ErrDeadlineExceeded and scratch directories are safely freed.",
+        "CleanOrphans safely sweeps abandoned scratch directories from interrupted runs without corrupting sealed evidence or interfering with active executions, fully synchronized against concurrent allocations.",
+        "Prerequisites (case_id, evidence_id, allowlisted analyzer_id, provider) are validated before scratch allocation.",
+        "Concurrent executions under go test -race on shared sealed evidence pass cleanly without data races or byte modification."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Persistent derived artifact manifests, retention schedules, and downstream timeline aggregations (C16) are deferred to their planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/analyzers/sandbox.go, tests/isolation_test.go, tests/fixtures/breachatlas/C15, and docs/evidence/C15.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

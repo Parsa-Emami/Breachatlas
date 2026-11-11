@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "run_id": "RUN-C15-JSON-001",
+  "case_id": "CASE-C15-001",
+  "evidence_id": "EVID-C15-JSON-001",
+  "analyzer_id": "json",
+  "provider": "local",
+  "media_type": "application/json",
+  "payload": "[{\"timestamp\":\"2026-11-11T10:00:00Z\",\"type\":\"dns_query\",\"query\":\"local.zone\"},{\"timestamp\":\"2026-11-11T10:01:00Z\",\"type\":\"conn_open\",\"port\":8080}]\n",
+  "expected_record_count": 2,
+  "expected_network_blocked": true,
+  "expected_read_only": true
+}

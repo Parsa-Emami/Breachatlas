@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "run_id": "RUN-C15-NET-001",
+  "case_id": "CASE-C15-001",
+  "evidence_id": "EVID-C15-CSV-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "target_network": "tcp",
+  "target_address": "198.51.100.1:443",
+  "expected_failure": "network_forbidden"
+}

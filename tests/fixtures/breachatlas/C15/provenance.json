@@ -1,0 +1,16 @@
+{
+  "task": "C15",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic sandbox isolation and resource bounding fixtures",
+  "sha256": {
+    "expected-output/isolation-outcomes.json": "59033524b4c8cc60813c0985dd9f61f26f533f2e23e8427d3f8489f5b5c51355",
+    "invalid/deadline-timeout.json": "1235c0ab32851524a4e6f4f21896cca9320fb5a8265aca422ee8b734ddefa37c",
+    "invalid/evidence-mutation-blocked.json": "18edea71acc517324759213e70f49d9bcf58770d5a8d7363bba6ac9b628a2641",
+    "invalid/network-dial-rejected.json": "7e6cf93b229e02a42263fbc2e04526d49f52004bc1b729d5ba5de5275fe08034",
+    "invalid/orphaned-scratch-interrupt.json": "85403f4be96606784294a446685ad55eec3f64a5000c3fb1d0d4d50ce33ff8b1",
+    "invalid/scratch-quota-exceeded.json": "6e8b7de1488ce4b695683c49713c2d7db2666557a6128fb7df9c6e4097f22fca",
+    "invalid/scratch-traversal-escape.json": "077548342fc91e123665fc3902dd683e0ecf6034eb841297f14e9543cfdf2eb5",
+    "positive/isolated-csv-analysis.json": "431edd768c682347af95b6ee8791e6eb7ba09864e33fb615f630ff25d4e1fdec",
+    "positive/isolated-json-analysis.json": "e847467b8069bff361d1b34c88c7b9097a3d0b6dff99e9cf96aeb1778fbb6487"
+  }
+}
