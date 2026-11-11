@@ -1,0 +1,37 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {
+      "name": "empty_evidence_selection",
+      "expected_error": "ErrMissingPrerequisite"
+    },
+    {
+      "name": "missing_seal_store_evidence",
+      "evidence_id": "ev-does-not-exist",
+      "expected_error": "ErrMissingPrerequisite"
+    },
+    {
+      "name": "missing_checkpoint",
+      "expected_error": "ErrMissingPrerequisite"
+    },
+    {
+      "name": "missing_derived_artifact",
+      "artifact_id": "art-does-not-exist",
+      "expected_error": "ErrMissingPrerequisite"
+    },
+    {
+      "name": "artifact_bound_to_unselected_evidence",
+      "expected_error": "ErrInputBindingMismatch"
+    },
+    {
+      "name": "unavailable_remote_provider",
+      "provider": "cloud-export-bucket",
+      "expected_error": "ErrUnavailableProvider"
+    },
+    {
+      "name": "unsupported_schema_version",
+      "schema_version": "99",
+      "expected_error": "ErrUnsupportedVersion"
+    }
+  ]
+}

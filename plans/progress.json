@@ -204,10 +204,12 @@
     },
     {
       "id": "C23",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C23.json"
+      ],
+      "source_identity": "sha256:ec221934523da8ad305e0e7f6f0b06b42130fb093521a2d986ed8bce691c559b",
+      "notes": "Portable self-contained DFIR export bundle packaging in internal/export/package.go and tests/export_test.go; binds verified SealStore evidence blobs read-only, custody event chains, verified signed Custody Checkpoints, verified derived ArtifactStore files, optional timeline and separated non-evidence hypotheses, FileChecksums, BundleDigest, and optional Ed25519 signature with atomic staging/restart recovery."
     },
     {
       "id": "C24",

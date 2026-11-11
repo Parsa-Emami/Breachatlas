@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {
+      "name": "untrusted_checkpoint_signer",
+      "expected_error": "ErrCheckpointFailed"
+    },
+    {
+      "name": "expired_checkpoint",
+      "expected_error": "ErrCheckpointFailed"
+    },
+    {
+      "name": "tampered_checkpoint_root",
+      "expected_error": "ErrCheckpointFailed"
+    }
+  ]
+}

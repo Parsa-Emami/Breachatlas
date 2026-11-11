@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "a8210de7e454a23e91c3e89fb9cf275e38de52a2",
-  "verified_source_commit": "a8210de7e454a23e91c3e89fb9cf275e38de52a2",
-  "verified_source_tree": "91a75bdd799811cc7e5bfc102e432d822914d234",
-  "scope": "C22 timezone-aware timeline and separated analyst notes UI on #timeline wired via loopback relay to Go engine POST /api/v1/timeline/inspect with inspectable raw/normalized timestamps, confidence, table alternative, JSX escaping, and 360px responsive state checks",
+  "base_commit": "affa0db3c2aeb14e306f1f88639b7441a4d9e87e",
+  "verified_source_commit": "affa0db3c2aeb14e306f1f88639b7441a4d9e87e",
+  "verified_source_tree": "a607a1dd45527b17a67d18633341b9df883af2d1",
+  "scope": "C23 portable export packaging in internal/export/package.go binding selected sealed evidence, custody chains, verified checkpoints, and derived files atomically without altering sealed source bytes",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -27,29 +27,22 @@
     "C19",
     "C20",
     "C21",
-    "C22"
+    "C22",
+    "C23"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
-    "apps/web/src/main.tsx",
-    "apps/web/src/pages/Timeline.tsx",
-    "apps/web/src/styles.css",
-    "apps/web/tests/timeline.spec.ts",
-    "cmd/breachatlas/integrity.go",
-    "cmd/breachatlas/main.go",
-    "cmd/breachatlas/timeline.go",
-    "cmd/breachatlas/timeline_test.go",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C22.json",
+    "docs/evidence/C23.json",
+    "internal/export/package.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "scripts/serve-web.mjs",
-    "tests/fixtures/breachatlas/C22/expected-output/timeline-ui-outcomes.json",
-    "tests/fixtures/breachatlas/C22/invalid/unavailable-provider-timeline.json",
-    "tests/fixtures/breachatlas/C22/invalid/unsupported-version-timeline.json",
-    "tests/fixtures/breachatlas/C22/positive/empty-timeline.json",
-    "tests/fixtures/breachatlas/C22/positive/mixed-timezone-timeline-and-notes.json",
-    "tests/fixtures/breachatlas/C22/provenance.json"
+    "tests/export_test.go",
+    "tests/fixtures/breachatlas/C23/expected-output/export-outcomes.json",
+    "tests/fixtures/breachatlas/C23/invalid/missing-prerequisites.json",
+    "tests/fixtures/breachatlas/C23/invalid/tampered-or-untrusted-checkpoint.json",
+    "tests/fixtures/breachatlas/C23/positive/portable-case-export.json",
+    "tests/fixtures/breachatlas/C23/provenance.json"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -72,7 +65,8 @@
     "docs/evidence/C19.json",
     "docs/evidence/C20.json",
     "docs/evidence/C21.json",
-    "docs/evidence/C22.json"
+    "docs/evidence/C22.json",
+    "docs/evidence/C23.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -82,7 +76,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C23",
+  "next_task": "C24",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C23."
+  "continuation": "Implement C24."
 }

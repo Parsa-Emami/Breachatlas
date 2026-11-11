@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c23-export",
+  "evidence_id": "ev-c23-auth-log",
+  "artifact_id": "art-c23-parsed",
+  "bundle_id_signed": "bundle-c23-signed",
+  "bundle_id_unsigned": "bundle-c23-unsigned",
+  "operation_id": "op-export-c23-01",
+  "payload_jsonl": "{\"timestamp\":\"2026-10-05T12:00:00Z\",\"event_type\":\"auth_login\",\"summary\":\"Accepted key for analyst01\"}\n{\"timestamp\":\"2026-10-05 08:05:00\",\"event_type\":\"config_read\",\"summary\":\"Read audit rules\"}\n",
+  "zone_hint": "America/New_York",
+  "checkpoint_key_id": "chk-signer-c23",
+  "bundle_key_id": "bundle-signer-c23",
+  "hypothesis": {
+    "hypothesis_id": "hyp-c23-01",
+    "author": "analyst.mina@ir.local",
+    "rationale": "Interactive config inspection followed SSH auth within 5 minutes.",
+    "statement": "Session reviewed audit collector configuration.",
+    "ui_label": "source_evidence"
+  }
+}

@@ -26,10 +26,11 @@
     "bounded local timeline search queries and deterministic atomic case index rebuild from verified derived artifacts",
     "strict separation of analyst hypotheses with mandatory author and rationale from cryptographically bound observed facts",
     "case evidence integrity, incomplete seal, and custody UI with escaped user strings, keyboard-accessible table inspection, and 360px mobile states wired to the Go engine",
-    "timezone-aware timeline and separated analyst notes UI inspecting raw timestamps, normalized UTC conversions, unresolved DST/zones, and confidence with table alternative"
+    "timezone-aware timeline and separated analyst notes UI inspecting raw timestamps, normalized UTC conversions, unresolved DST/zones, and confidence with table alternative",
+    "portable self-contained export packaging binding selected sealed evidence, derived artifacts, custody events, and verified checkpoints without modifying sealed source bytes"
   ],
-  "engine": "timeline_notes_ui_verified",
-  "next_task": "C23",
+  "engine": "portable_export_verified",
+  "next_task": "C24",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

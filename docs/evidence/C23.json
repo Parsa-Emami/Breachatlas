@@ -1,0 +1,66 @@
+{
+  "commit_id": "C23",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Portable self-contained export bundle packaging in internal/export/package.go binding selected sealed evidence, custody event chains, verified Custody Checkpoints, derived artifacts, and optional timeline/hypotheses without altering sealed source bytes",
+  "passed": true,
+  "source_commit": "affa0db3c2aeb14e306f1f88639b7441a4d9e87e",
+  "source_tree": "a607a1dd45527b17a67d18633341b9df883af2d1",
+  "source_identity": "sha256:ec221934523da8ad305e0e7f6f0b06b42130fb093521a2d986ed8bce691c559b",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C23/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "4b6e43bcaedba001a7011ef6a3b71cc90960607e6e54ce645081aac434a95f89"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including cmd/breachatlas and tests (TestC23FixturesAndProvenance, TestC23PortableBundleBinding, TestC23NegativeMissingPrereqAndCheckpoints, TestC23RestartRecoveryAndReplay, and TestC23ConcurrentExportRace)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F17",
+      "status": "passed",
+      "observations": [
+        "ExportStore.PackageCaseBundle binds selected verified SealStore evidence blobs, custody chain events, verified signed Custody Checkpoints, verified ArtifactStore derived outputs, and optional timeline/hypotheses into an atomic bundle directory with FileChecksums and BundleDigest.",
+        "Signed Ed25519 bundles verify cleanly against CanonicalSignaturePayload while unsigned bundles maintain Signed=false explicitly.",
+        "Missing evidence/checkpoint/artifact prerequisites (ErrMissingPrerequisite), derived input mismatch against selected evidence (ErrInputBindingMismatch), untrusted/expired/tampered checkpoints (ErrCheckpointFailed), unavailable providers (ErrUnavailableProvider), path traversal, and lock contention (ErrExportLockBusy) fail closed.",
+        "Interrupted staged bundles recover cleanly on reopen via orphan staging cleanup, idempotent OperationID replay and conflict detection succeed across restarts, and original sealed source bytes remain unmodified."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Standalone offline bundle verifier binary without server dependency (C24) is deferred to its planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/export/package.go, tests/export_test.go, tests/fixtures/breachatlas/C23, and docs/evidence/C23.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

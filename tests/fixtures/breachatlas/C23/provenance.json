@@ -1,0 +1,11 @@
+{
+  "task": "C23",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic portable export packaging, custody checkpoint binding, and negative prerequisite fixtures",
+  "sha256": {
+    "expected-output/export-outcomes.json": "f1c83b2f4731cde8f8bd344df98454f8509350d48534b8c481b487d1123db7a6",
+    "invalid/missing-prerequisites.json": "e3658590d4bd0fbf165b50bcd4683ef70c49f0cf4a815ec8d619621d3c4eb412",
+    "invalid/tampered-or-untrusted-checkpoint.json": "d66d5fcc1ba0b9c09fa65ace0631664c3bfa6a257f412373526316d57421e019",
+    "positive/portable-case-export.json": "da36576b436dbcd2a4458c5809f6d4a1217d578690b2c45b3a94c72656b0d61d"
+  }
+}

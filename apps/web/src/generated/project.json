@@ -287,7 +287,7 @@
       "id": "C23",
       "title": "feat(export): package evidence manifests and custody ledger",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Export binds selected evidence, derived files and checkpoint without altering source bytes."
       ],

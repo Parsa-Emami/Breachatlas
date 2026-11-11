@@ -1,0 +1,14 @@
+{
+  "schema_version": "1",
+  "task": "C23",
+  "requirement": "F17",
+  "expected_invariants": {
+    "export_binds_evidence_derived_and_checkpoint": true,
+    "all_bundle_file_checksums_verified": true,
+    "signed_and_unsigned_bundles_distinct": true,
+    "hypotheses_remain_non_evidence_in_export": true,
+    "missing_prereq_untrusted_checkpoint_and_provider_rejected": true,
+    "restart_recovery_and_idempotent_replay_verified": true,
+    "sealed_source_bytes_unmodified": true
+  }
+}
