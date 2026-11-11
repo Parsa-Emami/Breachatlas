@@ -123,10 +123,12 @@
     },
     {
       "id": "C14",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C14.json"
+      ],
+      "source_identity": "sha256:1f8eafb8af37bce0d28fbdedbaf19a15426d411532c1f25fc203359d041a675e",
+      "notes": "Fixed non-executing CSV and JSON analyzer interface, shipped allowlist enforcement, sealed evidence read-only verification, and deterministic config/tool provenance verified in internal/analyzers/provider.go and tests/analyzer_contract_test.go."
     },
     {
       "id": "C15",

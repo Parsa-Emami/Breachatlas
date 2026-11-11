@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "case_id": "CASE-C14-001",
+  "evidence_id": "EVID-C14-JSON-001",
+  "analyzer_id": "json",
+  "provider": "breachatlas",
+  "media_type": "application/json",
+  "payload": "[{\"timestamp\":\"2026-11-11T09:10:00Z\",\"source\":\"edr\",\"process\":\"sshd\",\"action\":\"session_open\"},{\"timestamp\":\"2026-11-11T09:11:00Z\",\"source\":\"edr\",\"process\":\"tar\",\"action\":\"archive_created\"}]\n",
+  "expected_record_count": 2,
+  "expected_first_timestamp": "2026-11-11T09:10:00Z"
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1",
+  "case_id": "CASE-C14-001",
+  "evidence_id": "EVID-C14-JSON-001",
+  "analyzer_id": "json",
+  "provider": "remote-cloud-parser-saas",
+  "payload": "{\"timestamp\":\"2026-11-11T09:10:00Z\",\"event\":\"ok\"}\n",
+  "expected_failure": "unavailable_provider"
+}

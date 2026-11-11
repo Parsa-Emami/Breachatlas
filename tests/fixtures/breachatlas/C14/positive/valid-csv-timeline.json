@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "case_id": "CASE-C14-001",
+  "evidence_id": "EVID-C14-CSV-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "media_type": "text/csv",
+  "payload": "timestamp,host,event_type,severity\n2026-11-11T09:00:00Z,web-01,auth_login_failed,medium\n2026-11-11T09:01:15Z,web-01,sudo_exec,high\n",
+  "expected_record_count": 2,
+  "expected_first_timestamp": "2026-11-11T09:00:00Z"
+}

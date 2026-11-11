@@ -1,0 +1,9 @@
+{
+  "schema_version": "1",
+  "case_id": "CASE-C14-001",
+  "evidence_id": "EVID-C14-BAD-JSON",
+  "analyzer_id": "json",
+  "provider": "local",
+  "payload": "{\"timestamp\":\"2026-11-11T09:00:00Z\", unclosed\n",
+  "expected_failure": "malformed_input"
+}

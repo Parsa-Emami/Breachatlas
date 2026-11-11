@@ -1,0 +1,16 @@
+{
+  "task": "C14",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic fixed CSV/JSON non-executing analyzer fixtures",
+  "sha256": {
+    "expected-output/outcomes.json": "dd0f510788dad663eae1525ddc68b03ef07663d08028d2a05ef85309f96468ae",
+    "invalid/executing-parser-rejected.json": "b1958ca306ec9a38af69f2901311a92b06b7004275ffb1648b4dc4b008b942eb",
+    "invalid/malformed-csv.json": "1c6169f7a23a2268e7820c0e610b3313fab1c2301715e5ab2f7f30c222681171",
+    "invalid/malformed-json.json": "0ce50770f6ef4950805f5772b5ff9b148f5c182d4195c8359050af6c1009cdcd",
+    "invalid/missing-sealed-prerequisite.json": "0474c80845533b946ead9093fa88242f9f999fdd03f8db6bd44cb02a7749ed5b",
+    "invalid/unavailable-provider.json": "b2a964b731b154e39b975f8922f1f3cbd147acf2ac5194e6db63dc80d17c35cb",
+    "invalid/unlisted-analyzer.json": "96b974df579a71ec04e353c642f4597391f54ce6e627a98b88a2297e5f7af6b7",
+    "positive/valid-csv-timeline.json": "dfd5397af3b903852ba87fe09d6969eb61758485a007814de4d3a3a45f0ec97a",
+    "positive/valid-json-events.json": "45fe99cb6baee4fa56901a5c922c75699d10ae45f91846869d566e2527f36f4e"
+  }
+}

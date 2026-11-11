@@ -1,0 +1,8 @@
+{
+  "schema_version": "1",
+  "case_id": "CASE-C14-001",
+  "evidence_id": "EVID-C14-UNSEALED-999",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "expected_failure": "missing_prerequisite"
+}

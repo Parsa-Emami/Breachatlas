@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "cases": {
+    "positive/valid-csv-timeline.json": {
+      "status": "parsed",
+      "analyzer_id": "csv",
+      "non_executing": true,
+      "read_only": true,
+      "record_count": 2,
+      "sealed_source_bytes_modified": false
+    },
+    "positive/valid-json-events.json": {
+      "status": "parsed",
+      "analyzer_id": "json",
+      "non_executing": true,
+      "read_only": true,
+      "record_count": 2,
+      "sealed_source_bytes_modified": false
+    },
+    "invalid/unlisted-analyzer.json": {
+      "error": "analyzer_not_allowlisted"
+    },
+    "invalid/executing-parser-rejected.json": {
+      "error": "executing_parser_forbidden"
+    },
+    "invalid/unavailable-provider.json": {
+      "error": "unavailable_provider"
+    },
+    "invalid/malformed-csv.json": {
+      "error": "malformed_input"
+    },
+    "invalid/malformed-json.json": {
+      "error": "malformed_input"
+    },
+    "invalid/missing-sealed-prerequisite.json": {
+      "error": "missing_prerequisite"
+    }
+  },
+  "invariants": [
+    "Only shipped non-executing parsers (csv, json) are enabled in MVP allowlist",
+    "Executing, dynamic, unlisted, and unavailable external parsers fail closed",
+    "Re-instantiating the registry after restart preserves identical allowlist and deterministic output",
+    "Sealed evidence source bytes remain unmodified during read-only analysis"
+  ]
+}

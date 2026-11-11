@@ -179,7 +179,7 @@
       "id": "C14",
       "title": "feat(analyzers): define fixed csv json analyzer interface",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Only shipped allowlisted non-executing parsers are enabled in MVP."
       ],
