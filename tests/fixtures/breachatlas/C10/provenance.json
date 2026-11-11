@@ -1,0 +1,13 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic sealed evidence verification and Ed25519 anti-rollback fixtures for C10.",
+  "sha256": {
+    "expected-output/outcomes.json": "99e2ce30269e5ba6370ba6a48ab0281ce43a6efb621a73717b9f246ddaa4f12c",
+    "invalid/expired-stale-replayed.json": "369a16c3f6c57fb8e9986748c0f97b7f260414d2dfcd9f3e287c6807919fc3ee",
+    "invalid/missing-evidence.json": "9b8d2fe0f852764be205a8c20375739f31d966fb445171e32c02caac247ebdfc",
+    "invalid/one-byte-modified.json": "0c4f3e593101d063c2ca6ea18f94afb1b4eec34225cc3b5984291bacc5431a15",
+    "invalid/size-mismatch.json": "c8ed1acd9555bc1c876c96064f2ec7605754fece26f12680aa87ec93ed616c08",
+    "invalid/untrusted-signer.json": "773478d24a950c38baa101e8911f359b6e5ba2dfd5eb4e780e272090d8f42008",
+    "positive/valid-sealed-signed.json": "de3c3db0a3cedd7bf7bf0d3aa7da98ac8daafdf643779dc7b974cf1d99980369"
+  }
+}

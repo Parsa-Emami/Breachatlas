@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-seal-c10-0003",
+  "upload_id": "upl-c10-0003",
+  "case_id": "case-2026-010",
+  "evidence_id": "ev-c10-0003",
+  "media_type": "text/plain",
+  "filename": "sshd-truncated.log",
+  "acquired_at": "2026-11-11T10:00:00Z",
+  "custody_root": "69be546be10e9bf49d9805499db065a1c266e8a697acc167008e3c1eeb10446f",
+  "payload_utf8": "2026-11-11T10:00:00Z host=auth-01 event=ssh_login user=ir-lead status=accepted\n",
+  "truncate_bytes": 70,
+  "expected_size": 79,
+  "actual_size": 70,
+  "expected_failure": "size_mismatch"
+}

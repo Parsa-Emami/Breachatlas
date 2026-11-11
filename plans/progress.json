@@ -87,10 +87,12 @@
     },
     {
       "id": "C10",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C10.json"
+      ],
+      "source_identity": "sha256:226a15b64ec77f867c6d4dfa7624c5b4aba3f72fb6563966a3d0263224b0c720",
+      "notes": "Read-only sealed byte and manifest integrity verification with distinct failure classification (1-byte digest_mismatch vs size_mismatch vs missing_file), Ed25519 signer trust/expiry enforcement, monotonic anti-rollback AuthorityTracker, and sealed-byte immutability verified in internal/evidence/verify.go and tests/integrity_test.go."
     },
     {
       "id": "C11",

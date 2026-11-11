@@ -13,10 +13,11 @@
     "pinned clean-checkout Go engine CI and fail-closed test collection",
     "analyst case and evidence aggregates with single-case ownership invariants",
     "bounded streaming evidence upload into isolated quarantine with live SHA-256 hashing",
-    "durable content-addressed blob and atomic evidence manifest sealing with orphan recovery"
+    "durable content-addressed blob and atomic evidence manifest sealing with orphan recovery",
+    "read-only sealed evidence byte verification, distinct failure classification, and Ed25519 anti-rollback authority checks"
   ],
-  "engine": "content_addressed_seal_implemented",
-  "next_task": "C10",
+  "engine": "sealed_evidence_verifier_implemented",
+  "next_task": "C11",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

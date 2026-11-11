@@ -1,0 +1,38 @@
+{
+  "positive/valid-sealed-signed.json": {
+    "verified": true,
+    "code": "verified",
+    "sha256": "69be546be10e9bf49d9805499db065a1c266e8a697acc167008e3c1eeb10446f",
+    "size_bytes": 79,
+    "sealed_bytes_modified": false
+  },
+  "invalid/one-byte-modified.json": {
+    "verified": false,
+    "code": "digest_mismatch",
+    "distinct_from": ["missing_file", "size_mismatch"]
+  },
+  "invalid/size-mismatch.json": {
+    "verified": false,
+    "code": "size_mismatch",
+    "distinct_from": ["missing_file", "digest_mismatch"]
+  },
+  "invalid/missing-evidence.json": {
+    "verified": false,
+    "code": "missing_file",
+    "distinct_from": ["size_mismatch", "digest_mismatch"]
+  },
+  "invalid/untrusted-signer.json": {
+    "verified": false,
+    "code": "untrusted_signer",
+    "preserves_accepted_authority": true
+  },
+  "invalid/expired-stale-replayed.json": {
+    "expired_verified": false,
+    "expired_code": "expired_authority",
+    "stale_verified": false,
+    "stale_code": "stale_revision",
+    "replayed_verified": false,
+    "replayed_code": "stale_revision",
+    "last_valid_authority_preserved": true
+  }
+}

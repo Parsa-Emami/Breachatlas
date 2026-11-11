@@ -131,7 +131,7 @@
       "id": "C10",
       "title": "feat(verify): verify bytes against sealed manifest",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "One-byte modification, missing file and size mismatch are distinct failures."
       ],
