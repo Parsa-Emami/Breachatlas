@@ -1,11 +1,11 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "a592b57316c024f854b6cabfd71b8a710495e4b2",
-  "verified_source_commit": "a592b57316c024f854b6cabfd71b8a710495e4b2",
-  "verified_source_tree": "3cd482162365adcd50e7131e5833f8304db84a830",
-  "final_source_identity": "sha256:040d6af12c5b0c80068bedd421fcea1211911d83e7bdf99ab69772152db79f14",
-  "scope": "C08 bounded streaming evidence upload into isolated quarantine with live SHA-256 hashing",
+  "base_commit": "8cac7647bdd3b551cf886d20affaabdccf1ba9f2",
+  "verified_source_commit": "8cac7647bdd3b551cf886d20affaabdccf1ba9f2",
+  "verified_source_tree": "2fdab92d0278a0ec59b0a7ac22220e34bc32ba34",
+  "final_source_identity": "sha256:f9fdf7bbaeb42f4bbf0b0b065793f55127d1255444d666edd3b9daca2ca0c250",
+  "scope": "C09 durable content-addressed evidence manifest sealing and orphan recovery",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -14,24 +14,24 @@
     "C05",
     "C06",
     "C07",
-    "C08"
+    "C08",
+    "C09"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C08.json",
-    "internal/evidence/upload.go",
+    "docs/evidence/C09.json",
+    "internal/evidence/seal.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C08/expected-output/outcomes.json",
-    "tests/fixtures/breachatlas/C08/invalid/interrupted-upload.json",
-    "tests/fixtures/breachatlas/C08/invalid/malformed-upload.json",
-    "tests/fixtures/breachatlas/C08/invalid/oversized-upload.json",
-    "tests/fixtures/breachatlas/C08/invalid/traversal-symlink.json",
-    "tests/fixtures/breachatlas/C08/invalid/unsupported-version.json",
-    "tests/fixtures/breachatlas/C08/positive/streaming-upload.json",
-    "tests/fixtures/breachatlas/C08/provenance.json",
-    "tests/upload_test.go"
+    "tests/fixtures/breachatlas/C09/expected-output/outcomes.json",
+    "tests/fixtures/breachatlas/C09/invalid/boundary-crash-orphan.json",
+    "tests/fixtures/breachatlas/C09/invalid/hash-mismatch.json",
+    "tests/fixtures/breachatlas/C09/invalid/replay-lost-ack-quota.json",
+    "tests/fixtures/breachatlas/C09/invalid/sealed-immutable.json",
+    "tests/fixtures/breachatlas/C09/positive/content-addressed-seal.json",
+    "tests/fixtures/breachatlas/C09/provenance.json",
+    "tests/seal_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -40,7 +40,8 @@
     "docs/evidence/C05.json",
     "docs/evidence/C06.json",
     "docs/evidence/C07.json",
-    "docs/evidence/C08.json"
+    "docs/evidence/C08.json",
+    "docs/evidence/C09.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -50,7 +51,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C09",
+  "next_task": "C10",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C09 content-addressed evidence manifest sealing and orphan recovery (internal/evidence/seal.go and tests/seal_test.go)."
+  "continuation": "Implement C10 byte verification against sealed manifests (internal/evidence/verify.go and tests/integrity_test.go)."
 }

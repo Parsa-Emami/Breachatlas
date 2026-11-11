@@ -78,10 +78,12 @@
     },
     {
       "id": "C09",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C09.json"
+      ],
+      "source_identity": "sha256:f9fdf7bbaeb42f4bbf0b0b065793f55127d1255444d666edd3b9daca2ca0c250",
+      "notes": "Durable content-addressed blob commit before atomic evidence manifest sealing, hash-mismatch abort, boundary-crash orphan recovery, lost-ACK idempotency, bounded retries, quota checks, and sealed-byte immutability verified in internal/evidence/seal.go and tests/seal_test.go."
     },
     {
       "id": "C10",

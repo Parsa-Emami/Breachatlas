@@ -119,7 +119,7 @@
       "id": "C09",
       "title": "feat(seal): commit content addressed evidence manifests",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "File is durable before metadata seal; hash mismatch aborts and orphan recovery is defined."
       ],

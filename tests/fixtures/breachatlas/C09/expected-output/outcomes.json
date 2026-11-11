@@ -1,0 +1,29 @@
+{
+  "positive/content-addressed-seal.json": {
+    "status": "sealed",
+    "sealed": true,
+    "sha256": "8241d30a8e37c6620b426aa1e4fd0a3d3f2292dc74e30cf5317dec3eff763eb3",
+    "blob_rel_path": "blobs/sha256/8241d30a8e37c6620b426aa1e4fd0a3d3f2292dc74e30cf5317dec3eff763eb3"
+  },
+  "invalid/hash-mismatch.json": {
+    "status": "error",
+    "code": "digest_mismatch",
+    "sealed": false
+  },
+  "invalid/boundary-crash-orphan.json": {
+    "status": "error",
+    "code": "seal_interrupted",
+    "orphan_reclaimed": true
+  },
+  "invalid/replay-lost-ack-quota.json": {
+    "idempotent_replay": true,
+    "conflict_error": "operation_conflict",
+    "quota_error": "storage_quota_exceeded",
+    "disk_full_error": "seal_disk_full",
+    "retry_limit_error": "retry_limit_exceeded"
+  },
+  "invalid/sealed-immutable.json": {
+    "status": "error",
+    "code": "sealed_bytes_immutable"
+  }
+}

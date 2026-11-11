@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-seal-c09-0001",
+  "upload_id": "upl-c09-0001",
+  "case_id": "case-2026-009",
+  "evidence_id": "ev-c09-0001",
+  "media_type": "text/plain",
+  "filename": "kerberos-tgt.log",
+  "acquired_at": "2026-11-11T09:00:00Z",
+  "custody_root": "8241d30a8e37c6620b426aa1e4fd0a3d3f2292dc74e30cf5317dec3eff763eb3",
+  "payload_utf8": "2026-11-11T09:00:00Z host=dc-01 event=kerberos_tgt_issue ticket_id=BA-T1001\n",
+  "expected_size": 76,
+  "expected_sha256": "8241d30a8e37c6620b426aa1e4fd0a3d3f2292dc74e30cf5317dec3eff763eb3",
+  "expected_blob_rel_path": "blobs/sha256/8241d30a8e37c6620b426aa1e4fd0a3d3f2292dc74e30cf5317dec3eff763eb3"
+}

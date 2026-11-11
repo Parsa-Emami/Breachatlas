@@ -1,0 +1,14 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-seal-c09-0001",
+  "conflict_operation_id": "op-seal-c09-0001",
+  "quota_operation_id": "op-seal-c09-quota",
+  "disk_full_operation_id": "op-seal-c09-diskfull",
+  "case_id": "case-2026-009",
+  "conflict_evidence_id": "ev-c09-conflict",
+  "quota_evidence_id": "ev-c09-quota",
+  "disk_full_evidence_id": "ev-c09-diskfull",
+  "max_storage_bytes": 100,
+  "max_retries": 2,
+  "excessive_attempt": 3
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-seal-c09-overwrite",
+  "upload_id": "upl-c09-overwrite",
+  "case_id": "case-2026-009",
+  "evidence_id": "ev-c09-0001",
+  "media_type": "text/plain",
+  "filename": "tamper-overwrite.log",
+  "acquired_at": "2026-11-11T09:10:00Z",
+  "custody_root": "c576cb96fa6618ec7ec31d6b941e8a6036d23858d216d4f7e2ef5aa0778bf242",
+  "payload_utf8": "2026-11-11T09:05:00Z host=dc-01 event=smb_session user=backup-svc status=ok\n",
+  "expected_error": "sealed_bytes_immutable"
+}

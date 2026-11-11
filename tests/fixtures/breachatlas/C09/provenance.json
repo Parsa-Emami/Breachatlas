@@ -1,0 +1,12 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic content-addressed manifest sealing and orphan recovery fixtures for C09.",
+  "sha256": {
+    "expected-output/outcomes.json": "8e6b1e189d4b994280df0f6d8fc7929cc46821455de6ce9fb3114347a9e50232",
+    "invalid/boundary-crash-orphan.json": "ee4dd87fd5344afd86f3290cea0e01d0606d8618055b9369d29078f32f8d63c8",
+    "invalid/hash-mismatch.json": "9d6bab558090bec0f74fcbff3a7b906b1c17d9155202d3eecd707d661c1627f1",
+    "invalid/replay-lost-ack-quota.json": "27b927b3241c0c99ff1b9c6a4fa1d6b31d46d5bd226df04934a22f665ed60ba5",
+    "invalid/sealed-immutable.json": "f9b6ce0434cb6ab253e70f8a188c71dbd82b00e0beea3e98e0172f947b358cdb",
+    "positive/content-addressed-seal.json": "3688bef98162b8ed14ed47605c872fe9ad2601ebdac1a53b78ef02765ff498f5"
+  }
+}

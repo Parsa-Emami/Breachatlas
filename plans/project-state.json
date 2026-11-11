@@ -12,10 +12,11 @@
     "recoverable local authoritative writes storage port",
     "pinned clean-checkout Go engine CI and fail-closed test collection",
     "analyst case and evidence aggregates with single-case ownership invariants",
-    "bounded streaming evidence upload into isolated quarantine with live SHA-256 hashing"
+    "bounded streaming evidence upload into isolated quarantine with live SHA-256 hashing",
+    "durable content-addressed blob and atomic evidence manifest sealing with orphan recovery"
   ],
-  "engine": "upload_quarantine_implemented",
-  "next_task": "C09",
+  "engine": "content_addressed_seal_implemented",
+  "next_task": "C10",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

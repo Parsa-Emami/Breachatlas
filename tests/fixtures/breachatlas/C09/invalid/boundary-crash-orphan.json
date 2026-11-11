@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-seal-c09-crash",
+  "upload_id": "upl-c09-crash",
+  "case_id": "case-2026-009",
+  "evidence_id": "ev-c09-crash",
+  "media_type": "text/plain",
+  "filename": "smb-session.log",
+  "acquired_at": "2026-11-11T09:05:00Z",
+  "custody_root": "c576cb96fa6618ec7ec31d6b941e8a6036d23858d216d4f7e2ef5aa0778bf242",
+  "payload_utf8": "2026-11-11T09:05:00Z host=dc-01 event=smb_session user=backup-svc status=ok\n",
+  "expected_sha256": "c576cb96fa6618ec7ec31d6b941e8a6036d23858d216d4f7e2ef5aa0778bf242",
+  "fault": "fail_after_blob_sync_before_manifest",
+  "expected_error": "seal_interrupted"
+}
