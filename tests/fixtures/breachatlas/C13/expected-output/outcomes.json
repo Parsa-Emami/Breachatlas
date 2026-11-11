@@ -1,0 +1,35 @@
+{
+  "schema_version": "1",
+  "cases": {
+    "positive/active-hold-lifecycle.json": {
+      "hold_placed": "allowed",
+      "delete_while_held": "blocked_hold_active",
+      "expire_while_held": "blocked_hold_active",
+      "delete_after_restart_while_held": "blocked_hold_active",
+      "release_hold": "allowed",
+      "delete_after_release": "allowed",
+      "sealed_source_bytes_modified": false
+    },
+    "invalid/missing-reason.json": {
+      "error": "missing_reason"
+    },
+    "invalid/missing-actor.json": {
+      "error": "missing_actor"
+    },
+    "invalid/unsealed-evidence.json": {
+      "error": "missing_prerequisite"
+    },
+    "invalid/unavailable-provider.json": {
+      "error": "unavailable_provider"
+    },
+    "invalid/malformed-hold-fixture.json": {
+      "error": "malformed_fixture"
+    }
+  },
+  "invariants": [
+    "Active legal hold blocks deletion and retention expiration even under concurrent calls",
+    "Every hold placement, release, blocked deletion/expiration, and allowed disposal reason is durably audited",
+    "Active holds and audit logs persist across service restarts",
+    "Sealed evidence source bytes remain unmodified byte-for-byte"
+  ]
+}

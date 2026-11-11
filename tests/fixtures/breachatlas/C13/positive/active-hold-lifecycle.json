@@ -1,0 +1,37 @@
+{
+  "schema_version": "1",
+  "case_id": "CASE-C13-001",
+  "evidence_id": "EVID-C13-001",
+  "hold": {
+    "hold_id": "HOLD-C13-001",
+    "actor": "legal-counsel",
+    "timestamp": "2026-11-11T10:00:00Z",
+    "reason": "Preserve forensic disk image pending regulatory subpoena",
+    "provider": "local"
+  },
+  "blocked_delete": {
+    "actor": "retention-bot",
+    "timestamp": "2026-11-11T10:05:00Z",
+    "reason": "Scheduled 30-day workspace cleanup",
+    "provider": "local"
+  },
+  "blocked_expire": {
+    "actor": "lifecycle-scheduler",
+    "timestamp": "2026-11-11T10:10:00Z",
+    "reason": "Automated retention policy window elapsed",
+    "provider": "breachatlas"
+  },
+  "release": {
+    "hold_id": "HOLD-C13-001",
+    "actor": "legal-counsel",
+    "timestamp": "2026-11-11T11:00:00Z",
+    "reason": "Subpoena lifted after closed investigation",
+    "provider": "local"
+  },
+  "allowed_delete": {
+    "actor": "retention-bot",
+    "timestamp": "2026-11-11T11:05:00Z",
+    "reason": "Approved post-hold disposal per retention schedule",
+    "provider": "local"
+  }
+}

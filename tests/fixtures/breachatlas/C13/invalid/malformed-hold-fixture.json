@@ -1,0 +1,11 @@
+{
+  "schema_version": "999",
+  "hold_id": "../escape-hold",
+  "case_id": "CASE-C13-001",
+  "evidence_id": "EVID-C13-001",
+  "actor": "legal-counsel",
+  "timestamp": "not-an-rfc3339-timestamp",
+  "reason": "Malformed fixture input",
+  "provider": "local",
+  "expected_failure": "malformed_fixture"
+}

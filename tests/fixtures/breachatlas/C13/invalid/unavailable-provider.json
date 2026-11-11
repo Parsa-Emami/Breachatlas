@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "hold_id": "HOLD-C13-BAD-PROVIDER",
+  "case_id": "CASE-C13-001",
+  "evidence_id": "EVID-C13-001",
+  "actor": "legal-counsel",
+  "timestamp": "2026-11-11T10:00:00Z",
+  "reason": "Hold via external unreachable SaaS provider",
+  "provider": "external-cloud-hold-saas",
+  "expected_failure": "unavailable_provider"
+}

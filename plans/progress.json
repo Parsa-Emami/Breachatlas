@@ -114,10 +114,12 @@
     },
     {
       "id": "C13",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C13.json"
+      ],
+      "source_identity": "sha256:b9eb24b8d3fdb027a55b88396e732793eae8ccb510a0bb6a1a5ec2fba898b057",
+      "notes": "Legal hold blocking of deletion and retention expiration under concurrency, durable attribution and reason auditing, restart recovery, and sealed-byte immutability verified in internal/holds/service.go and tests/hold_test.go."
     },
     {
       "id": "C14",

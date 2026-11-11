@@ -1,0 +1,14 @@
+{
+  "task": "C13",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic legal hold and deletion blocking fixtures",
+  "sha256": {
+    "expected-output/outcomes.json": "c2c6d82a8638a8a67d18eebafd58d2d7ebf19f7cfa86e34eff89d11b7457dc29",
+    "invalid/malformed-hold-fixture.json": "158e6549f0172b2f186067ee779430c87341d4f53ddb78922e29fb84af826a1c",
+    "invalid/missing-actor.json": "a40dd1be3cd9f89a9bdbb152dee91979fad5169c1b02b9700e4c0dab42566a2e",
+    "invalid/missing-reason.json": "5939dc41e667a166e0b5b84b76f3a08bedab75f24bd55fbcbb706d5974d1e839",
+    "invalid/unavailable-provider.json": "8b75737b806a050aa728f73d25c620c51d6d393817764bfb7c4df989806e4d8f",
+    "invalid/unsealed-evidence.json": "924b6a2232c86be3970bec9ffa384856b14c13d5246ebc0fa12f8a1dc9388596",
+    "positive/active-hold-lifecycle.json": "188c8bc3a228cee4ccda3e79456f9d231145f60cb6f6f14a32c4e94a32bb9a77"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "project": "BreachAtlas",
-  "reviewed_commit": "707b419f0dee51428decd7bba5d519af96ab5283",
+  "reviewed_commit": "21f761c4b9e4fc148388c7f7368b718bb7cd3565",
   "readiness": "WEB_FOUNDATION",
   "core_ready": false,
   "implemented": [
@@ -16,10 +16,11 @@
     "durable content-addressed blob and atomic evidence manifest sealing with orphan recovery",
     "read-only sealed evidence byte verification, distinct failure classification, and Ed25519 anti-rollback authority checks",
     "append-only attributable custody ledger with actor/timestamp/reason tracking and hash chaining",
-    "independent verification of signed externally stored custody roots, outside signer trust allowlisting, anti-rollback authority tracking, and ledger rewrite detection"
+    "independent verification of signed externally stored custody roots, outside signer trust allowlisting, anti-rollback authority tracking, and ledger rewrite detection",
+    "legal holds blocking concurrent deletion and retention expiration with durable reason auditing and restart persistence"
   ],
-  "engine": "checkpoints_verified",
-  "next_task": "C13",
+  "engine": "holds_verified",
+  "next_task": "C14",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

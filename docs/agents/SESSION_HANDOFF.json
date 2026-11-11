@@ -1,11 +1,11 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "707b419f0dee51428decd7bba5d519af96ab5283",
-  "verified_source_commit": "707b419f0dee51428decd7bba5d519af96ab5283",
-  "verified_source_tree": "6d338122221965440e94d0f8b812e8db78c40a8c",
-  "final_source_identity": "sha256:de31d40b705f9d0605938603242e0cb1bb4dd2fc0ae5f93e0ba2c5f92dfaa9ea",
-  "scope": "C12 verification of signed externally stored custody roots, outside signer trust, anti-rollback authority tracking, and ledger rewrite detection",
+  "base_commit": "21f761c4b9e4fc148388c7f7368b718bb7cd3565",
+  "verified_source_commit": "21f761c4b9e4fc148388c7f7368b718bb7cd3565",
+  "verified_source_tree": "41458cd5b5471cad8513fa184ebc04d858556c7f",
+  "final_source_identity": "sha256:b9eb24b8d3fdb027a55b88396e732793eae8ccb510a0bb6a1a5ec2fba898b057",
+  "scope": "C13 legal holds blocking deletion and retention expiration while active, durable reason auditing, concurrency safety, and restart persistence",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -18,24 +18,25 @@
     "C09",
     "C10",
     "C11",
-    "C12"
+    "C12",
+    "C13"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C12.json",
-    "internal/custody/checkpoints.go",
+    "docs/evidence/C13.json",
+    "internal/holds/service.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/checkpoint_test.go",
-    "tests/fixtures/breachatlas/C12/expected-output/outcomes.json",
-    "tests/fixtures/breachatlas/C12/invalid/expired-checkpoint.json",
-    "tests/fixtures/breachatlas/C12/invalid/ledger-rewritten-root-mismatch.json",
-    "tests/fixtures/breachatlas/C12/invalid/stale-replayed-revision.json",
-    "tests/fixtures/breachatlas/C12/invalid/tampered-checkpoint-bytes.json",
-    "tests/fixtures/breachatlas/C12/invalid/untrusted-signer.json",
-    "tests/fixtures/breachatlas/C12/positive/valid-checkpoint.json",
-    "tests/fixtures/breachatlas/C12/provenance.json"
+    "tests/fixtures/breachatlas/C13/expected-output/outcomes.json",
+    "tests/fixtures/breachatlas/C13/invalid/malformed-hold-fixture.json",
+    "tests/fixtures/breachatlas/C13/invalid/missing-actor.json",
+    "tests/fixtures/breachatlas/C13/invalid/missing-reason.json",
+    "tests/fixtures/breachatlas/C13/invalid/unavailable-provider.json",
+    "tests/fixtures/breachatlas/C13/invalid/unsealed-evidence.json",
+    "tests/fixtures/breachatlas/C13/positive/active-hold-lifecycle.json",
+    "tests/fixtures/breachatlas/C13/provenance.json",
+    "tests/hold_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -48,7 +49,8 @@
     "docs/evidence/C09.json",
     "docs/evidence/C10.json",
     "docs/evidence/C11.json",
-    "docs/evidence/C12.json"
+    "docs/evidence/C12.json",
+    "docs/evidence/C13.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -58,7 +60,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C13",
+  "next_task": "C14",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C13."
+  "continuation": "Implement C14."
 }

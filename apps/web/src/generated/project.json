@@ -167,7 +167,7 @@
       "id": "C13",
       "title": "feat(holds): block deletion while hold is active",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Concurrent hold/delete cannot remove held evidence and reason is audited."
       ],

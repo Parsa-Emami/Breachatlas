@@ -1,0 +1,11 @@
+{
+  "schema_version": "1",
+  "hold_id": "HOLD-C13-NO-ACTOR",
+  "case_id": "CASE-C13-001",
+  "evidence_id": "EVID-C13-001",
+  "actor": "",
+  "timestamp": "2026-11-11T10:00:00Z",
+  "reason": "Litigation freeze",
+  "provider": "local",
+  "expected_failure": "missing_actor"
+}
