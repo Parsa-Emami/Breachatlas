@@ -213,10 +213,12 @@
     },
     {
       "id": "C24",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C24.json"
+      ],
+      "source_identity": "sha256:223657fab644c6825b6f27ecb3bdae52833c73b061a39353198144934c79201a",
+      "notes": "Standalone offline verifier CLI (cmd/verify/main.go) and domain verification engine (internal/export/verify.go) verifying portable evidence, custody chains, checkpoints, derived artifacts, and timeline raw timestamps without running a server or network connection; validates all file checksums, sealed blobs, and custody roots, distinguishes unsigned vs trusted signatures, and rejects tampered bytes, missing files, corrupted signatures, and untrusted signers (verified in tests/offline_verify_test.go)."
     },
     {
       "id": "C25",

@@ -299,7 +299,7 @@
       "id": "C24",
       "title": "feat(verifier): verify portable bundle without server",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Missing or tampered file fails; unsigned and trusted-signature status remain distinct."
       ],

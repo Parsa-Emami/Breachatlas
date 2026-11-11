@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "affa0db3c2aeb14e306f1f88639b7441a4d9e87e",
-  "verified_source_commit": "affa0db3c2aeb14e306f1f88639b7441a4d9e87e",
-  "verified_source_tree": "a607a1dd45527b17a67d18633341b9df883af2d1",
-  "scope": "C23 portable export packaging in internal/export/package.go binding selected sealed evidence, custody chains, verified checkpoints, and derived files atomically without altering sealed source bytes",
+  "base_commit": "6ea85386724b4ccf7cc8f08729d39b7d4c9643d9",
+  "verified_source_commit": "6ea85386724b4ccf7cc8f08729d39b7d4c9643d9",
+  "verified_source_tree": "da9911450022b62f078090583b3a2f9df7219898",
+  "scope": "C24 offline verifier CLI and domain verification engine in cmd/verify/main.go and internal/export/verify.go verifying portable bundle integrity without server or network connectivity",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -28,21 +28,22 @@
     "C20",
     "C21",
     "C22",
-    "C23"
+    "C23",
+    "C24"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
+    "cmd/verify/main.go",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C23.json",
-    "internal/export/package.go",
+    "docs/evidence/C24.json",
+    "internal/export/verify.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/export_test.go",
-    "tests/fixtures/breachatlas/C23/expected-output/export-outcomes.json",
-    "tests/fixtures/breachatlas/C23/invalid/missing-prerequisites.json",
-    "tests/fixtures/breachatlas/C23/invalid/tampered-or-untrusted-checkpoint.json",
-    "tests/fixtures/breachatlas/C23/positive/portable-case-export.json",
-    "tests/fixtures/breachatlas/C23/provenance.json"
+    "tests/fixtures/breachatlas/C24/expected-output/offline-verification-results.json",
+    "tests/fixtures/breachatlas/C24/invalid/tampered-bundle-cases.json",
+    "tests/fixtures/breachatlas/C24/positive/valid-bundle-verification.json",
+    "tests/fixtures/breachatlas/C24/provenance.json",
+    "tests/offline_verify_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -66,7 +67,8 @@
     "docs/evidence/C20.json",
     "docs/evidence/C21.json",
     "docs/evidence/C22.json",
-    "docs/evidence/C23.json"
+    "docs/evidence/C23.json",
+    "docs/evidence/C24.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -76,7 +78,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C24",
+  "next_task": "C25",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C24."
+  "continuation": "Implement C25."
 }

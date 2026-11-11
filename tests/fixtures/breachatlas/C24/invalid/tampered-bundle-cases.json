@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {
+      "name": "tampered_blob_byte",
+      "target_file": "evidence/ev-c24-001/blob.dat",
+      "tamper_action": "flip_byte",
+      "expected_evidence_integrity": "MISMATCH",
+      "expected_verified": false
+    },
+    {
+      "name": "tampered_manifest_sha",
+      "target_file": "evidence/ev-c24-001/manifest.json",
+      "tamper_action": "corrupt_json_content",
+      "expected_evidence_integrity": "MISMATCH",
+      "expected_verified": false
+    },
+    {
+      "name": "missing_evidence_blob",
+      "target_file": "evidence/ev-c24-001/blob.dat",
+      "tamper_action": "remove_file",
+      "expected_evidence_integrity": "MISMATCH",
+      "expected_verified": false
+    },
+    {
+      "name": "tampered_custody_chain",
+      "target_file": "evidence/ev-c24-001/custody.json",
+      "tamper_action": "corrupt_event_digest",
+      "expected_custody_root_integrity": "MISMATCH",
+      "expected_verified": false
+    },
+    {
+      "name": "tampered_signature_bytes",
+      "target_file": "bundle-manifest.json",
+      "tamper_action": "corrupt_signature",
+      "expected_signature_status": "signature_invalid",
+      "expected_verified": false
+    },
+    {
+      "name": "untrusted_signer_key",
+      "target_file": "bundle-manifest.json",
+      "tamper_action": "use_untrusted_key",
+      "expected_signature_status": "untrusted_signer",
+      "expected_verified": false
+    }
+  ]
+}

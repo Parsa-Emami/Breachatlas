@@ -1,0 +1,10 @@
+{
+  "task": "C24",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic portable bundle offline verification fixtures, tampered negative cases, and expected verification results",
+  "sha256": {
+    "expected-output/offline-verification-results.json": "bbc94f063ebb8ce64b7e24c5c625ff8546b70671b53a4d6306f1182a459dcc86",
+    "invalid/tampered-bundle-cases.json": "3e8c626019b9486e94fb7ac8c8a086cd5279672e310ed11af807aaf462fc56c6",
+    "positive/valid-bundle-verification.json": "fbe62fb5f37073aab1528de472926fb0d0945531f28193f15c20902da34d888c"
+  }
+}

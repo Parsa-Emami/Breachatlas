@@ -1,0 +1,37 @@
+{
+  "schema_version": "1",
+  "trusted_signed": {
+    "bundle_version": "1",
+    "verified": true,
+    "evidence_integrity": "MATCH",
+    "custody_root_integrity": "MATCH",
+    "signature_status": "trusted_signed",
+    "signature_valid": true,
+    "raw_timestamps_preserved": true,
+    "requires_server": false
+  },
+  "valid_unsigned": {
+    "bundle_version": "1",
+    "verified": true,
+    "evidence_integrity": "MATCH",
+    "custody_root_integrity": "MATCH",
+    "signature_status": "unsigned",
+    "signature_valid": false,
+    "raw_timestamps_preserved": true,
+    "requires_server": false
+  },
+  "tampered_or_untrusted": {
+    "tampered_blob": {
+      "verified": false,
+      "evidence_integrity": "MISMATCH"
+    },
+    "untrusted_signer": {
+      "verified": false,
+      "signature_status": "untrusted_signer"
+    },
+    "signature_invalid": {
+      "verified": false,
+      "signature_status": "signature_invalid"
+    }
+  }
+}

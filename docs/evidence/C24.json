@@ -1,0 +1,67 @@
+{
+  "commit_id": "C24",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Standalone offline bundle verifier in cmd/verify/main.go and internal/export/verify.go verifying portable evidence, custody chains, checkpoints, and derived artifacts without server connectivity",
+  "passed": true,
+  "source_commit": "6ea85386724b4ccf7cc8f08729d39b7d4c9643d9",
+  "source_tree": "da9911450022b62f078090583b3a2f9df7219898",
+  "source_identity": "sha256:223657fab644c6825b6f27ecb3bdae52833c73b061a39353198144934c79201a",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C24/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "cf7f6047dd00cc16d70bf47867028fc7c400ec4227ec0172eadf6abcc8f3a670"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including cmd/breachatlas, cmd/verify, and tests (TestC24FixturesAndProvenance, TestOfflineVerifyTrustedSignedBundle, TestOfflineVerifyUnsignedBundleAndStatusDistinctness, TestOfflineVerifyUntrustedSignerNegativeCase, TestOfflineVerifyTamperedFilesNegativeCases, and TestOfflineVerifyCLIBinaryExecution)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F18",
+      "status": "passed",
+      "observations": [
+        "cmd/verify/main.go and export.VerifyBundle verify portable export bundles independently without server connectivity or network access.",
+        "Every file recorded in file_checksums (evidence blobs, manifests, custody records, checkpoints, derived payloads, timeline, hypotheses) is verified against its computed SHA-256; missing or tampered files cause immediate failure with evidence_integrity=MISMATCH.",
+        "Unsigned bundles and trusted-signed bundles maintain distinct cryptographic statuses (unsigned vs. trusted_signed); requiring signature fails unsigned bundles.",
+        "Untrusted signers and corrupted signature bytes fail closed without producing trusted success.",
+        "Sealed source bytes invariant is verified directly against content digests."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Legal hold precedence and permanent deletion prevention (C25) is deferred to its planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert cmd/verify/main.go, internal/export/verify.go, tests/offline_verify_test.go, tests/fixtures/breachatlas/C24, and docs/evidence/C24.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

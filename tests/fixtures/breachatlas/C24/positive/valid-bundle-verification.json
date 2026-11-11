@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c24-test-001",
+  "evidence_id": "ev-c24-001",
+  "artifact_id": "art-c24-001",
+  "bundle_id_signed": "bnd-c24-signed-001",
+  "bundle_id_unsigned": "bnd-c24-unsigned-001",
+  "key_id": "ed25519-c24-analyst-key",
+  "trusted_key_id": "ed25519-c24-analyst-key",
+  "untrusted_key_id": "ed25519-c24-rogue-key",
+  "zone_hint": "UTC",
+  "payload_sample": "{\"timestamp\":\"2026-10-15T10:00:00Z\",\"event\":\"user_login\",\"user\":\"alice\",\"ip\":\"192.168.1.50\"}\n"
+}
