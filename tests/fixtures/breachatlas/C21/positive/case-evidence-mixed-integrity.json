@@ -1,0 +1,58 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c21-ui",
+  "provider": "local",
+  "items": [
+    {
+      "evidence_id": "ev-verified-01",
+      "filename": "auth-<script>window.__xssSentinel=true</script>.log",
+      "media_type": "text/plain",
+      "expected_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "actual_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "size_bytes": 2048,
+      "acquired_at": "2026-10-01T10:00:00Z",
+      "custody_root": "9e57f2968201639b5e0f59ddc5ce9f2453d9cfcdd3856c8218f89dda181c2f28",
+      "sealed": true,
+      "hold_active": true,
+      "hold_reason": "Litigation hold <b>active</b>",
+      "custody_events": [
+        {
+          "schema_version": "1",
+          "event_id": "cust-c21-01",
+          "case_id": "case-c21-ui",
+          "evidence_id": "ev-verified-01",
+          "sequence": 1,
+          "event_type": "seal_verified",
+          "actor": "analyst<script>window.__xssSentinel=true</script>",
+          "timestamp": "2026-10-01T10:00:00Z",
+          "reason": "Custody verified <img src=x onerror=\"window.__xssSentinel=true\">",
+          "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+          "event_digest": "6f92755b91c29afc44dc158291ed7d7eba9d2d89d2bf13a2e2a252a603b7cab9",
+          "custody_root": "9e57f2968201639b5e0f59ddc5ce9f2453d9cfcdd3856c8218f89dda181c2f28"
+        }
+      ]
+    },
+    {
+      "evidence_id": "ev-incomplete-02",
+      "filename": "partial-upload.bin",
+      "media_type": "application/octet-stream",
+      "expected_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "actual_sha256": "",
+      "size_bytes": 512,
+      "acquired_at": "2026-10-01T10:05:00Z",
+      "custody_root": "",
+      "sealed": false
+    },
+    {
+      "evidence_id": "ev-failed-03",
+      "filename": "tampered.pcap",
+      "media_type": "application/vnd.tcpdump.pcap",
+      "expected_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "actual_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "size_bytes": 4096,
+      "acquired_at": "2026-10-01T10:10:00Z",
+      "custody_root": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "sealed": true
+    }
+  ]
+}

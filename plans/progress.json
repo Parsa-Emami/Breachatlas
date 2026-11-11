@@ -186,10 +186,12 @@
     },
     {
       "id": "C21",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C21.json"
+      ],
+      "source_identity": "sha256:a4bf830608b51e6d4695a2fbbfa40e6266b8d2af12cd82b70253d380453ec639",
+      "notes": "Evidence Integrity & Custody UI on #evidence route (apps/web/src/pages/Evidence.tsx, apps/web/src/main.tsx, apps/web/src/styles.css) wired via local relay (scripts/serve-web.mjs) to Go engine POST /api/v1/evidence-integrity/inspect (cmd/breachatlas/integrity.go); visibly displays verified/incomplete_seal/verification_failed states and custody chains, escapes all user strings via JSX text nodes, supports keyboard table inspection, and handles empty/invalid/interrupted/unavailable states cleanly at 360px (verified in apps/web/tests/evidence.spec.ts and cmd/breachatlas/integrity_test.go)."
     },
     {
       "id": "C22",

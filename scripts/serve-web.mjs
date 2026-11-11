@@ -6,8 +6,9 @@ import { validateRuntimeConfig } from '../apps/web/src/lib/runtime-config.mjs';
 
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
 const manifestPath = '/api/v1/evidence-manifests/validate';
+const integrityPath = '/api/v1/evidence-integrity/inspect';
 
-function relayManifest(req, res, engine, send) {
+function relayEngineRequest(req, res, engine, targetPath, send) {
   const fail = (status, code) => send(status, JSON.stringify({ schema_version: '1', status: 'error', error: { code } }));
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -29,7 +30,7 @@ function relayManifest(req, res, engine, send) {
     if (req.headers[name] !== undefined) headers[name] = req.headers[name];
   }
   const signal = AbortSignal.timeout(3500);
-  const upstream = http.request({ ...engine, path: manifestPath, method: 'POST', headers, signal }, response => {
+  const upstream = http.request({ ...engine, path: targetPath, method: 'POST', headers, signal }, response => {
     res.writeHead(response.statusCode ?? 502, { 'Content-Type': 'application/json; charset=utf-8' });
     response.on('error', () => res.destroy());
     response.pipe(res);
@@ -64,7 +65,7 @@ export function createWebServer({ root, config, projectId, manifestEngine }) {
     };
     const localAuthority = /^(?:localhost|127\.0\.0\.1|\[::1\])(?::([0-9]{1,5}))?$/i.exec(req.headers.host ?? '');
     if (!localAuthority || (localAuthority[1] && (Number(localAuthority[1]) < 1 || Number(localAuthority[1]) > 65535))) { send(403, '{"error":"invalid_host"}'); return; }
-    if (req.url === manifestPath) { relayManifest(req, res, manifestEngine, send); return; }
+    if (req.url === manifestPath || req.url === integrityPath) { relayEngineRequest(req, res, manifestEngine, req.url, send); return; }
     if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); send(405, '{"error":"method_not_allowed"}'); return; }
     let path;
     try {

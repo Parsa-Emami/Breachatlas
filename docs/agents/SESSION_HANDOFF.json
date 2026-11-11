@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "261e4a4d42f5fb2431abb3c996e8528be46fd467",
-  "verified_source_commit": "261e4a4d42f5fb2431abb3c996e8528be46fd467",
-  "verified_source_tree": "27bedeae3af393afb9506309c2cd1d3b455be5c5",
-  "scope": "C20 strict separation of analyst hypotheses (mandatory Author/Rationale, RecordKind=analyst_hypothesis, IsSourceEvidence=false) from SealStore/EventIndexStore observed facts with anti-promotion enforcement and restart tamper defense",
+  "base_commit": "df76bfa8c03f46ecd85287a5cd93705884863011",
+  "verified_source_commit": "df76bfa8c03f46ecd85287a5cd93705884863011",
+  "verified_source_tree": "64d959f5a484ab8fa77d6ad942b01f774f5dc44d",
+  "scope": "C21 case evidence integrity, incomplete seal, custody chain, and XSS-escaped UI on #evidence wired via loopback relay to Go engine POST /api/v1/evidence-integrity/inspect",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -25,22 +25,30 @@
     "C17",
     "C18",
     "C19",
-    "C20"
+    "C20",
+    "C21"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
+    "apps/web/src/main.tsx",
+    "apps/web/src/pages/Evidence.tsx",
+    "apps/web/src/styles.css",
+    "apps/web/tests/evidence.spec.ts",
+    "cmd/breachatlas/integrity.go",
+    "cmd/breachatlas/integrity_test.go",
+    "cmd/breachatlas/main.go",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C20.json",
-    "internal/findings/notes.go",
+    "docs/evidence/C21.json",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/facts_test.go",
-    "tests/fixtures/breachatlas/C20/expected-output/epistemic-ledger-outcomes.json",
-    "tests/fixtures/breachatlas/C20/invalid/missing-author-rationale.json",
-    "tests/fixtures/breachatlas/C20/invalid/missing-prerequisite-and-provider.json",
-    "tests/fixtures/breachatlas/C20/invalid/ui-label-promotion-spoof.json",
-    "tests/fixtures/breachatlas/C20/positive/analyst-hypotheses-and-facts.json",
-    "tests/fixtures/breachatlas/C20/provenance.json"
+    "playwright.config.ts",
+    "scripts/serve-web.mjs",
+    "tests/fixtures/breachatlas/C21/expected-output/evidence-ui-outcomes.json",
+    "tests/fixtures/breachatlas/C21/invalid/unavailable-provider-bundle.json",
+    "tests/fixtures/breachatlas/C21/invalid/unsupported-version-bundle.json",
+    "tests/fixtures/breachatlas/C21/positive/case-evidence-mixed-integrity.json",
+    "tests/fixtures/breachatlas/C21/positive/empty-case-evidence.json",
+    "tests/fixtures/breachatlas/C21/provenance.json"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -61,7 +69,8 @@
     "docs/evidence/C17.json",
     "docs/evidence/C18.json",
     "docs/evidence/C19.json",
-    "docs/evidence/C20.json"
+    "docs/evidence/C20.json",
+    "docs/evidence/C21.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -71,7 +80,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C21",
+  "next_task": "C22",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C21."
+  "continuation": "Implement C22."
 }

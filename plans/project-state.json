@@ -24,10 +24,11 @@
     "timestamp normalization preserving raw values and making unknown zones and DST ambiguity explicit without fabricating UTC",
     "stable derived event identity indexing deduplicating repeated and reordered analyses without mutating sealed source bytes",
     "bounded local timeline search queries and deterministic atomic case index rebuild from verified derived artifacts",
-    "strict separation of analyst hypotheses with mandatory author and rationale from cryptographically bound observed facts"
+    "strict separation of analyst hypotheses with mandatory author and rationale from cryptographically bound observed facts",
+    "case evidence integrity, incomplete seal, and custody UI with escaped user strings, keyboard-accessible table inspection, and 360px mobile states wired to the Go engine"
   ],
-  "engine": "analyst_hypotheses_verified",
-  "next_task": "C21",
+  "engine": "evidence_integrity_ui_verified",
+  "next_task": "C22",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

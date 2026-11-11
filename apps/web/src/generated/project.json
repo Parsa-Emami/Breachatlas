@@ -263,7 +263,7 @@
       "id": "C21",
       "title": "feat(ui): show case evidence integrity and custody",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Failed verification and incomplete seal are visible; user strings are escaped."
       ],

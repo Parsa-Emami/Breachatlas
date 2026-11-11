@@ -1,0 +1,12 @@
+{
+  "task": "C21",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic case evidence integrity, incomplete seal, custody chain, and XSS sentinel fixtures",
+  "sha256": {
+    "expected-output/evidence-ui-outcomes.json": "a3f00efeebc539744bcf2de04416c531922451c7dc883f440087920ff8e094cc",
+    "invalid/unavailable-provider-bundle.json": "e4d69d608707eee99dbba049c0f5ce2f1aa4b0f6f230657156741de9430df52e",
+    "invalid/unsupported-version-bundle.json": "bc2d1b6eec89d7e9822c33c3d9420558a2337b4bf20defa46947456b65c5d286",
+    "positive/case-evidence-mixed-integrity.json": "24a5d8741d8655e280e658dd4ca88e940889c24ec942c3db2a4d6a9bdbe90038",
+    "positive/empty-case-evidence.json": "e211f0c34f3eb28a6ab2274cd2b32ac8ccdc5252cb5de9deeadc0d39baeace96"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "commit_id": "C21",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Case evidence integrity, incomplete seal, and custody UI (#evidence) wired through loopback relay to Go engine POST /api/v1/evidence-integrity/inspect with JSX string escaping, keyboard-accessible table interaction, and 360px responsive state rendering",
+  "passed": true,
+  "source_commit": "df76bfa8c03f46ecd85287a5cd93705884863011",
+  "source_tree": "64d959f5a484ab8fa77d6ad942b01f774f5dc44d",
+  "source_identity": "sha256:a4bf830608b51e6d4695a2fbbfa40e6266b8d2af12cd82b70253d380453ec639",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C21/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "fb97e13cab2e5a86d1a1576188a1ec728d3695fa55035155c1c10e1c3d2cbc90"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including cmd/breachatlas (TestInspectEvidenceIntegrityEndpoint and TestInspectEvidenceIntegrityNegativeCases) and tests."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:browser",
+      "exit_code": 0,
+      "output": "6 Playwright Chromium specs passed across tests/browser/workspace.spec.ts and apps/web/tests/evidence.spec.ts (mixed integrity table, failed verification & incomplete seal badges, inert XSS sentinels, keyboard selection, and explicit empty/invalid/interrupted/unavailable states at 360px without horizontal overflow)."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F15",
+      "status": "passed",
+      "observations": [
+        "cmd/breachatlas POST /api/v1/evidence-integrity/inspect evaluates sealed SHA-256 digests, seal completeness (incomplete_seal vs sealed), legal holds, and custody hash-chain verification without modifying source bytes.",
+        "apps/web/src/pages/Evidence.tsx renders explicit alert banners and table badges for Failed verification and Incomplete seal alongside keyboard-operable inspect actions and custody event details.",
+        "Embedded <script> and <img onerror> strings in filenames, custody actors, custody reasons, and hold reasons render strictly as escaped JSX text with window.__xssSentinel remaining undefined in headless Chromium.",
+        "Empty, invalid, interrupted (AbortController cancel), and unavailable-provider/engine states render explicitly at 360x780 viewport with document.documentElement.scrollWidth <= window.innerWidth."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Timezone-aware timeline and analyst notes UI view (C22) is deferred to its planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert apps/web/src/pages/Evidence.tsx, apps/web/tests/evidence.spec.ts, apps/web/src/main.tsx, apps/web/src/styles.css, cmd/breachatlas/integrity.go, cmd/breachatlas/integrity_test.go, cmd/breachatlas/main.go, scripts/serve-web.mjs, playwright.config.ts, tests/fixtures/breachatlas/C21, and docs/evidence/C21.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

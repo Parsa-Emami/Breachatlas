@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "task": "C21",
+  "requirement": "F15",
+  "expected_outcomes": {
+    "mixed_bundle_overall_status": "verification_failed",
+    "verified_count": 1,
+    "incomplete_count": 1,
+    "failed_count": 1,
+    "xss_sentinels_rendered_as_text_only": true,
+    "keyboard_table_navigation_supported": true,
+    "states_explicit_at_360px": [
+      "empty",
+      "invalid",
+      "interrupted",
+      "unavailable"
+    ],
+    "sealed_source_bytes_unmodified": true
+  }
+}
