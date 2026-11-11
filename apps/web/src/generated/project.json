@@ -251,7 +251,7 @@
       "id": "C20",
       "title": "feat(hypotheses): separate notes from observed facts",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Analyst hypothesis has author and rationale and cannot become source evidence by UI label."
       ],

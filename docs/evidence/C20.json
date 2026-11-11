@@ -1,0 +1,67 @@
+{
+  "commit_id": "C20",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Strict epistemic separation between analyst hypotheses (mandatory Author and Rationale, IsSourceEvidence=false, RecordKind=analyst_hypothesis) and SealStore/EventIndexStore observed facts with anti-promotion guards and restart tamper defense",
+  "passed": true,
+  "source_commit": "261e4a4d42f5fb2431abb3c996e8528be46fd467",
+  "source_tree": "27bedeae3af393afb9506309c2cd1d3b455be5c5",
+  "source_identity": "sha256:e859e9b5c9b339ba6b2265d18838eaded9b94ec1b5cbbc74fbb262ec8edc1664",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C20/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "a15d450e58737b2856763a01afb850e8a1cb957b60b24c622c40a3f2921aa1d7"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go engine and integration test suites (cmd/breachatlas and tests including TestC20FixturesAndProvenance, TestC20HypothesisAuthorRationaleAndSeparation, TestC20NegativePrerequisitesMalformedAndProviders, TestC20RestartRecoveryAndTamperDefense, and TestC20ConcurrentFindingsAndLedgerRace)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F14",
+      "status": "passed",
+      "observations": [
+        "RecordHypothesis in FindingStore requires non-empty bounded Author (ErrMissingAuthor), Rationale (ErrMissingRationale), and Statement (ErrInvalidHypothesis), and enforces RecordKind=analyst_hypothesis and IsSourceEvidence=false.",
+        "BuildEpistemicLedger projects ObservedFacts strictly from verified EventIndexStore entries and SealStore sealed blobs and isolates AnalystHypotheses in a separate collection even when UILabel carries strings such as source_evidence.",
+        "Explicit promotion flags (ClaimSourceEvidence=true, ClaimRecordKind=observed_fact) and PromoteHypothesisToEvidence fail closed with ErrPromotionForbidden.",
+        "Missing SealStore or supporting evidence/event prerequisites reject with ErrMissingPrerequisite; non-local providers reject with ErrUnavailableProvider; unsupported versions, path traversal, and lock contention fail closed.",
+        "Crash recovery cleans orphan staging files, preserves idempotent replay and conflict detection across restarts, rejects on-disk tampering that flips is_source_evidence on reopen, and leaves sealed source bytes unmodified."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Web UI presentation of case evidence verification and custody integrity (C21) is deferred to its planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/findings/notes.go, tests/facts_test.go, tests/fixtures/breachatlas/C20, and docs/evidence/C20.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

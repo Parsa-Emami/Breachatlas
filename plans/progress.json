@@ -177,10 +177,12 @@
     },
     {
       "id": "C20",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C20.json"
+      ],
+      "source_identity": "sha256:e859e9b5c9b339ba6b2265d18838eaded9b94ec1b5cbbc74fbb262ec8edc1664",
+      "notes": "Epistemic separation of analyst hypotheses (requiring non-empty Author and Rationale, IsSourceEvidence=false, RecordKind=analyst_hypothesis) from cryptographically bound ObservedFacts (backed by SealStore and EventIndexStore) in internal/findings/notes.go and tests/facts_test.go; rejects UI-label/flag promotion and persisted tampering across restarts."
     },
     {
       "id": "C21",

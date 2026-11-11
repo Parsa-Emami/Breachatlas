@@ -1,0 +1,12 @@
+{
+  "task": "C20",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic analyst hypothesis and observed-fact separation fixtures",
+  "sha256": {
+    "expected-output/epistemic-ledger-outcomes.json": "378bb914c2878fae5f0b5286cd8fe0e186e5bf833d7c418d0d6b288cb9aa3d18",
+    "invalid/missing-author-rationale.json": "7f5860369477dca4f2e5c7c0609632d36615a4698d992d5bead9ff7b680957cd",
+    "invalid/missing-prerequisite-and-provider.json": "5d11f25f67f7f37f2cf12e0e7243639de37ecd3361c4d9166a9a1ff9acb82219",
+    "invalid/ui-label-promotion-spoof.json": "a88d044bb9e802aad2f0f0f3dc768b9aa6a55c4f75a23e45b763d15e994902fe",
+    "positive/analyst-hypotheses-and-facts.json": "56c3a8af720e36edfdefc0245f6ca9f6d2700644bd1197b53ddc27fdb4b23080"
+  }
+}

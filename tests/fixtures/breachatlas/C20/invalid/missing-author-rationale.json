@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c20-invalid-fields",
+  "cases": [
+    {
+      "name": "empty_author",
+      "hypothesis_id": "hyp-missing-author",
+      "author": "   ",
+      "rationale": "Correlated timestamps suggest lateral movement.",
+      "statement": "Lateral movement occurred via SSH.",
+      "expected_error": "ErrMissingAuthor"
+    },
+    {
+      "name": "empty_rationale",
+      "hypothesis_id": "hyp-missing-rationale",
+      "author": "analyst.mina@ir.local",
+      "rationale": "",
+      "statement": "Host was beaconed externally.",
+      "expected_error": "ErrMissingRationale"
+    },
+    {
+      "name": "empty_statement",
+      "hypothesis_id": "hyp-missing-statement",
+      "author": "analyst.mina@ir.local",
+      "rationale": "Observed anomalous egress spike.",
+      "statement": "\t\n ",
+      "expected_error": "ErrInvalidHypothesis"
+    },
+    {
+      "name": "confidence_out_of_range",
+      "hypothesis_id": "hyp-bad-confidence",
+      "author": "analyst.mina@ir.local",
+      "rationale": "Spike aligns with DNS log.",
+      "statement": "C2 channel likely active.",
+      "confidence": 1.25,
+      "expected_error": "ErrInvalidHypothesis"
+    }
+  ]
+}

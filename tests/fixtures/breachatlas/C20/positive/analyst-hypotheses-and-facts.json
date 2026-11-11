@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c20-findings",
+  "evidence_id": "ev-c20-auth",
+  "observed_events": [
+    {
+      "timestamp": "2026-09-01T08:15:00Z",
+      "event_type": "auth_login",
+      "summary": "Public key login accepted for svc-backup on host-db-01"
+    },
+    {
+      "timestamp": "2026-09-01T08:16:30Z",
+      "event_type": "archive_create",
+      "summary": "Created gzip tarball /tmp/dump-01.tar.gz"
+    }
+  ],
+  "hypotheses": [
+    {
+      "hypothesis_id": "hyp-c20-01",
+      "operation_id": "op-hyp-c20-01",
+      "author": "analyst.mina@ir.local",
+      "rationale": "Interactive shell archive creation 90s after svc-backup SSH login suggests manual staging rather than cron.",
+      "statement": "Attacker likely staged customer database dump using compromised svc-backup credentials.",
+      "status": "proposed",
+      "confidence": 0.78,
+      "ui_label": "working-theory"
+    },
+    {
+      "hypothesis_id": "hyp-c20-02-spoofed-ui",
+      "operation_id": "op-hyp-c20-02",
+      "author": "analyst.reza@ir.local",
+      "rationale": "Testing whether attaching a UI badge string named source_evidence leaks hypothesis into observed facts.",
+      "statement": "Backup schedule shift coincides with maintenance window.",
+      "status": "corroborated",
+      "confidence": 0.55,
+      "ui_label": "source_evidence"
+    }
+  ]
+}

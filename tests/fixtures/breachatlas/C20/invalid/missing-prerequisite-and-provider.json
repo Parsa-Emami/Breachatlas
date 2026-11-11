@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {
+      "name": "unavailable_remote_provider",
+      "provider": "cloud-llm",
+      "expected_error": "ErrUnavailableProvider"
+    },
+    {
+      "name": "unsupported_schema_version",
+      "schema_version": "99",
+      "expected_error": "ErrUnsupportedVersion"
+    },
+    {
+      "name": "missing_seal_store_prerequisite",
+      "missing_seal_store": true,
+      "expected_error": "ErrMissingPrerequisite"
+    },
+    {
+      "name": "unknown_supporting_evidence_id",
+      "supporting_evidence_id": "ev-nonexistent",
+      "expected_error": "ErrMissingPrerequisite"
+    },
+    {
+      "name": "unknown_supporting_event_id",
+      "supporting_event_id": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expected_error": "ErrMissingPrerequisite"
+    }
+  ]
+}

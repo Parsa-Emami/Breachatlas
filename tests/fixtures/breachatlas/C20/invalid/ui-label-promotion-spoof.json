@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c20-promotion",
+  "attempts": [
+    {
+      "name": "claim_source_evidence_flag",
+      "hypothesis_id": "hyp-spoof-flag",
+      "author": "analyst.mina@ir.local",
+      "rationale": "Trying to mark hypothesis as raw source evidence.",
+      "statement": "Claimed as observed source fact.",
+      "claim_source_evidence": true,
+      "expected_error": "ErrPromotionForbidden"
+    },
+    {
+      "name": "claim_record_kind_observed_fact",
+      "hypothesis_id": "hyp-spoof-kind",
+      "author": "analyst.mina@ir.local",
+      "rationale": "Trying to set claim_record_kind to observed_fact.",
+      "statement": "Claimed as observed_fact via payload.",
+      "claim_record_kind": "observed_fact",
+      "expected_error": "ErrPromotionForbidden"
+    },
+    {
+      "name": "promote_method_with_ui_label",
+      "hypothesis_id": "hyp-existing-01",
+      "ui_label": "source_evidence",
+      "expected_error": "ErrPromotionForbidden"
+    }
+  ]
+}

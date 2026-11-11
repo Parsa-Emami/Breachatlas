@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "task": "C20",
+  "requirement": "F14",
+  "expected_invariants": {
+    "hypothesis_requires_author_and_rationale": true,
+    "hypothesis_record_kind_always_analyst_hypothesis": true,
+    "hypothesis_is_source_evidence_always_false": true,
+    "ui_label_cannot_promote_to_observed_fact": true,
+    "promotion_attempts_return_err_promotion_forbidden": true,
+    "epistemic_ledger_separates_observed_facts_and_hypotheses": true,
+    "restart_recovery_preserves_and_verifies_invariants": true,
+    "persisted_tampering_rejected_on_restart": true,
+    "sealed_source_bytes_unmodified": true
+  }
+}
