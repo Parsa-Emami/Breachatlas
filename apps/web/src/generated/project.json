@@ -95,7 +95,7 @@
       "id": "C07",
       "title": "feat(cases): define analyst case and evidence aggregates",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Evidence belongs to one case; cross-case access fails."
       ],

@@ -1,0 +1,12 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic case and evidence aggregate fixtures for C07 single-case ownership invariants.",
+  "sha256": {
+    "expected-output/outcomes.json": "327ecb260e9c2cfe95c1b400565f697aaaecc333347655cbf5fd7ebb95c3a837",
+    "invalid/cross-case-access.json": "c8e2415bbe1b4a39dcd8968f50ec2f91cfde26c7c6c74e200f45bbe2ee22bcb5",
+    "invalid/malformed-case.json": "5911bddbc6d02fe189485904bc21c259cbf840dd0d260895c3abd68ffc2eb45f",
+    "invalid/missing-case-prerequisite.json": "f33810065cf7828a53541b0e1f68e488d352cbe085a5fbf6877a2d1e7ac20698",
+    "invalid/unavailable-provider.json": "76fe1e028bd6e14faab7f65b34fcf24cd1fed2bd322bb66471d302a5551a6af0",
+    "positive/case-and-evidence.json": "361875c29c687d4ecb80fd49f2a53c0f41f49aeeda11b17a3707c02ffdabe90d"
+  }
+}

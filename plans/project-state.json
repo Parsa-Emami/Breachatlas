@@ -10,10 +10,11 @@
     "unified Go engine runtime and supervisor",
     "version 1 evidence manifest validation in the loopback engine and web workspace",
     "recoverable local authoritative writes storage port",
-    "pinned clean-checkout Go engine CI and fail-closed test collection"
+    "pinned clean-checkout Go engine CI and fail-closed test collection",
+    "analyst case and evidence aggregates with single-case ownership invariants"
   ],
-  "engine": "ci_verified",
-  "next_task": "C07",
+  "engine": "cases_domain_implemented",
+  "next_task": "C08",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

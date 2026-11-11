@@ -1,0 +1,22 @@
+{
+  "operation_id": "op-2026-c07-003",
+  "manifest": {
+    "schema_version": "1",
+    "case_id": "case-2026-002",
+    "evidence_id": "ev-2026-0001",
+    "sha256": "54cf8cee54db0bd7fdb5827a2b412403adfe146292a275101b9f9af213829e62",
+    "size_bytes": 417,
+    "media_type": "text/plain",
+    "acquired_at": "2026-10-15T08:14:22.123+03:30",
+    "custody_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "payload_utf8": "2026-10-15T08:14:22+03:30 auth-srv sshd[1042]: Accepted publickey for analyst from 192.0.2.10 port 54820 ssh2: ED25519 SHA256:synthKeyAnalyst1\n2026-10-15T08:14:25+03:30 auth-srv sudo: analyst : TTY=pts/0 ; PWD=/home/analyst ; USER=root ; COMMAND=/usr/bin/tar -czf /evidence/capture.tar.gz /var/log\n2026-10-15T08:15:01+03:30 auth-srv sshd[1042]: Received disconnect from 192.0.2.10 port 54820:11: disconnected by user\n",
+  "identity": {
+    "principal": "analyst-2026",
+    "role": "analyst",
+    "case_scope": "case-2026-002",
+    "public_key": "442094197fb9995136d04bde0b8c1c889470a2c5f36fe73d327b3b39958905fb",
+    "expires_at": "2028-01-01T00:00:00Z",
+    "signature": "880e4ef247ac21dda0d65f29c55c54f7987223c3750ab7311c288168d8da12c5b1c896aabdd1d17eaf3af3bbe61e7ea80ca51a34991da2bd6f79947c16cfe90f"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "operation_id": "op-2026-c07-004",
+  "manifest": {
+    "schema_version": "1",
+    "case_id": "case-missing-999",
+    "evidence_id": "ev-2026-0003",
+    "sha256": "bb889b87be6656b4f52b20b6b68c613fb20a906161a08b41afb7c953806186f8",
+    "size_bytes": 58,
+    "media_type": "text/plain",
+    "acquired_at": "2026-10-16T09:00:00+03:30",
+    "custody_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "payload_utf8": "2026-10-16T09:00:00+03:30 app-srv nginx: GET /healthz 200\n",
+  "identity": {
+    "principal": "analyst-2026",
+    "role": "analyst",
+    "case_scope": "case-missing-999",
+    "public_key": "442094197fb9995136d04bde0b8c1c889470a2c5f36fe73d327b3b39958905fb",
+    "expires_at": "2028-01-01T00:00:00Z",
+    "signature": "3f0a89323f7dbae79c54103a1d4cf1638610086cc1c6a003bd7218a9834c732b25fe5479d370ca8a1dc40e7db94e636ab3eba84d33614f18602ebeb318210b0c"
+  }
+}

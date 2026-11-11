@@ -1,0 +1,23 @@
+{
+  "operation_id": "op-2026-c07-005",
+  "manifest": {
+    "schema_version": "1",
+    "case_id": "case-2026-001",
+    "evidence_id": "ev-2026-0004",
+    "sha256": "bb889b87be6656b4f52b20b6b68c613fb20a906161a08b41afb7c953806186f8",
+    "size_bytes": 58,
+    "media_type": "text/plain",
+    "acquired_at": "2026-10-16T09:00:00+03:30",
+    "custody_root": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "payload_utf8": "2026-10-16T09:00:00+03:30 app-srv nginx: GET /healthz 200\n",
+  "identity": {
+    "principal": "analyst-2026",
+    "role": "analyst",
+    "case_scope": "case-2026-001",
+    "public_key": "442094197fb9995136d04bde0b8c1c889470a2c5f36fe73d327b3b39958905fb",
+    "expires_at": "2028-01-01T00:00:00Z",
+    "signature": "ae7b9da1e67e122616bb247eae18bbeefd992defc10db3a56ce08dd21ab9db0385f7e689c0ea458c28639692254adcdfcb7c21bd4120110b152940710b3e7002",
+    "provider": "external-cloud-idp"
+  }
+}

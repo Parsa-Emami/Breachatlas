@@ -1,52 +1,54 @@
 {
   "project": "BreachAtlas",
-  "date": "2026-11-10",
-  "base_commit": "b9b2298f8af95439d9951e88312cd4d18d7b733b",
-  "verified_source_commit": "b9b2298f8af95439d9951e88312cd4d18d7b733b",
-  "verified_source_tree": "0a3d8fbdf711c5b3b4621cd7c2d408861308a6d8",
-  "final_source_identity": "sha256:e9f88e4292c83fbe02508f3985ea6b1a7b7aa511c827493efc34a06c37b9d15b",
-  "scope": "C06 clean-checkout Go engine CI verification and fail-closed test collection",
+  "date": "2026-11-11",
+  "base_commit": "30ee23aa6ddf7ee39421120c1a65b6c4ce64db59",
+  "verified_source_commit": "30ee23aa6ddf7ee39421120c1a65b6c4ce64db59",
+  "verified_source_tree": "3bcaf51db06d9e770a3a52b67bc94039b05b880c",
+  "final_source_identity": "sha256:50a9012387712e15ffdb3e569c90e2c01dedfcc650e584c1f08a81d4eeb0d049",
+  "scope": "C07 analyst case and evidence aggregates enforcing single-case ownership",
   "core_tasks_verified": [
     "C01",
     "C02",
     "C03",
     "C04",
     "C05",
-    "C06"
+    "C06",
+    "C07"
   ],
   "changed_paths": [
-    ".github/workflows/runtime.yml",
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/engineering/ENGINE_TESTS.md",
-    "docs/evidence/C06.json",
+    "docs/evidence/C07.json",
+    "internal/cases/model.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/engine_ci_test.go",
-    "tests/fixtures/breachatlas/C06/expected-output/outcomes.json",
-    "tests/fixtures/breachatlas/C06/invalid/missing-evidence.json",
-    "tests/fixtures/breachatlas/C06/invalid/modified-byte.json",
-    "tests/fixtures/breachatlas/C06/invalid/replayed-revision.json",
-    "tests/fixtures/breachatlas/C06/invalid/untrusted-signer.json",
-    "tests/fixtures/breachatlas/C06/positive/signed-authority.json",
-    "tests/fixtures/breachatlas/C06/provenance.json"
+    "tests/case_test.go",
+    "tests/fixtures/breachatlas/C07/expected-output/outcomes.json",
+    "tests/fixtures/breachatlas/C07/invalid/cross-case-access.json",
+    "tests/fixtures/breachatlas/C07/invalid/malformed-case.json",
+    "tests/fixtures/breachatlas/C07/invalid/missing-case-prerequisite.json",
+    "tests/fixtures/breachatlas/C07/invalid/unavailable-provider.json",
+    "tests/fixtures/breachatlas/C07/positive/case-and-evidence.json",
+    "tests/fixtures/breachatlas/C07/provenance.json",
+    "tests/web/oss-tooling.test.mjs"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
     "docs/evidence/C03.json",
     "docs/evidence/C04.json",
     "docs/evidence/C05.json",
-    "docs/evidence/C06.json"
+    "docs/evidence/C06.json",
+    "docs/evidence/C07.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
     "plan": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858579",
     "web": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563",
-    "runtime": ".github/workflows/runtime.yml (pinned SHA CI workflow added in C06)"
+    "runtime": ".github/workflows/runtime.yml (pinned SHA CI workflow)"
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C07",
+  "next_task": "C08",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C07 analyst case and evidence aggregates (internal/cases/model.go and tests/case_test.go)."
+  "continuation": "Implement C08 streaming evidence upload into quarantine and hash (internal/evidence/upload.go and tests/upload_test.go)."
 }

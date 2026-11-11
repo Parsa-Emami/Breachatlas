@@ -1,0 +1,26 @@
+{
+  "positive/case-and-evidence.json": {
+    "status": "committed",
+    "cases": ["case-2026-001", "case-2026-002"],
+    "evidence_owners": {
+      "ev-2026-0001": "case-2026-001",
+      "ev-2026-0002": "case-2026-002"
+    }
+  },
+  "invalid/cross-case-access.json": {
+    "status": "error",
+    "code": "cross_case_access"
+  },
+  "invalid/missing-case-prerequisite.json": {
+    "status": "error",
+    "code": "case_not_found"
+  },
+  "invalid/malformed-case.json": {
+    "status": "error",
+    "code": "invalid_case"
+  },
+  "invalid/unavailable-provider.json": {
+    "status": "error",
+    "code": "unavailable_provider"
+  }
+}

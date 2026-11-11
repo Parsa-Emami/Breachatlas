@@ -60,10 +60,12 @@
     },
     {
       "id": "C07",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C07.json"
+      ],
+      "source_identity": "sha256:50a9012387712e15ffdb3e569c90e2c01dedfcc650e584c1f08a81d4eeb0d049",
+      "notes": "Analyst case and evidence aggregates (internal/cases/model.go) enforce single-case evidence ownership, explicit cross-case access rejection, prerequisite checks, and restart recovery."
     },
     {
       "id": "C08",
