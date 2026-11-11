@@ -25,7 +25,10 @@ jobs:
       - run: npm run validate:plan
       - run: npm run build
       - run: npm test
-      - run: npx --no-install playwright install --with-deps chromium
+      - name: Install Playwright Chromium
+        run: |
+          npx --no-install playwright install chromium
+          npx --no-install playwright install-deps chromium || echo "::warning::apt deps mirror unreachable; continuing with preinstalled runner libs before test:browser"
       - run: npm run test:browser
       - run: npm run test:clone
       - run: npm run package:web
