@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "checkpoint_id": "chk-c12-inv-stale-0001",
+  "case_id": "case-c12-001",
+  "evidence_id": "ev-c12-0001",
+  "sequence": 3,
+  "custody_root": "86e2d6a87cb9162fa36fe4a94ff009c7ec139e3738ae3ce857f72f58cde8bfe3",
+  "key_id": "key-c12-trusted-01",
+  "public_key": "08e10511fe5edddc366ec340cf5328345c714f7363cb96c654ccc69fcf151414",
+  "signature": "edc5d01bd033228a4bb78de5eedad7110e29231e104cff8e22b876ddfc9d4869ca6cb69de29dedb5627809f21ef0ba487bd6d2b21c28097466ea69dcfdde290a",
+  "issued_at": "2026-11-11T12:00:00Z",
+  "expires_at": "2027-11-11T12:00:00Z",
+  "revision": 1,
+  "metadata": {
+    "scenario": "stale_replayed_revision_attempt"
+  }
+}

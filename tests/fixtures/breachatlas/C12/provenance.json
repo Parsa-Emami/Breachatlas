@@ -1,0 +1,13 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic signed external custody checkpoint fixtures for C12.",
+  "sha256": {
+    "expected-output/outcomes.json": "d22649033afe6bd1d7c9ba4b152a8e1abf4dfccc655ddea76060cde53d852502",
+    "invalid/expired-checkpoint.json": "f989f9ec3831a2b91848160be8c2100942586ed8dd1266dbd39d4e50552ee511",
+    "invalid/ledger-rewritten-root-mismatch.json": "05fa63708eb7f7eeb8cfb8cbe774bda0a506cffb4b3584393ed3dc37f5570e12",
+    "invalid/stale-replayed-revision.json": "0228ce5ba59ea18abafcc74a79f663ea08e9974b675ed4f1d93412f276ba99a4",
+    "invalid/tampered-checkpoint-bytes.json": "a2677f0993fdb219f0b9fb538de0ce4db4666458306016593702577fe465f201",
+    "invalid/untrusted-signer.json": "d1fc1bc2720afc7be43478ec5b98f1b87f3c47a7f75f7f4c725ef5b689d1642f",
+    "positive/valid-checkpoint.json": "a6842584dfd174fd10f286916da84f7ba64e56537a2b8e205302e8d4519513ea"
+  }
+}

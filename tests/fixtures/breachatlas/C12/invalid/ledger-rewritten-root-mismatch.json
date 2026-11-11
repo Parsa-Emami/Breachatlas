@@ -1,0 +1,17 @@
+{
+  "schema_version": "1",
+  "checkpoint_id": "chk-c12-inv-rewrite-0001",
+  "case_id": "case-c12-001",
+  "evidence_id": "ev-c12-0001",
+  "sequence": 3,
+  "custody_root": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "key_id": "key-c12-trusted-01",
+  "public_key": "08e10511fe5edddc366ec340cf5328345c714f7363cb96c654ccc69fcf151414",
+  "signature": "4c728319b6b6cc0c02a652086726dab1775daec9f983af1d953b39f5b60d74982116bec2641fc289d6e2cc3485ceece6cae8585192aee065dd7a907f8390180a",
+  "issued_at": "2026-11-11T12:00:00Z",
+  "expires_at": "2027-11-11T12:00:00Z",
+  "revision": 1,
+  "metadata": {
+    "scenario": "detected_tampered_root_at_seq_3"
+  }
+}

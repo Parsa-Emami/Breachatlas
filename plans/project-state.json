@@ -1,6 +1,6 @@
 {
   "project": "BreachAtlas",
-  "reviewed_commit": "f550fe97c989c3ec05171dbfd184dd7f5288faab",
+  "reviewed_commit": "707b419f0dee51428decd7bba5d519af96ab5283",
   "readiness": "WEB_FOUNDATION",
   "core_ready": false,
   "implemented": [
@@ -15,10 +15,11 @@
     "bounded streaming evidence upload into isolated quarantine with live SHA-256 hashing",
     "durable content-addressed blob and atomic evidence manifest sealing with orphan recovery",
     "read-only sealed evidence byte verification, distinct failure classification, and Ed25519 anti-rollback authority checks",
-    "append-only attributable custody ledger with actor/timestamp/reason tracking and hash chaining"
+    "append-only attributable custody ledger with actor/timestamp/reason tracking and hash chaining",
+    "independent verification of signed externally stored custody roots, outside signer trust allowlisting, anti-rollback authority tracking, and ledger rewrite detection"
   ],
-  "engine": "custody_ledger_implemented",
-  "next_task": "C12",
+  "engine": "checkpoints_verified",
+  "next_task": "C13",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

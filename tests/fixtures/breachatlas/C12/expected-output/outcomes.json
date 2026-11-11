@@ -1,0 +1,38 @@
+{
+  "invalid/expired-checkpoint.json": {
+    "error_code": "expired_checkpoint",
+    "expired": true,
+    "status": "error",
+    "verified": false
+  },
+  "invalid/ledger-rewritten-root-mismatch.json": {
+    "error_code": "root_mismatch",
+    "ledger_rewrite_detected": true,
+    "status": "error",
+    "verified": false
+  },
+  "invalid/stale-replayed-revision.json": {
+    "anti_rollback_enforced": true,
+    "error_code": "stale_revision",
+    "status": "error",
+    "verified": false
+  },
+  "invalid/tampered-checkpoint-bytes.json": {
+    "error_code": "invalid_signature",
+    "signature_valid": false,
+    "status": "error",
+    "verified": false
+  },
+  "invalid/untrusted-signer.json": {
+    "accepted": false,
+    "error_code": "untrusted_signer",
+    "status": "error",
+    "verified": false
+  },
+  "positive/valid-checkpoint.json": {
+    "root_matches": true,
+    "signer_trusted": true,
+    "status": "verified",
+    "verified": true
+  }
+}

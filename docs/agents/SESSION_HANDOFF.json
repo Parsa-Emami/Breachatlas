@@ -1,11 +1,11 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "60190eb9071739e26f26bead4f2da8194af0f313",
-  "verified_source_commit": "60190eb9071739e26f26bead4f2da8194af0f313",
-  "verified_source_tree": "3f3703d898eb74a3d19b86ea303b87f25e861844",
-  "final_source_identity": "sha256:fbd2d24e1955e1f24058131d6af2634d2f1516c7343a100938a2c77b98eca8d4",
-  "scope": "C11 append-only attributable custody event ledger and anti-rewrite invariants",
+  "base_commit": "707b419f0dee51428decd7bba5d519af96ab5283",
+  "verified_source_commit": "707b419f0dee51428decd7bba5d519af96ab5283",
+  "verified_source_tree": "6d338122221965440e94d0f8b812e8db78c40a8c",
+  "final_source_identity": "sha256:de31d40b705f9d0605938603242e0cb1bb4dd2fc0ae5f93e0ba2c5f92dfaa9ea",
+  "scope": "C12 verification of signed externally stored custody roots, outside signer trust, anti-rollback authority tracking, and ledger rewrite detection",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -17,23 +17,25 @@
     "C08",
     "C09",
     "C10",
-    "C11"
+    "C11",
+    "C12"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C11.json",
-    "internal/custody/events.go",
+    "docs/evidence/C12.json",
+    "internal/custody/checkpoints.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/custody_test.go",
-    "tests/fixtures/breachatlas/C11/expected-output/outcomes.json",
-    "tests/fixtures/breachatlas/C11/invalid/missing-actor.json",
-    "tests/fixtures/breachatlas/C11/invalid/missing-reason.json",
-    "tests/fixtures/breachatlas/C11/invalid/tampered-ledger-rewrite.json",
-    "tests/fixtures/breachatlas/C11/invalid/unavailable-provider.json",
-    "tests/fixtures/breachatlas/C11/positive/valid-custody-chain.json",
-    "tests/fixtures/breachatlas/C11/provenance.json"
+    "tests/checkpoint_test.go",
+    "tests/fixtures/breachatlas/C12/expected-output/outcomes.json",
+    "tests/fixtures/breachatlas/C12/invalid/expired-checkpoint.json",
+    "tests/fixtures/breachatlas/C12/invalid/ledger-rewritten-root-mismatch.json",
+    "tests/fixtures/breachatlas/C12/invalid/stale-replayed-revision.json",
+    "tests/fixtures/breachatlas/C12/invalid/tampered-checkpoint-bytes.json",
+    "tests/fixtures/breachatlas/C12/invalid/untrusted-signer.json",
+    "tests/fixtures/breachatlas/C12/positive/valid-checkpoint.json",
+    "tests/fixtures/breachatlas/C12/provenance.json"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -45,7 +47,8 @@
     "docs/evidence/C08.json",
     "docs/evidence/C09.json",
     "docs/evidence/C10.json",
-    "docs/evidence/C11.json"
+    "docs/evidence/C11.json",
+    "docs/evidence/C12.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -55,7 +58,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C12",
+  "next_task": "C13",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C12 verification of signed externally stored custody roots (internal/custody/checkpoints.go and tests/checkpoint_test.go)."
+  "continuation": "Implement C13."
 }

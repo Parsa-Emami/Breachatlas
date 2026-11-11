@@ -155,7 +155,7 @@
       "id": "C12",
       "title": "feat(checkpoints): verify signed externally stored custody roots",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Independent checkpoint detects ledger rewrite; signer trust must be supplied outside bundle."
       ],

@@ -105,10 +105,12 @@
     },
     {
       "id": "C12",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C12.json"
+      ],
+      "source_identity": "sha256:de31d40b705f9d0605938603242e0cb1bb4dd2fc0ae5f93e0ba2c5f92dfaa9ea",
+      "notes": "Independent verification of signed externally stored custody roots, outside signer trust allowlisting, Ed25519 signature validation, anti-rollback CheckpointTracker, FileCheckpointStore adapter, and ledger rewrite detection verified in internal/custody/checkpoints.go and tests/checkpoint_test.go."
     },
     {
       "id": "C13",
