@@ -203,7 +203,7 @@
       "id": "C16",
       "title": "feat(artifacts): bind derived output to inputs and tools",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Derived manifest includes input hashes, tool version and config hash."
       ],

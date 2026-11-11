@@ -1,0 +1,7 @@
+{
+  "schema_version": "1",
+  "artifact_id": "art-c16-notool",
+  "case_id": "case-c16-neg",
+  "bad_tool_version": "",
+  "expected_error": "tool_binding_invalid"
+}

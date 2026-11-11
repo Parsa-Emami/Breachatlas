@@ -141,10 +141,12 @@
     },
     {
       "id": "C16",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C16.json"
+      ],
+      "source_identity": "sha256:3797295cc6b0efc1dff72829c6ad050263f7c26c1596846a69df98a3f25d2589",
+      "notes": "Derived artifact manifests bound to sealed input hashes, allowlisted tool version, deterministic config hash, and optional Ed25519 attestation with atomic staging, restart recovery, and read-only source verification in internal/artifacts/manifest.go and tests/provenance_test.go."
     },
     {
       "id": "C17",

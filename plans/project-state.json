@@ -19,10 +19,11 @@
     "independent verification of signed externally stored custody roots, outside signer trust allowlisting, anti-rollback authority tracking, and ledger rewrite detection",
     "legal holds blocking concurrent deletion and retention expiration with durable reason auditing and restart persistence",
     "fixed shipped allowlisted non-executing CSV and JSON analyzer interface with read-only sealed evidence binding",
-    "bounded analyzer sandbox isolation with read-only sealed evidence, private 0700 scratch, network guard, and deadline enforcement"
+    "bounded analyzer sandbox isolation with read-only sealed evidence, private 0700 scratch, network guard, and deadline enforcement",
+    "derived artifact provenance manifests bound to sealed input hashes, tool version, config hash, and Ed25519 attestation with atomic recovery"
   ],
-  "engine": "analyzers_isolation_verified",
-  "next_task": "C16",
+  "engine": "artifacts_provenance_verified",
+  "next_task": "C17",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

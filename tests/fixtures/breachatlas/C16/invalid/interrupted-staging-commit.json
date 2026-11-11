@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c16-interrupt",
+  "artifact_id": "art-c16-interrupt",
+  "case_id": "case-c16-recover",
+  "evidence_id": "ev-c16-recover",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "media_type": "text/csv",
+  "payload": "timestamp,event\n2026-11-11T12:00:00Z,boot\n",
+  "expected_error": "interrupted"
+}

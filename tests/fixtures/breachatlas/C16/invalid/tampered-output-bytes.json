@@ -1,0 +1,7 @@
+{
+  "schema_version": "1",
+  "artifact_id": "art-c16-tamper-output",
+  "case_id": "case-c16-neg",
+  "tamper_append": "\n/* tampered-byte */\n",
+  "expected_error": "output_tampered"
+}

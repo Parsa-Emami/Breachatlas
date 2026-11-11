@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c16-csv-001",
+  "artifact_id": "art-c16-csv-001",
+  "case_id": "case-c16-001",
+  "evidence_id": "ev-c16-csv-001",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "media_type": "text/csv",
+  "payload": "timestamp,actor,action,status\n2026-11-11T10:00:00Z,svc-auth,login,ok\n2026-11-11T10:01:00Z,svc-db,query,ok\n",
+  "expected_record_count": 2,
+  "signed": false
+}

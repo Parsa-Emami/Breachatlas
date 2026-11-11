@@ -1,0 +1,8 @@
+{
+  "schema_version": "1",
+  "artifact_id": "art-c16-badsig",
+  "case_id": "case-c16-neg",
+  "key_id": "provenance-key-2026",
+  "untrusted_key_id": "rogue-signer-key",
+  "expected_error": "invalid_signature"
+}

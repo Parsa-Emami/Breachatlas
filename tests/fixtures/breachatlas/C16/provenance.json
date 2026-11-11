@@ -1,0 +1,17 @@
+{
+  "task": "C16",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic derived artifact provenance manifest fixtures",
+  "sha256": {
+    "expected-output/provenance-outcomes.json": "0504fa3f0e7c7027118bc98e5d079fd27e840742d7780f2109ad09f1818146c2",
+    "invalid/interrupted-staging-commit.json": "1e9b8ed20a9325b624f60471603e7e24b57a718f48c8d7e7be9f80986199aeb1",
+    "invalid/invalid-signature.json": "cafda588de9a7031c6f69d06df3d3c89974aceb02539dcd765156e8f995bd363",
+    "invalid/malformed-config-hash.json": "758456fe43e643ba198de91f5bb90bc01aef37dfb321ba0b0ca3abe707cd762b",
+    "invalid/missing-sealed-prerequisite.json": "ba96218bf4afddac217979d3588842726c3112ff0abf08cbd3ae448b76863d55",
+    "invalid/missing-tool-version.json": "3285707176375989fd3159ed8284c2c13c612061ddb558ec54f10aad9e849625",
+    "invalid/tampered-input-hash.json": "b05859e91f8ef1ba89af0c21772c168faf130c229f6a7116b6e2381c4d1afec4",
+    "invalid/tampered-output-bytes.json": "017c13826ee80fc3ef19de56066cd2191ca4afdf6b775ad4c5464e92eeee46bb",
+    "positive/derived-csv-provenance.json": "70f44232bbcac99ff2f9eb1198c2a8a7049b1927718a1946b030c8002b0a7166",
+    "positive/derived-json-signed-provenance.json": "7ff6e5807d20458ac08c3487a0e4030da2d781eff92bc6f46a2f0876780bc91f"
+  }
+}

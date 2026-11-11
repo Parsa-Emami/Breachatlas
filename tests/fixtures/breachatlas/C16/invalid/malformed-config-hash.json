@@ -1,0 +1,7 @@
+{
+  "schema_version": "1",
+  "artifact_id": "art-c16-badcfg",
+  "case_id": "case-c16-neg",
+  "bad_config_hash": "not-a-64-hex-sha256-digest",
+  "expected_error": "config_hash_mismatch"
+}

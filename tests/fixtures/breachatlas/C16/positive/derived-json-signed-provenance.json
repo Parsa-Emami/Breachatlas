@@ -1,0 +1,14 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c16-json-002",
+  "artifact_id": "art-c16-json-002",
+  "case_id": "case-c16-002",
+  "evidence_id": "ev-c16-json-002",
+  "analyzer_id": "json",
+  "provider": "breachatlas",
+  "media_type": "application/json",
+  "payload": "[{\"timestamp\":\"2026-11-11T11:00:00Z\",\"host\":\"node-a\",\"event\":\"process_start\"},{\"timestamp\":\"2026-11-11T11:02:00Z\",\"host\":\"node-b\",\"event\":\"socket_bind\"}]\n",
+  "expected_record_count": 2,
+  "signed": true,
+  "key_id": "provenance-key-2026"
+}

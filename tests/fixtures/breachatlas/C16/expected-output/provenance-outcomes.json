@@ -1,0 +1,35 @@
+{
+  "schema_version": "1",
+  "task": "C16",
+  "requirement": "F10",
+  "invariants": [
+    "derived_manifest_includes_input_hashes",
+    "derived_manifest_includes_tool_version",
+    "derived_manifest_includes_config_hash",
+    "sealed_source_bytes_never_modified",
+    "restart_recovery_cleans_uncommitted_staging_and_preserves_committed_provenance"
+  ],
+  "positive_outcomes": {
+    "derived-csv-provenance.json": {
+      "verified": true,
+      "inputs_verified": true,
+      "signature_valid": false,
+      "sealed_bytes_intact": true
+    },
+    "derived-json-signed-provenance.json": {
+      "verified": true,
+      "inputs_verified": true,
+      "signature_valid": true,
+      "sealed_bytes_intact": true
+    }
+  },
+  "negative_outcomes": {
+    "missing-sealed-prerequisite.json": "ErrMissingPrerequisite",
+    "malformed-config-hash.json": "ErrConfigHashMismatch",
+    "missing-tool-version.json": "ErrToolBindingInvalid",
+    "tampered-input-hash.json": "ErrInputBindingMismatch",
+    "tampered-output-bytes.json": "ErrOutputTampered",
+    "invalid-signature.json": "ErrInvalidSignature",
+    "interrupted-staging-commit.json": "ErrInterrupted"
+  }
+}

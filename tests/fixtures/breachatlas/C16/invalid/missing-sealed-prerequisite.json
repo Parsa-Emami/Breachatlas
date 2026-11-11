@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c16-neg-missing",
+  "artifact_id": "art-c16-missing",
+  "case_id": "case-c16-neg",
+  "evidence_id": "ev-does-not-exist",
+  "analyzer_id": "csv",
+  "provider": "local",
+  "expected_error": "missing_prerequisite"
+}

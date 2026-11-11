@@ -1,0 +1,67 @@
+{
+  "commit_id": "C16",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Derived artifact provenance manifests binding derived output payloads to sealed input hashes, allowlisted tool versions, deterministic config hashes, optional Ed25519 signatures, atomic staging persistence, and restart recovery",
+  "passed": true,
+  "source_commit": "3aa7c42b2925b317ced46a8014f9f6bc0224bcd7",
+  "source_tree": "d466f79f58e15c5ecd0c213bf563ae2aca26b59c",
+  "source_identity": "sha256:3797295cc6b0efc1dff72829c6ad050263f7c26c1596846a69df98a3f25d2589",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C16/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "480bb0144cb3abfa2ebbded992e2c42f82ae1bece0fad646df6a7822db0005be"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -v -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all 11 tests in cmd/breachatlas and all test suites in tests (C05 through C16, including 5 C16 provenance binding, negative tamper detection, Ed25519 verification, interrupted staging restart recovery, sealed source immutability, and concurrent race tests)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked 232 JSON files and repository contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F10",
+      "status": "passed",
+      "observations": [
+        "DeriveFromIsolatedRun and DeriveFromAnalysis in internal/artifacts/manifest.go create DerivedManifest records deterministically binding input_hashes and per-input InputBinding metadata, allowlisted tool_version, deterministic 64-hex config_hash, and output payload SHA-256/size.",
+        "CanonicalManifestBytes and ComputeManifestDigest compute a canonical SHA-256 manifest digest; optional Ed25519 signing binds KeyID and ManifestDigest via CanonicalSignaturePayload and verifies against trusted public keys.",
+        "VerifyDerivedManifest and VerifyStoredArtifact fail closed on missing prerequisites (ErrMissingPrerequisite), malformed/missing config_hash (ErrConfigHashMismatch), missing or non-allowlisted tool bindings (ErrToolBindingInvalid), tampered input hashes (ErrInputBindingMismatch), tampered output payload bytes (ErrOutputTampered), manifest digest tampering (ErrManifestDigestMismatch), forged/untrusted Ed25519 signatures (ErrInvalidSignature/ErrUntrustedSigner), and path traversal/symlinks (ErrPathTraversal/ErrSymlinkRejected).",
+        "ArtifactStore persists derived outputs and manifests atomically using staging temp files, fsync, atomic rename, exclusive flock (.artifact.lock), idempotent operation_id replay with conflict rejection (ErrManifestConflict), and startup orphan cleanup on restart.",
+        "Pre- and post-derivation read-only verification against SealStore confirms sealed source bytes are never modified."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Timestamp normalization with explicit unknown-zone and DST ambiguity tracking (C17) and downstream timeline aggregation are deferred to their planned tasks."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/artifacts/manifest.go, tests/provenance_test.go, tests/fixtures/breachatlas/C16, and docs/evidence/C16.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}
