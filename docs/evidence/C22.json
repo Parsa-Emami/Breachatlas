@@ -1,0 +1,71 @@
+{
+  "commit_id": "C22",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Timezone-aware timeline and separated analyst notes UI (#timeline) wired via loopback relay to Go engine POST /api/v1/timeline/inspect with inspectable raw/normalized timestamps, confidence scores, accessible table alternative, JSX escaping, and 360px responsive state checks",
+  "passed": true,
+  "source_commit": "a8210de7e454a23e91c3e89fb9cf275e38de52a2",
+  "source_tree": "91a75bdd799811cc7e5bfc102e432d822914d234",
+  "source_identity": "sha256:14ad6f23d9359ebb35aeafa2d8d9b681ac025b7296f29d174f14aeaee9f3b035",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C22/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "c4e933442edffb2e084d7b5a1e8c8edfe143dba10f909acb01256a1c763ac315"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including cmd/breachatlas (TestInspectTimelineEndpointPositiveAndNotes and TestInspectTimelineEndpointNegativeCases) and tests."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:browser",
+      "exit_code": 0,
+      "output": "8 Playwright Chromium specs passed across workspace.spec.ts, evidence.spec.ts, and timeline.spec.ts (raw/normalized timestamps, unresolved DST/zones, confidence scores, accessible table alternative, separated analyst notes, inert XSS sentinels, keyboard navigation, and 360px mobile states)."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F16",
+      "status": "passed",
+      "observations": [
+        "cmd/breachatlas POST /api/v1/timeline/inspect normalizes timestamps using internal/timeline.NormalizeTimestamp, computes deterministic EventIdentity values, retains raw_timestamp and raw_confidence, keeps normalized_timestamp empty on unknown_zone and dst_ambiguous with candidate UTCs, and separates analyst notes while rejecting promotion claims.",
+        "apps/web/src/pages/Timeline.tsx renders chronological timeline cards with a keyboard-operable Table view alternative, event detail inspector, text filter, and separated Analyst hypotheses and notes region even when UILabel carries source_evidence.",
+        "Embedded <script> and <img onerror> strings in summaries and analyst author fields stay escaped as text with window.__xssSentinel remaining undefined in Chromium.",
+        "Empty, invalid, interrupted (AbortController cancel), and unavailable-provider/engine states render explicitly at 360x780 viewport with document.documentElement.scrollWidth <= window.innerWidth."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Export bundle packaging of evidence manifests and custody ledgers (C23) is deferred to its planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert apps/web/src/pages/Timeline.tsx, apps/web/tests/timeline.spec.ts, apps/web/src/main.tsx, apps/web/src/styles.css, cmd/breachatlas/timeline.go, cmd/breachatlas/timeline_test.go, cmd/breachatlas/integrity.go, cmd/breachatlas/main.go, scripts/serve-web.mjs, tests/fixtures/breachatlas/C22, and docs/evidence/C22.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

@@ -7,6 +7,7 @@ import { validateRuntimeConfig } from '../apps/web/src/lib/runtime-config.mjs';
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.webmanifest': 'application/manifest+json' };
 const manifestPath = '/api/v1/evidence-manifests/validate';
 const integrityPath = '/api/v1/evidence-integrity/inspect';
+const timelinePath = '/api/v1/timeline/inspect';
 
 function relayEngineRequest(req, res, engine, targetPath, send) {
   const fail = (status, code) => send(status, JSON.stringify({ schema_version: '1', status: 'error', error: { code } }));
@@ -65,7 +66,7 @@ export function createWebServer({ root, config, projectId, manifestEngine }) {
     };
     const localAuthority = /^(?:localhost|127\.0\.0\.1|\[::1\])(?::([0-9]{1,5}))?$/i.exec(req.headers.host ?? '');
     if (!localAuthority || (localAuthority[1] && (Number(localAuthority[1]) < 1 || Number(localAuthority[1]) > 65535))) { send(403, '{"error":"invalid_host"}'); return; }
-    if (req.url === manifestPath || req.url === integrityPath) { relayEngineRequest(req, res, manifestEngine, req.url, send); return; }
+    if (req.url === manifestPath || req.url === integrityPath || req.url === timelinePath) { relayEngineRequest(req, res, manifestEngine, req.url, send); return; }
     if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); send(405, '{"error":"method_not_allowed"}'); return; }
     let path;
     try {

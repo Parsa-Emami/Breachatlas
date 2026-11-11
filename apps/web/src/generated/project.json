@@ -275,7 +275,7 @@
       "id": "C22",
       "title": "feat(ui): render timezone aware timeline and notes",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Raw timestamp, normalized time and confidence are inspectable with table alternative."
       ],

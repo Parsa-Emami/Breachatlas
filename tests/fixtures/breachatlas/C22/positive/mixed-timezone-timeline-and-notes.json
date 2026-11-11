@@ -1,0 +1,42 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c22-ui",
+  "provider": "local",
+  "events": [
+    {
+      "evidence_id": "ev-c22-log",
+      "source_line": 10,
+      "raw_timestamp": "2026-11-01 01:30:00",
+      "zone_hint": "America/New_York",
+      "source_confidence": 0.91,
+      "event_type": "dst_ambiguous_auth",
+      "summary": "DST fallback login <script>window.__xssSentinel=true</script>"
+    },
+    {
+      "evidence_id": "ev-c22-log",
+      "source_line": 20,
+      "raw_timestamp": "2026-11-01 03:00:00",
+      "event_type": "zoneless_exec",
+      "summary": "Executed collector without timezone"
+    },
+    {
+      "evidence_id": "ev-c22-log",
+      "source_line": 30,
+      "raw_timestamp": "2026-11-01T04:00:00-05:00",
+      "source_confidence": 0.98,
+      "event_type": "resolved_export",
+      "summary": "Exported encrypted case bundle"
+    }
+  ],
+  "notes": [
+    {
+      "hypothesis_id": "hyp-c22-01",
+      "author": "analyst.mina <img src=x onerror=\"window.__xssSentinel=true\">",
+      "rationale": "Ambiguous 01:30 local wall clock precedes zoneless exec.",
+      "statement": "Repeated SSH auth occurred across DST fold-back.",
+      "status": "proposed",
+      "confidence": 0.72,
+      "ui_label": "source_evidence"
+    }
+  ]
+}

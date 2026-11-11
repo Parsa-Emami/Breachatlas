@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "task": "C22",
+  "requirement": "F16",
+  "expected_outcomes": {
+    "raw_timestamp_preserved": true,
+    "normalized_time_and_confidence_inspectable": true,
+    "table_alternative_available": true,
+    "unresolved_zones_explicit_without_fabricated_utc": true,
+    "notes_separated_with_author_and_rationale": true,
+    "xss_sentinels_rendered_as_text_only": true,
+    "states_explicit_at_360px": [
+      "empty",
+      "invalid",
+      "interrupted",
+      "unavailable"
+    ],
+    "sealed_source_bytes_unmodified": true
+  }
+}

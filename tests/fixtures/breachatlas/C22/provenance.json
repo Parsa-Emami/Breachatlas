@@ -1,0 +1,12 @@
+{
+  "task": "C22",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic timezone-aware timeline and analyst hypothesis notes fixtures",
+  "sha256": {
+    "expected-output/timeline-ui-outcomes.json": "db712dfc4e4fa78d1828635447989ea0c61bd40f2740dee5f8c477238cf1112c",
+    "invalid/unavailable-provider-timeline.json": "f6575b9749830092ee4bbcb8cffe389c8ea2f2e2fce6344fd5015e7749c94110",
+    "invalid/unsupported-version-timeline.json": "b98757b87f33af8645b706cd243e5718db7d2e8c8368211119aff638c5860661",
+    "positive/empty-timeline.json": "a4c1d79d534858bd300792865e9eefd225fdc1f96cd1ba749d2cb1ba044ff852",
+    "positive/mixed-timezone-timeline-and-notes.json": "cb5c26475b886fa6072220afb45a73bc203b49ec5732985af339db154cf21cc5"
+  }
+}

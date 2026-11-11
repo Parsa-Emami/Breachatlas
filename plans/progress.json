@@ -195,10 +195,12 @@
     },
     {
       "id": "C22",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C22.json"
+      ],
+      "source_identity": "sha256:14ad6f23d9359ebb35aeafa2d8d9b681ac025b7296f29d174f14aeaee9f3b035",
+      "notes": "Timezone-aware Timeline and Analyst Notes UI on #timeline route (apps/web/src/pages/Timeline.tsx, apps/web/src/main.tsx, apps/web/src/styles.css) wired via local relay (scripts/serve-web.mjs) to Go engine POST /api/v1/timeline/inspect (cmd/breachatlas/timeline.go); makes raw timestamps, normalized UTC times (or explicit unresolved/DST ambiguity without fake UTC), and confidence inspectable in both timeline and accessible table views, separates non-evidence analyst notes with author/rationale, escapes all strings via JSX text nodes, and handles empty/invalid/interrupted/unavailable states cleanly at 360px (verified in apps/web/tests/timeline.spec.ts and cmd/breachatlas/timeline_test.go)."
     },
     {
       "id": "C23",

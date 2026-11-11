@@ -64,6 +64,7 @@ func NewMux() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/v1/evidence-manifests/validate", validateManifest)
 	mux.HandleFunc("/api/v1/evidence-integrity/inspect", inspectEvidenceIntegrity)
+	mux.HandleFunc("/api/v1/timeline/inspect", inspectTimeline)
 
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet && r.Method != http.MethodHead {

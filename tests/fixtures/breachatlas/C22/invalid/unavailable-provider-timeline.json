@@ -1,0 +1,6 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c22-bad-provider",
+  "provider": "external-cloud",
+  "events": []
+}
