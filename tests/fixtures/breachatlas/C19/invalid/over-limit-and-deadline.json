@@ -1,0 +1,33 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c19-limits",
+  "cases": [
+    {
+      "name": "max_results_exceeds_hard_cap",
+      "max_results": 5000,
+      "expected_error": "ErrQueryLimitExceeded"
+    },
+    {
+      "name": "max_scan_events_exceeds_hard_cap",
+      "max_scan_events": 100000,
+      "expected_error": "ErrQueryLimitExceeded"
+    },
+    {
+      "name": "negative_timeout",
+      "timeout_ms": -10,
+      "expected_error": "ErrInvalidInput"
+    },
+    {
+      "name": "expired_deadline",
+      "expired_deadline": true,
+      "expected_status": "deadline_exceeded",
+      "expected_error": "ErrQueryDeadlineExceeded"
+    },
+    {
+      "name": "pre_canceled_context",
+      "canceled": true,
+      "expected_status": "canceled",
+      "expected_error": "ErrQueryCanceled"
+    }
+  ]
+}

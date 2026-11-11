@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c19-rebuild",
+  "evidence_id": "ev-c19-auth-log",
+  "zone_hint": "America/New_York",
+  "records": [
+    {
+      "row_number": 1,
+      "timestamp": "2026-06-15T09:00:00Z",
+      "event_type": "auth_login",
+      "summary": "Interactive SSH login accepted for analyst01",
+      "fields": {
+        "node_id": "ev-node-1",
+        "host": "bastion-01",
+        "user": "analyst01",
+        "related_event_ids": ["ev-node-2"]
+      }
+    },
+    {
+      "row_number": 2,
+      "timestamp": "2026-06-15 05:05:00",
+      "event_type": "process_exec",
+      "summary": "Executed bounded log collector",
+      "fields": {
+        "node_id": "ev-node-2",
+        "parent_event_id": "ev-node-1",
+        "host": "bastion-01",
+        "binary": "/usr/local/bin/collect"
+      }
+    },
+    {
+      "row_number": 3,
+      "timestamp": "2026-06-15 05:10:00",
+      "event_type": "file_export",
+      "summary": "Exported encrypted case bundle",
+      "fields": {
+        "node_id": "ev-node-3",
+        "parent_event_id": "ev-node-2",
+        "host": "bastion-01"
+      }
+    },
+    {
+      "row_number": 4,
+      "timestamp": "2026-06-15 05:15:00",
+      "event_type": "audit_close",
+      "summary": "Closed collector session",
+      "fields": {
+        "node_id": "ev-node-4",
+        "host": "bastion-01"
+      }
+    }
+  ]
+}

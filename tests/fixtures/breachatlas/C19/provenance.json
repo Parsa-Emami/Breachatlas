@@ -1,0 +1,12 @@
+{
+  "task": "C19",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic bounded timeline search and rebuild fixtures",
+  "sha256": {
+    "expected-output/search-outcomes.json": "973823927b4ae199900b9dd9dc4014f9681b4efab8f98c7a4d1f1b1364058468",
+    "invalid/cyclic-high-degree-events.json": "3a71be797831dd5d535e1a19d8d7afc68dc728b6ccb6024efd6cf1ea52f0607d",
+    "invalid/over-limit-and-deadline.json": "1bc35dc8016eb384f13039f40ef3599d1db7d494421baae2b96dc3715ebba69a",
+    "positive/bounded-query-and-rebuild.json": "409a2bdcc38152c580d8a221826e4969e0320a85ca822342af272d920e779b41",
+    "positive/reordered-vs-semantic-diff.json": "1cde8b3f43493dc4eaa6243e6f32608ae99442d56f5d4f9eb6e5a4ea3dc091f0"
+  }
+}

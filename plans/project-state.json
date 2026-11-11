@@ -22,10 +22,11 @@
     "bounded analyzer sandbox isolation with read-only sealed evidence, private 0700 scratch, network guard, and deadline enforcement",
     "derived artifact provenance manifests bound to sealed input hashes, tool version, config hash, and Ed25519 attestation with atomic recovery",
     "timestamp normalization preserving raw values and making unknown zones and DST ambiguity explicit without fabricating UTC",
-    "stable derived event identity indexing deduplicating repeated and reordered analyses without mutating sealed source bytes"
+    "stable derived event identity indexing deduplicating repeated and reordered analyses without mutating sealed source bytes",
+    "bounded local timeline search queries and deterministic atomic case index rebuild from verified derived artifacts"
   ],
-  "engine": "timeline_index_verified",
-  "next_task": "C19",
+  "engine": "bounded_timeline_search_verified",
+  "next_task": "C20",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

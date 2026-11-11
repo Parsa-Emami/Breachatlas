@@ -1,0 +1,67 @@
+{
+  "commit_id": "C19",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Bounded local timeline index search (event/scan/degree/visited caps, cycle breaking, context deadlines/cancellations) and deterministic atomic RebuildCaseIndex from verified C16 derived artifacts and immutable SealStore evidence",
+  "passed": true,
+  "source_commit": "3d96f2de4dadca585f95a184fa05531b263091da",
+  "source_tree": "97f97445f2a16909d0ca1045dcdabe2420730ae8",
+  "source_identity": "sha256:72c25b9f2da45a81fc3ccac055633ba6193b7be4305d222eac10912751c78980",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C19/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "a0e4521eead7cfdcc20fb7d610b3ac20289d06d013c5ba0a3857f51a6a44ffc6"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go engine and integration test suites (cmd/breachatlas and tests including TestC19FixturesAndProvenance, TestC19IndexRebuildAndBoundedQuery, TestC19NegativeCyclicHighDegreeAndDeadline, TestC19DeterminismAndSemanticSensitivity, and TestC19ConcurrentSearchAndRebuildRace)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F13",
+      "status": "passed",
+      "observations": [
+        "EventIndexStore.Search executes bounded local timeline queries with MaxResults, MaxScanEvents, ExpandDepth, MaxExpandDegree, and MaxVisitedNodes caps, producing explicit truncated/deadline_exceeded/canceled termination status alongside deterministic canonical ResultDigest.",
+        "Cyclic cross-event links terminate immediately via visited-node tracking with CycleDetected and explicit TruncationReason without unbounded traversal, and high-degree hub expansions stop cleanly at MaxExpandDegree.",
+        "Request bounds exceeding hard caps reject with ErrQueryLimitExceeded; negative timeouts or malformed time ranges reject with ErrInvalidInput; unavailable remote providers reject with ErrUnavailableProvider; expired deadlines and canceled contexts return ErrQueryDeadlineExceeded and ErrQueryCanceled with matching termination status.",
+        "EventIndexStore.RebuildCaseIndex deterministically discovers or accepts verified C16 derived artifacts, verifies each against ArtifactStore and SealStore, normalizes timestamps via C17 rules, deduplicates stable EventIdentity rows, replaces case index files atomically with crash-staging cleanup on reopen, and matches original search ResultDigest.",
+        "Reordered artifact sets yield identical ResultDigest while mutated semantic facts yield distinct EventIdentity and distinct ResultDigest; sealed source evidence blobs remain byte-identical across rebuilds and queries."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Analyst hypothesis and observed-fact separation (C20) is deferred to its planned task."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/timeline/search.go, tests/search_test.go, tests/fixtures/breachatlas/C19, and docs/evidence/C19.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

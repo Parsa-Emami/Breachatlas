@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c19-determinism",
+  "evidence_id": "ev-c19-det-log",
+  "baseline_records": [
+    {
+      "row_number": 10,
+      "timestamp": "2026-07-01T12:00:00Z",
+      "event_type": "dns_query",
+      "summary": "Lookup internal-vault.local",
+      "fields": {
+        "qname": "internal-vault.local",
+        "rcode": "NOERROR"
+      }
+    },
+    {
+      "row_number": 20,
+      "timestamp": "2026-07-01T12:01:00Z",
+      "event_type": "tls_connect",
+      "summary": "Established TLS session to vault",
+      "fields": {
+        "dst_port": 443,
+        "cipher": "TLS_AES_256_GCM_SHA384"
+      }
+    }
+  ],
+  "semantic_changed_records": [
+    {
+      "row_number": 10,
+      "timestamp": "2026-07-01T12:00:00Z",
+      "event_type": "dns_query",
+      "summary": "Lookup external-exfil.example",
+      "fields": {
+        "qname": "external-exfil.example",
+        "rcode": "NOERROR"
+      }
+    },
+    {
+      "row_number": 20,
+      "timestamp": "2026-07-01T12:01:00Z",
+      "event_type": "tls_connect",
+      "summary": "Established TLS session to vault",
+      "fields": {
+        "dst_port": 443,
+        "cipher": "TLS_AES_256_GCM_SHA384"
+      }
+    }
+  ]
+}

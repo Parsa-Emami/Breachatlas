@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-11",
-  "base_commit": "e579cad1f126acee2112d90dd735fee5ad0e9c2a",
-  "verified_source_commit": "e579cad1f126acee2112d90dd735fee5ad0e9c2a",
-  "verified_source_tree": "f8a6fb6b6258deae619d70721eb41bc9bd0889d9",
-  "scope": "C18 stable derived EventIdentity indexing, deduplicating duplicate and reordered analyses across C16/C17/SealStore with deterministic timeline ordering and atomic restart recovery",
+  "base_commit": "3d96f2de4dadca585f95a184fa05531b263091da",
+  "verified_source_commit": "3d96f2de4dadca585f95a184fa05531b263091da",
+  "verified_source_tree": "97f97445f2a16909d0ca1045dcdabe2420730ae8",
+  "scope": "C19 bounded local timeline index queries (max results, scan limits, degree/visited bounds, cycle termination, context deadlines/cancellations) and deterministic RebuildCaseIndex from verified C16 derived artifacts and read-only SealStore inputs",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -23,24 +23,23 @@
     "C15",
     "C16",
     "C17",
-    "C18"
+    "C18",
+    "C19"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C18.json",
-    "internal/timeline/index.go",
+    "docs/evidence/C19.json",
+    "internal/timeline/search.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C18/expected-output/timeline-index-outcomes.json",
-    "tests/fixtures/breachatlas/C18/invalid/interrupted-index-commit.json",
-    "tests/fixtures/breachatlas/C18/invalid/malformed-records.json",
-    "tests/fixtures/breachatlas/C18/invalid/missing-derived-prerequisite.json",
-    "tests/fixtures/breachatlas/C18/invalid/unavailable-provider.json",
-    "tests/fixtures/breachatlas/C18/positive/duplicate-reordered-analysis.json",
-    "tests/fixtures/breachatlas/C18/positive/multi-zone-timeline-ordering.json",
-    "tests/fixtures/breachatlas/C18/provenance.json",
-    "tests/timeline_test.go"
+    "tests/fixtures/breachatlas/C19/expected-output/search-outcomes.json",
+    "tests/fixtures/breachatlas/C19/invalid/cyclic-high-degree-events.json",
+    "tests/fixtures/breachatlas/C19/invalid/over-limit-and-deadline.json",
+    "tests/fixtures/breachatlas/C19/positive/bounded-query-and-rebuild.json",
+    "tests/fixtures/breachatlas/C19/positive/reordered-vs-semantic-diff.json",
+    "tests/fixtures/breachatlas/C19/provenance.json",
+    "tests/search_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -59,7 +58,8 @@
     "docs/evidence/C15.json",
     "docs/evidence/C16.json",
     "docs/evidence/C17.json",
-    "docs/evidence/C18.json"
+    "docs/evidence/C18.json",
+    "docs/evidence/C19.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -69,7 +69,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C19",
+  "next_task": "C20",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C19."
+  "continuation": "Implement C20."
 }

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "task": "C19",
+  "requirement": "F13",
+  "expected_invariants": {
+    "rebuild_matches_original_digest": true,
+    "reordered_input_same_digest": true,
+    "semantic_change_distinct_digest": true,
+    "cyclic_graph_terminates_with_truncation": true,
+    "high_degree_graph_terminates_at_max_degree": true,
+    "scan_limit_sets_status_truncated": true,
+    "deadline_exceeded_returns_err_and_status": true,
+    "canceled_context_returns_err_and_status": true,
+    "sealed_source_bytes_unmodified": true
+  }
+}

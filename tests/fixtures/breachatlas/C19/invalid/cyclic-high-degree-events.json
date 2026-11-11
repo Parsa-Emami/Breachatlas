@@ -1,0 +1,32 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c19-cyclic",
+  "evidence_id": "ev-c19-cyclic",
+  "cyclic_records": [
+    {
+      "row_number": 1,
+      "timestamp": "2026-08-01T10:00:00Z",
+      "event_type": "proc_spawn",
+      "summary": "Root cyclic seed node-a",
+      "fields": {
+        "node_id": "node-a",
+        "related_event_ids": ["node-b"]
+      }
+    },
+    {
+      "row_number": 2,
+      "timestamp": "2026-08-01T10:00:05Z",
+      "event_type": "proc_spawn",
+      "summary": "Cyclic child node-b back to node-a",
+      "fields": {
+        "node_id": "node-b",
+        "related_event_ids": ["node-a"]
+      }
+    }
+  ],
+  "high_degree_hub": {
+    "fanout_count": 48,
+    "max_expand_degree": 8,
+    "expected_truncation_reason": "max_degree"
+  }
+}

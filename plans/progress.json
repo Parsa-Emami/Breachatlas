@@ -168,10 +168,12 @@
     },
     {
       "id": "C19",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C19.json"
+      ],
+      "source_identity": "sha256:72c25b9f2da45a81fc3ccac055633ba6193b7be4305d222eac10912751c78980",
+      "notes": "Bounded local timeline index search (MaxResults, MaxScanEvents, ExpandDepth, MaxExpandDegree, MaxVisitedNodes, cycle detection, context deadline/cancellation) and deterministic atomic RebuildCaseIndex from verified C16 derived artifacts and immutable SealStore inputs in internal/timeline/search.go and tests/search_test.go."
     },
     {
       "id": "C20",

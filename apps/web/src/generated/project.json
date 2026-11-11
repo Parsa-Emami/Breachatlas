@@ -239,7 +239,7 @@
       "id": "C19",
       "title": "feat(search): query bounded local timeline index",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Index can be rebuilt and queries stay within event/deadline bounds."
       ],
