@@ -1,0 +1,13 @@
+{
+  "schema_version": "1",
+  "upload_id": "upl-2026-0001",
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0001",
+  "media_type": "text/plain",
+  "filename": "usb-mount.log",
+  "payload_utf8": "2026-11-11T08:00:00Z host=workstation-04 event=usb_mount serial=BA-9981\n",
+  "expected_size": 72,
+  "expected_sha256": "0da189c695e39c45dbcd4655fc63f96b05413e3ef2c06c5c13a74073180491b0",
+  "expected_status": "quarantined",
+  "expected_sealed": false
+}

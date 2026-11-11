@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "upload_id": "upl-malformed-01",
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0099",
+  "media_type": "not-a-valid-media-type",
+  "filename": "bad.log",
+  "payload_utf8": "malformed sample payload\n",
+  "expected_error": "malformed_upload"
+}

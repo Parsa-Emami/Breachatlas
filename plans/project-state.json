@@ -11,10 +11,11 @@
     "version 1 evidence manifest validation in the loopback engine and web workspace",
     "recoverable local authoritative writes storage port",
     "pinned clean-checkout Go engine CI and fail-closed test collection",
-    "analyst case and evidence aggregates with single-case ownership invariants"
+    "analyst case and evidence aggregates with single-case ownership invariants",
+    "bounded streaming evidence upload into isolated quarantine with live SHA-256 hashing"
   ],
-  "engine": "cases_domain_implemented",
-  "next_task": "C08",
+  "engine": "upload_quarantine_implemented",
+  "next_task": "C09",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

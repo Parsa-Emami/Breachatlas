@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "upload_id": "upl-oversized-01",
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0097",
+  "media_type": "application/octet-stream",
+  "filename": "disk-chunk.bin",
+  "max_bytes": 64,
+  "stream_bytes": 128,
+  "expected_error": "upload_too_large",
+  "expected_sealed": false
+}

@@ -69,10 +69,12 @@
     },
     {
       "id": "C08",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C08.json"
+      ],
+      "source_identity": "sha256:040d6af12c5b0c80068bedd421fcea1211911d83e7bdf99ab69772152db79f14",
+      "notes": "Bounded streaming evidence upload into isolated quarantine with SHA-256 hashing, path/symlink rejection, interrupt/retry safety, and sealed-byte immutability verified in internal/evidence/upload.go and tests/upload_test.go."
     },
     {
       "id": "C09",

@@ -1,0 +1,10 @@
+{
+  "schema_version": "2",
+  "upload_id": "upl-badver-01",
+  "case_id": "case-2026-001",
+  "evidence_id": "ev-2026-0098",
+  "media_type": "text/plain",
+  "filename": "future.log",
+  "payload_utf8": "unsupported schema payload\n",
+  "expected_error": "unsupported_version"
+}

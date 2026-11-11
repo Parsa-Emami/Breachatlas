@@ -1,0 +1,35 @@
+{
+  "positive/streaming-upload.json": {
+    "status": "quarantined",
+    "sealed": false,
+    "sha256": "0da189c695e39c45dbcd4655fc63f96b05413e3ef2c06c5c13a74073180491b0",
+    "size_bytes": 72
+  },
+  "invalid/malformed-upload.json": {
+    "status": "error",
+    "code": "malformed_upload",
+    "sealed": false
+  },
+  "invalid/unsupported-version.json": {
+    "status": "error",
+    "code": "unsupported_version",
+    "sealed": false
+  },
+  "invalid/oversized-upload.json": {
+    "status": "error",
+    "code": "upload_too_large",
+    "sealed": false
+  },
+  "invalid/traversal-symlink.json": {
+    "status": "error",
+    "code": "path_traversal",
+    "sealed": false
+  },
+  "invalid/interrupted-upload.json": {
+    "status": "error",
+    "code": "upload_interrupted",
+    "sealed": false,
+    "retry_status": "quarantined",
+    "prior_preserved": true
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "prior_valid_upload": {
+    "schema_version": "1",
+    "upload_id": "upl-2026-0000",
+    "case_id": "case-2026-001",
+    "evidence_id": "ev-2026-0000",
+    "media_type": "text/plain",
+    "filename": "baseline.log",
+    "payload_utf8": "baseline valid quarantine payload\n"
+  },
+  "interrupted_upload": {
+    "schema_version": "1",
+    "upload_id": "upl-2026-0002",
+    "case_id": "case-2026-001",
+    "evidence_id": "ev-2026-0002",
+    "media_type": "text/plain",
+    "filename": "retryable.log",
+    "payload_utf8": "2026-11-11T08:05:00Z host=workstation-04 event=retry_complete\n",
+    "interrupt_after_bytes": 24,
+    "expected_error": "upload_interrupted",
+    "expected_sealed": false
+  }
+}

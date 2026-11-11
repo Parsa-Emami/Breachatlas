@@ -1,0 +1,13 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic streaming quarantine and hashing fixtures for C08.",
+  "sha256": {
+    "expected-output/outcomes.json": "52bdcd5612f0fa024680a8bba3b938aee273ebcc7008224834740305c0d1a701",
+    "invalid/interrupted-upload.json": "e0708ab7220fc4a1da919755c2c04f42c8829661902636235050a40d61e15092",
+    "invalid/malformed-upload.json": "e0fbf64f759e69d858335fa1f77c166a8b5c51d42b7f05026873e17e57fedb9e",
+    "invalid/oversized-upload.json": "b825898bbb159c623beaf36da033d50b7e5494de38b1711be39a13cfc2c06294",
+    "invalid/traversal-symlink.json": "3fcebcffc5649e2454e176badd57ea0036c6079aeabd2e3ea96e439b3e1f337e",
+    "invalid/unsupported-version.json": "b6de866adbd7bb70ab9c790726c10b4f3cd76f9c148eaeaa831c8ca1fcd1b469",
+    "positive/streaming-upload.json": "8298e1becf24a1c26eb9490b426a55ce346f6207de60dd77dfa9616e66f9b690"
+  }
+}

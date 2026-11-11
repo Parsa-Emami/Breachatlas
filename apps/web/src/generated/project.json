@@ -107,7 +107,7 @@
       "id": "C08",
       "title": "feat(upload): stream evidence into quarantine and hash",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Interrupted or oversized upload never appears sealed."
       ],
