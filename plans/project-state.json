@@ -14,10 +14,11 @@
     "analyst case and evidence aggregates with single-case ownership invariants",
     "bounded streaming evidence upload into isolated quarantine with live SHA-256 hashing",
     "durable content-addressed blob and atomic evidence manifest sealing with orphan recovery",
-    "read-only sealed evidence byte verification, distinct failure classification, and Ed25519 anti-rollback authority checks"
+    "read-only sealed evidence byte verification, distinct failure classification, and Ed25519 anti-rollback authority checks",
+    "append-only attributable custody ledger with actor/timestamp/reason tracking and hash chaining"
   ],
-  "engine": "sealed_evidence_verifier_implemented",
-  "next_task": "C11",
+  "engine": "custody_ledger_implemented",
+  "next_task": "C12",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

@@ -1,0 +1,29 @@
+{
+  "schema_version": "1",
+  "case_id": "case-2026-011",
+  "evidence_id": "ev-c11-0004",
+  "events": [
+    {
+      "event_id": "cust-ev-c11-0004-0001",
+      "event_type": "acquisition",
+      "actor": "forensic-analyst-01",
+      "timestamp": "2026-11-11T11:00:00Z",
+      "reason": "Original acquisition entry",
+      "from_custodian": "scene-a",
+      "to_custodian": "lab-b"
+    },
+    {
+      "event_id": "cust-ev-c11-0004-0002",
+      "event_type": "transfer",
+      "actor": "lead-investigator",
+      "timestamp": "2026-11-11T11:30:00Z",
+      "reason": "Legitimate subsequent transfer",
+      "from_custodian": "lab-b",
+      "to_custodian": "vault-c"
+    }
+  ],
+  "tampered_event_sequence": 1,
+  "tampered_field": "actor",
+  "tampered_value": "malicious-intruder",
+  "expected_failure": "chain_corrupted"
+}

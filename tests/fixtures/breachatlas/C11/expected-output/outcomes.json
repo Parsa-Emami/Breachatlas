@@ -1,0 +1,28 @@
+{
+  "positive/valid-custody-chain.json": {
+    "status": "valid",
+    "events_count": 3,
+    "chain_verified": true,
+    "immutable": true
+  },
+  "invalid/missing-actor.json": {
+    "status": "error",
+    "error_code": "missing_actor",
+    "recorded": false
+  },
+  "invalid/missing-reason.json": {
+    "status": "error",
+    "error_code": "missing_reason",
+    "recorded": false
+  },
+  "invalid/tampered-ledger-rewrite.json": {
+    "status": "error",
+    "error_code": "chain_corrupted",
+    "rewrite_prevented": true
+  },
+  "invalid/unavailable-provider.json": {
+    "status": "error",
+    "error_code": "unavailable_provider",
+    "recorded": false
+  }
+}

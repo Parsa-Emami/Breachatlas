@@ -1,0 +1,12 @@
+{
+  "license": "Apache-2.0",
+  "origin": "Repository-authored synthetic attributable custody events and ledger anti-rewrite fixtures for C11.",
+  "sha256": {
+    "expected-output/outcomes.json": "f9fa4acbfc3847f548335645d53b5ffb769c36e53bf805c4141ed493cbf775c8",
+    "invalid/missing-actor.json": "5b9f6c742f2abcab8e246ed391c1a395ed200ef545942cf48536c8eb32edcc5b",
+    "invalid/missing-reason.json": "a3eff66ee3d47b38a75eae97164c250d2720a524f8e1f0db3451d5800888a664",
+    "invalid/tampered-ledger-rewrite.json": "647090bdb04ac0f547a3a05bc3b64317ab97469ee39dda9183f2435dc82ab18e",
+    "invalid/unavailable-provider.json": "4ea5ba78eb9194144a5a6c57ed23c39ad7b397fa662f89f6d7457e75bf8915f0",
+    "positive/valid-custody-chain.json": "00b0ce354c91932f0744f76be758bd95d150dd4a80d4f5e2f6adc014f1498e70"
+  }
+}

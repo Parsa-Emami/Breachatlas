@@ -143,7 +143,7 @@
       "id": "C11",
       "title": "feat(custody): append attributable custody events",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Every transfer records actor/time/reason; no update API rewrites event history."
       ],

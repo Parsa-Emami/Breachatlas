@@ -1,0 +1,68 @@
+{
+  "commit_id": "C11",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Append-only attributable custody event ledger recording actor, timestamp, and reason with cryptographic hash chaining and anti-rewrite invariants",
+  "passed": true,
+  "source_commit": "60190eb9071739e26f26bead4f2da8194af0f313",
+  "source_tree": "3f3703d898eb74a3d19b86ea303b87f25e861844",
+  "source_identity": "sha256:fbd2d24e1955e1f24058131d6af2634d2f1516c7343a100938a2c77b98eca8d4",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C11/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "7786474305d2140b34bb1312914782fc6486e45f527d98e2e993c4dd9d006054"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -v -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all 11 tests in cmd/breachatlas and all 21 test suites in tests (including C05, C06, C07, C08, C09, C10, and C11 custody ledger suites)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F05",
+      "status": "passed",
+      "observations": [
+        "LedgerStore.AppendEvent in internal/custody/events.go strictly validates and records actor, timestamp, reason, and custody transfer endpoints into append-only .jsonl ledger files.",
+        "Missing actor, missing reason, missing timestamp, or unavailable provider produce distinct explicit validation errors (ErrMissingActor, ErrMissingReason, ErrMissingTimestamp, ErrUnavailableProvider).",
+        "Cryptographic hash chaining binds each event to the preceding event digest (PrevHash) and computes an incremental CustodyRoot via SHA-256.",
+        "No update or delete API exists on LedgerStore; modifying or rewriting historical events on disk causes VerifyChain and OpenLedgerStore to detect chain corruption and fail closed with ErrChainCorrupted/ErrHashMismatch.",
+        "Restart and recovery retains the complete custody history, monotonic sequence numbers, and valid CustodyRoot across closing and reopening the store.",
+        "Sealed evidence source bytes are verified to remain completely unmodified during and after custody operations."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Verification of signed externally stored custody checkpoints belongs to C12 (internal/custody/checkpoints.go)."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/custody/events.go, tests/custody_test.go, and C11 fixtures/evidence. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

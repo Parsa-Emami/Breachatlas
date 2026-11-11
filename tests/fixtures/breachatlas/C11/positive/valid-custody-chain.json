@@ -1,0 +1,34 @@
+{
+  "schema_version": "1",
+  "case_id": "case-2026-011",
+  "evidence_id": "ev-c11-0001",
+  "events": [
+    {
+      "event_id": "cust-ev-c11-0001-0001",
+      "event_type": "acquisition",
+      "actor": "forensic-analyst-01",
+      "timestamp": "2026-11-11T11:00:00Z",
+      "reason": "Acquired disk image from seized server srv-core-01",
+      "from_custodian": "evidence-locker-a",
+      "to_custodian": "forensic-lab-station-1"
+    },
+    {
+      "event_id": "cust-ev-c11-0001-0002",
+      "event_type": "transfer",
+      "actor": "lead-investigator",
+      "timestamp": "2026-11-11T11:15:00Z",
+      "reason": "Transferred for timeline extraction and malware scanning",
+      "from_custodian": "forensic-lab-station-1",
+      "to_custodian": "analysis-sandbox-02"
+    },
+    {
+      "event_id": "cust-ev-c11-0001-0003",
+      "event_type": "transfer",
+      "actor": "evidence-officer",
+      "timestamp": "2026-11-11T11:45:00Z",
+      "reason": "Returned to secure cold storage locker under legal hold",
+      "from_custodian": "analysis-sandbox-02",
+      "to_custodian": "vault-safe-b"
+    }
+  ]
+}

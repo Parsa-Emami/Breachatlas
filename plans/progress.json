@@ -96,10 +96,12 @@
     },
     {
       "id": "C11",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C11.json"
+      ],
+      "source_identity": "sha256:fbd2d24e1955e1f24058131d6af2634d2f1516c7343a100938a2c77b98eca8d4",
+      "notes": "Append-only attributable custody ledger with mandatory actor/timestamp/reason records, SHA-256 cryptographic hash chaining, anti-rewrite invariants, restart durability, and sealed-byte immutability verified in internal/custody/events.go and tests/custody_test.go."
     },
     {
       "id": "C12",

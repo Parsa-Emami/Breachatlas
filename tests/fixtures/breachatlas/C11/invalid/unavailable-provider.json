@@ -1,0 +1,12 @@
+{
+  "schema_version": "1",
+  "case_id": "case-2026-011",
+  "evidence_id": "ev-c11-0005",
+  "event_id": "cust-ev-c11-0005-0001",
+  "event_type": "transfer",
+  "actor": "forensic-analyst-01",
+  "timestamp": "2026-11-11T11:00:00Z",
+  "reason": "Transfer with untrusted provider identity",
+  "provider": "untrusted-cloud-provider-x",
+  "expected_failure": "unavailable_provider"
+}
