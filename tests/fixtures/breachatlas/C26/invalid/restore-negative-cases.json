@@ -1,0 +1,81 @@
+{
+  "schema_version": "1",
+  "cases": [
+    {
+      "name": "fail_after_stage_before_commit",
+      "fault": "FailAfterStageBeforeCommit",
+      "expected_error": "ErrRestoreInterrupted"
+    },
+    {
+      "name": "fail_before_manifest_commit",
+      "fault": "FailBeforeManifestCommit",
+      "expected_error": "ErrRestoreInterrupted"
+    },
+    {
+      "name": "simulate_disk_full",
+      "fault": "SimulateDiskFull",
+      "expected_error": "ErrDiskFull"
+    },
+    {
+      "name": "quota_exceeded",
+      "max_restore_bytes": 16,
+      "expected_error": "ErrQuotaExceeded"
+    },
+    {
+      "name": "retry_budget_exceeded",
+      "max_retry_count": 2,
+      "attempt": 3,
+      "expected_error": "ErrRetryLimitExceeded"
+    },
+    {
+      "name": "operation_id_conflict",
+      "reuse_operation_id": true,
+      "expected_error": "ErrRestoreConflict"
+    },
+    {
+      "name": "lock_busy",
+      "concurrent_open": true,
+      "expected_error": "ErrLockBusy"
+    },
+    {
+      "name": "custody_rewrite_attempt",
+      "mutation": "divergent_custody_chain",
+      "expected_error": "ErrCustodyRewriteForbidden"
+    },
+    {
+      "name": "tampered_sealed_blob_in_bundle",
+      "mutation": "tamper_bundle_blob",
+      "expected_error": "ErrBundleVerificationFailed"
+    },
+    {
+      "name": "tampered_derived_artifact_in_bundle",
+      "mutation": "tamper_bundle_artifact",
+      "expected_error": "ErrBundleVerificationFailed"
+    },
+    {
+      "name": "tampered_custody_chain_in_bundle",
+      "mutation": "tamper_bundle_custody",
+      "expected_error": "ErrBundleVerificationFailed"
+    },
+    {
+      "name": "missing_bundle_manifest",
+      "mutation": "delete_bundle_manifest",
+      "expected_error": "ErrBundleVerificationFailed"
+    },
+    {
+      "name": "path_traversal_bundle_path",
+      "bundle_path": "../escape/bundle",
+      "expected_error": "ErrPathTraversal"
+    },
+    {
+      "name": "symlink_bundle_path",
+      "mutation": "symlink_bundle_dir",
+      "expected_error": "ErrSymlinkRejected"
+    },
+    {
+      "name": "unavailable_remote_provider",
+      "provider": "s3-remote-restore",
+      "expected_error": "ErrUnavailableProvider"
+    }
+  ]
+}

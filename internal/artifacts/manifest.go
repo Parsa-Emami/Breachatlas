@@ -1002,6 +1002,234 @@ func (s *ArtifactStore) GetManifest(caseID, artifactID string) (*DerivedManifest
 	return &copyM, nil
 }
 
+// RootDir returns the resolved root directory of the artifact store.
+func (s *ArtifactStore) RootDir() string {
+	if s == nil {
+		return ""
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.rootDir
+}
+
+// ListCaseManifests returns all committed DerivedManifests for caseID sorted deterministically by ArtifactID.
+func (s *ArtifactStore) ListCaseManifests(caseID string) ([]DerivedManifest, error) {
+	if s == nil {
+		return nil, ErrArtifactStoreRequired
+	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	if s.closed {
+		return nil, ErrArtifactStoreClosed
+	}
+	if err := validateIdentifier("case_id", caseID); err != nil {
+		return nil, err
+	}
+	var out []DerivedManifest
+	for _, m := range s.index.Manifests {
+		if m.CaseID == caseID {
+			out = append(out, m)
+		}
+	}
+	sort.Slice(out, func(i, j int) bool {
+		return out[i].ArtifactID < out[j].ArtifactID
+	})
+	return out, nil
+}
+
+// RestoreVerifiedArtifact verifies provenance, optional Ed25519 signature, read-only sealed inputs,
+// and exact output payload digest before atomically committing a restored derived artifact and manifest.
+func (s *ArtifactStore) RestoreVerifiedArtifact(
+	ctx context.Context,
+	sealStore *evidence.SealStore,
+	m DerivedManifest,
+	payloadBytes []byte,
+	opts VerifyOptions,
+) (*DerivedManifest, error) {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+	if s == nil {
+		return nil, ErrArtifactStoreRequired
+	}
+	if sealStore == nil {
+		return nil, fmt.Errorf("%w: sealStore is required to restore verified artifact", ErrMissingPrerequisite)
+	}
+
+	if _, err := VerifyDerivedManifest(ctx, sealStore, &m, opts); err != nil {
+		return nil, err
+	}
+
+	if int64(len(payloadBytes)) > s.maxPayload {
+		return nil, fmt.Errorf("%w: derived payload %d bytes exceeds max %d", ErrStorageQuotaExceeded, len(payloadBytes), s.maxPayload)
+	}
+	sum := sha256.Sum256(payloadBytes)
+	gotSHA := hex.EncodeToString(sum[:])
+	gotSize := int64(len(payloadBytes))
+	if gotSize != m.Output.SizeBytes || gotSHA != m.Output.SHA256 {
+		return nil, fmt.Errorf("%w: restored payload mismatch (got sha256=%s size=%d, manifest sha256=%s size=%d)",
+			ErrOutputTampered, gotSHA, gotSize, m.Output.SHA256, m.Output.SizeBytes)
+	}
+
+	var payload DerivedPayload
+	if err := json.Unmarshal(payloadBytes, &payload); err != nil {
+		return nil, fmt.Errorf("%w: parse restored payload JSON: %v", ErrMalformedPayload, err)
+	}
+	if payload.SchemaVersion != SchemaVersion {
+		return nil, fmt.Errorf("%w: payload schema_version %q", ErrUnsupportedVersion, payload.SchemaVersion)
+	}
+	if payload.CaseID != m.CaseID || payload.ArtifactID != m.ArtifactID {
+		return nil, fmt.Errorf("%w: payload case/artifact %s/%s != manifest %s/%s", ErrInputBindingMismatch, payload.CaseID, payload.ArtifactID, m.CaseID, m.ArtifactID)
+	}
+	if payload.AnalyzerID != m.AnalyzerID || payload.ToolVersion != m.ToolVersion || payload.ConfigHash != m.ConfigHash {
+		return nil, fmt.Errorf("%w: payload tool/config provenance does not match manifest", ErrToolBindingInvalid)
+	}
+	if payload.RecordCount != m.Output.RecordCount || len(payload.Records) != m.Output.RecordCount {
+		return nil, fmt.Errorf("%w: payload record count %d/%d != manifest %d", ErrMalformedPayload, payload.RecordCount, len(payload.Records), m.Output.RecordCount)
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	if s.closed {
+		return nil, ErrArtifactStoreClosed
+	}
+
+	expectedRelPath := filepath.ToSlash(filepath.Join(artifactsSubdir, m.CaseID, m.ArtifactID, outputFileName))
+	if filepath.ToSlash(filepath.Clean(filepath.FromSlash(m.Output.RelPath))) != expectedRelPath {
+		return nil, fmt.Errorf("%w: invalid output.rel_path %q (expected %q)", ErrPathTraversal, m.Output.RelPath, expectedRelPath)
+	}
+
+	finalPayloadPath := filepath.Join(s.rootDir, filepath.FromSlash(expectedRelPath))
+	if err := checkWithinDir(filepath.Join(s.rootDir, artifactsSubdir), finalPayloadPath); err != nil {
+		return nil, err
+	}
+	if _, err := ensureNoSymlink(finalPayloadPath); err != nil {
+		return nil, err
+	}
+
+	if m.OperationID != "" {
+		if prev, exists := s.index.Operations[m.OperationID]; exists {
+			if prev.CaseID != m.CaseID || prev.ArtifactID != m.ArtifactID || prev.ManifestDigest != m.ManifestDigest || prev.Output.SHA256 != m.Output.SHA256 {
+				return nil, fmt.Errorf("%w: operation %q previously committed different artifact", ErrManifestConflict, m.OperationID)
+			}
+			if err := s.verifyStoredPayloadUnlocked(prev); err != nil {
+				return nil, err
+			}
+			replay := prev
+			replay.IdempotentReplay = true
+			return &replay, nil
+		}
+	}
+
+	artifactKey := m.CaseID + "/" + m.ArtifactID
+	if prev, exists := s.index.Manifests[artifactKey]; exists {
+		if prev.ManifestDigest != m.ManifestDigest || prev.Output.SHA256 != m.Output.SHA256 {
+			return nil, fmt.Errorf("%w: artifact %s already exists with different provenance digest", ErrManifestConflict, artifactKey)
+		}
+		if err := s.verifyStoredPayloadUnlocked(prev); err != nil {
+			return nil, err
+		}
+		replay := prev
+		replay.IdempotentReplay = true
+		return &replay, nil
+	}
+
+	if s.cfg.Faults.SimulateDiskFull {
+		return nil, ErrDiskFull
+	}
+	if s.index.TotalBytes+gotSize > s.maxStorage {
+		return nil, fmt.Errorf("%w: total bytes %d + %d exceeds max %d", ErrStorageQuotaExceeded, s.index.TotalBytes, gotSize, s.maxStorage)
+	}
+
+	restored := m
+	restored.Generation = s.index.Generation + 1
+	restored.IdempotentReplay = false
+
+	manifestBytes, err := json.MarshalIndent(restored, "", "  ")
+	if err != nil {
+		return nil, fmt.Errorf("marshal restored derived manifest: %w", err)
+	}
+	manifestBytes = append(manifestBytes, '\n')
+
+	stagePrefix := fmt.Sprintf("restore-gen-%d-%s-%s", restored.Generation, restored.CaseID, restored.ArtifactID)
+	payloadTmp := filepath.Join(s.rootDir, stagingSubdir, stagePrefix+".payload.tmp")
+	manifestTmp := filepath.Join(s.rootDir, stagingSubdir, stagePrefix+".manifest.tmp")
+
+	if err := writeSyncFile(payloadTmp, payloadBytes, 0640); err != nil {
+		return nil, err
+	}
+	if err := writeSyncFile(manifestTmp, manifestBytes, 0640); err != nil {
+		_ = os.Remove(payloadTmp)
+		return nil, err
+	}
+
+	if s.cfg.Faults.FailAfterPayloadBeforeManifest {
+		return nil, ErrInterrupted
+	}
+
+	if err := os.MkdirAll(filepath.Dir(finalPayloadPath), 0750); err != nil {
+		_ = os.Remove(payloadTmp)
+		_ = os.Remove(manifestTmp)
+		return nil, fmt.Errorf("create restored artifact dir: %w", err)
+	}
+	if err := os.Rename(payloadTmp, finalPayloadPath); err != nil {
+		_ = os.Remove(payloadTmp)
+		_ = os.Remove(manifestTmp)
+		return nil, fmt.Errorf("commit restored payload: %w", err)
+	}
+	if s.cfg.SyncDir {
+		_ = syncDir(filepath.Dir(finalPayloadPath))
+	}
+
+	finalManifestPath := filepath.Join(s.rootDir, manifestsSubdir, restored.CaseID, restored.ArtifactID+".manifest.json")
+	if err := checkWithinDir(s.rootDir, finalManifestPath); err != nil {
+		_ = os.Remove(manifestTmp)
+		return nil, err
+	}
+	if err := os.MkdirAll(filepath.Dir(finalManifestPath), 0750); err != nil {
+		_ = os.Remove(manifestTmp)
+		return nil, fmt.Errorf("create restored manifest dir: %w", err)
+	}
+	if err := os.Rename(manifestTmp, finalManifestPath); err != nil {
+		_ = os.Remove(manifestTmp)
+		return nil, fmt.Errorf("commit restored manifest: %w", err)
+	}
+	if s.cfg.SyncDir {
+		_ = syncDir(filepath.Dir(finalManifestPath))
+	}
+
+	nextIndex := s.index
+	nextIndex.Generation = restored.Generation
+	nextIndex.TotalBytes += gotSize
+	nextOps := make(map[string]DerivedManifest, len(s.index.Operations)+1)
+	for k, v := range s.index.Operations {
+		nextOps[k] = v
+	}
+	if restored.OperationID != "" {
+		nextOps[restored.OperationID] = restored
+	}
+	nextManifests := make(map[string]DerivedManifest, len(s.index.Manifests)+1)
+	for k, v := range s.index.Manifests {
+		nextManifests[k] = v
+	}
+	nextManifests[artifactKey] = restored
+	nextIndex.Operations = nextOps
+	nextIndex.Manifests = nextManifests
+
+	if err := s.persistIndexUnlocked(nextIndex); err != nil {
+		return nil, err
+	}
+	s.index = nextIndex
+
+	out := restored
+	return &out, nil
+}
+
 // VerifyStoredArtifact performs full provenance, disk payload digest, sealed input binding,
 // and optional Ed25519 signature verification for a persisted artifact.
 func (s *ArtifactStore) VerifyStoredArtifact(

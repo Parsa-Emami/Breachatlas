@@ -29,10 +29,11 @@
     "timezone-aware timeline and separated analyst notes UI inspecting raw timestamps, normalized UTC conversions, unresolved DST/zones, and confidence with table alternative",
     "portable self-contained export packaging binding selected sealed evidence, derived artifacts, custody events, and verified checkpoints without modifying sealed source bytes",
     "standalone offline verifier CLI and domain verification engine validating file checksums, sealed blobs, custody chains, checkpoints, derived artifacts, raw timestamps, and distinct unsigned vs trusted signature status without requiring a server",
-    "retention store forbidding automatic raw-evidence TTL while enforcing legal hold precedence and recording signed immutable destruction tombstones and audit logs"
+    "retention store forbidding automatic raw-evidence TTL while enforcing legal hold precedence and recording signed immutable destruction tombstones and audit logs",
+    "cross-store case consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild without custody rewrite or sealed-byte mutation"
   ],
-  "engine": "retention_tombstone_verified",
-  "next_task": "C26",
+  "engine": "recovery_restore_verified",
+  "next_task": "C27",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

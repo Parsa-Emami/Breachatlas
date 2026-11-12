@@ -1,0 +1,65 @@
+{
+  "commit_id": "C26",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Cross-store case consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild without custody rewrite or sealed-byte mutation in internal/recovery/restore.go, internal/artifacts/manifest.go, internal/custody/events.go, and internal/evidence/seal.go",
+  "passed": true,
+  "source_commit": "1563ea1ad2a046ebfafda9d01a69f4eb7e2f72ae",
+  "source_tree": "0a5c60a56940d0242f60d11ea68adaedb5291abf",
+  "source_identity": "sha256:3126ad1055e77fccfe953ff422dca98adecfb90065bac90dc5d4e20f88c70cd7",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C26/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "f41c4f4daf1364f110be8684f755ef3bf0e61527b4896a92e24abe21bb11c55c"
+  },
+  "commands": [
+    {
+      "command": "npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including tests/restore_test.go (TestC26FixturesAndProvenance, TestRestoreCrossChecksAndTimelineRebuildWithoutCustodyRewrite, TestRestoreBoundaryCrashRecovery, TestRestoreReplayQuotaLockAndNegativeCases, TestRestoreEdgeCasesAndConcurrentSafety, and TestRestoreAdversarialBreakage)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, TypeScript check, Vite build, and web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "F20",
+      "status": "passed",
+      "observations": [
+        "RestoreStore.RestoreFromBundle verifies portable export bundles offline via export.VerifyBundle, cross-checks sealed blob digests, manifests, custody hash chains, signed checkpoints, and derived artifact provenance/input bindings before staging, and commits target stores without mutating sealed source bytes (SealedBytesModified == false) or rewriting existing custody ledgers (CustodyRewritten == false).",
+        "RestoreStore.VerifyAndRebuildCase cross-checks SealStore, LedgerStore, FileCheckpointStore, ArtifactStore, and optional RetentionStore tombstones, recovers from deleted or corrupted derived timeline index files, and rebuilds EventIndexStore deterministically with SearchResult.ResultDigest parity and preserved raw timestamps and DST ambiguity.",
+        "Boundary interruptions at FailAfterStageBeforeCommit and FailBeforeManifestCommit clean partial staging artifacts on restart and expose only the complete prior authoritative state; ACK-loss replays return IdempotentReplay == true with zero duplicate side effects; conflicting OperationID, quota/retry/disk-full limits, concurrent flock contention, divergent custody rewrite attempts, tamper, path traversal, and symlink inputs fail closed."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "UI wiring for restore/retention workflows, performance benchmarking against hardware targets, and clean-host clone-to-value end-to-end packaging remain tracked in downstream planned tasks (C27+)."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/recovery/restore.go, tests/restore_test.go, docs/evidence/restore-template.md, tests/fixtures/breachatlas/C26, docs/evidence/C26.json, and the minimal helper additions in internal/artifacts/manifest.go, internal/custody/events.go, and internal/evidence/seal.go. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

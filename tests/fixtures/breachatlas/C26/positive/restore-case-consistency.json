@@ -1,0 +1,41 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c26-rec-001",
+  "evidence_id": "ev-c26-auth-01",
+  "artifact_id": "art-c26-timeline-01",
+  "bundle_id": "bnd-c26-001",
+  "operation_id_restore": "op-c26-restore-001",
+  "operation_id_rebuild": "op-c26-rebuild-001",
+  "key_id_checkpoint": "ed25519-c26-chk-key1",
+  "key_id_bundle": "ed25519-c26-bnd-key1",
+  "key_id_artifact": "ed25519-c26-art-key1",
+  "zone_hint": "America/New_York",
+  "source_confidence": 0.95,
+  "provider": "local",
+  "payload_jsonl": "{\"timestamp\":\"2026-11-01T05:30:00Z\",\"event_type\":\"auth_success\",\"summary\":\"Service login verified\",\"host\":\"bastion-01\",\"account\":\"analyst-mina\"}\n{\"timestamp\":\"2026-11-01 01:30:00\",\"event_type\":\"session_pivot\",\"summary\":\"Ambiguous DST fall-back local timestamp\",\"host\":\"bastion-01\",\"account\":\"analyst-mina\"}\n{\"timestamp\":\"2026-11-01 06:15:00\",\"event_type\":\"sudo_exec\",\"summary\":\"Read-only inspection command\",\"host\":\"app-02\",\"account\":\"svc-audit\"}\n",
+  "custody_events": [
+    {
+      "event_id": "cust-c26-01",
+      "event_type": "intake_seal",
+      "actor": "analyst-mina",
+      "timestamp": "2026-11-01T07:00:00Z",
+      "reason": "Initial synthetic intake and quarantine seal for C26 recovery verification."
+    },
+    {
+      "event_id": "cust-c26-02",
+      "event_type": "transfer",
+      "actor": "custodian-ali",
+      "timestamp": "2026-11-01T07:15:00Z",
+      "reason": "Transferred verified evidence package to clean-host recovery workspace.",
+      "from_custodian": "analyst-mina",
+      "to_custodian": "custodian-ali"
+    }
+  ],
+  "hypothesis": {
+    "hypothesis_id": "hyp-c26-001",
+    "author": "analyst-mina",
+    "rationale": "Sudden sudo execution after bastion login warrants timeline verification.",
+    "statement": "Possible privilege escalation from bastion-01 to app-02.",
+    "ui_label": "Escalation Lead"
+  }
+}

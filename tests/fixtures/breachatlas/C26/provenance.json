@@ -1,0 +1,10 @@
+{
+  "task": "C26",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic case restore, cross-store consistency check, derived timeline rebuild, fault-boundary, and custody-immutability fixtures",
+  "sha256": {
+    "expected-output/restore-outcomes.json": "9e351e52bc76632c3197a8cd7c1e2f523ff7f0b065995117cb82e90e8ed4a021",
+    "invalid/restore-negative-cases.json": "e76611f403f98ef8f89e21bbdfe9cee79585211b956669745ba3d884b554e81f",
+    "positive/restore-case-consistency.json": "9ac6cc57ed386226d234b7eb55dd1c4502fd40eb655dd721888d5741a2ada430"
+  }
+}

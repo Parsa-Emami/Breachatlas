@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
-  "date": "2026-11-11",
-  "base_commit": "43ed02d97b07e5bd3d23da234c2fc874b128039a",
-  "verified_source_commit": "43ed02d97b07e5bd3d23da234c2fc874b128039a",
-  "verified_source_tree": "96d40d6163126a4c51b709e1528e28174c5928fb",
-  "scope": "C25 retention policy and explicit operator destruction tombstone/audit store in internal/retention/destroy.go forbidding automatic raw-evidence TTL and honoring active legal holds",
+  "date": "2026-11-12",
+  "base_commit": "1563ea1ad2a046ebfafda9d01a69f4eb7e2f72ae",
+  "verified_source_commit": "1563ea1ad2a046ebfafda9d01a69f4eb7e2f72ae",
+  "verified_source_tree": "0a5c60a56940d0242f60d11ea68adaedb5291abf",
+  "scope": "C26 cross-store consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild without custody rewrite in internal/recovery/restore.go",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -30,20 +30,25 @@
     "C22",
     "C23",
     "C24",
-    "C25"
+    "C25",
+    "C26"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C25.json",
-    "internal/retention/destroy.go",
+    "docs/evidence/C26.json",
+    "docs/evidence/restore-template.md",
+    "internal/artifacts/manifest.go",
+    "internal/custody/events.go",
+    "internal/evidence/seal.go",
+    "internal/recovery/restore.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C25/expected-output/retention-outcomes.json",
-    "tests/fixtures/breachatlas/C25/invalid/rejected-destruction-cases.json",
-    "tests/fixtures/breachatlas/C25/positive/explicit-destruction.json",
-    "tests/fixtures/breachatlas/C25/provenance.json",
-    "tests/retention_test.go"
+    "tests/fixtures/breachatlas/C26/expected-output/restore-outcomes.json",
+    "tests/fixtures/breachatlas/C26/invalid/restore-negative-cases.json",
+    "tests/fixtures/breachatlas/C26/positive/restore-case-consistency.json",
+    "tests/fixtures/breachatlas/C26/provenance.json",
+    "tests/restore_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -69,7 +74,8 @@
     "docs/evidence/C22.json",
     "docs/evidence/C23.json",
     "docs/evidence/C24.json",
-    "docs/evidence/C25.json"
+    "docs/evidence/C25.json",
+    "docs/evidence/C26.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -79,7 +85,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C26",
+  "next_task": "C27",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C26."
+  "continuation": "Implement C27."
 }

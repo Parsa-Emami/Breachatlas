@@ -793,6 +793,20 @@ func (s *SealStore) TotalBytes() int64 {
 	return s.index.TotalBytes
 }
 
+// RootDir returns the resolved root directory of the seal store.
+func (s *SealStore) RootDir() string {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.rootDir
+}
+
+// QuarantineDir returns the configured quarantine directory of the seal store, if any.
+func (s *SealStore) QuarantineDir() string {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.quarantineDir
+}
+
 // Close releases the exclusive file lock held by SealStore.
 func (s *SealStore) Close() error {
 	s.mu.Lock()

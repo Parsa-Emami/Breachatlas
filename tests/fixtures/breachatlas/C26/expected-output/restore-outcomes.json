@@ -1,0 +1,26 @@
+{
+  "schema_version": "1",
+  "bundle_restore": {
+    "verified": true,
+    "custody_rewritten": false,
+    "sealed_bytes_modified": false,
+    "timeline_rebuilt": true,
+    "rebuilt_timeline_entries": 3,
+    "raw_timestamps_preserved": true,
+    "search_parity": true
+  },
+  "consistency_rebuild": {
+    "verified_evidence_count": 1,
+    "verified_artifact_count": 1,
+    "custody_rewritten": false,
+    "sealed_bytes_modified": false,
+    "timeline_rebuilt": true,
+    "rebuilt_timeline_entries": 3,
+    "search_parity": true
+  },
+  "ack_loss_replay": {
+    "idempotent_replay": true,
+    "custody_rewritten": false,
+    "sealed_bytes_modified": false
+  }
+}

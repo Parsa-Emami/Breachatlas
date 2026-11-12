@@ -323,7 +323,7 @@
       "id": "C26",
       "title": "test(recovery): restore case bytes custody and derived indexes",
       "stage": "domain",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Restore cross-checks manifest/file consistency and rebuilds timeline without custody rewrite."
       ],

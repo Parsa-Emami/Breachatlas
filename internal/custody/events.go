@@ -557,6 +557,269 @@ func (s *LedgerStore) VerifyChain(caseID, evidenceID string) (bool, error) {
 	return true, nil
 }
 
+// CustodyDir returns the resolved custody directory storing <caseID>/<evidenceID>.jsonl chains.
+func (s *LedgerStore) CustodyDir() string {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	return s.rootDir
+}
+
+// VerifyChainFileOnDisk re-reads and verifies the persisted <caseID>/<evidenceID>.jsonl file
+// against cryptographic chain invariants and the store's loaded in-memory chain.
+func (s *LedgerStore) VerifyChainFileOnDisk(caseID, evidenceID string) error {
+	if s == nil {
+		return ErrStoreDirRequired
+	}
+	if !isValidIdentifier(caseID) {
+		return fmt.Errorf("%w: invalid case_id %q", ErrInvalidEvent, caseID)
+	}
+	if !isValidIdentifier(evidenceID) {
+		return fmt.Errorf("%w: invalid evidence_id %q", ErrInvalidEvent, evidenceID)
+	}
+
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	if s.closed {
+		return ErrStoreClosed
+	}
+
+	key := caseID + "/" + evidenceID
+	caseDir := filepath.Join(s.rootDir, caseID)
+	if err := checkWithinDir(s.rootDir, caseDir); err != nil {
+		return err
+	}
+	filePath := filepath.Join(caseDir, evidenceID+".jsonl")
+	if err := checkWithinDir(caseDir, filePath); err != nil {
+		return err
+	}
+	if _, err := ensureNoSymlink(filePath); err != nil {
+		return err
+	}
+
+	memChain := s.chains[key]
+	diskEvents, err := loadAndVerifyFile(filePath, caseID, evidenceID)
+	if err != nil {
+		if os.IsNotExist(err) {
+			if len(memChain) == 0 {
+				return fmt.Errorf("%w: missing custody file for %s", ErrChainCorrupted, key)
+			}
+			return fmt.Errorf("%w: missing on-disk custody file for loaded chain %s", ErrChainCorrupted, key)
+		}
+		return err
+	}
+	if len(diskEvents) == 0 {
+		return fmt.Errorf("%w: empty custody file for %s", ErrChainCorrupted, key)
+	}
+	if err := verifyCandidateChain(caseID, evidenceID, diskEvents); err != nil {
+		return err
+	}
+	if !custodyChainsEqual(memChain, diskEvents) {
+		return fmt.Errorf("%w: on-disk custody file %s diverges from in-memory ledger", ErrChainCorrupted, key)
+	}
+	return nil
+}
+
+// RestoreVerifiedChain atomically imports a verified custody chain when absent on disk/in memory.
+// If a chain already exists for (caseID, evidenceID), it is never rewritten or truncated:
+// an identical chain returns nil (idempotent), while any divergence returns ErrImmutableHistory.
+func (s *LedgerStore) RestoreVerifiedChain(ctx context.Context, caseID, evidenceID string, events []CustodyEvent) error {
+	if ctx != nil && ctx.Err() != nil {
+		return ctx.Err()
+	}
+	if !isValidIdentifier(caseID) {
+		return fmt.Errorf("%w: invalid case_id %q", ErrInvalidEvent, caseID)
+	}
+	if !isValidIdentifier(evidenceID) {
+		return fmt.Errorf("%w: invalid evidence_id %q", ErrInvalidEvent, evidenceID)
+	}
+	if len(events) == 0 {
+		return fmt.Errorf("%w: cannot restore empty custody chain", ErrInvalidEvent)
+	}
+
+	if err := verifyCandidateChain(caseID, evidenceID, events); err != nil {
+		return err
+	}
+
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	if s.closed {
+		return ErrStoreClosed
+	}
+
+	key := caseID + "/" + evidenceID
+	caseDir := filepath.Join(s.rootDir, caseID)
+	if err := checkWithinDir(s.rootDir, caseDir); err != nil {
+		return err
+	}
+	filePath := filepath.Join(caseDir, evidenceID+".jsonl")
+	if err := checkWithinDir(caseDir, filePath); err != nil {
+		return err
+	}
+	if _, err := ensureNoSymlink(filePath); err != nil {
+		return err
+	}
+
+	// Never overwrite, rewrite, or truncate an existing custody chain.
+	if existing, ok := s.chains[key]; ok {
+		if !custodyChainsEqual(existing, events) {
+			return fmt.Errorf("%w: existing custody chain %s differs from restore candidate", ErrImmutableHistory, key)
+		}
+		diskEvents, loadErr := loadAndVerifyFile(filePath, caseID, evidenceID)
+		if loadErr != nil || !custodyChainsEqual(diskEvents, existing) {
+			return fmt.Errorf("%w: on-disk custody file %s missing or diverges from loaded chain (%v)", ErrImmutableHistory, key, loadErr)
+		}
+		return nil
+	}
+	if _, err := os.Lstat(filePath); err == nil {
+		diskEvents, loadErr := loadAndVerifyFile(filePath, caseID, evidenceID)
+		if loadErr != nil {
+			return fmt.Errorf("%w: existing custody file %s invalid: %v", ErrImmutableHistory, key, loadErr)
+		}
+		if custodyChainsEqual(diskEvents, events) {
+			s.chains[key] = diskEvents
+			return nil
+		}
+		return fmt.Errorf("%w: existing custody file %s differs from restore candidate", ErrImmutableHistory, key)
+	} else if !os.IsNotExist(err) {
+		return err
+	}
+
+	if err := os.MkdirAll(caseDir, 0o750); err != nil {
+		return fmt.Errorf("create case custody dir: %w", err)
+	}
+
+	var buf strings.Builder
+	for _, ev := range events {
+		line, err := json.Marshal(ev)
+		if err != nil {
+			return fmt.Errorf("marshal custody event: %w", err)
+		}
+		buf.Write(line)
+		buf.WriteByte('\n')
+	}
+
+	tmpPath := filepath.Join(caseDir, fmt.Sprintf(".%s.%d.jsonl.tmp", evidenceID, time.Now().UnixNano()))
+	if _, err := ensureNoSymlink(tmpPath); err != nil {
+		return err
+	}
+	f, err := os.OpenFile(tmpPath, os.O_CREATE|os.O_WRONLY|os.O_EXCL, 0o600)
+	if err != nil {
+		return fmt.Errorf("create staged custody file: %w", err)
+	}
+	if _, err := f.WriteString(buf.String()); err != nil {
+		_ = f.Close()
+		_ = os.Remove(tmpPath)
+		return fmt.Errorf("write staged custody file: %w", err)
+	}
+	if err := f.Sync(); err != nil {
+		_ = f.Close()
+		_ = os.Remove(tmpPath)
+		return fmt.Errorf("sync staged custody file: %w", err)
+	}
+	if err := f.Close(); err != nil {
+		_ = os.Remove(tmpPath)
+		return fmt.Errorf("close staged custody file: %w", err)
+	}
+	if err := os.Rename(tmpPath, filePath); err != nil {
+		_ = os.Remove(tmpPath)
+		return fmt.Errorf("commit custody chain %s: %w", key, err)
+	}
+	if s.syncDir {
+		if df, err := os.Open(caseDir); err == nil {
+			_ = df.Sync()
+			_ = df.Close()
+		}
+	}
+
+	copied := make([]CustodyEvent, len(events))
+	copy(copied, events)
+	s.chains[key] = copied
+	return nil
+}
+
+func verifyCandidateChain(caseID, evidenceID string, events []CustodyEvent) error {
+	expectedPrevHash := GenesisPrevHash
+	expectedPrevRoot := GenesisPrevHash
+	var prevTime time.Time
+
+	for i, ev := range events {
+		expectedSeq := uint64(i + 1)
+		if ev.SchemaVersion != SchemaVersion {
+			return fmt.Errorf("%w: unsupported event schema_version %q at sequence %d", ErrInvalidEvent, ev.SchemaVersion, expectedSeq)
+		}
+		if ev.CaseID != caseID || ev.EvidenceID != evidenceID {
+			return fmt.Errorf("%w: event case/evidence mismatch at sequence %d", ErrChainCorrupted, expectedSeq)
+		}
+		if !isValidIdentifier(ev.EventID) {
+			return fmt.Errorf("%w: invalid event_id %q", ErrInvalidEvent, ev.EventID)
+		}
+		if strings.TrimSpace(ev.Actor) == "" || !isValidIdentifier(ev.Actor) {
+			return fmt.Errorf("%w: invalid actor at sequence %d", ErrInvalidEvent, expectedSeq)
+		}
+		if strings.TrimSpace(ev.Reason) == "" {
+			return ErrMissingReason
+		}
+		if !timestampRegex.MatchString(ev.Timestamp) {
+			return fmt.Errorf("%w: %q", ErrInvalidTimestamp, ev.Timestamp)
+		}
+		currTime, err := time.Parse(time.RFC3339Nano, ev.Timestamp)
+		if err != nil {
+			return fmt.Errorf("%w: %v", ErrInvalidTimestamp, err)
+		}
+		if i > 0 && currTime.Before(prevTime) {
+			return fmt.Errorf("%w: non-monotonic timestamp at sequence %d", ErrInvalidTimestamp, expectedSeq)
+		}
+		prevTime = currTime
+		if !allowedProviders[ev.Provider] {
+			return fmt.Errorf("%w: %q", ErrUnavailableProvider, ev.Provider)
+		}
+		if ev.Sequence != expectedSeq {
+			return fmt.Errorf("%w: sequence %d != expected %d", ErrSequenceMismatch, ev.Sequence, expectedSeq)
+		}
+		if ev.PrevHash != expectedPrevHash {
+			return fmt.Errorf("%w: prev_hash mismatch at sequence %d", ErrChainCorrupted, ev.Sequence)
+		}
+		digest := ComputeEventDigest(ev)
+		if ev.EventDigest != digest {
+			return fmt.Errorf("%w: digest mismatch at sequence %d", ErrHashMismatch, ev.Sequence)
+		}
+		root := ComputeCustodyRoot(expectedPrevRoot, digest)
+		if ev.CustodyRoot != root {
+			return fmt.Errorf("%w: custody root mismatch at sequence %d", ErrChainCorrupted, ev.Sequence)
+		}
+		if ev.PublicKey != "" || ev.Signature != "" {
+			pubBytes, err := hex.DecodeString(ev.PublicKey)
+			if err != nil || len(pubBytes) != ed25519.PublicKeySize {
+				return fmt.Errorf("%w: invalid public key at sequence %d", ErrInvalidEvent, ev.Sequence)
+			}
+			sigBytes, err := hex.DecodeString(ev.Signature)
+			if err != nil || len(sigBytes) != ed25519.SignatureSize {
+				return fmt.Errorf("%w: invalid signature at sequence %d", ErrInvalidEvent, ev.Sequence)
+			}
+			if !ed25519.Verify(pubBytes, CanonicalEventBytes(ev), sigBytes) {
+				return fmt.Errorf("%w: signature verification failed at sequence %d", ErrChainCorrupted, ev.Sequence)
+			}
+		}
+		expectedPrevHash = ev.EventDigest
+		expectedPrevRoot = ev.CustodyRoot
+	}
+	return nil
+}
+
+func custodyChainsEqual(a, b []CustodyEvent) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
 // Close closes the ledger store.
 func (s *LedgerStore) Close() error {
 	s.mu.Lock()

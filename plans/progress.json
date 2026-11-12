@@ -231,10 +231,12 @@
     },
     {
       "id": "C26",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C26.json"
+      ],
+      "source_identity": "sha256:3126ad1055e77fccfe953ff422dca98adecfb90065bac90dc5d4e20f88c70cd7",
+      "notes": "Cross-store case consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild in internal/recovery/restore.go, internal/artifacts/manifest.go, internal/custody/events.go, and internal/evidence/seal.go without custody rewrite or sealed-byte mutation; verified against boundary crashes, ACK-loss idempotent replay, quota/retry/disk-full limits, lock contention, and tamper/traversal/symlink negative cases in tests/restore_test.go and documented in docs/evidence/restore-template.md."
     },
     {
       "id": "C27",
