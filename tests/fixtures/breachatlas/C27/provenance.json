@@ -1,0 +1,10 @@
+{
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic security, authorization, XSS/import, and abuse-boundary fixtures",
+  "sha256": {
+    "expected-output/security-outcomes.json": "44e2bbd3351b80e85dab8903331a776b363fb026d98d080e355c912dbf4ab158",
+    "invalid/security-abuse-cases.json": "282e2470bd9739e78137116d789928830b9d6c2ea20508f64b47aa84ae2add05",
+    "positive/authorized-security-baseline.json": "38e7c593316a40a70a27fc6ef6749d2d7c7c869fdf92b256d41c5a17fa112343"
+  },
+  "task": "C27"
+}

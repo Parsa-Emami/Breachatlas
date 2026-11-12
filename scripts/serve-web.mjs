@@ -9,6 +9,43 @@ const manifestPath = '/api/v1/evidence-manifests/validate';
 const integrityPath = '/api/v1/evidence-integrity/inspect';
 const timelinePath = '/api/v1/timeline/inspect';
 
+const forgedApiHeaders = new Set([
+  'x-identity-override',
+  'x-forwarded-user',
+  'x-forwarded-host',
+  'x-forwarded-role',
+  'x-role',
+  'x-case-scope',
+  'x-provider',
+  'x-auth-user',
+  'x-user-override',
+]);
+
+function hasDisallowedOriginOrSite(req) {
+  const secFetchRaw = Array.isArray(req.headers['sec-fetch-site'])
+    ? req.headers['sec-fetch-site'].join(',')
+    : String(req.headers['sec-fetch-site'] ?? '');
+  for (const part of secFetchRaw.split(',')) {
+    if (part.trim().toLowerCase() === 'cross-site') return true;
+  }
+  const host = String(req.headers.host ?? '').toLowerCase();
+  const originRaw = req.headers.origin;
+  if (originRaw !== undefined) {
+    const origins = Array.isArray(originRaw) ? originRaw : [String(originRaw)];
+    for (const entry of origins) {
+      for (const part of entry.split(',')) {
+        const origin = part.trim().toLowerCase();
+        if (origin !== '' && origin !== `http://${host}` && origin !== `https://${host}`) return true;
+      }
+    }
+  }
+  return false;
+}
+
+function hasForgedApiHeader(headers) {
+  return Object.keys(headers).some(name => forgedApiHeaders.has(name.trim().toLowerCase()));
+}
+
 function relayEngineRequest(req, res, engine, targetPath, send) {
   const fail = (status, code) => send(status, JSON.stringify({ schema_version: '1', status: 'error', error: { code } }));
   if (req.method !== 'POST') {
@@ -16,9 +53,12 @@ function relayEngineRequest(req, res, engine, targetPath, send) {
     fail(405, 'method_not_allowed');
     return;
   }
-  if (req.headers['sec-fetch-site'] === 'cross-site' ||
-      (req.headers.origin && req.headers.origin !== `http://${req.headers.host}` && req.headers.origin !== `https://${req.headers.host}`)) {
+  if (hasDisallowedOriginOrSite(req)) {
     fail(403, 'origin_not_allowed');
+    return;
+  }
+  if (hasForgedApiHeader(req.headers)) {
+    fail(403, 'forged_header');
     return;
   }
   if (!engine) {
@@ -66,21 +106,32 @@ export function createWebServer({ root, config, projectId, manifestEngine }) {
     };
     const localAuthority = /^(?:localhost|127\.0\.0\.1|\[::1\])(?::([0-9]{1,5}))?$/i.exec(req.headers.host ?? '');
     if (!localAuthority || (localAuthority[1] && (Number(localAuthority[1]) < 1 || Number(localAuthority[1]) > 65535))) { send(403, '{"error":"invalid_host"}'); return; }
-    if (req.url === manifestPath || req.url === integrityPath || req.url === timelinePath) { relayEngineRequest(req, res, manifestEngine, req.url, send); return; }
-    if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); send(405, '{"error":"method_not_allowed"}'); return; }
     let path;
     try {
       path = decodeURIComponent((req.url ?? '/').split('?')[0]);
       if (!path.startsWith('/') || path.includes('\\') || path.includes('\0') || path.split('/').some(part => part.startsWith('.'))) throw new Error();
     } catch { send(400, '{"error":"invalid_path"}'); return; }
+    if (path === '/api' || path.startsWith('/api/')) {
+      const failApi = (status, code) => send(status, JSON.stringify({ schema_version: '1', status: 'error', error: { code } }));
+      if (hasDisallowedOriginOrSite(req)) { failApi(403, 'origin_not_allowed'); return; }
+      if (hasForgedApiHeader(req.headers)) { failApi(403, 'forged_header'); return; }
+      if (path === manifestPath || path === integrityPath || path === timelinePath) { relayEngineRequest(req, res, manifestEngine, path, send); return; }
+      if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); failApi(405, 'method_not_allowed'); return; }
+      send(503, '{"error":"engine_not_integrated"}');
+      return;
+    }
+    if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); send(405, '{"error":"method_not_allowed"}'); return; }
     if (path === '/healthz') { send(200, '{"status":"ok","scope":"web-shell"}'); return; }
     if (path === '/readyz') {
       try { await stat(resolve(publicRoot, 'index.html')); send(200, '{"status":"ready","scope":"web-shell","engineReady":false}'); }
       catch { send(503, '{"status":"not_ready","scope":"web-shell"}'); }
       return;
     }
-    if (path === '/api' || path.startsWith('/api/')) { send(503, '{"error":"engine_not_integrated"}'); return; }
-    if (path === '/runtime-config.json') { send(200, JSON.stringify(valid)); return; }
+    if (path === '/runtime-config.json') {
+      if (hasDisallowedOriginOrSite(req)) { send(403, '{"error":"origin_not_allowed"}'); return; }
+      send(200, JSON.stringify(valid));
+      return;
+    }
     const asset = path.startsWith('/assets/');
     if (!(asset || ['/', '/index.html', '/icon.svg', '/manifest.webmanifest', '/robots.txt'].includes(path))) { send(404, '{"error":"not_found"}'); return; }
     try {

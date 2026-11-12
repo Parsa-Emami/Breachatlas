@@ -15,6 +15,8 @@ import (
 	"strings"
 	"syscall"
 	"time"
+
+	"github.com/Parsa-Emami/Breachatlas/internal/evidence"
 )
 
 const (
@@ -128,17 +130,83 @@ func NewMux() http.Handler {
 
 	// Wrap with security middleware
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Host validation: must be loopback
-		if !isLoopbackAuthority(r.Host) {
-			http.Error(w, `{"error":"invalid_host"}`, http.StatusForbidden)
-			return
-		}
-
 		w.Header().Set("Content-Security-Policy", "default-src 'none'")
 		w.Header().Set("Referrer-Policy", "no-referrer")
 		w.Header().Set("X-Frame-Options", "DENY")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.Header().Set("Cache-Control", "no-store")
+
+		// Host validation: must be loopback
+		if !isLoopbackAuthority(r.Host) {
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+			w.WriteHeader(http.StatusForbidden)
+			_, _ = w.Write([]byte(`{"error":"invalid_host"}`))
+			return
+		}
+
+		isAPIPath := r.URL.Path == "/api" || strings.HasPrefix(r.URL.Path, "/api/")
+
+		// Cross-site / cross-origin browser request rejection (check every header value)
+		if hasDisallowedCrossSiteOrOrigin(r) {
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+			if isAPIPath {
+				writeEngineProblem(w, http.StatusForbidden, evidence.Problem{Code: "origin_not_allowed"})
+				return
+			}
+			w.WriteHeader(http.StatusForbidden)
+			_, _ = w.Write([]byte(`{"error":"origin_not_allowed"}`))
+			return
+		}
+
+		// Forged proxy/identity header rejection on API endpoints
+		if isAPIPath && hasForgedIdentityHeader(r.Header) {
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
+			writeEngineProblem(w, http.StatusForbidden, evidence.Problem{Code: "forged_header"})
+			return
+		}
+
 		mux.ServeHTTP(w, r)
 	})
+}
+
+func hasDisallowedCrossSiteOrOrigin(r *http.Request) bool {
+	for _, raw := range r.Header.Values("Sec-Fetch-Site") {
+		for _, part := range strings.Split(raw, ",") {
+			if strings.EqualFold(strings.TrimSpace(part), "cross-site") {
+				return true
+			}
+		}
+	}
+	for _, raw := range r.Header.Values("Origin") {
+		for _, part := range strings.Split(raw, ",") {
+			origin := strings.TrimSpace(part)
+			if origin == "" {
+				continue
+			}
+			if !strings.EqualFold(origin, "http://"+r.Host) && !strings.EqualFold(origin, "https://"+r.Host) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func hasForgedIdentityHeader(h http.Header) bool {
+	for rawKey := range h {
+		switch strings.ToLower(strings.TrimSpace(rawKey)) {
+		case "x-identity-override",
+			"x-forwarded-user",
+			"x-forwarded-host",
+			"x-forwarded-role",
+			"x-role",
+			"x-case-scope",
+			"x-provider",
+			"x-auth-user",
+			"x-user-override":
+			return true
+		}
+	}
+	return false
 }
 
 func ParseFlags(args []string, stdout, stderr io.Writer) (*Config, error) {

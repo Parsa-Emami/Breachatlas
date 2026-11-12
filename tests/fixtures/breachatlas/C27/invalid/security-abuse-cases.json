@@ -1,0 +1,240 @@
+{
+  "http_and_ui_abuse_cases": [
+    {
+      "host": "evil.invalid:8080",
+      "method": "GET",
+      "name": "http_bad_host",
+      "path": "/healthz",
+      "want_code": "invalid_host",
+      "want_status": 403
+    },
+    {
+      "method": "POST",
+      "name": "http_cross_origin",
+      "origin": "https://attacker.invalid",
+      "path": "/api/v1/evidence-integrity/inspect",
+      "want_code": "origin_not_allowed",
+      "want_status": 403
+    },
+    {
+      "method": "POST",
+      "name": "http_cross_site_fetch",
+      "path": "/api/v1/timeline/inspect",
+      "sec_fetch_site": "cross-site",
+      "want_code": "origin_not_allowed",
+      "want_status": 403
+    },
+    {
+      "headers": {
+        "x-identity-override": "admin"
+      },
+      "method": "POST",
+      "name": "http_forged_identity_override",
+      "path": "/api/v1/evidence-manifests/validate",
+      "want_code": "forged_header",
+      "want_status": 403
+    },
+    {
+      "headers": {
+        "X-Forwarded-User": "root"
+      },
+      "method": "POST",
+      "name": "http_forged_forwarded_user",
+      "path": "/api/v1/evidence-integrity/inspect",
+      "want_code": "forged_header",
+      "want_status": 403
+    },
+    {
+      "headers": {
+        "x-role": "admin"
+      },
+      "method": "POST",
+      "name": "http_forged_role",
+      "path": "/api/v1/timeline/inspect",
+      "want_code": "forged_header",
+      "want_status": 403
+    },
+    {
+      "content_type": "text/plain",
+      "method": "POST",
+      "name": "http_unsupported_media_type",
+      "path": "/api/v1/evidence-integrity/inspect",
+      "want_code": "unsupported_media_type",
+      "want_status": 415
+    },
+    {
+      "body": {
+        "case_id": "case-c27-sec",
+        "events": [],
+        "notes": [
+          {
+            "author": "analyst-c27",
+            "claim_source_evidence": true,
+            "hypothesis_id": "hyp-c27-promote",
+            "rationale": "attempting epistemic promotion",
+            "statement": "should fail closed"
+          }
+        ],
+        "schema_version": "1"
+      },
+      "method": "POST",
+      "name": "http_promotion_forbidden",
+      "path": "/api/v1/timeline/inspect",
+      "want_code": "promotion_forbidden",
+      "want_status": 422
+    },
+    {
+      "body": {
+        "case_id": "case-c27-sec",
+        "items": [],
+        "provider": "cloud-kms",
+        "schema_version": "1"
+      },
+      "method": "POST",
+      "name": "http_unavailable_provider",
+      "path": "/api/v1/evidence-integrity/inspect",
+      "want_code": "unavailable_provider",
+      "want_status": 503
+    }
+  ],
+  "schema_version": "1",
+  "storage_and_case_cases": [
+    {
+      "expected_error": "ErrMissingIdentity",
+      "identity": {},
+      "name": "missing_identity",
+      "operation_id": "op-c27-missing-id"
+    },
+    {
+      "expected_error": "ErrExpiredIdentity",
+      "identity": {
+        "case_scope": "case-c27-sec",
+        "expires_at": "2020-01-01T00:00:00Z",
+        "principal": "analyst-c27",
+        "provider": "local",
+        "public_key": "aae255bb5f2644c97e6eb9b023c78fea8198f74ccc91ab3db454310835cdbc5d",
+        "role": "analyst",
+        "signature": "ea03f409ccd4e1b8823c020558fb515176e0e7f9eb7fea29c8f2713fd91026eb42dec1a028946eb5359549b8b4ef49ddbea22e93adac522844721aeeb70d8c0e"
+      },
+      "name": "expired_identity",
+      "operation_id": "op-c27-expired"
+    },
+    {
+      "expected_error": "ErrReplayedIdentity",
+      "identity": {
+        "case_scope": "case-c27-sec",
+        "expires_at": "2029-01-01T00:00:00Z",
+        "principal": "analyst-c27",
+        "provider": "local",
+        "public_key": "aae255bb5f2644c97e6eb9b023c78fea8198f74ccc91ab3db454310835cdbc5d",
+        "role": "analyst",
+        "signature": "6e95de9c0c1e35a6d89c2ecca8be0616c0206254c6d96c0e4b15bb740296f36c264b3e79287c5b1868e5e5bc1ca5c314ffaf3179bc14f309b92b679c2031470c"
+      },
+      "name": "replayed_identity",
+      "operation_id": "op-c27-replay-99"
+    },
+    {
+      "expected_error": "ErrScopeMismatch",
+      "identity": {
+        "case_scope": "case-other-999",
+        "expires_at": "2029-01-01T00:00:00Z",
+        "principal": "analyst-c27",
+        "provider": "local",
+        "public_key": "aae255bb5f2644c97e6eb9b023c78fea8198f74ccc91ab3db454310835cdbc5d",
+        "role": "analyst",
+        "signature": "c758480ad540f17b3d551d10bbc256cf539240a7a11bd253e653ae3d4df991561c899ed04d1ea3589642fa018a8fe129ca26b1fdc8145f1426d58098ddf41301"
+      },
+      "name": "scope_mismatch",
+      "operation_id": "op-c27-scope-mismatch"
+    },
+    {
+      "expected_error": "ErrInvalidSignature",
+      "identity": {
+        "case_scope": "case-c27-sec",
+        "expires_at": "2029-01-01T00:00:00Z",
+        "principal": "analyst-c27",
+        "provider": "local",
+        "public_key": "aae255bb5f2644c97e6eb9b023c78fea8198f74ccc91ab3db454310835cdbc5d",
+        "role": "analyst",
+        "signature": "cacd9acdd0a7584c14e1254c8e564cd112dfa3c40b83ed988133bb667e9f27f85768cd0d22d7bed98c9c3583676a15255dd6915e6c1b2402b6abe46e6cf0b309"
+      },
+      "name": "forged_signature",
+      "operation_id": "op-c27-forged-sig",
+      "untrusted_pub": "d04d2dc2019c932ff5a52f0dc5f762d35dd66bcc21eaeb124b6268597003c882"
+    },
+    {
+      "expected_error": "ErrForgedHeader",
+      "headers": {
+        "x-identity-override": "admin"
+      },
+      "name": "forged_header_lowercase_override",
+      "operation_id": "op-c27-001"
+    },
+    {
+      "expected_error": "ErrForgedHeader",
+      "headers": {
+        "x-role": "admin"
+      },
+      "name": "forged_header_lowercase_role",
+      "operation_id": "op-c27-001"
+    },
+    {
+      "expected_error": "ErrForgedHeader",
+      "headers": {
+        "X-Forwarded-User": "root"
+      },
+      "name": "forged_header_forwarded_user",
+      "operation_id": "op-c27-001"
+    },
+    {
+      "expected_error": "ErrForgedHeader",
+      "headers": {
+        "x-forwarded-host": "evil.invalid"
+      },
+      "name": "forged_header_forwarded_host",
+      "operation_id": "op-c27-001"
+    },
+    {
+      "expected_error": "ErrForgedHeader",
+      "headers": {
+        "x-case-scope": "case-other-999"
+      },
+      "name": "forged_header_case_scope",
+      "operation_id": "op-c27-001"
+    },
+    {
+      "expected_error": "ErrWidenedPath",
+      "name": "widened_path_traversal",
+      "operation_id": "../../escape-op"
+    },
+    {
+      "expected_error": "ErrUnavailableProvider",
+      "identity": {
+        "case_scope": "case-c27-sec",
+        "expires_at": "2029-01-01T00:00:00Z",
+        "principal": "analyst-c27",
+        "provider": "remote-kms",
+        "public_key": "aae255bb5f2644c97e6eb9b023c78fea8198f74ccc91ab3db454310835cdbc5d",
+        "role": "analyst",
+        "signature": "c0beeeab0b3fe5a68ba9cedea3fae114f1e2a1a2bc6d4ebc40e99427306073cb3b740a0a8dbe432109e99fbe170f88dceb545237fd5ef4bb9095b069c7c9f009"
+      },
+      "name": "unavailable_provider",
+      "operation_id": "op-c27-unavail-prov"
+    },
+    {
+      "case_id": "case-other-999",
+      "expected_error": "ErrCrossCaseAccess",
+      "identity": {
+        "case_scope": "case-other-999",
+        "expires_at": "2029-01-01T00:00:00Z",
+        "principal": "analyst-c27",
+        "provider": "local",
+        "public_key": "aae255bb5f2644c97e6eb9b023c78fea8198f74ccc91ab3db454310835cdbc5d",
+        "role": "analyst",
+        "signature": "78f9d275e80d4c9f65086e0f442d3e72fbef785248bf2f1222ace50ef3ebe04bbdec7d89b8d9a981ebc00a6bb36f0c8e0b25dddb0b2921f3d789f440e295870f"
+      },
+      "name": "cross_case_access",
+      "operation_id": "op-c27-cross-case"
+    }
+  ]
+}

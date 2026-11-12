@@ -240,10 +240,12 @@
     },
     {
       "id": "C27",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C27.json"
+      ],
+      "source_identity": "sha256:85f0f5cc02c7b827b828c6d82b59d0060e285bbae886b9a810ebe94d7ba5d04e",
+      "notes": "Cross-surface abuse, XSS/import, and authorization boundaries (N27) verified across #workspace, #evidence, #timeline, #roadmap, scripts/serve-web.mjs, cmd/breachatlas HTTP endpoints, and domain/storage stores; hardened case-insensitive forged header checks and blobs/ path containment/symlink rejection in internal/storage/adapter.go, all-values Origin/Sec-Fetch-Site/forged-header enforcement in cmd/breachatlas/main.go, and normalized-path /api* + /runtime-config.json enforcement in scripts/serve-web.mjs, documented in docs/security/THREAT_MODEL.md and tests/release/security-matrix.md, and verified in tests/security_boundaries_test.go, cmd/breachatlas/main_test.go, and tests/browser/security.spec.ts."
     },
     {
       "id": "C28",

@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-12",
-  "base_commit": "1563ea1ad2a046ebfafda9d01a69f4eb7e2f72ae",
-  "verified_source_commit": "1563ea1ad2a046ebfafda9d01a69f4eb7e2f72ae",
-  "verified_source_tree": "0a5c60a56940d0242f60d11ea68adaedb5291abf",
-  "scope": "C26 cross-store consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild without custody rewrite in internal/recovery/restore.go",
+  "base_commit": "1c1e9a31fdb8360a7f8d19898a21cac3a1498abf",
+  "verified_source_commit": "1c1e9a31fdb8360a7f8d19898a21cac3a1498abf",
+  "verified_source_tree": "2f4733a1f1a9a1d55568669f0c236c601a26ec69",
+  "scope": "C27 cross-surface abuse, XSS/import, and authorization boundaries across web UI (#workspace, #evidence, #timeline, #roadmap), local relay (scripts/serve-web.mjs), Go engine HTTP API (cmd/breachatlas), and storage/case/domain stores",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -31,24 +31,27 @@
     "C23",
     "C24",
     "C25",
-    "C26"
+    "C26",
+    "C27"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
+    "cmd/breachatlas/main.go",
+    "cmd/breachatlas/main_test.go",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C26.json",
-    "docs/evidence/restore-template.md",
-    "internal/artifacts/manifest.go",
-    "internal/custody/events.go",
-    "internal/evidence/seal.go",
-    "internal/recovery/restore.go",
+    "docs/evidence/C27.json",
+    "docs/security/THREAT_MODEL.md",
+    "internal/storage/adapter.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C26/expected-output/restore-outcomes.json",
-    "tests/fixtures/breachatlas/C26/invalid/restore-negative-cases.json",
-    "tests/fixtures/breachatlas/C26/positive/restore-case-consistency.json",
-    "tests/fixtures/breachatlas/C26/provenance.json",
-    "tests/restore_test.go"
+    "scripts/serve-web.mjs",
+    "tests/browser/security.spec.ts",
+    "tests/fixtures/breachatlas/C27/expected-output/security-outcomes.json",
+    "tests/fixtures/breachatlas/C27/invalid/security-abuse-cases.json",
+    "tests/fixtures/breachatlas/C27/positive/authorized-security-baseline.json",
+    "tests/fixtures/breachatlas/C27/provenance.json",
+    "tests/release/security-matrix.md",
+    "tests/security_boundaries_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -75,7 +78,8 @@
     "docs/evidence/C23.json",
     "docs/evidence/C24.json",
     "docs/evidence/C25.json",
-    "docs/evidence/C26.json"
+    "docs/evidence/C26.json",
+    "docs/evidence/C27.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -85,7 +89,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C27",
+  "next_task": "C28",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C27."
+  "continuation": "Implement C28."
 }

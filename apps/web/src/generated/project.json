@@ -335,7 +335,7 @@
       "id": "C27",
       "title": "test(security): prove project abuse and authorization boundaries",
       "stage": "private-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Execute this project's negative UAT, XSS/import and object/provider authorization tests for every enabled surface. Fix critical/high findings or block the affected supported profile."
       ],

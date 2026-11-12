@@ -1,0 +1,71 @@
+{
+  "commit_id": "C27",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Cross-surface negative UAT, XSS/import, and object/provider authorization boundary verification and hardening across web routes (#workspace, #evidence, #timeline, #roadmap), web relay (scripts/serve-web.mjs), Go engine HTTP API (cmd/breachatlas), and storage/case/domain stores",
+  "passed": true,
+  "source_commit": "1c1e9a31fdb8360a7f8d19898a21cac3a1498abf",
+  "source_tree": "2f4733a1f1a9a1d55568669f0c236c601a26ec69",
+  "source_identity": "sha256:85f0f5cc02c7b827b828c6d82b59d0060e285bbae886b9a810ebe94d7ba5d04e",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": []
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C27/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "2571c25df39a5378707936c5b5235f75e477c5394b7907af43ade835b776e74d"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including cmd/breachatlas (TestAPISecurityOriginAndCrossSite, TestAPIForgedIdentityHeadersRejected) and tests (TestC27FixturesAndProvenance, TestC27StorageAndCaseAuthorizationBoundaries, TestC27DomainSecurityBoundaries, TestC27LiveEngineHTTPAbuseBoundaries)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, prepare:web, TypeScript check, Vite build, and 29 web/contract tests passed."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:browser",
+      "exit_code": 0,
+      "output": "10 Playwright Chromium specs passed across tests/browser/workspace.spec.ts, tests/browser/security.spec.ts, apps/web/tests/evidence.spec.ts, and apps/web/tests/timeline.spec.ts."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N27",
+      "status": "passed",
+      "observations": [
+        "Hardened internal/storage/adapter.go authorizeIdentity to normalize header keys case-insensitively and reject forged override/proxy headers (x-identity-override, x-forwarded-user, x-forwarded-host, x-forwarded-role, x-role, x-case-scope, x-auth-user, x-user-override) with ErrForgedHeader and unknown x-provider with ErrUnavailableProvider prior to side effects, and added resolveSafeBlobPath to enforce blobs/ containment and reject symlinked blobs during recovery and reads.",
+        "Hardened cmd/breachatlas/main.go NewMux (inspecting all Origin and Sec-Fetch-Site header values to prevent duplicate-header smuggling across /api* and engine routes) and scripts/serve-web.mjs (enforcing normalized-path Origin, Sec-Fetch-Site, and forged-header checks across all /api* routes including query-string variants and /runtime-config.json) while preserving documented reverse-proxy transport headers (X-Forwarded-Proto, X-Forwarded-For).",
+        "Documented local-first trust boundaries, assets, STRIDE controls, and residual risks in docs/security/THREAT_MODEL.md and mapped every enabled surface and negative vector in tests/release/security-matrix.md.",
+        "Verified in headless Chromium (tests/browser/security.spec.ts) and live Go engine + storage/domain tests (tests/security_boundaries_test.go, cmd/breachatlas/main_test.go) that XSS payloads stay inert escaped text, hostile/oversized/epistemic-promotion imports fail closed, missing/expired/replayed/cross-case/forged/symlink/network-egress/hold-blocked operations fail before sensitive side effects, and sealed 0600 source bytes and fixture files remain unmodified."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Hardware target benchmarking (2 vCPU / 4096 MiB RAM), clean-host clone-to-value packaging, and final release certification remain tracked in downstream planned tasks (C28-C40)."
+  ],
+  "rollback_or_recovery_observation": "Revert docs/security/THREAT_MODEL.md, tests/release/security-matrix.md, tests/browser/security.spec.ts, tests/security_boundaries_test.go, tests/fixtures/breachatlas/C27, docs/evidence/C27.json, and the targeted hardening changes in internal/storage/adapter.go, cmd/breachatlas/main.go, cmd/breachatlas/main_test.go, and scripts/serve-web.mjs. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

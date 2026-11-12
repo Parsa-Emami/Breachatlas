@@ -1,0 +1,73 @@
+{
+  "domain_rejections": {
+    "analyzer_network_forbidden": "ErrNetworkForbidden",
+    "analyzer_unallowlisted": "ErrUnavailableProvider",
+    "auto_raw_ttl_forbidden": "ErrAutoRawTTLForbidden",
+    "epistemic_promotion_forbidden": "ErrPromotionForbidden",
+    "hold_blocks_destruction": "ErrHoldActive",
+    "symlink_traversal_rejected": "ErrSymlinkRejected"
+  },
+  "http_rejections": {
+    "http_bad_host": {
+      "code": "invalid_host",
+      "status": 403
+    },
+    "http_cross_origin": {
+      "code": "origin_not_allowed",
+      "status": 403
+    },
+    "http_cross_site_fetch": {
+      "code": "origin_not_allowed",
+      "status": 403
+    },
+    "http_forged_forwarded_user": {
+      "code": "forged_header",
+      "status": 403
+    },
+    "http_forged_identity_override": {
+      "code": "forged_header",
+      "status": 403
+    },
+    "http_forged_role": {
+      "code": "forged_header",
+      "status": 403
+    },
+    "http_promotion_forbidden": {
+      "code": "promotion_forbidden",
+      "status": 422
+    },
+    "http_unavailable_provider": {
+      "code": "unavailable_provider",
+      "status": 503
+    },
+    "http_unsupported_media_type": {
+      "code": "unsupported_media_type",
+      "status": 415
+    }
+  },
+  "positive_commit": {
+    "case_id": "case-c27-sec",
+    "evidence_id": "ev-c27-001",
+    "sha256": "87b7ee4508167aaf9c8d3ffde6c3dc18fe2454b99f18cf03ae13321ecfdb19a5",
+    "size_bytes": 162,
+    "status": "committed"
+  },
+  "schema_version": "1",
+  "sealed_bytes_modified": false,
+  "storage_and_case_rejections": {
+    "cross_case_access": "ErrCrossCaseAccess",
+    "expired_identity": "ErrExpiredIdentity",
+    "forged_header_case_scope": "ErrForgedHeader",
+    "forged_header_forwarded_host": "ErrForgedHeader",
+    "forged_header_forwarded_user": "ErrForgedHeader",
+    "forged_header_lowercase_override": "ErrForgedHeader",
+    "forged_header_lowercase_role": "ErrForgedHeader",
+    "forged_signature": "ErrInvalidSignature",
+    "missing_identity": "ErrMissingIdentity",
+    "replayed_identity": "ErrReplayedIdentity",
+    "scope_mismatch": "ErrScopeMismatch",
+    "unavailable_provider": "ErrUnavailableProvider",
+    "widened_path_traversal": "ErrWidenedPath"
+  },
+  "xss_executed": false
+}

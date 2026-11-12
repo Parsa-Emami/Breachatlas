@@ -1,0 +1,107 @@
+{
+  "evidence_inspect_snapshot": {
+    "case_id": "case-c27-sec",
+    "items": [
+      {
+        "acquired_at": "2026-11-12T08:00:00Z",
+        "actual_sha256": "87b7ee4508167aaf9c8d3ffde6c3dc18fe2454b99f18cf03ae13321ecfdb19a5",
+        "custody_events": [
+          {
+            "actor": "analyst-c27\u003cscript\u003ewindow.__xssC27=\"custActor\"\u003c/script\u003e",
+            "case_id": "case-c27-sec",
+            "custody_root": "cfd7953ac7683496aff58b7980f87c9b3a81e9375542d0431b60f52b24632b69",
+            "event_digest": "f8199bb7ee04a4d9cf4b8c21bf5ebf9f3dd570e10169ba664e4541cb77165080",
+            "event_id": "cust-c27-01",
+            "event_type": "seal_verified",
+            "evidence_id": "ev-c27-001",
+            "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+            "reason": "Sealed intake \u003cimg src=x onerror=\"window.__xssC27='custReason'\"\u003e",
+            "schema_version": "1",
+            "sequence": 1,
+            "timestamp": "2026-11-12T08:02:00Z"
+          }
+        ],
+        "custody_root": "cfd7953ac7683496aff58b7980f87c9b3a81e9375542d0431b60f52b24632b69",
+        "evidence_id": "ev-c27-001",
+        "expected_sha256": "87b7ee4508167aaf9c8d3ffde6c3dc18fe2454b99f18cf03ae13321ecfdb19a5",
+        "filename": "auth-\u003cscript\u003ewindow.__xssC27=\"filename\"\u003c/script\u003e.log",
+        "hold_active": true,
+        "hold_reason": "Litigation hold \u003csvg onload=\"window.__xssC27='hold'\"\u003e",
+        "media_type": "text/plain",
+        "sealed": true,
+        "size_bytes": 162
+      },
+      {
+        "acquired_at": "2026-11-12T08:05:00Z",
+        "actual_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "custody_root": "cfd7953ac7683496aff58b7980f87c9b3a81e9375542d0431b60f52b24632b69",
+        "evidence_id": "ev-c27-tampered",
+        "expected_sha256": "87b7ee4508167aaf9c8d3ffde6c3dc18fe2454b99f18cf03ae13321ecfdb19a5",
+        "filename": "tampered-disk.img",
+        "media_type": "application/octet-stream",
+        "sealed": true,
+        "size_bytes": 1024
+      }
+    ],
+    "provider": "local",
+    "schema_version": "1"
+  },
+  "identity": {
+    "case_scope": "case-c27-sec",
+    "expires_at": "2029-01-01T00:00:00Z",
+    "principal": "analyst-c27",
+    "provider": "local",
+    "public_key": "aae255bb5f2644c97e6eb9b023c78fea8198f74ccc91ab3db454310835cdbc5d",
+    "role": "analyst",
+    "signature": "6e95de9c0c1e35a6d89c2ecca8be0616c0206254c6d96c0e4b15bb740296f36c264b3e79287c5b1868e5e5bc1ca5c314ffaf3179bc14f309b92b679c2031470c"
+  },
+  "manifest": {
+    "acquired_at": "2026-11-12T08:00:00Z",
+    "case_id": "case-c27-sec",
+    "custody_root": "cfd7953ac7683496aff58b7980f87c9b3a81e9375542d0431b60f52b24632b69",
+    "evidence_id": "ev-c27-001",
+    "media_type": "text/plain",
+    "schema_version": "1",
+    "sha256": "87b7ee4508167aaf9c8d3ffde6c3dc18fe2454b99f18cf03ae13321ecfdb19a5",
+    "size_bytes": 162
+  },
+  "operation_id": "op-c27-001",
+  "payload_utf8": "2026-11-12T08:00:00Z host-01 sshd[2101]: Accepted publickey for analyst-c27 from 198.51.100.10\n2026-11-12T08:01:00Z host-01 auditd[902]: SEAL_VERIFIED ev-c27-001\n",
+  "schema_version": "1",
+  "timeline_inspect_snapshot": {
+    "case_id": "case-c27-sec",
+    "events": [
+      {
+        "event_type": "ssh_login",
+        "evidence_id": "ev-c27-001",
+        "input_hash": "87b7ee4508167aaf9c8d3ffde6c3dc18fe2454b99f18cf03ae13321ecfdb19a5",
+        "raw_timestamp": "2026-11-12T08:00:00Z",
+        "source_confidence": 0.99,
+        "source_line": 1,
+        "summary": "Verified login \u003cscript\u003ewindow.__xssC27=\"summary\"\u003c/script\u003e"
+      },
+      {
+        "event_type": "dst_ambiguous_event",
+        "evidence_id": "ev-c27-001",
+        "input_hash": "87b7ee4508167aaf9c8d3ffde6c3dc18fe2454b99f18cf03ae13321ecfdb19a5",
+        "raw_timestamp": "2026-11-01 01:30:00",
+        "source_confidence": 0.85,
+        "source_line": 2,
+        "summary": "DST ambiguity check \u003cimg src=x onerror=\"window.__xssC27='dst'\"\u003e",
+        "zone_hint": "America/New_York"
+      }
+    ],
+    "notes": [
+      {
+        "author": "analyst.c27\u003csvg onload=\"window.__xssC27='noteAuthor'\"\u003e",
+        "hypothesis_id": "hyp-c27-01",
+        "rationale": "Observed log correlation \u003cscript\u003ewindow.__xssC27=\"rationale\"\u003c/script\u003e",
+        "statement": "Lateral movement suspected \u003cb\u003eunverified\u003c/b\u003e",
+        "status": "proposed",
+        "ui_label": "source_evidence"
+      }
+    ],
+    "provider": "local",
+    "schema_version": "1"
+  }
+}

@@ -30,10 +30,11 @@
     "portable self-contained export packaging binding selected sealed evidence, derived artifacts, custody events, and verified checkpoints without modifying sealed source bytes",
     "standalone offline verifier CLI and domain verification engine validating file checksums, sealed blobs, custody chains, checkpoints, derived artifacts, raw timestamps, and distinct unsigned vs trusted signature status without requiring a server",
     "retention store forbidding automatic raw-evidence TTL while enforcing legal hold precedence and recording signed immutable destruction tombstones and audit logs",
-    "cross-store case consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild without custody rewrite or sealed-byte mutation"
+    "cross-store case consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild without custody rewrite or sealed-byte mutation",
+    "cross-surface abuse, XSS/import, and authorization boundary hardening and regression verification across web routes, relay, Go HTTP API, and domain/storage stores"
   ],
-  "engine": "recovery_restore_verified",
-  "next_task": "C27",
+  "engine": "security_boundaries_verified",
+  "next_task": "C28",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

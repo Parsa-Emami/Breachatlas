@@ -210,6 +210,34 @@ func Open(cfg Config) (*Adapter, error) {
 	return a, nil
 }
 
+func resolveSafeBlobPath(rootDir, blobRelPath string) (string, error) {
+	if strings.TrimSpace(blobRelPath) == "" || strings.ContainsRune(blobRelPath, '\x00') || filepath.IsAbs(blobRelPath) {
+		return "", fmt.Errorf("%w: invalid blob_path %q", ErrWidenedPath, blobRelPath)
+	}
+	for _, seg := range strings.FieldsFunc(blobRelPath, func(r rune) bool { return r == '/' || r == '\\' }) {
+		if seg == ".." {
+			return "", fmt.Errorf("%w: traversal segment in blob_path %q", ErrWidenedPath, blobRelPath)
+		}
+	}
+	blobsRoot := filepath.Clean(filepath.Join(rootDir, BlobsDirName))
+	blobPath := filepath.Clean(filepath.Join(rootDir, filepath.FromSlash(blobRelPath)))
+	rel, err := filepath.Rel(blobsRoot, blobPath)
+	if err != nil || rel == "." || rel == ".." || strings.HasPrefix(rel, ".."+string(filepath.Separator)) || filepath.IsAbs(rel) {
+		return "", fmt.Errorf("%w: blob_path %q escapes blobs directory", ErrWidenedPath, blobRelPath)
+	}
+	info, err := os.Lstat(blobPath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return "", fmt.Errorf("%w: %s", ErrMissingReference, blobRelPath)
+		}
+		return "", err
+	}
+	if info.Mode()&os.ModeSymlink != 0 {
+		return "", fmt.Errorf("%w: symlink rejected at %s", ErrWidenedPath, blobRelPath)
+	}
+	return blobPath, nil
+}
+
 func (a *Adapter) recoverUnlocked(ctx context.Context) error {
 	manifestPath := filepath.Join(a.cfg.RootDir, ManifestFileName)
 	if data, err := os.ReadFile(manifestPath); err == nil {
@@ -246,7 +274,10 @@ func (a *Adapter) recoverUnlocked(ctx context.Context) error {
 		if ctx.Err() != nil {
 			return ctx.Err()
 		}
-		blobPath := filepath.Join(a.cfg.RootDir, rec.BlobPath)
+		blobPath, err := resolveSafeBlobPath(a.cfg.RootDir, rec.BlobPath)
+		if err != nil {
+			return err
+		}
 		f, err := os.Open(blobPath)
 		if err != nil {
 			if os.IsNotExist(err) {
@@ -308,18 +339,24 @@ func (a *Adapter) authorizeIdentity(req WriteRequest) error {
 		return ErrScopeMismatch
 	}
 
-	if len(req.Headers) > 0 {
-		if r, ok := req.Headers["X-Role"]; ok && r != "" && r != id.Role {
+	for rawKey, val := range req.Headers {
+		key := strings.ToLower(strings.TrimSpace(rawKey))
+		trimmedVal := strings.TrimSpace(val)
+		switch key {
+		case "x-role":
+			if trimmedVal != "" && trimmedVal != id.Role {
+				return ErrForgedHeader
+			}
+		case "x-case-scope":
+			if trimmedVal != "" && trimmedVal != id.CaseScope {
+				return ErrForgedHeader
+			}
+		case "x-identity-override", "x-forwarded-user", "x-forwarded-host", "x-forwarded-role", "x-auth-user", "x-user-override":
 			return ErrForgedHeader
-		}
-		if s, ok := req.Headers["X-Case-Scope"]; ok && s != "" && s != id.CaseScope {
-			return ErrForgedHeader
-		}
-		if _, ok := req.Headers["X-Identity-Override"]; ok {
-			return ErrForgedHeader
-		}
-		if p, ok := req.Headers["X-Provider"]; ok && p != "" && p != "local" && p != "breachatlas" {
-			return ErrUnavailableProvider
+		case "x-provider":
+			if trimmedVal != "" && trimmedVal != "local" && trimmedVal != "breachatlas" {
+				return ErrUnavailableProvider
+			}
 		}
 	}
 
@@ -577,7 +614,10 @@ func (a *Adapter) GetEvidence(caseID, evidenceID string) ([]byte, *EvidenceRecor
 		return nil, nil, os.ErrNotExist
 	}
 
-	blobPath := filepath.Join(a.cfg.RootDir, rec.BlobPath)
+	blobPath, err := resolveSafeBlobPath(a.cfg.RootDir, rec.BlobPath)
+	if err != nil {
+		return nil, nil, err
+	}
 	f, err := os.Open(blobPath)
 	if err != nil {
 		if os.IsNotExist(err) {
