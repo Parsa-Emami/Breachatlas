@@ -1,0 +1,62 @@
+{
+  "schema_version": "1",
+  "overload_cases": [
+    {
+      "case_name": "oversized_stream",
+      "declared_size": 104857601,
+      "max_allowed": 104857600,
+      "expected_error": "upload_too_large"
+    },
+    {
+      "case_name": "oversized_manifest",
+      "declared_size": 16385,
+      "max_allowed": 16384,
+      "expected_error": "payload_too_large"
+    },
+    {
+      "case_name": "excessive_results_cap",
+      "max_results": 1001,
+      "max_allowed": 1000,
+      "expected_error": "query_limit_exceeded"
+    },
+    {
+      "case_name": "excessive_scan_events",
+      "max_scan_events": 50001,
+      "max_allowed": 50000,
+      "expected_error": "query_limit_exceeded"
+    },
+    {
+      "case_name": "excessive_expand_depth",
+      "expand_depth": 9,
+      "max_allowed": 8,
+      "expected_error": "query_limit_exceeded"
+    },
+    {
+      "case_name": "excessive_expand_degree",
+      "max_expand_degree": 257,
+      "max_allowed": 256,
+      "expected_error": "query_limit_exceeded"
+    },
+    {
+      "case_name": "excessive_visited_nodes",
+      "max_visited_nodes": 5001,
+      "max_allowed": 5000,
+      "expected_error": "query_limit_exceeded"
+    },
+    {
+      "case_name": "cancelled_request",
+      "simulate_abort": true,
+      "expected_error": "query_canceled"
+    },
+    {
+      "case_name": "store_lock_busy",
+      "simulate_contention": true,
+      "expected_error": "lock_busy"
+    },
+    {
+      "case_name": "simulated_disk_full",
+      "fault_flag": "SimulateDiskFull",
+      "expected_error": "disk_full"
+    }
+  ]
+}

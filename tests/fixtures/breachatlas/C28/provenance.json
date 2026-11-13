@@ -1,0 +1,10 @@
+{
+  "task": "C28",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic bounded target and overload workload performance fixtures",
+  "sha256": {
+    "expected-output/workload-thresholds.json": "11611708f5ba0a19442f2ccabdf9396b7dd4e04c0f6b59477f1f73a7838bb718",
+    "invalid/overload-inputs.json": "c7c9aed05595ee600bb14f6cb4f2f7c72064b7467c7dc3de35336ce074629738",
+    "positive/target-workload-input.json": "cf0e2274848e94eb080157fd0c7ed9d062d0e4572546f17fdaae4af1e0d2f330"
+  }
+}

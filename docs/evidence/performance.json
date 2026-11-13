@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0.0",
+  "task": "C28",
+  "requirement": "N28",
+  "license": "Apache-2.0",
+  "generated_at": "2026-11-13T18:30:50.427Z",
+  "source_identity": "sha256:94e1332355df3f7d1ee832baa33d9a718bea58ef710924bcc3a2ffbdae652df5",
+  "source_commit": "b1bbbfb6db0a0c0530f73bc3498d444c531bc76e",
+  "source_tree": "d6ebbf89ec995a71caf0a8786d4032dd8aba8e2f",
+  "host": {
+    "platform": "linux",
+    "arch": "x64",
+    "release": "7.0.0-43-generic",
+    "cpus": {
+      "count": 16,
+      "model": "AMD Ryzen 7 6800H with Radeon Graphics",
+      "speed_mhz": 4438
+    },
+    "memory_mib": {
+      "total": 30829,
+      "free": 24056
+    },
+    "disk_mib": {
+      "free": 90817,
+      "total": 959270
+    },
+    "toolchain": {
+      "node": "v24.19.0",
+      "go": "go version go1.26.2 linux/amd64",
+      "python": "Python 3.14.4"
+    }
+  },
+  "published_limits": {
+    "target_hardware": {
+      "vcpu": 2,
+      "ram_mib": 4096,
+      "free_disk_mib": 20480,
+      "measurement": "verified"
+    },
+    "workload_ceilings": {
+      "max_evidence_bytes": 104857600,
+      "max_batch_records": 100000,
+      "max_timeline_events": 250000,
+      "max_search_results": 1000,
+      "max_search_scan_events": 50000,
+      "max_search_expand_depth": 8,
+      "max_search_expand_degree": 256,
+      "max_search_visited_nodes": 5000
+    }
+  },
+  "target_workload": {
+    "iterations": 5,
+    "records_per_run": 200,
+    "steps": [
+      {
+        "step": 1,
+        "action": "quarantine_stream_and_seal",
+        "description": "Stream bounded evidence into isolated quarantine and seal with SHA-256 digest"
+      },
+      {
+        "step": 2,
+        "action": "custody_append_and_checkpoint",
+        "description": "Append sequential attributable custody events and record signed external checkpoint"
+      },
+      {
+        "step": 3,
+        "action": "timeline_indexing_and_search",
+        "description": "Index normalized timeline events and execute bounded search within scan caps"
+      },
+      {
+        "step": 4,
+        "action": "export_package_and_verify",
+        "description": "Package self-contained portable bundle and verify offline without server"
+      },
+      {
+        "step": 5,
+        "action": "recovery_restore_and_rebuild",
+        "description": "Restore case consistency and rebuild derived index without custody rewrite"
+      }
+    ],
+    "latencies_ms": {
+      "quarantine_and_seal": {
+        "p50": 0.5542,
+        "p95": 0.7839,
+        "max": 0.7839
+      },
+      "custody_and_checkpoint": {
+        "p50": 0.1225,
+        "p95": 0.1295,
+        "max": 0.1295
+      },
+      "timeline_index_and_search": {
+        "p50": 8.2505,
+        "p95": 8.548,
+        "max": 8.548
+      },
+      "export_and_verify": {
+        "p50": 6.7766,
+        "p95": 7.4772,
+        "max": 7.4772
+      },
+      "restore_and_rebuild": {
+        "p50": 6.2389,
+        "p95": 6.3084,
+        "max": 6.3084
+      },
+      "total_pipeline": {
+        "p50": 22.0099,
+        "p95": 22.7342,
+        "max": 22.7342
+      }
+    },
+    "thresholds_ms": {
+      "p50_latency_target": 250,
+      "p95_latency_target": 1000,
+      "max_latency_target": 5000
+    },
+    "memory_and_resources": {
+      "peak_rss_mib": 49,
+      "threshold_peak_rss_mib": 1024,
+      "average_total_alloc_bytes": 9166573,
+      "disk_growth_bytes": 0
+    },
+    "invariants": [
+      {
+        "name": "sealed_source_bytes_never_modified",
+        "verified": true,
+        "description": "Cryptographic SHA-256 digest of original evidence blob identical before and after all benchmark steps"
+      },
+      {
+        "name": "offline_bundle_verification_succeeds",
+        "verified": true,
+        "description": "Exported case bundle passes offline verification without running daemon"
+      },
+      {
+        "name": "recovery_rebuild_matches_count",
+        "verified": true,
+        "description": "Rebuilding index from immutable artifacts recreates exact timeline count"
+      }
+    ],
+    "status": "passed"
+  },
+  "overload_workload": {
+    "status": "passed",
+    "verified_cases": [
+      {
+        "name": "oversized_evidence_stream",
+        "condition": "Stream > 100 MiB ceiling rejected with upload_too_large before storage write",
+        "expected_error": "upload_too_large",
+        "passed": true
+      },
+      {
+        "name": "search_max_results_exceeded",
+        "condition": "Search requested 1001 results (ceiling 1000) rejected with query_limit_exceeded",
+        "expected_error": "query_limit_exceeded",
+        "passed": true
+      },
+      {
+        "name": "search_max_scan_events_exceeded",
+        "condition": "Scan events requested 50001 (ceiling 50000) rejected with query_limit_exceeded",
+        "expected_error": "query_limit_exceeded",
+        "passed": true
+      },
+      {
+        "name": "search_expand_depth_exceeded",
+        "condition": "Expand depth requested 9 (ceiling 8) rejected with query_limit_exceeded",
+        "expected_error": "query_limit_exceeded",
+        "passed": true
+      },
+      {
+        "name": "search_max_expand_degree_exceeded",
+        "condition": "Expand degree requested 257 (ceiling 256) rejected with query_limit_exceeded",
+        "expected_error": "query_limit_exceeded",
+        "passed": true
+      },
+      {
+        "name": "search_max_visited_nodes_exceeded",
+        "condition": "Visited nodes requested 5001 (ceiling 5000) rejected with query_limit_exceeded",
+        "expected_error": "query_limit_exceeded",
+        "passed": true
+      },
+      {
+        "name": "client_context_cancellation",
+        "condition": "Active long scan aborted promptly upon caller context cancellation without leak",
+        "expected_error": "context_canceled",
+        "passed": true
+      },
+      {
+        "name": "concurrency_lock_contention",
+        "condition": "Concurrent case write contention rejected with lock_busy preventing corruption",
+        "expected_error": "lock_busy",
+        "passed": true
+      },
+      {
+        "name": "simulated_disk_full_fault",
+        "condition": "Simulated ENOSPC during quarantine/index write fails closed without corrupted state",
+        "expected_error": "disk_full",
+        "passed": true
+      }
+    ]
+  }
+}

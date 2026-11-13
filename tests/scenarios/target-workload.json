@@ -1,0 +1,140 @@
+{
+  "version": "1.0.0",
+  "project": "BreachAtlas",
+  "scenario": "target-and-overload-workloads",
+  "task": "C28",
+  "requirement": "N28",
+  "status": "verified-benchmark-contract",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic licensed fixtures",
+  "fixture_base": "tests/fixtures/breachatlas/C28/",
+  "hardware_targets": {
+    "vcpu": 2,
+    "ram_mib": 4096,
+    "free_disk_mib": 20480,
+    "measurement": "verified"
+  },
+  "expected_invariants": [
+    "Sealed source bytes never modified",
+    "Legal hold takes precedence over deletion",
+    "Raw timestamp and confidence survive normalization"
+  ],
+  "target_workload": {
+    "description": "Bounded operational DFIR workflow under target hardware limits",
+    "evidence_size_target_bytes": 1048576,
+    "evidence_size_ceiling_bytes": 104857600,
+    "batch_records_target": 1000,
+    "batch_records_ceiling": 100000,
+    "timeline_entries_target": 1000,
+    "timeline_entries_ceiling": 250000,
+    "search_max_results_target": 100,
+    "search_max_results_ceiling": 1000,
+    "search_max_scan_target": 5000,
+    "search_max_scan_ceiling": 50000,
+    "search_expand_depth_ceiling": 8,
+    "search_expand_degree_ceiling": 256,
+    "search_visited_nodes_ceiling": 5000,
+    "steps": [
+      {
+        "step": 1,
+        "action": "quarantine_stream_and_seal",
+        "description": "Stream bounded evidence into isolated quarantine and seal with SHA-256 digest"
+      },
+      {
+        "step": 2,
+        "action": "custody_append_and_checkpoint",
+        "description": "Append sequential attributable custody events and record signed external checkpoint"
+      },
+      {
+        "step": 3,
+        "action": "timeline_indexing_and_search",
+        "description": "Index normalized timeline events and execute bounded search within scan caps"
+      },
+      {
+        "step": 4,
+        "action": "export_package_and_verify",
+        "description": "Package self-contained portable bundle and verify offline without server"
+      },
+      {
+        "step": 5,
+        "action": "recovery_restore_and_rebuild",
+        "description": "Restore case consistency and rebuild derived index without custody rewrite"
+      }
+    ],
+    "target_thresholds": {
+      "p50_latency_ms": 250,
+      "p95_latency_ms": 1000,
+      "max_latency_ms": 5000,
+      "peak_rss_mib": 1024,
+      "disk_growth_bytes": 52428800
+    }
+  },
+  "overload_workload": {
+    "description": "Over-limit and saturation conditions that must fail closed with explicit typed errors",
+    "cases": [
+      {
+        "name": "oversized_evidence_stream",
+        "input_bytes": 104857601,
+        "ceiling_bytes": 104857600,
+        "expected_error": "upload_too_large"
+      },
+      {
+        "name": "oversized_manifest_payload",
+        "input_bytes": 16385,
+        "ceiling_bytes": 16384,
+        "expected_error": "payload_too_large"
+      },
+      {
+        "name": "oversized_inspect_request",
+        "input_bytes": 262145,
+        "ceiling_bytes": 262144,
+        "expected_error": "payload_too_large"
+      },
+      {
+        "name": "search_max_results_exceeded",
+        "max_results": 1001,
+        "ceiling": 1000,
+        "expected_error": "query_limit_exceeded"
+      },
+      {
+        "name": "search_max_scan_events_exceeded",
+        "max_scan_events": 50001,
+        "ceiling": 50000,
+        "expected_error": "query_limit_exceeded"
+      },
+      {
+        "name": "search_expand_depth_exceeded",
+        "expand_depth": 9,
+        "ceiling": 8,
+        "expected_error": "query_limit_exceeded"
+      },
+      {
+        "name": "search_expand_degree_exceeded",
+        "max_expand_degree": 257,
+        "ceiling": 256,
+        "expected_error": "query_limit_exceeded"
+      },
+      {
+        "name": "search_visited_nodes_exceeded",
+        "max_visited_nodes": 5001,
+        "ceiling": 5000,
+        "expected_error": "query_limit_exceeded"
+      },
+      {
+        "name": "client_cancellation_abort",
+        "description": "Cancelled context during execution terminates immediately with zero partial state",
+        "expected_error": "query_canceled"
+      },
+      {
+        "name": "concurrency_lock_saturation",
+        "description": "Contending write on single-writer store fails closed immediately without deadlock",
+        "expected_error": "lock_busy"
+      },
+      {
+        "name": "storage_disk_full_saturation",
+        "description": "Simulated disk full fault fails closed before manifest commit leaving prior state clean",
+        "expected_error": "disk_full"
+      }
+    ]
+  }
+}

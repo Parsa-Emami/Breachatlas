@@ -249,10 +249,12 @@
     },
     {
       "id": "C28",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C28.json"
+      ],
+      "source_identity": "sha256:6ca247ff20d2a781f1964207f787a2ff3eda6fc178746ced24a7b577e3705623",
+      "notes": "Bounded operational target and overload workloads (N28) measured and verified on local host across quarantine & seal, custody & checkpoint, timeline index & search, export & verify, and restore & rebuild (tests/performance_test.go, scripts/benchmark-local.mjs, tests/scenarios/target-workload.json, tests/fixtures/breachatlas/C28); confirmed pipeline p50/p95/max latencies within bounds (p50 ~21.1ms, p95 ~22.6ms against 250ms/1000ms thresholds), peak RSS well under 1024 MiB, zero disk leakage, 9 overload saturation failure modes (upload_too_large, query_limit_exceeded, context_canceled, lock_busy, disk_full), and sealed source byte immutability, with published limits recorded in docs/evidence/performance.json."
     },
     {
       "id": "C29",

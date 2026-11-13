@@ -1,0 +1,28 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c28-perf-001",
+  "evidence_id": "ev-c28-perf-01",
+  "artifact_id": "art-c28-perf-01",
+  "bundle_id": "bnd-c28-perf-001",
+  "provider": "local",
+  "zone_hint": "UTC",
+  "source_confidence": 0.98,
+  "target_records_count": 50,
+  "search_params": {
+    "max_results": 50,
+    "max_scan_events": 500,
+    "expand_depth": 2,
+    "max_expand_degree": 16,
+    "max_visited_nodes": 100
+  },
+  "evidence_template": {
+    "filename": "synthetic-auth-audit.log",
+    "media_type": "text/plain",
+    "sample_line": "2026-11-13T08:00:00Z app-srv-01 auth_event: user=operator-c28 action=login status=success\n"
+  },
+  "custody_init": {
+    "actor": "operator-c28",
+    "reason": "Initial intake and performance baseline benchmark intake",
+    "timestamp": "2026-11-13T08:00:00Z"
+  }
+}

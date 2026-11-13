@@ -1,0 +1,31 @@
+{
+  "schema_version": "1",
+  "task": "C28",
+  "requirement": "N28",
+  "published_limits": {
+    "evidence_size_ceiling_bytes": 104857600,
+    "manifest_ceiling_bytes": 16384,
+    "inspect_ceiling_bytes": 262144,
+    "batch_records_ceiling": 100000,
+    "timeline_entries_ceiling": 250000,
+    "search_max_results_cap": 1000,
+    "search_max_scan_events_cap": 50000,
+    "search_max_expand_depth_cap": 8,
+    "search_max_expand_degree_cap": 256,
+    "search_max_visited_nodes_cap": 5000,
+    "single_writer_lock_enforced": true
+  },
+  "invariants_verified": [
+    "Sealed source bytes never modified",
+    "Legal hold takes precedence over deletion",
+    "Raw timestamp and confidence survive normalization"
+  ],
+  "expected_rejection_codes": [
+    "upload_too_large",
+    "payload_too_large",
+    "query_limit_exceeded",
+    "query_canceled",
+    "lock_busy",
+    "disk_full"
+  ]
+}

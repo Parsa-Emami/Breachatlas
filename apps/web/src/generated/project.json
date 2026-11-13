@@ -347,7 +347,7 @@
       "id": "C28",
       "title": "perf(local): measure bounded target and overload workloads",
       "stage": "private-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Record hardware, OS, source and fixture identities, latency/CPU/RSS/disk, cancellation and saturation for the target and an over-limit workload. Publish only observed limits and reduce unsupported targets."
       ],
