@@ -419,7 +419,7 @@
       "id": "C34",
       "title": "docs(oss): complete installation usage contribution and support guides",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "A fresh reader completes the core task from public instructions. Document source builds, licenses, data/limits/privacy/recovery/support and a confirmed vulnerability reporting route without mandatory cloud or paid entitlements."
       ],

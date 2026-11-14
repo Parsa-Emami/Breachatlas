@@ -1,0 +1,65 @@
+{
+  "commit_id": "C34",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Complete open-source installation, usage, contribution, support, and private vulnerability reporting guides (docs/release/USER_GUIDE.md, SECURITY.md, README.md, OPEN_SOURCE.md, CONTRIBUTING.md, docs/engineering/CLONE_TO_RUN.md) with Go documentation contract and negative sentinel/immutability verification.",
+  "passed": true,
+  "source_commit": "f78a10bf890ff0f116b8a26469f63310529bd890",
+  "source_tree": "fb398df85b13d6ca8d2af18f15894d82618441d9",
+  "source_identity": "sha256:5ccdb60e6a02050c6cae985cbbe0db5dc23e7a105b5f742093a623ca52e7236a",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C34/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "bd84bfbd763c90b20099da60214e8362a544003fa0d841717f63699c22580039"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./... && go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including tests/oss_docs_test.go (TestC34OSSDocsSupportAndNegativeCases)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, prepare:web, TypeScript typecheck, Vite build, and 35 web/contract tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N34",
+      "status": "passed",
+      "observations": [
+        "Authored docs/release/USER_GUIDE.md covering source installation, 8-step DFIR workflow, published limits, local-first privacy, recovery, licenses, and support.",
+        "Updated SECURITY.md with supported versions, GitHub Private Vulnerability Reporting route, 3-business-day acknowledgement target, and scope.",
+        "Updated README.md, OPEN_SOURCE.md, CONTRIBUTING.md, and docs/engineering/CLONE_TO_RUN.md to reflect CORE_READY_LOCAL_USABLE and cross-link user, security, and contribution guides.",
+        "Verified documentation contracts, inert script/HTML sentinel handling, and 0440 sealed-byte immutability in tests/oss_docs_test.go."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Only Linux x86_64 is advertised as observed supported platform."
+  ],
+  "rollback_or_recovery_observation": "Revert docs/release/USER_GUIDE.md, SECURITY.md, README.md, OPEN_SOURCE.md, CONTRIBUTING.md, docs/engineering/CLONE_TO_RUN.md, tests/oss_docs_test.go, tests/fixtures/breachatlas/C34, docs/evidence/C34.json, plans/progress.json, plans/project-state.json, apps/web/src/generated/project.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

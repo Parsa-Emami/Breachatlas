@@ -1,5 +1,33 @@
-# Contribution workflow
+# Contributing to BreachAtlas
 
-Read OPEN_SOURCE.md, AGENTS.md and ROADMAP.md. Use npm run setup and npm run plan -- next, then read that complete task card. Implement one real dependency-ready work unit with meaningful positive/negative tests. Preserve Apache-2.0, upstream attribution and DCO.md; no secrets/private data or license-unknown fixtures.
+Thank you for contributing to BreachAtlas!
 
-Run actual relevant engine checks and npm run check; browser changes also run test:browser and clone changes run test:clone. Record source/fixture identities, command exits and observed results, then update progress truthfully. Use focused Conventional Commits/PRs describing the concrete behavior, validation and remaining blockers. Do not disable checks, fake providers or change protected DB schema/migration/.env/Dockerfile files. Security reporting follows SECURITY.md.
+## Getting Started
+
+1. Read [OPEN_SOURCE.md](OPEN_SOURCE.md), [AGENTS.md](AGENTS.md), and [ROADMAP.md](ROADMAP.md).
+2. Run setup and inspect the next planned work unit:
+   ```sh
+   npm run setup
+   npm run plan -- next
+   ```
+3. Read the returned `plans/commits/Cxx.md` card in full and implement one dependency-ready work unit with meaningful positive and negative tests.
+4. Preserve [Apache-2.0](LICENSE), upstream attribution ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)), and [DCO.md](DCO.md). Never commit secrets, private incident data, or license-unknown fixtures.
+
+## Verification Before Opening a PR
+
+Run the relevant checks locally:
+```sh
+npm run validate:plan
+go vet ./... && go test -race -count=1 ./...
+npm run check
+npm run test:browser
+python3 scripts/validate_repo.py
+```
+
+For clone/setup changes, also run `npm run test:clone`. Record exact source/fixture identities, command exits, and observed results in `docs/evidence/Cxx.json` and update `plans/progress.json` truthfully.
+
+## Boundaries & Security
+
+- Do not disable checks, fake providers, or modify protected database schemas, migrations, `.env` files, or Dockerfiles.
+- Use focused Conventional Commits describing the concrete behavior and validation.
+- Report security vulnerabilities privately via [SECURITY.md](SECURITY.md).

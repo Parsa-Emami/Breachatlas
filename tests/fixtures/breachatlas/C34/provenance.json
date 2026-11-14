@@ -1,0 +1,10 @@
+{
+  "task": "C34",
+  "license": "Apache-2.0",
+  "provenance": "Synthetic deterministic C34 OSS documentation, support, security, and negative sentinel fixtures authored for BreachAtlas.",
+  "sha256": {
+    "positive/docs-contract.json": "499e05b0ed8536df6c1bf1bd335f00997c271a359b5488b786fb3b5076e19a63",
+    "invalid/negative-cases.json": "67182ce95e3709daeaa97e244f7c0f732fa5c44e92341e8f5e7e6aa97794bf84",
+    "expected/expected-docs-outcomes.json": "b9aefb2ef6513ba537f588b18fbb79e15ff3ed8090ec1f8bb85cfea0dd604d28"
+  }
+}

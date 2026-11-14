@@ -1,0 +1,7 @@
+{
+  "schema_version": "1",
+  "all_docs_present": true,
+  "no_mandatory_cloud_or_paid_entitlements": true,
+  "script_sentinel_preserved_inert": true,
+  "sealed_bytes_modified": false
+}

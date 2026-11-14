@@ -1,0 +1,5 @@
+{
+  "schema_version": "1",
+  "script_sentinel_payload": "{\"timestamp\":\"2026-11-14T08:00:00Z\",\"event_type\":\"<script>alert('xss')</script>\",\"summary\":\"<img src=x onerror=alert(1)>\"}\n",
+  "sealed_bytes_modified": false
+}

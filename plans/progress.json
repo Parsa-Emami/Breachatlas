@@ -303,10 +303,12 @@
     },
     {
       "id": "C34",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C34.json"
+      ],
+      "source_identity": "sha256:5ccdb60e6a02050c6cae985cbbe0db5dc23e7a105b5f742093a623ca52e7236a",
+      "notes": "Completed open-source installation, usage, contribution, support, and private vulnerability reporting guides (N34): authored docs/release/USER_GUIDE.md, updated SECURITY.md, README.md, OPEN_SOURCE.md, CONTRIBUTING.md, and docs/engineering/CLONE_TO_RUN.md, and verified documentation contracts, inert script/HTML sentinel handling, and 0440 sealed-byte immutability in tests/oss_docs_test.go and tests/fixtures/breachatlas/C34/."
     },
     {
       "id": "C35",

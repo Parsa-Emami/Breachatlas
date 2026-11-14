@@ -21,6 +21,7 @@ Open http://127.0.0.1:4173. No owned public domain, external DNS, TLS certificat
 - **Default unexposed engine work:** Standalone web serving (`scripts/serve-web.mjs`) keeps `engineEnabled: false` and fails closed (`503`) on `/api/*`. Supervised local runs validate storage and provider prerequisites before reporting `/readyz` ready.
 - **Optional private TLS ingress:** Operators with an owned domain and TLS certificate can configure `ops/web/nginx.conf.template` (deny-all default + `Host $proxy_host` -> `127.0.0.1:4310`) and `ops/web/service.systemd`. See [infra/deployment.md](../../infra/deployment.md) and [docs/engineering/WEB_RUNBOOK.md](WEB_RUNBOOK.md).
 - **Complete reproducible packaging:** Run `bash scripts/package.sh` to build and verify `dist/release/` (binaries, web UI, reproducible source archive, SPDX SBOM, notices, and checksums).
+- **User guide, security & licensing:** See [User Guide](../release/USER_GUIDE.md), [SECURITY.md](../../SECURITY.md), and [OPEN_SOURCE.md](../../OPEN_SOURCE.md) for data limits, local-first privacy, recovery, support, and private vulnerability reporting.
 
 Local resources: none beyond the selected runtime. Hardware target: 2 vCPU / 4096 MiB RAM / 20480 MiB free disk plus real dataset/provider/backup space (measured bounds recorded in `docs/evidence/performance.json`). Full engine support initially targets Linux x86_64.
 

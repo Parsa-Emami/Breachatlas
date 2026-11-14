@@ -4,7 +4,7 @@
   "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_tree": "HEAD",
-  "scope": "C33 UX keyboard, mobile/desktop 360px/1440px, table equivalents, failure-handling (empty/invalid/interrupted/provider-outage), N-1 export compatibility, Go engine negative cases (modified byte, missing evidence, untrusted signer, expired/stale/replayed revision, sealed byte immutability), and ux/C33 evidence",
+  "scope": "C34 complete open-source installation, usage, contribution, support, and private vulnerability reporting guides",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -38,20 +38,23 @@
     "C30",
     "C31",
     "C32",
-    "C33"
+    "C33",
+    "C34"
   ],
   "changed_paths": [
+    "CONTRIBUTING.md",
+    "OPEN_SOURCE.md",
+    "README.md",
+    "SECURITY.md",
     "apps/web/src/generated/project.json",
-    "apps/web/src/pages/Workflow.tsx",
-    "apps/web/src/styles.css",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C33.json",
-    "docs/evidence/ux.json",
+    "docs/engineering/CLONE_TO_RUN.md",
+    "docs/evidence/C34.json",
+    "docs/release/USER_GUIDE.md",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/browser/full-workflow-accessibility.spec.ts",
-    "tests/fixtures/breachatlas/C33/",
-    "tests/ux_compatibility_test.go"
+    "tests/fixtures/breachatlas/C34/",
+    "tests/oss_docs_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -86,6 +89,7 @@
     "docs/evidence/C31.json",
     "docs/evidence/C32.json",
     "docs/evidence/C33.json",
+    "docs/evidence/C34.json",
     "docs/evidence/domain.json",
     "docs/evidence/private-install.json",
     "docs/evidence/ux.json"
@@ -98,7 +102,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C34",
+  "next_task": "C35",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C34."
+  "continuation": "Implement C35."
 }

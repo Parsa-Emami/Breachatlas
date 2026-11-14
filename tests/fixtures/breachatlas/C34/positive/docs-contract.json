@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "required_docs": [
+    "docs/release/USER_GUIDE.md",
+    "SECURITY.md",
+    "README.md",
+    "OPEN_SOURCE.md",
+    "CONTRIBUTING.md",
+    "docs/engineering/CLONE_TO_RUN.md"
+  ],
+  "required_sections": {
+    "docs/release/USER_GUIDE.md": ["Apache-2.0", "npm run setup", "npm start", "256 KiB", "4 GiB", "SECURITY.md"],
+    "SECURITY.md": ["Private Vulnerability Reporting", "3 business days", "Linux x86_64"],
+    "README.md": ["npm run setup", "npm start", "docs/release/USER_GUIDE.md", "SECURITY.md"],
+    "OPEN_SOURCE.md": ["Apache-2.0", "THIRD_PARTY_NOTICES.md", "SPDX-2.3"],
+    "CONTRIBUTING.md": ["go test -race -count=1 ./...", "npm run check", "DCO.md", "SECURITY.md"],
+    "docs/engineering/CLONE_TO_RUN.md": ["USER_GUIDE.md", "SECURITY.md", "OPEN_SOURCE.md"]
+  }
+}
