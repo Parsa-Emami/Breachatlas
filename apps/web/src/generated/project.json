@@ -359,7 +359,7 @@
       "id": "C29",
       "title": "feat(operations): expose real engine readiness and redacted diagnostics",
       "stage": "private-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Separate web health from engine, authoritative storage and required provider readiness. Failures are visible; logs are bounded and exclude synthetic secret/credential sentinels."
       ],

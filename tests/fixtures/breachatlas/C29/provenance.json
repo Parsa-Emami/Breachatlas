@@ -1,0 +1,10 @@
+{
+  "task": "C29",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic engine readiness, storage/provider prerequisite, and secret sentinel redaction fixtures",
+  "sha256": {
+    "expected-output/diagnostics-outcomes.json": "0d27a63037764dd4b7b3936c91af4efcaa7f69445395667adcee71e6fbb38a88",
+    "invalid/degraded-and-secret-sentinels.json": "ff5bb1115096d3ba05c20d3945f2e772680c534c8c264c4edf2435880ac35072",
+    "positive/readiness-and-diagnostics.json": "b540097deaeac1d1c3dc6118d8853e2446b25384af5efc11d20b988bcb0cb2f9"
+  }
+}

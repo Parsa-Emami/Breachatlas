@@ -32,10 +32,11 @@
     "retention store forbidding automatic raw-evidence TTL while enforcing legal hold precedence and recording signed immutable destruction tombstones and audit logs",
     "cross-store case consistency verification, portable export bundle restoration, and deterministic derived timeline index rebuild without custody rewrite or sealed-byte mutation",
     "cross-surface abuse, XSS/import, and authorization boundary hardening and regression verification across web routes, relay, Go HTTP API, and domain/storage stores",
-    "bounded operational and overload workload performance benchmarks recording actual hardware, latency distributions, CPU/RSS/disk bounds, cancellation, saturation, and published limits without mutating sealed source bytes"
+    "bounded operational and overload workload performance benchmarks recording actual hardware, latency distributions, CPU/RSS/disk bounds, cancellation, saturation, and published limits without mutating sealed source bytes",
+    "separated web-shell liveness, Go engine readiness, authoritative storage integrity checks, required provider verification, and bounded secret-redacted diagnostic logging"
   ],
-  "engine": "performance_workloads_verified",
-  "next_task": "C29",
+  "engine": "readiness_and_diagnostics_verified",
+  "next_task": "C30",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

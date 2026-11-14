@@ -2,5 +2,10 @@
   "projectId": "breachatlas",
   "apiBasePath": "/api",
   "engineEnabled": false,
-  "maxPreviewBytes": 1048576
+  "maxPreviewBytes": 1048576,
+  "readinessPath": "/readyz",
+  "diagnosticsPath": "/api/v1/diagnostics",
+  "maxDiagnosticLogBytes": 16384,
+  "maxDiagnosticEntries": 64,
+  "requiredProviders": ["local", "csv", "json"]
 }

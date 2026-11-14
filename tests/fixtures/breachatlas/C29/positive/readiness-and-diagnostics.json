@@ -1,0 +1,14 @@
+{
+  "schema_version": "1",
+  "fixture_id": "c29-positive-readiness",
+  "case_id": "case-c29-ops-01",
+  "evidence_id": "ev-c29-ops-01",
+  "sealed_payload": "2026-11-14T08:00:00Z,auth,srv-c29,analyst-ops,readiness-check\n",
+  "required_providers": ["local", "csv", "json"],
+  "max_diagnostic_entries": 64,
+  "max_diagnostic_bytes": 16384,
+  "benign_log_messages": [
+    "Authoritative storage lock acquired cleanly",
+    "Allowlisted analyzer providers verified"
+  ]
+}

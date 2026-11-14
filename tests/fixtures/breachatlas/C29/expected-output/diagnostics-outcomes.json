@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "fixture_id": "c29-expected-outcomes",
+  "web_only_readyz": {
+    "http_status": 200,
+    "status": "ready",
+    "scope": "web-shell",
+    "webReady": true,
+    "engineReady": false,
+    "storageReady": false,
+    "providersReady": false
+  },
+  "unified_healthy": {
+    "healthz_status": 200,
+    "readyz_status": 200,
+    "diagnostics_status": 200,
+    "webHealthy": true,
+    "engineReady": true,
+    "storageReady": true,
+    "providersReady": true
+  },
+  "engine_unreachable": {
+    "healthz_status": 200,
+    "readyz_status": 503,
+    "diagnostics_status": 503,
+    "webHealthy": true,
+    "engineReady": false,
+    "failure_code": "engine_unavailable"
+  },
+  "storage_missing": {
+    "healthz_status": 200,
+    "readyz_status": 503,
+    "storageReady": false,
+    "failure_code": "storage_prerequisite_missing"
+  },
+  "provider_unavailable": {
+    "healthz_status": 200,
+    "readyz_status": 503,
+    "providersReady": false,
+    "failure_code": "provider_unavailable"
+  },
+  "redaction_token": "[REDACTED]",
+  "pem_redaction_token": "[REDACTED_PEM]"
+}

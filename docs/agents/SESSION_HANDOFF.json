@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
-  "date": "2026-11-13",
-  "base_commit": "b1bbbfb6db0a0c0530f73bc3498d444c531bc76e",
-  "verified_source_commit": "b1bbbfb6db0a0c0530f73bc3498d444c531bc76e",
-  "verified_source_tree": "d6ebbf89ec995a71caf0a8786d4032dd8aba8e2f",
-  "scope": "C28 bounded operational target and overload performance workloads across quarantine & seal, custody & checkpoint, timeline indexing & search, export & verify, and restore & rebuild",
+  "date": "2026-11-14",
+  "base_commit": "85c7ff0852bcf676f54b99b0d17eba92816fa2d0",
+  "verified_source_commit": "85c7ff0852bcf676f54b99b0d17eba92816fa2d0",
+  "verified_source_tree": "8f7c85dd2d23cf047d483ee6cefd6edd4611c49a",
+  "scope": "C29 separated web health from engine, authoritative storage, and required provider readiness alongside bounded secret-redacted diagnostic logging",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -33,22 +33,29 @@
     "C25",
     "C26",
     "C27",
-    "C28"
+    "C28",
+    "C29"
   ],
   "changed_paths": [
+    "apps/web/public/runtime-config.json",
     "apps/web/src/generated/project.json",
+    "apps/web/src/lib/runtime-config.mjs",
+    "cmd/breachatlas/diagnostics.go",
+    "cmd/breachatlas/diagnostics_test.go",
+    "cmd/breachatlas/main.go",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C28.json",
-    "docs/evidence/performance.json",
+    "docs/evidence/C29.json",
+    "ops/diagnostics.md",
+    "ops/web/runtime-config.json",
     "plans/progress.json",
     "plans/project-state.json",
-    "scripts/benchmark-local.mjs",
-    "tests/fixtures/breachatlas/C28/expected-output/workload-thresholds.json",
-    "tests/fixtures/breachatlas/C28/invalid/overload-inputs.json",
-    "tests/fixtures/breachatlas/C28/positive/target-workload-input.json",
-    "tests/fixtures/breachatlas/C28/provenance.json",
-    "tests/performance_test.go",
-    "tests/scenarios/target-workload.json"
+    "scripts/serve-web.mjs",
+    "tests/diagnostics_readiness_test.go",
+    "tests/fixtures/breachatlas/C29/expected-output/diagnostics-outcomes.json",
+    "tests/fixtures/breachatlas/C29/invalid/degraded-and-secret-sentinels.json",
+    "tests/fixtures/breachatlas/C29/positive/readiness-and-diagnostics.json",
+    "tests/fixtures/breachatlas/C29/provenance.json",
+    "tests/web/engine-readiness.test.mjs"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -78,7 +85,7 @@
     "docs/evidence/C26.json",
     "docs/evidence/C27.json",
     "docs/evidence/C28.json",
-    "docs/evidence/performance.json"
+    "docs/evidence/C29.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -88,7 +95,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": false,
-  "next_task": "C29",
+  "next_task": "C30",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C29."
+  "continuation": "Implement C30."
 }

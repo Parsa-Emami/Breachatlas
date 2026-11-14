@@ -25,10 +25,12 @@ const (
 )
 
 type Config struct {
-	Host        string
-	Port        int
-	ShowVersion bool
-	CheckHealth bool
+	Host              string
+	Port              int
+	ShowVersion       bool
+	CheckHealth       bool
+	StorageDir        string
+	RequiredProviders string
 }
 
 type HealthResponse struct {
@@ -63,6 +65,10 @@ func isLoopbackAuthority(authority string) bool {
 }
 
 func NewMux() http.Handler {
+	return NewMuxWithOptions(EngineRuntimeOptions{})
+}
+
+func NewMuxWithOptions(opts EngineRuntimeOptions) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/v1/evidence-manifests/validate", validateManifest)
 	mux.HandleFunc("/api/v1/evidence-integrity/inspect", inspectEvidenceIntegrity)
@@ -105,16 +111,7 @@ func NewMux() http.Handler {
 		}
 	})
 
-	mux.HandleFunc("/readyz", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json; charset=utf-8")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
-		w.WriteHeader(http.StatusOK)
-		_ = json.NewEncoder(w).Encode(map[string]interface{}{
-			"status":  "ready",
-			"service": ServiceName,
-			"scope":   "local-loopback",
-		})
-	})
+	registerDiagnosticsRoutes(mux, opts)
 
 	mux.HandleFunc("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -218,6 +215,8 @@ func ParseFlags(args []string, stdout, stderr io.Writer) (*Config, error) {
 	fs.IntVar(&cfg.Port, "port", 8080, "Port number to listen on (1-65535)")
 	fs.BoolVar(&cfg.ShowVersion, "version", false, "Print engine version and exit")
 	fs.BoolVar(&cfg.CheckHealth, "health", false, "Probe engine loopback health and exit")
+	fs.StringVar(&cfg.StorageDir, "storage-dir", "", "Authoritative local storage directory for readiness verification")
+	fs.StringVar(&cfg.RequiredProviders, "required-providers", "", "Comma-separated required providers (defaults to local,csv,json)")
 
 	if err := fs.Parse(args); err != nil {
 		return nil, err
@@ -290,8 +289,23 @@ func Run(args []string, stdout, stderr io.Writer, readyChan chan<- struct{}) int
 		return 1
 	}
 
+	var reqProviders []string
+	if strings.TrimSpace(cfg.RequiredProviders) != "" {
+		for _, item := range strings.Split(cfg.RequiredProviders, ",") {
+			if trimmed := strings.TrimSpace(item); trimmed != "" {
+				reqProviders = append(reqProviders, trimmed)
+			}
+		}
+	}
+
+	muxOpts := EngineRuntimeOptions{
+		StorageRoot:       strings.TrimSpace(cfg.StorageDir),
+		RequireStorageDir: strings.TrimSpace(cfg.StorageDir) != "",
+		RequiredProviders: reqProviders,
+	}
+
 	server := &http.Server{
-		Handler:      NewMux(),
+		Handler:      NewMuxWithOptions(muxOpts),
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  30 * time.Second,

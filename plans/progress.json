@@ -258,10 +258,12 @@
     },
     {
       "id": "C29",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C29.json"
+      ],
+      "source_identity": "sha256:83231e85984b022674306356044ba279e919d4cc7f2096a1790c0a6712fbd5d8",
+      "notes": "Separated web liveness (/healthz) from Go engine, authoritative local storage, and required provider readiness (/readyz and /api/v1/diagnostics) with bounded (64 entries / 16384 bytes) secret-redacted diagnostic logging in cmd/breachatlas/diagnostics.go, cmd/breachatlas/main.go, scripts/serve-web.mjs, ops/web/runtime-config.json, apps/web/src/lib/runtime-config.mjs, and ops/diagnostics.md; verified missing storage prerequisites, symlinked roots, unavailable providers, unreachable engine, synthetic secret sentinel redaction, ring buffer eviction, restart recovery, and sealed 0440 byte immutability across cmd/breachatlas/diagnostics_test.go, tests/diagnostics_readiness_test.go, and tests/web/engine-readiness.test.mjs."
     },
     {
       "id": "C30",
