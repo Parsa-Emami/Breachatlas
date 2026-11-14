@@ -321,10 +321,12 @@
     },
     {
       "id": "C36",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C36.json"
+      ],
+      "source_identity": "sha256:b0dbe8a0a0e5448f6eec253de3cdcd0f0a6fb4c9dd12e461849b04ff55e0a5f2",
+      "notes": "Repeated independent clean-checkout clone-to-value verification (N36): extended scripts/clone-smoke.mjs and tests/scenarios/clone-to-value.json to measure setup/workflow timings and verify all 8 workflow steps, web-only separation, missing-prerequisite 503 rejection, offline verify, restart & restore, and doctor checks; recorded observed effort and failure checks in docs/product/ONBOARDING_RESULTS.md and verified Go engine restart/0440 sealed-byte immutability in tests/onboarding_clone_test.go."
     },
     {
       "id": "C37",

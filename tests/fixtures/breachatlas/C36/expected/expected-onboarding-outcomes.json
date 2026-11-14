@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "task": "C36",
+  "positive": {
+    "clone_setup_succeeded": true,
+    "core_workflow_completed": true,
+    "restart_recovery_verified": true,
+    "offline_verify_succeeded": true,
+    "sealed_bytes_modified": false
+  },
+  "negative": {
+    "missing_prerequisite_rejected": true,
+    "malformed_fixture_rejected": true,
+    "unavailable_provider_rejected": true
+  }
+}

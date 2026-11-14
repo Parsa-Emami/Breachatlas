@@ -1,0 +1,10 @@
+{
+  "task": "C36",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic independent clone-to-value onboarding contract and negative-case fixtures",
+  "sha256": {
+    "positive/onboarding-contract.json": "f9ac5a48c72c6b559543928b739f7d411d98cb6f566a5b80e54eb5a5a5daf8a4",
+    "invalid/negative-cases.json": "6b4ea9a23fc46f6ecfc640d1554090f45dff7657cc4cd1ff45b9f012150cee4c",
+    "expected/expected-onboarding-outcomes.json": "e22b4b573dd8947d61273f02ef8f7e24312d246a13fb17234ba449cada787e62"
+  }
+}

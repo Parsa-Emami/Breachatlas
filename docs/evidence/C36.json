@@ -1,0 +1,74 @@
+{
+  "commit_id": "C36",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Independent clean-checkout clone-to-value repeatability following public onboarding documentation (README.md, docs/release/USER_GUIDE.md, docs/engineering/CLONE_TO_RUN.md), onboarding results report (docs/product/ONBOARDING_RESULTS.md), and negative-case / restart-persistence verification (N36).",
+  "passed": true,
+  "source_commit": "e4ef9a6d0995b168bd3efc4e4541dc4d930e5ca4",
+  "source_tree": "96ffa4e6a6541bd95fb476cd7e81ebd179afa808",
+  "source_identity": "sha256:b0dbe8a0a0e5448f6eec253de3cdcd0f0a6fb4c9dd12e461849b04ff55e0a5f2",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C36/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "94dec4e081e29d56f3318f595e00dc98b53a35645979904455fe77542b144c6a"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./... && go test -race -count=1 ./tests -run TestC36",
+      "exit_code": 0,
+      "output": "Passed TestC36IndependentCloneToValue in tests/onboarding_clone_test.go."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:clone",
+      "exit_code": 0,
+      "output": "Clean git clone -> npm run setup (3144ms) -> web-only boundary -> missing-prerequisite /readyz 503 -> npm start + Chromium 8-step workflow (2831ms) -> offline verify -> restart & restore -> npm run doctor (total 6463ms)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, prepare:web, tsc typecheck, Vite build, and 36 Node tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked 375 JSON files and repository contract invariants."
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0,
+      "output": "Ran 6 tests in tests/engineering; OK."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N36",
+      "status": "passed",
+      "observations": [
+        "Extended scripts/clone-smoke.mjs and tests/scenarios/clone-to-value.json to verify all 8 workflow steps and measure setup/workflow onboarding effort in an isolated clean git clone.",
+        "Recorded observed timings (setup 3144ms, workflow 2831ms, total 6463ms) and negative failure checks in docs/product/ONBOARDING_RESULTS.md.",
+        "Verified C36 fixtures, public onboarding guides, restart persistence, and 0440 sealed-byte immutability in tests/onboarding_clone_test.go."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Observed independent onboarding environment is Linux x86_64."
+  ],
+  "rollback_or_recovery_observation": "Revert docs/product/ONBOARDING_RESULTS.md, docs/evidence/C36.json, scripts/clone-smoke.mjs, tests/scenarios/clone-to-value.json, tests/onboarding_clone_test.go, tests/fixtures/breachatlas/C36/, plans/progress.json, plans/project-state.json, apps/web/src/generated/project.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

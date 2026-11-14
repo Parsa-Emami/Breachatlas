@@ -1,0 +1,26 @@
+{
+  "schema_version": "1",
+  "task": "C36",
+  "cases": [
+    {
+      "id": "missing_storage_prerequisite",
+      "description": "Missing storage directory must force /readyz 503 storageReady=false.",
+      "expected_status": 503
+    },
+    {
+      "id": "malformed_fixture",
+      "description": "Malformed JSON input must be rejected explicitly by the engine.",
+      "expected_error": "invalid_json"
+    },
+    {
+      "id": "unavailable_provider",
+      "description": "Unavailable provider name must fail closed rather than returning placeholder success.",
+      "expected_error": "unavailable_provider"
+    },
+    {
+      "id": "sealed_bytes_immutable_across_restart",
+      "description": "0440 sealed evidence bytes must remain identical across clean-checkout restart.",
+      "expected_sealed_modified": false
+    }
+  ]
+}

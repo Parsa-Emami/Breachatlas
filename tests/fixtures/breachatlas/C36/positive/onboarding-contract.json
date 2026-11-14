@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "project": "BreachAtlas",
+  "task": "C36",
+  "requirement": "N36",
+  "guide_paths": [
+    "README.md",
+    "docs/release/USER_GUIDE.md",
+    "docs/engineering/CLONE_TO_RUN.md"
+  ],
+  "setup_commands": [
+    "npm run setup",
+    "npm run doctor",
+    "npm start"
+  ],
+  "scenario_path": "tests/scenarios/clone-to-value.json",
+  "required_workflow_steps": 8,
+  "restart_verification": true,
+  "offline_verify": true
+}

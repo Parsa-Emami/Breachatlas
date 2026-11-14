@@ -49,6 +49,7 @@ async function stopChild(child) {
 }
 
 try {
+  const startMs = Date.now();
   // Stage committed/index tree into an isolated bare repo so real `git clone` transfers objects cleanly.
   const tree = run('git', ['write-tree'], root);
   const identity = {
@@ -71,7 +72,9 @@ try {
   if (!process.env.npm_execpath) throw new Error('Invoke through npm run test:clone.');
 
   // 1. Clean-host setup (npm ci + build + go build breachatlas + go build verify)
+  const setupStartMs = Date.now();
   run(process.execPath, [process.env.npm_execpath, 'run', 'setup'], checkout);
+  const setupMs = Date.now() - setupStartMs;
   await access(join(checkout, 'dist/web/index.html'), constants.R_OK);
   await access(join(checkout, 'dist/bin/breachatlas'), constants.X_OK);
   await access(join(checkout, 'dist/bin/verify'), constants.X_OK);
@@ -135,7 +138,8 @@ try {
   await stopChild(degradedSupervisor);
   degradedSupervisor = undefined;
 
-  // 4. Full C30 reference workflow, negative UATs, offline `verify`, restart, and restore via `npm start` + Chromium
+  // 4. Full reference workflow, negative UATs, offline `verify`, restart, and restore via `npm start` + Chromium
+  const workflowStartMs = Date.now();
   const acceptWebPort = await getFreePort();
   const acceptEngPort = await getFreePort();
   const playwrightCli = resolve(checkout, 'node_modules/@playwright/test/cli.js');
@@ -151,11 +155,16 @@ try {
       },
     }
   );
+  const workflowMs = Date.now() - workflowStartMs;
 
-  // 5. Verify doctor status and project state in cloned checkout
+  // 5. Verify doctor status, scenario contract, and project state in cloned checkout
   const doctorOut = JSON.parse(run(process.execPath, [process.env.npm_execpath, 'run', '--silent', 'doctor'], checkout));
   if (!doctorOut.nodeSupported || !doctorOut.webAssetsBuilt || !doctorOut.engineBuilt) {
     throw new Error(`Unexpected doctor failure in cloned checkout: ${JSON.stringify(doctorOut)}`);
+  }
+  const scenario = JSON.parse(await readFile(join(checkout, 'tests/scenarios/clone-to-value.json'), 'utf8'));
+  if (!scenario.engine_implemented || !Array.isArray(scenario.steps) || scenario.steps.length !== 8) {
+    throw new Error(`Invalid clone-to-value scenario contract: steps=${scenario.steps?.length}`);
   }
   const projectState = JSON.parse(await readFile(join(checkout, 'plans/project-state.json'), 'utf8'));
 
@@ -169,13 +178,19 @@ try {
       engineReady: false,
     },
     fullWorkflowProof: {
-      label: 'c30-clone-to-value-local-usability',
+      label: 'c36-independent-clone-to-value',
       passed: true,
       engineReady: true,
+      scenarioSteps: scenario.steps.length,
       missingPrerequisiteStatus: degReadyRes.status,
       offlineVerifierPassed: true,
       restartAndRestorePassed: true,
       negativeCasesPassed: true,
+    },
+    onboardingEffort: {
+      setupMs,
+      workflowMs,
+      totalMs: Date.now() - startMs,
     },
     coreReady: Boolean(projectState.core_ready),
   }));

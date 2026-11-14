@@ -443,7 +443,7 @@
       "id": "C36",
       "title": "test(onboarding): repeat clone-to-value independently",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "A separate clean environment or independent contributor follows only the public guide and completes the actual core workflow. Record observed effort and failures; customer demand and five pilots are not prerequisites for OSS usability."
       ],
