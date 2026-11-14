@@ -14,6 +14,7 @@ const expectedOutcomes = JSON.parse(
 );
 
 async function activateByKeyboard(locator: Locator, page: import('@playwright/test').Page) {
+  await expect(locator).toBeEnabled();
   await locator.focus();
   await expect(locator).toBeFocused();
   await page.keyboard.press('Enter');
