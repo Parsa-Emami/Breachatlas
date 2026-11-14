@@ -4,7 +4,7 @@
   "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_tree": "HEAD",
-  "scope": "C38 frozen local privacy limits, data lifecycle, supported profiles, and maintenance/dependency policy",
+  "scope": "C39 enforced evidence-backed open-source v1 readiness gate across C01–C38",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -107,7 +107,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C39",
+  "next_task": "C40",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C39 after C38 review/commit."
+  "continuation": "Implement C40 after C39 review/commit."
 }

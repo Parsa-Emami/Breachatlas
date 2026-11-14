@@ -1,0 +1,21 @@
+{
+  "schema_version": "1",
+  "task": "C39",
+  "cases": [
+    {
+      "id": "planning_template_rejected",
+      "description": "Any evidence file with planning_template=true must fail the v1 release gate.",
+      "expected_exit_code": 2
+    },
+    {
+      "id": "missing_or_mismatched_source_identity_rejected",
+      "description": "Missing proof or mismatched source_identity must fail the v1 release gate.",
+      "expected_exit_code": 2
+    },
+    {
+      "id": "writer_boundary_and_replay_quota",
+      "description": "Engine writer interrupted at staged-byte/manifest boundary recovers cleanly; replay is idempotent and quota overflow fails closed without modifying sealed bytes.",
+      "expected_sealed_modified": false
+    }
+  ]
+}

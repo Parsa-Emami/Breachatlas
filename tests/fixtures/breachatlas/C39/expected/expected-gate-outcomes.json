@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "task": "C39",
+  "positive": {
+    "release_gate_passed": true,
+    "c01_c38_verified": true,
+    "sealed_bytes_modified": false
+  },
+  "negative": {
+    "planning_template_rejected": true,
+    "mismatched_source_identity_rejected": true,
+    "boundary_crash_recovery_verified": true,
+    "replay_and_quota_verified": true
+  }
+}

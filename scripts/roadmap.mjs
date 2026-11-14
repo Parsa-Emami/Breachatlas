@@ -53,6 +53,62 @@ export async function load() {
   }
   return { plan, progress, gates, errors };
 }
+const REQUIRED_GATE_EVIDENCE = [
+  'docs/evidence/private-install.json',
+  'docs/evidence/release-verification.json',
+  'docs/evidence/ux.json',
+  'docs/evidence/domain.json',
+  'docs/evidence/performance.json',
+];
+export async function evaluateReleaseGate(options = {}) {
+  const baseDir = options.rootDir ? resolve(options.rootDir) : root;
+  const readJson = options.readJson ?? (async p => JSON.parse(await readFile(resolve(baseDir, p), 'utf8')));
+  const progress = options.progress ?? await readJson('plans/progress.json');
+  const gates = options.gates ?? await readJson('plans/release-gates.json');
+  const failures = [];
+  const prerequisiteIds = progress.commits.slice(0, 38).map(t => t.id);
+  const missing = progress.commits.slice(0, 38).filter(t => t.status !== 'verified').map(t => t.id);
+  if (missing.length) failures.push('Missing verified prerequisites: ' + missing.join(', '));
+  if (!gates.core_ready) failures.push('Release gate core_ready must be true');
+  for (const state of progress.commits.slice(0, 38)) {
+    if (state.status !== 'verified') continue;
+    if (!Array.isArray(state.evidence) || state.evidence.length === 0) {
+      failures.push(`${state.id}: missing evidence list`);
+      continue;
+    }
+    for (const evPath of state.evidence) {
+      if (!safe(evPath)) { failures.push(`${state.id}: unsafe evidence path ${evPath}`); continue; }
+      try {
+        const proof = await readJson(evPath);
+        if (proof.planning_template) failures.push(`${state.id}: planning_template evidence rejected`);
+        if (!proof.passed) failures.push(`${state.id}: evidence passed=false`);
+        if (proof.commit_id !== state.id) failures.push(`${state.id}: commit_id mismatch (${proof.commit_id})`);
+        if (!proof.source_identity || proof.source_identity !== state.source_identity) failures.push(`${state.id}: source_identity mismatch`);
+        if (!Array.isArray(proof.commands) || proof.commands.length === 0 || proof.commands.some(c => c.exit_code !== 0)) {
+          failures.push(`${state.id}: missing or failed command evidence`);
+        }
+      } catch (err) {
+        failures.push(`${state.id}: unreadable evidence ${evPath} (${err.message})`);
+      }
+    }
+  }
+  for (const rel of REQUIRED_GATE_EVIDENCE) {
+    try {
+      const doc = await readJson(rel);
+      if (doc.passed === false) failures.push(`${rel}: passed=false`);
+    } catch (err) {
+      failures.push(`Missing required release evidence ${rel} (${err.message})`);
+    }
+  }
+  return {
+    passed: failures.length === 0,
+    verified_prerequisites: prerequisiteIds.length - missing.length,
+    total_prerequisites: 38,
+    core_ready: Boolean(gates.core_ready),
+    required_evidence_checked: REQUIRED_GATE_EVIDENCE.length,
+    failures,
+  };
+}
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) try {
   const { plan, progress, gates, errors } = await load(); if (errors.length) throw new Error(errors.join('\n'));
   const command = process.argv[2] ?? 'status';
@@ -64,7 +120,12 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     if (!task) throw new Error('No matching/dependency-ready task; inspect blockers.');
     console.log(JSON.stringify({ task, progress: states.get(task.id) }, null, 2));
   } else if (command === 'release-check') {
-    const missing = progress.commits.slice(0, 38).filter(t => t.status !== 'verified').map(t => t.id);
-    if (missing.length || !gates.core_ready) { console.error('NOT RELEASE READY: actual C01-C38 and complete clone-to-value evidence required. Missing: ' + missing.join(', ')); process.exitCode = 2; }
+    const gate = await evaluateReleaseGate({ progress, gates });
+    if (!gate.passed) {
+      console.error('NOT RELEASE READY: ' + gate.failures.join('; '));
+      process.exitCode = 2;
+    } else {
+      console.log(JSON.stringify(gate, null, 2));
+    }
   } else throw new Error('Usage: npm run plan -- [validate|status|next|show C07|release-check]');
 } catch (error) { console.error(error.message); process.exitCode = 1; }

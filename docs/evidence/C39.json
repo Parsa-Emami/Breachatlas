@@ -1,0 +1,52 @@
+{
+  "commit_id": "C39",
+  "title": "Enforce evidence-backed open-source v1 readiness",
+  "requirement_id": "N39",
+  "passed": true,
+  "planning_template": false,
+  "source_commit": "717c3471d49c3e85c13ee462552b7892395a69c5",
+  "source_tree": "a4391c03c33b9a35b5cb7d7058b87e3b631f566d",
+  "source_identity": "sha256:799e99d483232ec9eee15f54c12756ddab8bcb6707c15d65c8b567a170ac01e1",
+  "fixtures": {
+    "dir": "tests/fixtures/breachatlas/C39",
+    "provenance_sha256": "802bd9bd8411fa1fcafaec3f91ea51919efadd9c1d113b755d316251d80322b7"
+  },
+  "artifacts": [
+    "scripts/roadmap.mjs",
+    "plans/release-gates.json",
+    "docs/evidence/v1-gate.json",
+    ".github/workflows/release-gate.yml",
+    "tests/release_gate_test.go",
+    "tests/fixtures/breachatlas/C39/provenance.json",
+    "plans/progress.json",
+    "plans/project-state.json",
+    "apps/web/src/generated/project.json",
+    "docs/agents/SESSION_HANDOFF.json"
+  ],
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run release:check",
+      "exit_code": 0
+    },
+    {
+      "command": "go vet ./... && go test -race -count=1 ./tests -run TestC39",
+      "exit_code": 0
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0
+    }
+  ]
+}

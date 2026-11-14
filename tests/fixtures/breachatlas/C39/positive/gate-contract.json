@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "project": "BreachAtlas",
+  "task": "C39",
+  "requirement": "N39",
+  "required_verified_range": "C01-C38",
+  "required_evidence_files": [
+    "docs/evidence/private-install.json",
+    "docs/evidence/release-verification.json",
+    "docs/evidence/ux.json",
+    "docs/evidence/domain.json",
+    "docs/evidence/performance.json"
+  ],
+  "required_workflow_file": ".github/workflows/release-gate.yml",
+  "required_gate_command": "npm run release:check"
+}

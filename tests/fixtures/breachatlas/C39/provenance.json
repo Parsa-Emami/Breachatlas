@@ -1,0 +1,10 @@
+{
+  "task": "C39",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic v1 release gate and durability fixtures",
+  "sha256": {
+    "positive/gate-contract.json": "28aca83dbf92c5385445b0df9da5e573af2ae305a1c253694e4a41826a964a71",
+    "invalid/negative-cases.json": "1659b8b18004af53cc253f7412637c0b7ee45af5326c5bfaa1a9b626e3a114b3",
+    "expected/expected-gate-outcomes.json": "5fc7ec313d2cc8cf8e170e5850e2ecb859cfcfb2c2eda5d819fbdece623cc507"
+  }
+}

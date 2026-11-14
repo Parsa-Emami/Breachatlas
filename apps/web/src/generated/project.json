@@ -479,7 +479,7 @@
       "id": "C39",
       "title": "ci(release): enforce evidence-backed open-source v1 readiness",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Verify actual evidence for C01-C38, full clone-to-value, complete source/engine packaging, dependency/fixture licenses and supported-profile security/recovery. Planning templates, missing proofs and wrong-source evidence fail the release gate."
       ],

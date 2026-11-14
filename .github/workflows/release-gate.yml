@@ -1,0 +1,54 @@
+name: release-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-gate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  enforce-v1-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Setup Go toolchain
+        uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Setup Node.js toolchain
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install locked Node dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Validate roadmap, repository contracts, and v1 release gate
+        run: |
+          npm run validate:plan
+          npm run release:check
+          python3 scripts/validate_repo.py
+
+      - name: Verify Go engine and release-gate tests
+        run: |
+          go vet ./...
+          go test -race -count=1 ./tests -run TestC39
+
+      - name: Verify web build and Node tooling/contract checks
+        run: npm run check
