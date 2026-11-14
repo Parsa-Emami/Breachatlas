@@ -352,7 +352,7 @@
       "evidence": [
         "docs/evidence/C39.json"
       ],
-      "source_identity": "sha256:799e99d483232ec9eee15f54c12756ddab8bcb6707c15d65c8b567a170ac01e1",
+      "source_identity": "sha256:64862c288691b764cae6211432b690f9d95a899168d2c8df53ab6d5666be0fb6",
       "notes": "C39 enforced evidence-backed OSS v1 readiness gate across C01-C38, CI workflow with SHA-pinned actions, and Go release-gate/durability regressions."
     },
     {
