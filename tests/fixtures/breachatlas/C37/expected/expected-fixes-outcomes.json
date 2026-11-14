@@ -1,0 +1,15 @@
+{
+  "schema_version": "1",
+  "task": "C37",
+  "positive": {
+    "all_observed_blockers_verified": true,
+    "sealed_bytes_modified": false,
+    "no_invented_feedback": true
+  },
+  "negative": {
+    "missing_prerequisite_rejected": true,
+    "malformed_json_rejected": true,
+    "unavailable_provider_rejected": true,
+    "restart_preserves_sealed_bytes": true
+  }
+}

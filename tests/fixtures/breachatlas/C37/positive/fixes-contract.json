@@ -1,0 +1,29 @@
+{
+  "schema_version": "1",
+  "project": "BreachAtlas",
+  "task": "C37",
+  "requirement": "N37",
+  "resolved_blockers": [
+    {
+      "id": "keyboard_enable_wait_in_c33",
+      "source_task": "C33",
+      "file": "tests/browser/full-workflow-accessibility.spec.ts",
+      "resolution": "Await button enabled state before focus() in keyboard workflow steps so delayed enable transitions cannot flake in CI."
+    },
+    {
+      "id": "content_addressed_blob_rel_path_check",
+      "source_task": "C31",
+      "file": "tests/release_packaging_test.go",
+      "resolution": "Verify the returned SealedManifest.BlobRelPath directly instead of a conditional read on a hypothetical sealed.bin path."
+    },
+    {
+      "id": "clone_to_value_scenario_pin",
+      "source_task": "C36",
+      "file": "tests/scenarios/clone-to-value.json",
+      "resolution": "Keep verified_at_commit pinned to C30 per tests/web/reference-workflow.test.mjs while recording C36 clean-clone effort metrics in scripts/clone-smoke.mjs and docs/product/ONBOARDING_RESULTS.md."
+    }
+  ],
+  "explicit_open_scope_limits": [
+    "Supported and verified host architecture remains Linux x86_64."
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "commit_id": "C37",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Resolve observed C30/C33/C35/C36 installation and workflow blockers with targeted regressions (tests/release_packaging_test.go, tests/acceptance_fixes_test.go), explicit scope/fix documentation (docs/product/BETA_FIXES.md), and repeat verification of affected Go, Playwright browser, clean-clone, and contract suites (N37).",
+  "passed": true,
+  "source_commit": "cc4134bdacf277d3714df7e4e3438f1c1ba31986",
+  "source_tree": "df6ab08fb343c3e867ae7937683964d6ea143746",
+  "source_identity": "sha256:4f8cceabdc8c39f689e1b20753c2bed9b07fd2dd2a691dc7cf977f646a29c58b",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C37/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "6e1f1af9083e6484ce5cc805631ca367979ded41fc0b4abd4679f6ab8af5520e"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./... && go test -race -count=1 ./tests -run \"TestC31|TestC35|TestC36|TestC37\"",
+      "exit_code": 0,
+      "output": "Passed TestC37AcceptanceBlockersAndRegressions, TestC36IndependentCloneToValue, TestC35SignedArtifactsAndDataSafeUpgrades, and TestC31CompleteReleasePackagingAndNegativeCases."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:browser",
+      "exit_code": 0,
+      "output": "Passed all 14 Playwright Chromium tests including C30 clone-to-value and C33 full-workflow accessibility."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:clone",
+      "exit_code": 0,
+      "output": "Passed clean git clone -> npm run setup -> npm start -> 8-step core workflow -> offline verify -> restart & restore -> npm run doctor."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Validated plan, rebuilt web workspace, ran tsc typecheck, and passed all 36 Node tests."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0,
+      "output": "Ran 6 tests in tests/engineering; OK."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N37",
+      "status": "passed",
+      "observations": [
+        "Documented observed C30/C33/C35/C36 blockers and targeted resolutions in docs/product/BETA_FIXES.md while keeping Linux x86_64 host scope explicit.",
+        "Closed silent sealed-blob assertion in tests/release_packaging_test.go by verifying SealedManifest.BlobRelPath directly without skipping missing paths.",
+        "Verified missing storage prerequisite (ErrSealStoreRequired), malformed JSON manifest (invalid_json), unavailable provider rejection, restart persistence, and restricted sealed-blob immutability in tests/acceptance_fixes_test.go.",
+        "Re-ran Go regression suites, Playwright browser accessibility & clone-to-value specs, clean-clone smoke verification, and Node contract checks with zero failures."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Supported host platform remains Linux x86_64."
+  ],
+  "rollback_or_recovery_observation": "Revert docs/product/BETA_FIXES.md, tests/acceptance_fixes_test.go, tests/release_packaging_test.go, tests/fixtures/breachatlas/C37/, docs/evidence/C37.json, plans/progress.json, plans/project-state.json, apps/web/src/generated/project.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

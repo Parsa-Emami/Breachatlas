@@ -455,7 +455,7 @@
       "id": "C37",
       "title": "fix(acceptance): resolve observed installation and workflow blockers",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Fix actual C30/C33/C35/C36 failures with targeted regressions and repeat affected checks. Keep unresolved blockers explicit; never invent feedback or weaken an invariant to claim completion."
       ],

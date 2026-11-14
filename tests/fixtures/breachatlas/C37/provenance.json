@@ -1,0 +1,10 @@
+{
+  "task": "C37",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic beta blocker resolution and regression fixtures",
+  "sha256": {
+    "positive/fixes-contract.json": "22ea03ac539bf861efee39040fa2fd0a3272a29ec9de8e5660d764e40148ea3d",
+    "invalid/negative-cases.json": "1fc7d998f86e18f7fcbe75eecf3985efeb51efdc0880e6f40cb1e843c2ee9704",
+    "expected/expected-fixes-outcomes.json": "82663c8cf1ade1fa8937150659c56a1bd1005e13ae8020dc2b9c31aaf89953eb"
+  }
+}

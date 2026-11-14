@@ -330,10 +330,12 @@
     },
     {
       "id": "C37",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C37.json"
+      ],
+      "source_identity": "sha256:4f8cceabdc8c39f689e1b20753c2bed9b07fd2dd2a691dc7cf977f646a29c58b",
+      "notes": "Resolved and verified observed installation and workflow blockers across C30/C33/C35/C36 (N37): closed silent sealed-blob assertion gap in tests/release_packaging_test.go using SealedManifest.BlobRelPath, documented observed fixes and Linux x86_64 host limits in docs/product/BETA_FIXES.md, added negative-case and restart-immutability regressions in tests/acceptance_fixes_test.go and tests/fixtures/breachatlas/C37/, and re-verified affected Go, Playwright browser, clean-clone, and contract suites."
     },
     {
       "id": "C38",

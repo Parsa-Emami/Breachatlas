@@ -4,7 +4,7 @@
   "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_tree": "HEAD",
-  "scope": "C36 independent clean-checkout clone-to-value repeatability, onboarding results report, and negative prerequisite checks",
+  "scope": "C37 resolution and regression verification of observed C30/C33/C35/C36 installation and workflow blockers",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -41,19 +41,19 @@
     "C33",
     "C34",
     "C35",
-    "C36"
+    "C36",
+    "C37"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C36.json",
-    "docs/product/ONBOARDING_RESULTS.md",
+    "docs/evidence/C37.json",
+    "docs/product/BETA_FIXES.md",
     "plans/progress.json",
     "plans/project-state.json",
-    "scripts/clone-smoke.mjs",
-    "tests/fixtures/breachatlas/C36/",
-    "tests/onboarding_clone_test.go",
-    "tests/scenarios/clone-to-value.json"
+    "tests/acceptance_fixes_test.go",
+    "tests/fixtures/breachatlas/C37/",
+    "tests/release_packaging_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -91,6 +91,7 @@
     "docs/evidence/C34.json",
     "docs/evidence/C35.json",
     "docs/evidence/C36.json",
+    "docs/evidence/C37.json",
     "docs/evidence/domain.json",
     "docs/evidence/private-install.json",
     "docs/evidence/release-verification.json",
@@ -104,7 +105,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C37",
+  "next_task": "C38",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C37 after C36 review/commit."
+  "continuation": "Implement C38 after C37 review/commit."
 }

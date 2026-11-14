@@ -1,0 +1,26 @@
+{
+  "schema_version": "1",
+  "task": "C37",
+  "cases": [
+    {
+      "id": "missing_prerequisite_storage",
+      "description": "Opening SealStore with an empty RootDir must return ErrSealStoreRequired.",
+      "expected_error": "seal_store_required"
+    },
+    {
+      "id": "malformed_json_manifest",
+      "description": "Submitting malformed JSON input fails explicitly without partial success.",
+      "expected_error": "invalid_json"
+    },
+    {
+      "id": "unavailable_provider",
+      "description": "Custody intake or analyzer execution against an unavailable provider fails closed.",
+      "expected_error": "unavailable_provider"
+    },
+    {
+      "id": "sealed_bytes_immutable_across_restart",
+      "description": "0440 sealed evidence bytes remain identical after store close and reopen.",
+      "expected_sealed_modified": false
+    }
+  ]
+}

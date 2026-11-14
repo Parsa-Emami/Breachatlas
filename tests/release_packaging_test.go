@@ -224,13 +224,14 @@ func TestC31CompleteReleasePackagingAndNegativeCases(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err := ss.SealQuarantined(ctx, evidence.SealRequest{
+	sealedManifest, err := ss.SealQuarantined(ctx, evidence.SealRequest{
 		OperationID:    "op-seal-c31",
 		Quarantined:    q,
 		ExpectedSHA256: expectedSHA,
 		AcquiredAt:     now,
 		CustodyRoot:    ev1.CustodyRoot,
-	}); err != nil {
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -287,8 +288,8 @@ func TestC31CompleteReleasePackagingAndNegativeCases(t *testing.T) {
 	if out, err := verifyCmd.CombinedOutput(); err != nil {
 		t.Fatalf("packaged bin/verify failed on signed bundle: %v\n%s", err, string(out))
 	}
-	if gotPayload, err := os.ReadFile(filepath.Join(sDir, "cases", "c31-case", "evidence", "c31-ev", "sealed.bin")); err == nil && string(gotPayload) != string(sealedPayload) {
-		t.Fatalf("sealed evidence blob modified")
+	if gotPayload, err := os.ReadFile(filepath.Join(sDir, sealedManifest.BlobRelPath)); err != nil || string(gotPayload) != string(sealedPayload) {
+		t.Fatalf("sealed evidence blob missing or modified: err=%v", err)
 	}
 
 	// 6. Signed atomic release promotion & Ed25519 verification via internal/release.

@@ -40,10 +40,11 @@
     "keyboard-only 8-step workflow with accessible table equivalents at 360px and 1440px, invalid/empty/interrupted/provider-outage failure handling, N-1 export compatibility, and observed platform UX evidence verified through C33",
     "complete open-source installation, usage, licensing, limits/privacy/recovery/support, contribution, and private vulnerability reporting guides verified through C34",
     "signed release artifact verification against independently trusted Ed25519 keys, monotonic revision/expiry enforcement, data-safe upgrade and binary rollback preserving newer accepted data, and documented source-build alternative verified through C35",
-    "independent clean-checkout clone-to-value repeatability, onboarding timings, negative prerequisite handling, and restart-safe 0440 sealed-byte verification verified through C36"
+    "independent clean-checkout clone-to-value repeatability, onboarding timings, negative prerequisite handling, and restart-safe 0440 sealed-byte verification verified through C36",
+    "observed C30/C33/C35/C36 installation and workflow blocker fixes documented and verified with targeted regressions through C37"
   ],
   "engine": "local_usable_clone_to_value_verified",
-  "next_task": "C37",
+  "next_task": "C38",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }
