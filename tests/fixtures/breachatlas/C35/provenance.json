@@ -1,0 +1,10 @@
+{
+  "task": "C35",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic release distribution, Ed25519 signature, and upgrade/rollback safety policy fixtures",
+  "sha256": {
+    "positive/trusted-release-policy.json": "c499496fdf2829cffd7400a932151e285d3769b1ce78eb72602d489f4ab9d57c",
+    "invalid/negative-cases.json": "b8dc7ae91774b9ccd97e549f2d0bee4b9cce57f72ec0cfc9ccd75b2a1dd0b59d",
+    "expected/expected-upgrade-outcomes.json": "280987394a72b11eaf6c4aa200dbc3df48d18603f2d8db6abaee64e389ba2227"
+  }
+}

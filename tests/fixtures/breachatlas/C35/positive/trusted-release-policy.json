@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "project": "BreachAtlas",
+  "task": "C35",
+  "requirement": "N35",
+  "scope": "complete-open-source",
+  "trusted_key_id": "release-key-ed25519-v1",
+  "supported_hosts": [
+    "Linux x86_64"
+  ],
+  "required_deliverables": [
+    "bin/breachatlas",
+    "bin/verify",
+    "web/index.html",
+    "source/breachatlas-source.tar.gz",
+    "source/BUILD_RECIPE.json",
+    "sbom.spdx.json",
+    "THIRD_PARTY_NOTICES.md",
+    "SHA256SUMS.txt",
+    "release.json"
+  ],
+  "upgrade_sequence": [
+    {
+      "release_version": "0.1.0",
+      "revision": 1,
+      "issued_at": "2026-11-14T10:00:00Z",
+      "expires_at": "2027-11-14T10:00:00Z"
+    },
+    {
+      "release_version": "0.1.1",
+      "revision": 2,
+      "issued_at": "2026-11-14T12:00:00Z",
+      "expires_at": "2027-11-14T12:00:00Z"
+    }
+  ],
+  "rollback_policy": {
+    "target_release_version": "0.1.0",
+    "preserve_newer_accepted_data": true,
+    "preserve_authority_high_water_mark": true,
+    "allow_old_data_backup_overwrite": false
+  },
+  "source_build_alternative": {
+    "archive_path": "source/breachatlas-source.tar.gz",
+    "recipe_path": "source/BUILD_RECIPE.json",
+    "require_reproducible": true
+  }
+}

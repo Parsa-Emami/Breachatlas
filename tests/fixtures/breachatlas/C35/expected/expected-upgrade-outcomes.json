@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "task": "C35",
+  "positive": {
+    "signed_release_verified": true,
+    "upgrade_preserves_prior_data": true,
+    "rollback_preserves_newer_accepted_data": true,
+    "authority_high_water_mark_preserved": true,
+    "source_build_alternative_verified": true,
+    "sealed_bytes_modified": false
+  },
+  "negative": {
+    "one_byte_tamper_rejected": true,
+    "missing_deliverable_rejected": true,
+    "untrusted_signer_rejected": true,
+    "expired_revision_rejected": true,
+    "stale_replayed_revision_rejected": true,
+    "old_backup_overwrite_rejected": true
+  }
+}

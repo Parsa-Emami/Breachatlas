@@ -4,7 +4,7 @@
   "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_tree": "HEAD",
-  "scope": "C34 complete open-source installation, usage, contribution, support, and private vulnerability reporting guides",
+  "scope": "C35 signed release artifact verification, trusted Ed25519 keys, monotonic revision checks, data-safe upgrade and rollback preserving newer accepted data, and source-build alternative",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -39,22 +39,23 @@
     "C31",
     "C32",
     "C33",
-    "C34"
+    "C34",
+    "C35"
   ],
   "changed_paths": [
-    "CONTRIBUTING.md",
-    "OPEN_SOURCE.md",
-    "README.md",
-    "SECURITY.md",
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/engineering/CLONE_TO_RUN.md",
-    "docs/evidence/C34.json",
-    "docs/release/USER_GUIDE.md",
+    "docs/evidence/C35.json",
+    "docs/evidence/release-verification.json",
+    "internal/release/package.go",
+    "internal/release/upgrade.go",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/fixtures/breachatlas/C34/",
-    "tests/oss_docs_test.go"
+    "scripts/verify-release.mjs",
+    "tests/distribution_upgrade_test.go",
+    "tests/fixtures/breachatlas/C35/",
+    "tests/release/upgrade-recovery.mjs",
+    "tests/web/oss-tooling.test.mjs"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -90,8 +91,10 @@
     "docs/evidence/C32.json",
     "docs/evidence/C33.json",
     "docs/evidence/C34.json",
+    "docs/evidence/C35.json",
     "docs/evidence/domain.json",
     "docs/evidence/private-install.json",
+    "docs/evidence/release-verification.json",
     "docs/evidence/ux.json"
   ],
   "ci": {
@@ -102,7 +105,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C35",
+  "next_task": "C36",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C35."
+  "continuation": "Implement C36 after C35 review/commit."
 }

@@ -312,10 +312,12 @@
     },
     {
       "id": "C35",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C35.json"
+      ],
+      "source_identity": "sha256:ce1bcd0d91c7cebb3dc367d95ccf1b783f66080111f9401cb2b1952c491cff62",
+      "notes": "Verified signed release artifacts against independently trusted Ed25519 keys, monotonic revision/expiry authority checks, data-safe install/upgrade and binary-only rollback preserving newer accepted sealed evidence, and documented source-build alternative (N35): implemented SignReleaseVersion, SignReleaseDirectory, VerifyTrustedRelease, InstallOrUpgradeRelease, and RollbackRelease in internal/release/upgrade.go and internal/release/package.go; implemented scripts/verify-release.mjs, tests/release/upgrade-recovery.mjs, and docs/evidence/release-verification.json; verified 1-byte tamper, missing deliverable, untrusted signer, expired/stale/replayed revision rejection, forbidden old-backup data overwrite rejection, Go->Node Ed25519 cross-verification, and 0440 sealed-byte immutability in tests/distribution_upgrade_test.go and tests/web/oss-tooling.test.mjs."
     },
     {
       "id": "C36",

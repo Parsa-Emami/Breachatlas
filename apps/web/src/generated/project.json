@@ -431,7 +431,7 @@
       "id": "C35",
       "title": "test(distribution): verify signed artifacts and data-safe upgrades",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Verify integrity and authenticity against independently trusted release identity/key. Install, upgrade and roll back on supported hosts without discarding newer accepted data; maintain the documented source-build alternative."
       ],

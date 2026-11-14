@@ -90,6 +90,7 @@ type ReleaseManifest struct {
 	SchemaVersion        string            `json:"schemaVersion"`
 	Project              string            `json:"project"`
 	Scope                string            `json:"scope"`
+	ReleaseVersion       string            `json:"releaseVersion,omitempty"`
 	EngineReady          bool              `json:"engineReady"`
 	OfflineVerifierReady bool              `json:"offlineVerifierReady"`
 	Reproducible         bool              `json:"reproducible"`
@@ -98,6 +99,9 @@ type ReleaseManifest struct {
 	Components           ReleaseComponents `json:"components"`
 	ProvenanceKeyID      string            `json:"provenanceKeyId,omitempty"`
 	ProvenancePublicKey  string            `json:"provenancePublicKey,omitempty"`
+	ProvenanceRevision   uint64            `json:"provenanceRevision,omitempty"`
+	ProvenanceIssuedAt   string            `json:"provenanceIssuedAt,omitempty"`
+	ProvenanceExpiresAt  string            `json:"provenanceExpiresAt,omitempty"`
 	ProvenanceSignature  string            `json:"provenanceSignature,omitempty"`
 }
 
@@ -118,15 +122,19 @@ type SPDXDocument struct {
 }
 
 type VerificationResult struct {
-	Valid                bool     `json:"valid"`
-	Scope                string   `json:"scope"`
-	EngineReady          bool     `json:"engine_ready"`
-	OfflineVerifierReady bool     `json:"offline_verifier_ready"`
-	VerifiedFiles        int      `json:"verified_files"`
-	SBOMPackages         int      `json:"sbom_packages"`
-	SourceArchiveFiles   int      `json:"source_archive_files"`
-	SignatureVerified    bool     `json:"signature_verified"`
-	SourceCommit         string   `json:"source_commit"`
+	Valid                  bool   `json:"valid"`
+	Scope                  string `json:"scope"`
+	ReleaseVersion         string `json:"release_version,omitempty"`
+	EngineReady            bool   `json:"engine_ready"`
+	OfflineVerifierReady   bool   `json:"offline_verifier_ready"`
+	SourceBuildRecipeReady bool   `json:"source_build_recipe_ready"`
+	VerifiedFiles          int    `json:"verified_files"`
+	SBOMPackages           int    `json:"sbom_packages"`
+	SourceArchiveFiles     int    `json:"source_archive_files"`
+	SignatureVerified      bool   `json:"signature_verified"`
+	ProvenanceKeyID        string `json:"provenance_key_id,omitempty"`
+	ProvenanceRevision     uint64 `json:"provenance_revision,omitempty"`
+	SourceCommit           string `json:"source_commit"`
 }
 
 type PackageConfig struct {
@@ -290,15 +298,19 @@ func VerifyReleaseDirectory(ctx context.Context, dir string, trustedPubKey ed255
 	}
 
 	return VerificationResult{
-		Valid:                true,
-		Scope:                manifest.Scope,
-		EngineReady:          manifest.EngineReady,
-		OfflineVerifierReady: manifest.OfflineVerifierReady,
-		VerifiedFiles:        verifiedCount,
-		SBOMPackages:         len(sbomDoc.Packages),
-		SourceArchiveFiles:   archiveFiles,
-		SignatureVerified:    sigVerified,
-		SourceCommit:         manifest.SourceCommit,
+		Valid:                  true,
+		Scope:                  manifest.Scope,
+		ReleaseVersion:         manifest.ReleaseVersion,
+		EngineReady:            manifest.EngineReady,
+		OfflineVerifierReady:   manifest.OfflineVerifierReady,
+		SourceBuildRecipeReady: manifest.Reproducible,
+		VerifiedFiles:          verifiedCount,
+		SBOMPackages:           len(sbomDoc.Packages),
+		SourceArchiveFiles:     archiveFiles,
+		SignatureVerified:      sigVerified,
+		ProvenanceKeyID:        manifest.ProvenanceKeyID,
+		ProvenanceRevision:     manifest.ProvenanceRevision,
+		SourceCommit:           manifest.SourceCommit,
 	}, nil
 }
 

@@ -1,0 +1,45 @@
+{
+  "schema_version": "1",
+  "task": "C35",
+  "cases": [
+    {
+      "id": "tamper_one_byte",
+      "description": "Flipping one byte in a packaged deliverable must fail verification.",
+      "target_file": "THIRD_PARTY_NOTICES.md",
+      "expected_error": "checksum_mismatch"
+    },
+    {
+      "id": "missing_evidence_or_deliverable",
+      "description": "Missing required release deliverable or SHA256SUMS entry must fail closed.",
+      "missing_file": "bin/verify",
+      "expected_error": "incomplete_release_artifact"
+    },
+    {
+      "id": "untrusted_signer",
+      "description": "Release signed by an untrusted or wrong Ed25519 key must be rejected.",
+      "signer_key_id": "rogue-signer-key",
+      "expected_error": "signature_invalid"
+    },
+    {
+      "id": "expired_revision",
+      "description": "Signed release whose provenance_expires_at is before verification time must be rejected.",
+      "revision": 3,
+      "expires_at": "2026-11-01T00:00:00Z",
+      "verify_time": "2026-11-14T14:00:00Z",
+      "expected_error": "stale_or_expired_revision"
+    },
+    {
+      "id": "stale_replayed_revision",
+      "description": "Replaying revision <= last valid accepted authority revision must be rejected.",
+      "current_authority_revision": 2,
+      "candidate_revision": 1,
+      "expected_error": "stale_or_expired_revision"
+    },
+    {
+      "id": "overwrite_newer_data_with_old_backup",
+      "description": "Rollback attempting to overwrite newer accepted host data with an older snapshot must be rejected.",
+      "overwrite_data_with_old_backup": true,
+      "expected_error": "newer_data_overwrite_forbidden"
+    }
+  ]
+}

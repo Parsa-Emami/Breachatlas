@@ -7,6 +7,7 @@ import { setup, supportedNode } from '../../scripts/oss-bootstrap.mjs';
 import { validate } from '../../scripts/roadmap.mjs';
 import { packageSourceArtifacts, ALLOWED_LICENSES } from '../../scripts/package-source.mjs';
 import { packageCompleteRelease } from '../../scripts/package-web.mjs';
+import { runUpgradeRecoverySuite } from '../release/upgrade-recovery.mjs';
 test('setup validates toolchain/options and stops at the first failed install', () => {
   assert.equal(supportedNode('v24.19.0'), true); assert.equal(supportedNode('v25.1.0'), false);
   assert.throws(() => setup(['--unknown']), /options/);
@@ -46,4 +47,14 @@ test('source archive & SPDX SBOM generation is reproducible and complete package
   for (const pkg of sbom.packages) {
     assert.ok(ALLOWED_LICENSES.has(pkg.licenseConcluded), `${pkg.name} license ${pkg.licenseConcluded}`);
   }
+});
+
+test('C35 signed release verification and data-safe upgrade/rollback succeed end-to-end', async () => {
+  const summary = await runUpgradeRecoverySuite();
+  assert.equal(summary.passed, true);
+  assert.equal(summary.source_build_alternative_verified, true);
+  assert.equal(summary.lifecycle_checks.case_v1_preserved, true);
+  assert.equal(summary.lifecycle_checks.case_v2_newer_preserved, true);
+  assert.equal(summary.lifecycle_checks.sealed_bytes_modified, false);
+  assert.equal(summary.lifecycle_checks.authority_high_water_mark, 2);
 });

@@ -1,0 +1,75 @@
+{
+  "commit_id": "C35",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Verify signed release artifacts against independently trusted Ed25519 keys, enforce monotonic revision and expiration authority checks, perform data-safe install, upgrade, and binary rollback on Linux x86_64 without discarding newer accepted data, and maintain the documented source-build alternative (N35).",
+  "passed": true,
+  "source_commit": "35cc7432101237613650635da9aa0a43c2f8495e",
+  "source_tree": "120092e32393e6fe884100698d3a6bd552e57131",
+  "source_identity": "sha256:ce1bcd0d91c7cebb3dc367d95ccf1b783f66080111f9401cb2b1952c491cff62",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C35/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "c6b35ed5f7227b5d0796a353b5d5d4a5336ce6acc98a15729007ad82a15af0b0"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./... && go test -race -count=1 ./internal/release ./tests -run \"TestC31|TestC35|TestVerify\"",
+      "exit_code": 0,
+      "output": "Passed internal/release (TestVerifySPDXDocumentAndSymlinkRejection) and tests (TestC35SignedArtifactsAndDataSafeUpgrades, TestC31CompleteReleasePackagingAndNegativeCases)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY node tests/release/upgrade-recovery.mjs --write-report",
+      "exit_code": 0,
+      "output": "Verified signed v0.1.0 -> v0.1.1 upgrade and v0.1.1 -> v0.1.0 data-safe rollback preserving newer accepted data, source-build alternative, and all 6 negative rejections; recorded docs/evidence/release-verification.json."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Validated plan, built web assets, ran tsc typecheck, and passed all 36 Node web/contract/distribution tests."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0,
+      "output": "Ran 6 tests in tests/engineering; OK."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N35",
+      "status": "passed",
+      "observations": [
+        "Implemented SignReleaseVersion, SignReleaseDirectory, VerifyTrustedRelease, InstallOrUpgradeRelease, and RollbackRelease in internal/release/upgrade.go with supporting ReleaseManifest and VerificationResult fields in internal/release/package.go.",
+        "Implemented standalone Node verifier/signer scripts/verify-release.mjs using built-in node:crypto Ed25519 keys compatible byte-for-byte with Go canonicalManifestSignPayload, plus end-to-end suite tests/release/upgrade-recovery.mjs and report docs/evidence/release-verification.json.",
+        "Verified Linux x86_64 host lifecycle across v0.1.0 (rev 1) install -> SealStore case-v1 -> v0.1.1 (rev 2) upgrade -> SealStore case-v2-newer -> binary-only rollback to v0.1.0: both case-v1 and newer accepted case-v2-newer sealed bytes (0440) remained untouched and authority highest_accepted_revision stayed at 2.",
+        "Verified all negative cases across both Go and Node verifiers: 1-byte file tamper (ErrChecksumMismatch), missing deliverable (ErrIncompleteWebOnlyArtifact), untrusted/wrong Ed25519 signer (ErrSignatureInvalid), expired and stale/replayed revision (ErrStaleOrExpiredRevision), and forbidden old-backup overwrite of newer accepted data (ErrNewerDataOverwriteForbidden), plus source/BUILD_RECIPE.json and source/breachatlas-source.tar.gz source-build alternative."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Supported and observed distribution verification host is Linux x86_64."
+  ],
+  "rollback_or_recovery_observation": "Revert internal/release/package.go, internal/release/upgrade.go, scripts/verify-release.mjs, tests/release/upgrade-recovery.mjs, tests/distribution_upgrade_test.go, tests/web/oss-tooling.test.mjs, tests/fixtures/breachatlas/C35/, docs/evidence/release-verification.json, docs/evidence/C35.json, plans/progress.json, plans/project-state.json, apps/web/src/generated/project.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

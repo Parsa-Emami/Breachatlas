@@ -1,0 +1,31 @@
+{
+  "schema_version": "1",
+  "task": "C35",
+  "requirement": "N35",
+  "passed": true,
+  "supported_hosts": [
+    "Linux x86_64"
+  ],
+  "trusted_signer_key_id": "release-key-ed25519-v1",
+  "verified_files": 39,
+  "sbom_packages": 80,
+  "source_archive_files": 699,
+  "source_build_alternative_verified": true,
+  "lifecycle_checks": {
+    "installed_version": "0.1.0",
+    "upgraded_version": "0.1.1",
+    "rolled_back_version": "0.1.0",
+    "authority_high_water_mark": 2,
+    "case_v1_preserved": true,
+    "case_v2_newer_preserved": true,
+    "sealed_bytes_modified": false
+  },
+  "negative_cases_rejected": [
+    "one_byte_tamper",
+    "missing_deliverable",
+    "untrusted_signer",
+    "expired_revision",
+    "stale_replayed_revision",
+    "old_backup_overwrite_newer_data"
+  ]
+}
