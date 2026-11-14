@@ -1,5 +1,5 @@
 [Unit]
-Description=BreachAtlas web application shell
+Description=BreachAtlas complete local-first forensic engine and web supervisor
 After=network.target
 
 [Service]
@@ -7,7 +7,9 @@ Type=simple
 User=breachatlas-web
 Group=breachatlas-web
 WorkingDirectory=/srv/breachatlas/current
-ExecStart=/usr/bin/node scripts/serve-web.mjs --root web --port 4310 --config ops/web/runtime-config.json
+StateDirectory=breachatlas
+StateDirectoryMode=0700
+ExecStart=/usr/bin/node scripts/start-local.mjs --host 127.0.0.1 --port 4310 --enginePort 8080 --root web --config ops/web/runtime-config.json --engineBin bin/breachatlas --storageDir /var/lib/breachatlas/data
 Restart=on-failure
 RestartSec=3
 TimeoutStopSec=15

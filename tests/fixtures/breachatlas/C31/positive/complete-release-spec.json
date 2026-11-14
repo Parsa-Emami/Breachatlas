@@ -1,0 +1,32 @@
+{
+  "schema_version": "1",
+  "project": "BreachAtlas",
+  "scope": "complete-open-source",
+  "engine_ready": true,
+  "offline_verifier_ready": true,
+  "required_paths": [
+    "bin/breachatlas",
+    "bin/verify",
+    "web/index.html",
+    "source/breachatlas-source.tar.gz",
+    "source/BUILD_RECIPE.json",
+    "sbom.spdx.json",
+    "THIRD_PARTY_NOTICES.md",
+    "ops/web/nginx.conf.template",
+    "ops/web/service.systemd",
+    "ops/runtime-requirements.json",
+    "docs/engineering/toolchain-lock.json",
+    "docs/release/ARTIFACTS.md",
+    "release.json",
+    "SHA256SUMS.txt"
+  ],
+  "allowed_licenses": [
+    "Apache-2.0",
+    "MIT",
+    "BSD-3-Clause",
+    "BSD-2-Clause",
+    "ISC",
+    "MPL-2.0",
+    "Artistic-2.0"
+  ]
+}

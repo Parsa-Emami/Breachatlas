@@ -1,0 +1,80 @@
+{
+  "commit_id": "C31",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Package complete reproducible open-source release artifacts (compiled Go engine, standalone offline verifier, web UI, contracts/offline resources, reproducible tar+gzip source archive and BUILD_RECIPE.json, SPDX-2.3 SBOM, complete THIRD_PARTY_NOTICES.md, SHA256SUMS.txt, and Ed25519 provenance with atomic staging and replay/quota guards); reject web-only or non-permissive artifacts.",
+  "passed": true,
+  "source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
+  "source_tree": "9a7691d8746c0db6cc320dc13b3f183f0511ef97",
+  "source_identity": "sha256:d5d0ca2e5d37bc160f487f693b54378310478738ccf65b56e80c1f68d861ec60",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C31/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "d7d62539e733a663f56287bc5ee53136666117210f3d165c03772026122bec56"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY bash scripts/package.sh",
+      "exit_code": 0,
+      "output": "Validated roadmap and resource locks, built reproducible Go engine and standalone offline verifier (-trimpath -buildvcs=false), built Vite web UI, generated deterministic source/breachatlas-source.tar.gz + BUILD_RECIPE.json + SPDX-2.3 sbom.spdx.json (80 packages) + SHA256SUMS.txt (39 files), verified sha256sum -c and release.json (scope: complete-open-source, engineReady: true, offlineVerifierReady: true)."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed cmd/breachatlas, internal/release (TestVerifySPDXDocumentAndSymlinkRejection), and tests (TestC31CompleteReleasePackagingAndNegativeCases + all existing C03-C30 suites)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Validated plan, rebuilt web workspace, ran TypeScript typecheck, and passed all 33 Node web/contract/tooling tests."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0,
+      "output": "Ran 6 tests in tests/engineering; OK."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N31",
+      "status": "passed",
+      "observations": [
+        "Implemented scripts/package-source.mjs (reproducible POSIX ustar tar+gzip generator from tracked git files with normalized metadata and deterministic SPDX-2.3 SBOM enforcing permissive OSS allowlist), upgraded scripts/package-web.mjs to stage complete releases atomically, and created scripts/package.sh + docs/release/ARTIFACTS.md.",
+        "Updated THIRD_PARTY_NOTICES.md with full distributed license texts (Apache-2.0, MIT, BSD-3-Clause, ISC, MPL-2.0), updated ops/web/nginx.conf.template and ops/web/service.systemd to supervise the packaged loopback engine + web relay via scripts/start-local.mjs under systemd hardening, and updated docs/engineering/WEB_RUNBOOK.md.",
+        "Implemented internal/release/package.go providing VerifyReleaseDirectory, VerifySPDXDocument, VerifyChecksums, Ed25519 SignManifest/VerifyManifestSignature, RecoverStaging, and atomic PackageCompleteRelease with quota and idempotent replay ledger guards.",
+        "Verified via internal/release/package_test.go and tests/release_packaging_test.go: bit-for-bit identical breachatlas-source.tar.gz SHA-256 across independent runs, live packaged bin/breachatlas & bin/verify execution against a signed sealed bundle, rejection of web-only artifacts (ErrIncompleteWebOnlyArtifact) and restricted licenses (ErrRestrictedOrUnknownLicense), crash/kill recovery at staged-byte & manifest boundaries preserving authoritative current state (ErrInterruptedStaging), lost-ACK replay idempotency, conflicting operation rejection (ErrOperationConflict), quota exhaustion failure (ErrReleaseQuotaExceeded), symlink rejection (ErrInvalidReleasePath), tamper detection (ErrChecksumMismatch), and sealed source byte immutability."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Network boundary hardening, UX polish, upgrade/support matrices, and maintainer-authorized v1 publication remain tracked in downstream planned tasks C32-C40."
+  ],
+  "rollback_or_recovery_observation": "Revert THIRD_PARTY_NOTICES.md, docs/engineering/WEB_RUNBOOK.md, docs/release/ARTIFACTS.md, ops/web/nginx.conf.template, ops/web/service.systemd, scripts/package-source.mjs, scripts/package-web.mjs, scripts/package.sh, internal/release/, tests/release_packaging_test.go, tests/web/oss-tooling.test.mjs, tests/fixtures/breachatlas/C31/, docs/evidence/C31.json, plans/progress.json, plans/project-state.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

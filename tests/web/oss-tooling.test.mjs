@@ -1,8 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { setup, supportedNode } from '../../scripts/oss-bootstrap.mjs';
 import { validate } from '../../scripts/roadmap.mjs';
+import { packageSourceArtifacts, ALLOWED_LICENSES } from '../../scripts/package-source.mjs';
+import { packageCompleteRelease } from '../../scripts/package-web.mjs';
 test('setup validates toolchain/options and stops at the first failed install', () => {
   assert.equal(supportedNode('v24.19.0'), true); assert.equal(supportedNode('v25.1.0'), false);
   assert.throws(() => setup(['--unknown']), /options/);
@@ -21,4 +25,25 @@ test('roadmap rejects absent resources, escaping paths and unproved completion',
   const circular = structuredClone(values); circular[0].commits[0].verification_commands[1].introduced_by = 'C06'; assert.ok(validate(...circular).some(e => e.includes('future task')));
   const unsafeFixture = structuredClone(values); unsafeFixture[0].commits[6].resources.fixture.path = '../escape'; assert.ok(validate(...unsafeFixture).some(e => e.includes('unsafe')));
   const fake = structuredClone(values); fake[1].commits[6].status = 'verified'; fake[1].commits[6].source_identity = null; fake[1].commits[6].evidence = []; assert.ok(validate(...fake).some(e => e.includes('unproved')));
+});
+test('source archive & SPDX SBOM generation is reproducible and complete packager fails closed without built web assets', async t => {
+  const emptyRoot = await mkdtemp(join(tmpdir(), 'breachatlas-pkg-failclosed-'));
+  t.after(async () => rm(emptyRoot, { recursive: true, force: true }));
+  await assert.rejects(() => packageCompleteRelease({ rootDir: emptyRoot }), /dist\/web\/index\.html missing/);
+
+  const outA = await mkdtemp(join(tmpdir(), 'breachatlas-sbom-a-'));
+  const outB = await mkdtemp(join(tmpdir(), 'breachatlas-sbom-b-'));
+  t.after(async () => {
+    await rm(outA, { recursive: true, force: true });
+    await rm(outB, { recursive: true, force: true });
+  });
+  const resA = await packageSourceArtifacts({ outputDir: outA });
+  const resB = await packageSourceArtifacts({ outputDir: outB });
+  assert.equal(resA.archiveSha256, resB.archiveSha256);
+  const sbom = JSON.parse(await readFile(resA.sbomPath, 'utf8'));
+  assert.equal(sbom.spdxVersion, 'SPDX-2.3');
+  assert.ok(sbom.packages.length >= 10);
+  for (const pkg of sbom.packages) {
+    assert.ok(ALLOWED_LICENSES.has(pkg.licenseConcluded), `${pkg.name} license ${pkg.licenseConcluded}`);
+  }
 });

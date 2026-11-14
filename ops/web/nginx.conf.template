@@ -1,5 +1,7 @@
 # Replace every __PLACEHOLDER__, run nginx -t, then enable the site.
 # All external traffic is denied until reviewed trusted CIDRs are explicitly added.
+# Loopback engine (127.0.0.1:8080) MUST NOT be exposed directly; the Node web relay on 127.0.0.1:4310
+# enforces Host, Origin, Sec-Fetch-Site, and forged-header containment before forwarding /api/v1/* calls.
 server {
     listen 443 ssl;
     server_name __OWNED_DOMAIN__;
@@ -12,8 +14,10 @@ server {
     # allow __TRUSTED_OPERATOR_CIDR__;
     deny all;
     client_max_body_size 1m;
+
     location / {
         proxy_pass http://127.0.0.1:4310;
+        proxy_http_version 1.1;
         proxy_set_header Host $proxy_host;
         proxy_set_header X-Forwarded-Proto https;
         proxy_set_header X-Forwarded-For $remote_addr;

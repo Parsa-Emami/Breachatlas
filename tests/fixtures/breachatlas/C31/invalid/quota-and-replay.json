@@ -1,0 +1,9 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c31-replay-001",
+  "conflicting_source_commit": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+  "quota_limit_bytes": 1024,
+  "expected_replay_idempotent": true,
+  "expected_conflict_error": "release operation ID replayed with conflicting inputs",
+  "expected_quota_error": "release packaging quota or disk space exceeded"
+}

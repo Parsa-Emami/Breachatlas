@@ -383,7 +383,7 @@
       "id": "C31",
       "title": "build(release): package complete reproducible open-source artifacts",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Package the actual engine, web UI and offline rules/resources, source archive/build recipes, SBOM, upstream notices, checksums and provenance. A web-only artifact cannot satisfy this complete-product task."
       ],

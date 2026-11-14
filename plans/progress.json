@@ -276,10 +276,12 @@
     },
     {
       "id": "C31",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C31.json"
+      ],
+      "source_identity": "sha256:d5d0ca2e5d37bc160f487f693b54378310478738ccf65b56e80c1f68d861ec60",
+      "notes": "Packaged complete reproducible open-source release artifacts (N31): compiled Go loopback engine (bin/breachatlas) and standalone offline verifier (bin/verify) via -trimpath -buildvcs=false alongside Vite web assets (web/), local relay/supervisor scripts (scripts/serve-web.mjs, scripts/start-local.mjs), hardened private-host templates (ops/web/nginx.conf.template, ops/web/service.systemd), offline contracts/runtime requirements (contracts/, ops/runtime-requirements.json, docs/engineering/toolchain-lock.json), bit-for-bit reproducible source tar.gz and BUILD_RECIPE.json (scripts/package-source.mjs), SPDX-2.3 SBOM (80 packages validated against permissive OSS allowlist), complete THIRD_PARTY_NOTICES.md, SHA256SUMS.txt, and Ed25519-signed release.json provenance with atomic staging, crash recovery, lost-ACK replay idempotency, conflict/quota rejection, and sealed source immutability verified in internal/release/package.go, internal/release/package_test.go, tests/release_packaging_test.go, tests/web/oss-tooling.test.mjs, scripts/package.sh, and scripts/package-web.mjs."
     },
     {
       "id": "C32",

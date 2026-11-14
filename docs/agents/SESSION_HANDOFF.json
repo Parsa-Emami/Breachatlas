@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-14",
-  "base_commit": "ba4da478c35555ac57dcc1e8510b8160f65f426a",
-  "verified_source_commit": "ba4da478c35555ac57dcc1e8510b8160f65f426a",
-  "verified_source_tree": "10d8d730b2eaff9a68141f80950b0493f355acef",
-  "scope": "C30 clean-host clone-to-value acceptance: full reference workflow, negative cases, standalone offline verification, restart persistence, consistency rebuild, and restore",
+  "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
+  "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
+  "verified_source_tree": "HEAD",
+  "scope": "C31 complete reproducible open-source release packaging: compiled Go engine and offline verifier binaries, web UI, contracts/offline resources, reproducible tar+gzip source archive and BUILD_RECIPE.json, SPDX-2.3 SBOM, complete THIRD_PARTY_NOTICES.md, SHA256SUMS.txt, atomic staging, replay/quota guards, and Ed25519 provenance",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -35,34 +35,27 @@
     "C27",
     "C28",
     "C29",
-    "C30"
+    "C30",
+    "C31"
   ],
   "changed_paths": [
-    "apps/web/src/generated/project.json",
-    "apps/web/src/main.tsx",
-    "apps/web/src/pages/Workflow.tsx",
-    "cmd/breachatlas/main.go",
-    "cmd/breachatlas/workflow.go",
-    "cmd/breachatlas/workflow_test.go",
+    "THIRD_PARTY_NOTICES.md",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C30.json",
-    "docs/evidence/private-install.json",
-    "docs/product/REFERENCE_WORKFLOW.md",
-    "internal/export/verify.go",
-    "internal/recovery/restore.go",
+    "docs/engineering/WEB_RUNBOOK.md",
+    "docs/evidence/C31.json",
+    "docs/release/ARTIFACTS.md",
+    "internal/release/package.go",
+    "internal/release/package_test.go",
+    "ops/web/nginx.conf.template",
+    "ops/web/service.systemd",
     "plans/progress.json",
     "plans/project-state.json",
-    "plans/release-gates.json",
-    "playwright.config.ts",
-    "scripts/clone-smoke.mjs",
-    "scripts/oss-bootstrap.mjs",
-    "scripts/serve-web.mjs",
-    "scripts/start-local.mjs",
-    "scripts/verify-reference.mjs",
-    "tests/browser/clone-to-value.spec.ts",
-    "tests/clone_acceptance_test.go",
-    "tests/fixtures/breachatlas/C30/",
-    "tests/scenarios/clone-to-value.json"
+    "scripts/package-source.mjs",
+    "scripts/package-web.mjs",
+    "scripts/package.sh",
+    "tests/fixtures/breachatlas/C31/",
+    "tests/release_packaging_test.go",
+    "tests/web/oss-tooling.test.mjs"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -94,6 +87,7 @@
     "docs/evidence/C28.json",
     "docs/evidence/C29.json",
     "docs/evidence/C30.json",
+    "docs/evidence/C31.json",
     "docs/evidence/private-install.json"
   ],
   "ci": {
@@ -104,7 +98,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C31",
+  "next_task": "C32",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C31."
+  "continuation": "Implement C32."
 }

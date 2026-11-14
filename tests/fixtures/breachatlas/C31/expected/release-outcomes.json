@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "positive": {
+    "complete_release_valid": true,
+    "engine_ready": true,
+    "offline_verifier_ready": true,
+    "signature_verified": true,
+    "reproducible_source_archive": true,
+    "sealed_bytes_modified": false
+  },
+  "negative": {
+    "web_only_rejected": true,
+    "restricted_license_rejected": true,
+    "interrupted_staging_preserves_authoritative_state": true,
+    "lost_ack_replay_idempotent": true,
+    "conflicting_replay_rejected": true,
+    "quota_exhausted_no_partial_residue": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "task": "C31",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic release packaging positive and negative fixtures",
+  "sha256": {
+    "expected/release-outcomes.json": "1c125e019f348011f4277fb968811c9c24a6cc7e2dd67fbf65617c04624901cf",
+    "invalid/interrupted-staging.json": "65217d681482d5d32b44d0d17b9d1cf87c25d7c39685f88f3a883f0f740636f9",
+    "invalid/quota-and-replay.json": "47a8ad83bf3d27e793ba28ddfaeaf2b251ac07623b91d8daa1f86e204552af0f",
+    "invalid/restricted-license-sbom.json": "eea9373763b87830505a398e8587ad9b712a4598df011a2ae62ae8a03cb9d2ef",
+    "invalid/web-only-artifact.json": "47745353565191e99ca8fdad8a268e150c55bf5acf51ffca45d0092bd2735fb4",
+    "positive/complete-release-spec.json": "9f923daa519ce38392c85e1d38a5bc6d43922a8aaed402159c38b98f8ead67eb"
+  }
+}

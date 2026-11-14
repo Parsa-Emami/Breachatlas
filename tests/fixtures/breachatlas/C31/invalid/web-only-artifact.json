@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1",
+  "project": "BreachAtlas",
+  "scope": "web-foundation",
+  "engineReady": false,
+  "offlineVerifierReady": false,
+  "reproducible": false,
+  "sourceCommit": "0000000000000000000000000000000000000000",
+  "dirty": false
+}

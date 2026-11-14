@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "operation_id": "op-c31-interrupted-boundary-001",
+  "fault_points": [
+    "kill_after_staged_bytes",
+    "kill_after_manifest_write"
+  ],
+  "expected_error": "release writer interrupted at staged-byte/manifest boundary",
+  "expected_prior_state_preserved": true
+}

@@ -1,4 +1,4 @@
-# BreachAtlas web runbook
+# BreachAtlas web and release runbook
 
 ## Unified local development and launch
 
@@ -11,7 +11,7 @@ npm start
 
 `npm run setup` prepares the environment:
 1. Validates Node runtime.
-2. Checks Go compiler and compiles the Go engine binary into `dist/bin/breachatlas`.
+2. Checks Go compiler and compiles `dist/bin/breachatlas` and `dist/bin/verify`.
 3. Prepares web workspace data and builds web assets into `dist/web/`.
 
 `npm start` invokes `scripts/start-local.mjs`, which supervises both the Go loopback engine (`127.0.0.1:8080`) and web workspace (`127.0.0.1:4173`). No second terminal is required. Both processes shut down cleanly upon receiving `SIGINT` or `SIGTERM`.
@@ -35,47 +35,69 @@ Built URL: http://127.0.0.1:4310. Browser routing uses hashes and hosting at the
 
 ## What is runnable
 
-The responsive React workspace, forty-step product roadmap, local bounded JSON structure preview, Node static server and its health endpoints are implemented. Preview uses tab memory, does not persist files and does not send them to the server. Reload clears the preview. This is not a domain import or a security assessment. The PWA manifest supplies install metadata; there is no service worker or offline claim. Cache rules retain only fingerprinted static assets; HTML and runtime configuration are no-store.
+The responsive React workspace, forty-step product roadmap, local bounded JSON structure preview, authenticated same-origin workflow endpoints (`/api/v1/workflow/*`), Go loopback engine (`bin/breachatlas`), standalone offline bundle verifier (`bin/verify`), and local bounded storage/custody/timeline/export/recovery subsystems are implemented. Preview uses tab memory unless explicitly submitted through the supported local workflow endpoints. `ops/web/runtime-config.json` retains fail-closed public configuration (`engineEnabled: false` for unauthenticated public shells; live supervisor enables loopback engine relay explicitly).
 
-`GET /healthz` covers the web process; `GET /readyz` covers web assets and valid startup configuration. Neither proves engine/provider/database health. `/api` and all `/api/` routes return 503 while the engine is unavailable. No upload endpoint or authentication service is created. Engine admission cannot be enabled by a public config flag.
+`GET /healthz` covers the web or engine process probe; `GET /readyz` covers web assets, valid startup configuration, and real loopback engine + storage/provider readiness. Unbound engine routes fail closed (`503`). Cache rules retain only fingerprinted static assets; HTML and runtime configuration are `no-store`.
 
-## Build an artifact
+## Build complete reproducible release artifact
+
+Build and package the complete release (`bin/breachatlas`, `bin/verify`, `web/`, `source/breachatlas-source.tar.gz`, `source/BUILD_RECIPE.json`, `sbom.spdx.json`, `THIRD_PARTY_NOTICES.md`, `release.json`, and `SHA256SUMS.txt`):
 
 ```sh
-npm run package:web
+bash scripts/package.sh
 cd dist/release
 sha256sum -c SHA256SUMS.txt
-node scripts/serve-web.mjs --root web --port 4310 --config ops/web/runtime-config.json
+./bin/verify --version
+./bin/breachatlas --version
+node scripts/start-local.mjs --host 127.0.0.1 --port 4310 --enginePort 8080 --root web --config ops/web/runtime-config.json --engineBin bin/breachatlas --storageDir /tmp/breachatlas-data
 ```
 
-Package after build. `release.json` records the source commit and whether the working tree was dirty; build from a clean commit for a releasable provenance record. Node production serving needs no installed npm dependencies. CI uploads the web package; it does not publish a host or modify repository settings. Copy the complete `dist/release` tree to the chosen immutable release directory.
+You may also generate the source archive, build recipe, and SPDX SBOM standalone via:
+
+```sh
+node scripts/package-source.mjs --output dist/release
+```
+
+See [docs/release/ARTIFACTS.md](../release/ARTIFACTS.md) for the complete `dist/release/` layout, deterministic tar normalization rules, and atomic staging guarantees.
+
+`release.json` records `scope: "complete-open-source"`, `engineReady: true`, `offlineVerifierReady: true`, the source commit, and whether the working tree was dirty; build from a clean commit for a releasable provenance record. Web-only artifacts (`engineReady: false`) are rejected for complete-product distribution. Production serving from `dist/release/` needs no installed npm dependencies. Copy the complete `dist/release` tree atomically to the chosen immutable release directory.
+
+## Offline bundle verification
+
+Exported evidence bundles (`bundle-manifest.json` + sealed blobs + custody checkpoints) can be verified completely offline with zero network or server connectivity using the packaged verifier binary:
+
+```sh
+./bin/verify --bundle /path/to/exported-bundle --json
+```
+
+Supply `--trusted-key <hex>` and `--require-signature` to require Ed25519 signature verification against a pinned analyst key.
 
 ## Private Linux host
 
-Prerequisites: operator-owned domain/DNS, valid TLS certificate/key, installed Node 24.19.0, Nginx, systemd, and an unprivileged `breachatlas-web` account. Reserve port 4310 for this project. Keep certificates outside the artifact and never commit a private key. Install releases under `/srv/breachatlas/releases/<source-commit>` and point `/srv/breachatlas/current` to the selected verified release. Ensure the service user has read/execute access to artifact directories. Match the actual Node binary path in the service file.
+Prerequisites: operator-owned domain/DNS, valid TLS certificate/key, installed Node 24.19.0, Nginx, systemd, and an unprivileged `breachatlas-web` account. Reserve ports `4310` (web relay) and `8080` (loopback engine) on `127.0.0.1` for this project. Keep TLS keys outside the artifact and never commit a private key. Install verified releases under `/srv/breachatlas/releases/<source-commit>` and point `/srv/breachatlas/current` to the selected verified release. Ensure `breachatlas-web` has read/execute permissions on release directories and write permission inside `/var/lib/breachatlas/data` (`StateDirectory=breachatlas`). Match the actual Node binary path in `ops/web/service.systemd`.
 
-Use `ops/web/service.systemd` and render `ops/web/nginx.conf.template` with the real owned domain, TLS paths and reviewed operator network ranges. The proxy passes the trusted local upstream authority in the `Host` header (`$proxy_host`), not an arbitrary external authority. The Node server rejects untrusted `Host` values, including on health endpoints, to reduce DNS-rebinding exposure. Keep the upstream on loopback; do not replace this with `$host` or publish its port. The proxy initially denies external traffic. Keep the deny-all default until private admission is configured and tested; do not treat an IP range as per-user authentication. Runtime APIs remain blocked until W06/W07. Validate the rendered Nginx configuration with `nginx -t` before reload. Install the service under `/etc/systemd/system/breachatlas-web.service`, then run:
+Use `ops/web/service.systemd` and render `ops/web/nginx.conf.template` with the real owned domain, TLS paths, and reviewed operator network ranges. The proxy passes the trusted local upstream authority in the `Host` header (`$proxy_host`), not an arbitrary external authority. Both `scripts/serve-web.mjs` and `bin/breachatlas` reject untrusted `Host` values, foreign `Origin` headers, `Sec-Fetch-Site: cross-site`, and forged identity headers. Keep both listeners on loopback; never publish `8080` externally or replace `$proxy_host` with `$host`. Keep the proxy `deny all` default until private admission CIDRs are reviewed and tested. Validate rendered Nginx configuration with `nginx -t` before reload. Install the service under `/etc/systemd/system/breachatlas-web.service`, then run:
 
 ```sh
 sudo systemctl daemon-reload
 sudo systemctl enable --now breachatlas-web
-curl --fail http://127.0.0.1:4310/healthz
+curl --fail http://127.0.0.1:8080/healthz
 curl --fail http://127.0.0.1:4310/readyz
 sudo journalctl -u breachatlas-web --since '10 minutes ago'
 ```
 
-Test HTTPS access from an allowed operator and rejection from a disallowed network. Test that `/api/v1/not-implemented` stays unavailable. No domain, certificate, host or credentials were provisioned by the source commit.
+Test HTTPS access from an allowed operator and verify rejection from disallowed networks.
 
 ## Update and rollback
 
-Build/test/package from a clean source commit; verify SHA256SUMS before switching the current symlink. Retain the previous artifact; switch the symlink and restart the service in a maintenance window. Check both web probes and browser navigation. If either fails, restore the previous symlink and restart. The shell has no durable user data, so it has no data restore operation. Once domain storage/providers are integrated, add backup/restore and schema-compatibility evidence before updates; a frontend rollback does not roll back engine data.
+Build/test/package from a clean source commit; verify `SHA256SUMS.txt` and `release.json` before switching `/srv/breachatlas/current`. Retain the previous verified release directory and take an authoritative bundle export backup before upgrading. Switch the symlink and restart `breachatlas-web` in a maintenance window. Verify `http://127.0.0.1:8080/healthz`, `http://127.0.0.1:4310/readyz`, offline `./bin/verify`, and browser workflow navigation.
 
-## Engine integration and operations still required
+If post-upgrade checks fail: stop `breachatlas-web`, restore the previous `/srv/breachatlas/current` symlink, verify `/var/lib/breachatlas/data` integrity (or restore from the verified exported bundle when required), and restart the service. Never overwrite newer accepted case/evidence state with an old backup without explicit tested recovery procedures.
 
-Profile: `private-web`. Retained engine choices: Go private service/CLI, SQLite case and custody metadata, Content-addressed local evidence files, React timeline UI. Implement the first vertical slice in IMPLEMENTATION_BLUEPRINT.md and W06, then authenticated negative tests in W07. Route only explicitly supported endpoints through a same-origin authenticated service. Keep secrets exclusively on the server/provider. Add real engine readiness, bounded jobs, cancellation, redacted audit, operational metrics, alerts and retention/restore proof alongside the domain implementation. Public marketing/static demonstrations must use synthetic data; they cannot admit arbitrary runtime work.
+## Engine integration and security boundaries
 
-For KeyHelix, no plaintext secrets may enter browser file preview; import only synthetic nonsecret metadata. For RiftRange/MirageMesh, orchestration/sensors stay on isolated private hosts. Existing RiskWeft Laravel source is preserved and has not been connected to this shell or certified by web tests.
+Profile: `open-source local-first`. Retained engine choices: Go private service/CLI (`bin/breachatlas`), standalone verifier (`bin/verify`), SQLite/WAL-compatible atomic JSON/content-addressed local evidence store, custody hash chain + Ed25519 checkpoints, and React timeline/workflow UI. All sensitive operations run strictly on loopback under fail-closed `Host`/`Origin`/header checks. Existing RiskWeft Laravel source is preserved cleanly and has not been modified.
 
 ## Reproduce source evidence
 
-Run `python3 scripts/source_identity.py --check` against the committed checkout. The digest covers tracked and deliverable untracked files, excluding only the self-referential evidence JSON and SHA256SUMS.txt. Build/test output directories are ignored. Verification evidence records web-only checks and the exact tested runtime; it does not certify the domain engine.
+Run `python3 scripts/source_identity.py --check` against the committed checkout, or re-create the normalized source archive with `node scripts/package-source.mjs`. The source identity digest covers tracked and deliverable untracked files, excluding only self-referential evidence JSONs and `SHA256SUMS.txt`. Build/test output directories are ignored.
