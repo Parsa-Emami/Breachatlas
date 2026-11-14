@@ -1,0 +1,10 @@
+{
+  "task": "C30",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic clone-to-value workflow, negative cases, offline verification, restart persistence, and restore acceptance fixtures",
+  "sha256": {
+    "expected-output/acceptance-outcomes.json": "a60a0527e42910225b5e207dc9f36306928f030327a65abfac20e7207d913742",
+    "invalid/negative-cases.json": "9592a903e22d59e944e0c26e02875e1d26f0095b9007300d7db0d7b445f752fe",
+    "positive/workflow-input.json": "92a01c6930012da11c9aa67cb24d8b169a6d85ad2d08fb51f0a3f08a7221ad37"
+  }
+}

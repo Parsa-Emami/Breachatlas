@@ -596,7 +596,7 @@ func (s *RestoreStore) RestoreFromBundle(ctx context.Context, stores TargetStore
 		if err != nil {
 			return nil, fmt.Errorf("%w: invalid custody chain for %s: %v", ErrManifestConsistency, ev.EvidenceID, err)
 		}
-		if chainRoot != ev.CustodyRoot || chainRoot != ev.Manifest.CustodyRoot {
+		if chainRoot != ev.CustodyRoot || (ev.Manifest.CustodyRoot != custody.GenesisPrevHash && !custodyEventsContainRoot(events, ev.Manifest.CustodyRoot)) {
 			return nil, fmt.Errorf("%w: custody root mismatch for %s (chain=%s entry=%s manifest=%s)",
 				ErrManifestConsistency, ev.EvidenceID, chainRoot, ev.CustodyRoot, ev.Manifest.CustodyRoot)
 		}

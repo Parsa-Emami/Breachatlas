@@ -1,0 +1,91 @@
+{
+  "commit_id": "C30",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Prove full clean-host local usability from git clone -> npm run setup -> npm start across the entire 8-step reference workflow, negative cases, offline standalone verification, restart persistence, consistency recovery, and restore while keeping web-only proof labeled separately and unlocking core_ready at C30.",
+  "passed": true,
+  "source_commit": "ba4da478c35555ac57dcc1e8510b8160f65f426a",
+  "source_tree": "10d8d730b2eaff9a68141f80950b0493f355acef",
+  "source_identity": "sha256:cfe08ce567a5eaf62bec49fd5dbc8227effcedbd07b8e615c1df3d2decf3152b",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C30/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "11f755bd8fb0fa886a82950bd622230b23394d85bb8b65a0b480214676f7e895"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed all Go packages including cmd/breachatlas (TestWorkflowEndToEndRestartRestoreAndNegativeCases) and tests (TestC30FixturesAndFullWorkflowRestartRestore, TestOffline*, TestRestore*, TestExport*)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, prepare:web, TypeScript typecheck, Vite build, and 32 web/contract tests passed."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:browser",
+      "exit_code": 0,
+      "output": "12 Playwright Chromium specs passed including tests/browser/clone-to-value.spec.ts (full 8-step UI workflow, negative cases, standalone offline dist/bin/verify, restart persistence, index rebuild, and bundle restore)."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run test:clone",
+      "exit_code": 0,
+      "output": "Real clean git clone -> npm run setup -> web-only proof (labeled separately) -> degraded /readyz 503 check -> npm start + Playwright clone-to-value acceptance + restart/restore + doctor check passed."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run doctor",
+      "exit_code": 0,
+      "output": "Reported nodeSupported: true, webAssetsBuilt: true, engineBuilt: true, readiness: CORE_READY_LOCAL_USABLE, engineReady: true."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0,
+      "output": "Ran 6 tests in tests/engineering; OK."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N30",
+      "status": "passed",
+      "observations": [
+        "Added real loopback workflow HTTP endpoints in cmd/breachatlas/workflow.go wired in cmd/breachatlas/main.go and allowlisted in scripts/serve-web.mjs under existing Host/Origin/Sec-Fetch-Site/forged-header enforcement, backed directly by internal/evidence, internal/custody, internal/analyzers, internal/artifacts, internal/timeline, internal/holds, internal/export, and internal/recovery.",
+        "Updated internal/export/verify.go and internal/recovery/restore.go so sequential post-seal custody additions verify whenever ev.Manifest.CustodyRoot is an authentic prefix root in the verified append-only chain.",
+        "Added accessible #workflow UI in apps/web/src/pages/Workflow.tsx and apps/web/src/main.tsx and built dist/bin/verify alongside dist/bin/breachatlas in scripts/oss-bootstrap.mjs.",
+        "Extended scripts/clone-smoke.mjs and authored tests/browser/clone-to-value.spec.ts + tests/clone_acceptance_test.go to prove real clean-host git clone -> npm run setup -> npm start end-to-end execution, offline verification without server, restart persistence, index rebuild, restore, and negative cases while keeping web-only foundation proof labeled separately.",
+        "Recorded verified clone-to-value acceptance evidence in docs/evidence/private-install.json, updated tests/scenarios/clone-to-value.json, scripts/verify-reference.mjs, and docs/product/REFERENCE_WORKFLOW.md, and enabled core_ready: true at usable gate C30."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Public distribution/convenience artifacts, installer smoke tests, supported host/profile hardening, and final v1 certification remain tracked in downstream planned tasks C31-C40."
+  ],
+  "rollback_or_recovery_observation": "Revert cmd/breachatlas/workflow.go, cmd/breachatlas/workflow_test.go, cmd/breachatlas/main.go, internal/export/verify.go, internal/recovery/restore.go, apps/web/src/pages/Workflow.tsx, apps/web/src/main.tsx, apps/web/src/generated/project.json, scripts/oss-bootstrap.mjs, scripts/start-local.mjs, scripts/serve-web.mjs, scripts/clone-smoke.mjs, scripts/verify-reference.mjs, playwright.config.ts, tests/browser/clone-to-value.spec.ts, tests/clone_acceptance_test.go, tests/scenarios/clone-to-value.json, tests/fixtures/breachatlas/C30, docs/product/REFERENCE_WORKFLOW.md, docs/evidence/private-install.json, docs/evidence/C30.json, plans/progress.json, plans/project-state.json, plans/release-gates.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

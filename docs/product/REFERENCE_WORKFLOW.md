@@ -1,6 +1,6 @@
 # BreachAtlas: Reference Workflow
 
-**Status**: Planned domain acceptance contract; the current web foundation and JSON structure preview do not implement this workflow. Engine execution begins at C03; complete clean-host workflow, restart, and restore are proven at C30.
+**Status**: C30 local usability verified — complete clean-host `git clone -> npm run setup -> npm start` reference workflow, negative cases, offline verification, restart persistence, consistency rebuild, and restore proven on supported Linux x86_64. Final OSS v1 release certification continues through C31–C40.
 
 ## Workflow Summary
 

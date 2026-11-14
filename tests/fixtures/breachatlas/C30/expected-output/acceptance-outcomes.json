@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "seal_status": "sealed",
+  "verification_status": "verified",
+  "custody_chain_valid": true,
+  "timeline_count": 3,
+  "preserved_raw_timestamp": "2026-11-14T07:45:12+03:30",
+  "preserved_timezone_offset": "+03:30",
+  "preserved_confidence": 0.96,
+  "hold_active": true,
+  "delete_blocked_when_hold_active": true,
+  "expire_blocked_when_hold_active": true,
+  "bundle_signed": true,
+  "offline_verified_without_server": true,
+  "sealed_bytes_modified": false,
+  "custody_rewritten": false,
+  "restart_persists_state": true,
+  "consistency_rebuilt": true,
+  "bundle_restored_verified": true
+}

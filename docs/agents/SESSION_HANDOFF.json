@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-14",
-  "base_commit": "85c7ff0852bcf676f54b99b0d17eba92816fa2d0",
-  "verified_source_commit": "85c7ff0852bcf676f54b99b0d17eba92816fa2d0",
-  "verified_source_tree": "8f7c85dd2d23cf047d483ee6cefd6edd4611c49a",
-  "scope": "C29 separated web health from engine, authoritative storage, and required provider readiness alongside bounded secret-redacted diagnostic logging",
+  "base_commit": "ba4da478c35555ac57dcc1e8510b8160f65f426a",
+  "verified_source_commit": "ba4da478c35555ac57dcc1e8510b8160f65f426a",
+  "verified_source_tree": "10d8d730b2eaff9a68141f80950b0493f355acef",
+  "scope": "C30 clean-host clone-to-value acceptance: full reference workflow, negative cases, standalone offline verification, restart persistence, consistency rebuild, and restore",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -34,28 +34,35 @@
     "C26",
     "C27",
     "C28",
-    "C29"
+    "C29",
+    "C30"
   ],
   "changed_paths": [
-    "apps/web/public/runtime-config.json",
     "apps/web/src/generated/project.json",
-    "apps/web/src/lib/runtime-config.mjs",
-    "cmd/breachatlas/diagnostics.go",
-    "cmd/breachatlas/diagnostics_test.go",
+    "apps/web/src/main.tsx",
+    "apps/web/src/pages/Workflow.tsx",
     "cmd/breachatlas/main.go",
+    "cmd/breachatlas/workflow.go",
+    "cmd/breachatlas/workflow_test.go",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C29.json",
-    "ops/diagnostics.md",
-    "ops/web/runtime-config.json",
+    "docs/evidence/C30.json",
+    "docs/evidence/private-install.json",
+    "docs/product/REFERENCE_WORKFLOW.md",
+    "internal/export/verify.go",
+    "internal/recovery/restore.go",
     "plans/progress.json",
     "plans/project-state.json",
+    "plans/release-gates.json",
+    "playwright.config.ts",
+    "scripts/clone-smoke.mjs",
+    "scripts/oss-bootstrap.mjs",
     "scripts/serve-web.mjs",
-    "tests/diagnostics_readiness_test.go",
-    "tests/fixtures/breachatlas/C29/expected-output/diagnostics-outcomes.json",
-    "tests/fixtures/breachatlas/C29/invalid/degraded-and-secret-sentinels.json",
-    "tests/fixtures/breachatlas/C29/positive/readiness-and-diagnostics.json",
-    "tests/fixtures/breachatlas/C29/provenance.json",
-    "tests/web/engine-readiness.test.mjs"
+    "scripts/start-local.mjs",
+    "scripts/verify-reference.mjs",
+    "tests/browser/clone-to-value.spec.ts",
+    "tests/clone_acceptance_test.go",
+    "tests/fixtures/breachatlas/C30/",
+    "tests/scenarios/clone-to-value.json"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -85,7 +92,9 @@
     "docs/evidence/C26.json",
     "docs/evidence/C27.json",
     "docs/evidence/C28.json",
-    "docs/evidence/C29.json"
+    "docs/evidence/C29.json",
+    "docs/evidence/C30.json",
+    "docs/evidence/private-install.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -94,8 +103,8 @@
     "runtime": ".github/workflows/runtime.yml (pinned SHA CI workflow)"
   },
   "protected_paths_changed": [],
-  "current_core_ready": false,
-  "next_task": "C30",
+  "current_core_ready": true,
+  "next_task": "C31",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C30."
+  "continuation": "Implement C31."
 }

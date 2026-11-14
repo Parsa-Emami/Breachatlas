@@ -67,7 +67,13 @@ export async function startSupervisor(options = {}) {
   }
   options.signal?.throwIfAborted();
 
-  const engineProcess = spawn(engineBinary, ['--host', host, '--port', String(enginePort)], {
+  const storageDir = String(options.storageDir ?? process.env.BREACHATLAS_STORAGE_DIR ?? '').trim();
+  const requiredProviders = String(options.requiredProviders ?? process.env.BREACHATLAS_REQUIRED_PROVIDERS ?? '').trim();
+  const engineArgs = ['--host', host, '--port', String(enginePort)];
+  if (storageDir) engineArgs.push('--storage-dir', storageDir);
+  if (requiredProviders) engineArgs.push('--required-providers', requiredProviders);
+
+  const engineProcess = spawn(engineBinary, engineArgs, {
     cwd: root, stdio: ['ignore', 'pipe', options.engineStdio || 'inherit']
   });
   if (options.engineStdio !== 'ignore') engineProcess.stdout.pipe(process.stdout, { end: false });
@@ -143,7 +149,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     enginePort: '8080',
     root: 'dist/web',
     config: 'ops/web/runtime-config.json',
-    engineBin: 'dist/bin/breachatlas'
+    engineBin: 'dist/bin/breachatlas',
+    storageDir: '',
+    requiredProviders: ''
   };
 
   for (let i = 0; i < args.length; i += 2) {

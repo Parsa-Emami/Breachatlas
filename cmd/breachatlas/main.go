@@ -69,6 +69,14 @@ func NewMux() http.Handler {
 }
 
 func NewMuxWithOptions(opts EngineRuntimeOptions) http.Handler {
+	h, _ := NewMuxWithOptionsAndCleanup(opts)
+	return h
+}
+
+func NewMuxWithOptionsAndCleanup(opts EngineRuntimeOptions) (http.Handler, func()) {
+	if opts.Logger == nil {
+		opts.Logger = NewDiagnosticLogger(opts.MaxLogEntries, opts.MaxLogBytes)
+	}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/v1/evidence-manifests/validate", validateManifest)
 	mux.HandleFunc("/api/v1/evidence-integrity/inspect", inspectEvidenceIntegrity)
@@ -112,6 +120,7 @@ func NewMuxWithOptions(opts EngineRuntimeOptions) http.Handler {
 	})
 
 	registerDiagnosticsRoutes(mux, opts)
+	cleanupWorkflow := registerWorkflowRoutes(mux, opts, opts.Logger)
 
 	mux.HandleFunc("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -163,7 +172,7 @@ func NewMuxWithOptions(opts EngineRuntimeOptions) http.Handler {
 		}
 
 		mux.ServeHTTP(w, r)
-	})
+	}), cleanupWorkflow
 }
 
 func hasDisallowedCrossSiteOrOrigin(r *http.Request) bool {
@@ -304,8 +313,11 @@ func Run(args []string, stdout, stderr io.Writer, readyChan chan<- struct{}) int
 		RequiredProviders: reqProviders,
 	}
 
+	handler, cleanupWorkflow := NewMuxWithOptionsAndCleanup(muxOpts)
+	defer cleanupWorkflow()
+
 	server := &http.Server{
-		Handler:      NewMuxWithOptions(muxOpts),
+		Handler:      handler,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  30 * time.Second,

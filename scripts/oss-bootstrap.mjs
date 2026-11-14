@@ -16,8 +16,10 @@ export function setup(args = [], run = spawnSync, version = process.version) {
     }
     const goResult = run('go', ['build', '-o', 'dist/bin/breachatlas', './cmd/breachatlas'], { cwd: root, stdio: 'inherit' });
     if (goResult.error || goResult.status !== 0) throw new Error('Setup failed at go build ./cmd/breachatlas');
+    const verifyResult = run('go', ['build', '-o', 'dist/bin/verify', './cmd/verify'], { cwd: root, stdio: 'inherit' });
+    if (verifyResult.error || verifyResult.status !== 0) throw new Error('Setup failed at go build ./cmd/verify');
   }
-  return { executed: !args.includes('--check'), steps, capability: 'unified-local-runtime', engineReady: true, binary: 'dist/bin/breachatlas' };
+  return { executed: !args.includes('--check'), steps, capability: 'unified-local-runtime', engineReady: true, binary: 'dist/bin/breachatlas', verifierBinary: 'dist/bin/verify' };
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {

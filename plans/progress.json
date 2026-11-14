@@ -267,10 +267,12 @@
     },
     {
       "id": "C30",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C30.json"
+      ],
+      "source_identity": "sha256:cfe08ce567a5eaf62bec49fd5dbc8227effcedbd07b8e615c1df3d2decf3152b",
+      "notes": "Proved full local usability from real clean git clone -> npm run setup -> npm start (N30): wired live Go workflow engine handlers (cmd/breachatlas/workflow.go) and accessible #workflow UI (apps/web/src/pages/Workflow.tsx) with relay routing (scripts/serve-web.mjs), extended scripts/clone-smoke.mjs while keeping the web-only proof labeled separately, verified all 8 reference workflow steps, legal hold precedence (409 hold_active), tampered-byte detection, unavailable-provider/missing-storage/malformed-JSON failures, offline verification without a running server via dist/bin/verify, restart persistence, derived index rebuild, and bundle restore preserving immutable sealed bytes in tests/browser/clone-to-value.spec.ts and tests/clone_acceptance_test.go, recording acceptance evidence in docs/evidence/private-install.json."
     },
     {
       "id": "C31",
@@ -350,5 +352,5 @@
     "backend_tests": "not_implemented"
   },
   "roadmap_contract": "clone-to-run-oss-v1",
-  "current_core_ready": false
+  "current_core_ready": true
 }

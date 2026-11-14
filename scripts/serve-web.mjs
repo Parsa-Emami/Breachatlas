@@ -9,6 +9,16 @@ const manifestPath = '/api/v1/evidence-manifests/validate';
 const integrityPath = '/api/v1/evidence-integrity/inspect';
 const timelinePath = '/api/v1/timeline/inspect';
 const diagnosticsPath = '/api/v1/diagnostics';
+const workflowPostPaths = new Set([
+  '/api/v1/workflow/upload-seal',
+  '/api/v1/workflow/custody',
+  '/api/v1/workflow/timeline',
+  '/api/v1/workflow/hold',
+  '/api/v1/workflow/export',
+  '/api/v1/workflow/verify-bundle',
+  '/api/v1/workflow/recover',
+]);
+const workflowStatePath = '/api/v1/workflow/state';
 
 const forgedApiHeaders = new Set([
   'x-identity-override',
@@ -178,10 +188,10 @@ function probeEngineJson(engine, targetPath, timeoutMs = 1500) {
   });
 }
 
-function relayEngineRequest(req, res, engine, targetPath, send, logBuffer) {
+function relayEngineRequest(req, res, engine, targetPath, send, logBuffer, allowedMethod = 'POST') {
   const fail = (status, code) => send(status, JSON.stringify({ schema_version: '1', status: 'error', error: { code } }));
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+  if (req.method !== allowedMethod) {
+    res.setHeader('Allow', allowedMethod);
     fail(405, 'method_not_allowed');
     return;
   }
@@ -198,12 +208,15 @@ function relayEngineRequest(req, res, engine, targetPath, send, logBuffer) {
     return;
   }
 
-  const headers = { 'content-type': req.headers['content-type'] ?? '' };
-  for (const name of ['content-length', 'content-encoding']) {
-    if (req.headers[name] !== undefined) headers[name] = req.headers[name];
+  const headers = {};
+  if (allowedMethod === 'POST') {
+    headers['content-type'] = req.headers['content-type'] ?? '';
+    for (const name of ['content-length', 'content-encoding']) {
+      if (req.headers[name] !== undefined) headers[name] = req.headers[name];
+    }
   }
-  const signal = AbortSignal.timeout(3500);
-  const upstream = http.request({ ...engine, path: targetPath, method: 'POST', headers, signal }, response => {
+  const signal = AbortSignal.timeout(5000);
+  const upstream = http.request({ ...engine, path: targetPath, method: allowedMethod, headers, signal }, response => {
     res.writeHead(response.statusCode ?? 502, { 'Content-Type': 'application/json; charset=utf-8' });
     response.on('error', () => res.destroy());
     response.pipe(res);
@@ -337,7 +350,8 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
         }));
         return;
       }
-      if (path === manifestPath || path === integrityPath || path === timelinePath) { relayEngineRequest(req, res, manifestEngine, path, send, logBuffer); return; }
+      if (path === manifestPath || path === integrityPath || path === timelinePath || workflowPostPaths.has(path)) { relayEngineRequest(req, res, manifestEngine, path, send, logBuffer, 'POST'); return; }
+      if (path === workflowStatePath) { relayEngineRequest(req, res, manifestEngine, req.url ?? workflowStatePath, send, logBuffer, 'GET'); return; }
       if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); failApi(405, 'method_not_allowed'); return; }
       send(503, '{"error":"engine_not_integrated"}');
       return;

@@ -1,6 +1,6 @@
 {
   "project": "BreachAtlas",
-  "core_ready": false,
+  "core_ready": true,
   "usable_at": "C30",
   "oss_v1_at": "C40",
   "local_usable_requires": [

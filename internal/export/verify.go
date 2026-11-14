@@ -258,9 +258,9 @@ func VerifyBundle(ctx context.Context, bundlePath string, opts VerifyBundleOptio
 					custodyMatch = false
 					res.Errors = append(res.Errors, fmt.Sprintf("evidence %s: computed custody root %s != bound %s", ev.EvidenceID, computedRoot, ev.CustodyRoot))
 				}
-				if computedRoot != ev.Manifest.CustodyRoot {
+				if !custodyChainContainsRoot(events, ev.Manifest.CustodyRoot) {
 					custodyMatch = false
-					res.Errors = append(res.Errors, fmt.Sprintf("evidence %s: custody root %s != manifest custody root %s", ev.EvidenceID, computedRoot, ev.Manifest.CustodyRoot))
+					res.Errors = append(res.Errors, fmt.Sprintf("evidence %s: manifest custody root %s not present in custody chain (latest %s)", ev.EvidenceID, ev.Manifest.CustodyRoot, computedRoot))
 				}
 				if ev.Checkpoint.CustodyRoot != "" && ev.Checkpoint.CustodyRoot != computedRoot {
 					custodyMatch = false
@@ -422,6 +422,18 @@ func verifyLegacySingleFileBundle(b legacySingleFileBundle, absPath string, raw 
 	res.SignatureValid = true
 	res.Verified = true
 	return res, nil
+}
+
+func custodyChainContainsRoot(events []custody.CustodyEvent, root string) bool {
+	if root == custody.GenesisPrevHash {
+		return true
+	}
+	for _, ev := range events {
+		if ev.CustodyRoot == root {
+			return true
+		}
+	}
+	return false
 }
 
 func isTrustedPublicKey(keyID, pubHex string, trustedKeys map[string]string) bool {

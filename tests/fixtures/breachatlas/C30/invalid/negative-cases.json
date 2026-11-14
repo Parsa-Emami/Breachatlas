@@ -1,0 +1,38 @@
+{
+  "schema_version": "1",
+  "empty_upload": {
+    "case_id": "case-c30-neg-001",
+    "evidence_id": "ev-c30-empty",
+    "payload": "",
+    "expected_code": "invalid_field"
+  },
+  "tampered_bytes": {
+    "case_id": "case-c30-acceptance-001",
+    "evidence_id": "ev-c30-auth-01",
+    "tamper_suffix": "\n{\"tampered\":true}",
+    "expected_status": "verification_failed"
+  },
+  "unavailable_provider": {
+    "case_id": "case-c30-acceptance-001",
+    "provider": "cloud-s3-unavailable",
+    "expected_status": 503,
+    "expected_code": "unavailable_provider"
+  },
+  "hold_disposal_attempts": [
+    {
+      "action": "delete",
+      "expected_status": 409,
+      "expected_code": "hold_active"
+    },
+    {
+      "action": "expire",
+      "expected_status": 409,
+      "expected_code": "hold_active"
+    }
+  ],
+  "malformed_json": {
+    "raw": "{not-valid-json",
+    "expected_status": 400,
+    "expected_code": "invalid_json"
+  }
+}

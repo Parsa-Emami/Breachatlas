@@ -53,12 +53,18 @@ export function validateScenario(scenario, options = {}) {
     errors.push(`Invalid project identity: expected BreachAtlas, got ${scenario.project}.`);
   }
 
-  // Contract status: must NOT falsely claim executed engine proof at C01
+  // Execution & contract status consistency check
   if (scenario.engine_implemented === true) {
-    errors.push('Claim of unimplemented engine passed is rejected: engine_implemented cannot be true at C01.');
-  }
-  if (!scenario.status || !scenario.status.includes('planned acceptance contract')) {
-    errors.push('Status must indicate planned acceptance contract, not executed domain proof.');
+    if (!scenario.status || scenario.status.includes('planned acceptance contract') || scenario.verified_at_commit !== 'C30') {
+      errors.push('Claim of executed engine proof requires verified_at_commit C30 and non-planned status.');
+    }
+    if (!isSafePath(scenario.c30_fixtures) || !scenario.restart_and_restore?.restart_verified || !scenario.restart_and_restore?.restore_verified || scenario.restart_and_restore?.sealed_bytes_modified !== false) {
+      errors.push('Claim of executed engine proof requires valid c30_fixtures and restart_and_restore verification.');
+    }
+  } else {
+    if (!scenario.status || !scenario.status.includes('planned acceptance contract')) {
+      errors.push('Status must indicate planned acceptance contract when engine_implemented is false.');
+    }
   }
 
   // License & Provenance
@@ -159,8 +165,8 @@ export function validateReferenceDoc(docContent) {
     return ['REFERENCE_WORKFLOW.md is empty or missing.'];
   }
 
-  if (!docContent.includes('Planned domain acceptance contract')) {
-    errors.push('REFERENCE_WORKFLOW.md must explicitly note planned domain acceptance status.');
+  if (!docContent.includes('Planned domain acceptance contract') && !docContent.includes('C30 local usability verified')) {
+    errors.push('REFERENCE_WORKFLOW.md must explicitly note planned or C30 verified acceptance status.');
   }
 
   for (const inv of REQUIRED_INVARIANTS) {
@@ -341,7 +347,7 @@ export async function runSelfTests() {
     const errs = validateScenario(bad);
     testResults.push({
       name: 'rejects false claim of engine execution passing',
-      passed: errs.some(e => e.includes('Claim of unimplemented engine passed is rejected'))
+      passed: errs.some(e => e.includes('Claim of executed engine proof'))
     });
   }
 
@@ -390,6 +396,15 @@ export async function main() {
         const digest = createHash('sha256').update(data).digest('hex');
         if (digest !== meta.sha256) {
           allErrors.push(`Fixture hash mismatch for ${relFile}: recorded ${meta.sha256}, calculated ${digest}.`);
+        }
+      }
+      if (scenario.c30_fixtures) {
+        const c30Base = resolve(root, scenario.c30_fixtures);
+        const c30Prov = JSON.parse(await readFile(join(c30Base, 'provenance.json'), 'utf8'));
+        if (c30Prov.license !== 'Apache-2.0') allErrors.push('C30 provenance.json missing Apache-2.0 license.');
+        for (const [relFile, expectedHex] of Object.entries(c30Prov.sha256 || {})) {
+          const digest = createHash('sha256').update(await readFile(join(c30Base, relFile))).digest('hex');
+          if (digest !== expectedHex) allErrors.push(`C30 fixture hash mismatch for ${relFile}.`);
         }
       }
     } catch (err) {

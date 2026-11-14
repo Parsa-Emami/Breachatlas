@@ -1,0 +1,18 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c30-acceptance-001",
+  "evidence_id": "ev-c30-auth-01",
+  "artifact_id": "art-c30-timeline-01",
+  "bundle_id": "bnd-c30-001",
+  "hold_id": "hold-c30-001",
+  "filename": "ev-c30-auth-01.jsonl",
+  "media_type": "application/x-ndjson",
+  "provider": "local",
+  "zone_hint": "Asia/Tehran",
+  "source_confidence": 0.96,
+  "acquired_at": "2026-11-14T08:00:00+03:30",
+  "actor": "analyst-parisa",
+  "custody_reason": "Clone-to-value initial intake and cryptographic seal verification",
+  "hold_reason": "Active incident investigation litigation hold",
+  "payload_jsonl": "{\"timestamp\":\"2026-11-14T07:45:12+03:30\",\"event_type\":\"auth_login\",\"summary\":\"Interactive SSH login on bastion-01\",\"host\":\"bastion-01\",\"account\":\"analyst-parisa\"}\n{\"timestamp\":\"2026-11-14T08:05:30+03:30\",\"event_type\":\"privilege_check\",\"summary\":\"Read-only log collection initialized\",\"host\":\"bastion-01\",\"account\":\"analyst-parisa\"}\n{\"timestamp\":\"2026-11-14 08:20:00\",\"event_type\":\"export_prep\",\"summary\":\"Zoneless log line normalized with source zone hint\",\"host\":\"app-02\",\"account\":\"svc-dfir\"}\n"
+}

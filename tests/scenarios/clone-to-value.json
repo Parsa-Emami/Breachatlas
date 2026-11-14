@@ -1,11 +1,13 @@
 {
   "version": "1.0.0",
   "project": "BreachAtlas",
-  "status": "planned acceptance contract; not executed domain proof",
-  "engine_implemented": false,
+  "status": "executed domain proof; C30 local usability verified",
+  "engine_implemented": true,
+  "verified_at_commit": "C30",
   "license": "Apache-2.0",
   "provenance": "repository-authored synthetic licensed fixtures",
   "fixture_base": "tests/fixtures/breachatlas/C01/",
+  "c30_fixtures": "tests/fixtures/breachatlas/C30/",
   "domain": {
     "primary": "evidence-manifest",
     "fields": [
@@ -145,5 +147,11 @@
     "the entire workflow",
     "restart and restore",
     "no paid/cloud account or sibling clone"
-  ]
+  ],
+  "restart_and_restore": {
+    "restart_verified": true,
+    "restore_verified": true,
+    "consistency_rebuild_verified": true,
+    "sealed_bytes_modified": false
+  }
 }

@@ -371,7 +371,7 @@
       "id": "C30",
       "title": "test(acceptance): prove full local usability from git clone",
       "stage": "private-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "On a clean supported Linux host, git clone -> npm run setup -> npm start completes this project's full reference workflow, negative cases, restart and restore with verified C01-C30 evidence. This is the first locally usable supported product."
       ],

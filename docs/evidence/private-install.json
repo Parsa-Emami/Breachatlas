@@ -1,0 +1,50 @@
+{
+  "schema_version": "1",
+  "project": "BreachAtlas",
+  "commit_id": "C30",
+  "requirement": "N30",
+  "usable_gate": "C30",
+  "core_ready": true,
+  "passed": true,
+  "profile": {
+    "os": "Linux x86_64",
+    "node": "v24.19.0",
+    "npm": "11.17.0",
+    "go": "go1.26.2",
+    "python": "3.14.4",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "clone_sequence": [
+    "git clone (isolated bare snapshot transport into clean checkout)",
+    "npm run setup (npm ci --ignore-scripts --no-fund, npm run build, go build ./cmd/breachatlas, go build ./cmd/verify)",
+    "web-only foundation proof labeled separately (engineReady: false, /api/v1/unimplemented -> 503)",
+    "npm start negative prerequisite check (missing --storage-dir -> /readyz 503 storageReady:false)",
+    "npm start full supervised stack (/readyz 200, /api/v1/diagnostics ready) + Playwright Chromium tests/browser/clone-to-value.spec.ts",
+    "standalone offline verifier dist/bin/verify without running server (positive signature match + wrong-key rejection + tampered-byte failure)",
+    "process shutdown + derived timeline index drop + restart against persisted --storage-dir + consistency rebuild + bundle restore"
+  ],
+  "invariants_verified": {
+    "sealed_source_bytes_never_modified": true,
+    "legal_hold_takes_precedence_over_deletion": true,
+    "raw_timestamp_and_confidence_survive_normalization": true,
+    "offline_verification_without_server": true,
+    "restart_and_restore_verified": true
+  },
+  "scenario": "tests/scenarios/clone-to-value.json",
+  "fixtures": {
+    "c01_base": "tests/fixtures/breachatlas/C01/",
+    "c30_base": "tests/fixtures/breachatlas/C30/",
+    "c30_provenance_sha256": "11f755bd8fb0fa886a82950bd622230b23394d85bb8b65a0b480214676f7e895",
+    "license": "Apache-2.0"
+  },
+  "staged_tree": "10d8d730b2eaff9a68141f80950b0493f355acef",
+  "web_only_proof": {
+    "label": "web-only-foundation-shell (kept separate from engine readiness)",
+    "passed": true,
+    "engineReady": false
+  }
+}
