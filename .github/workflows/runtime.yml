@@ -100,5 +100,10 @@ jobs:
           npm run build
           npm test
 
+      - name: Install Playwright Chromium
+        run: |
+          npx --no-install playwright install chromium
+          npx --no-install playwright install-deps chromium || echo "::warning::apt deps mirror unreachable; continuing with preinstalled runner libs before test:clone"
+
       - name: Verify clean checkout clone-to-run smoke test
         run: npm run test:clone
