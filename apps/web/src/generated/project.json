@@ -395,7 +395,7 @@
       "id": "C32",
       "title": "feat(network): harden local launch and optional private hosting",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Local operation needs no owned public domain. Prove loopback/origin/cache boundaries and document optional TLS/private ingress without exposing engine work by default."
       ],

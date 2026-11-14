@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "standalone_api_status": 503,
+  "standalone_api_error": "engine_unavailable",
+  "invalid_host_status": 403,
+  "invalid_host_error": "invalid_host",
+  "origin_not_allowed_status": 403,
+  "origin_not_allowed_error": "origin_not_allowed",
+  "forged_header_status": 403,
+  "forged_header_error": "forged_header",
+  "missing_prerequisite_readyz_status": 503,
+  "unavailable_provider_readyz_status": 503,
+  "malformed_manifest_status": 400,
+  "restart_preserves_boundaries": true,
+  "sealed_bytes_modified": false
+}

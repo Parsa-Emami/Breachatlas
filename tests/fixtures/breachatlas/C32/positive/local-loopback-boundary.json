@@ -1,0 +1,26 @@
+{
+  "schema_version": "1",
+  "owned_public_domain_required": false,
+  "loopback_hosts": [
+    "127.0.0.1",
+    "localhost",
+    "[::1]"
+  ],
+  "allowed_proxy_transport_headers": {
+    "X-Forwarded-Proto": "https",
+    "X-Forwarded-For": "203.0.113.10"
+  },
+  "cache_control": {
+    "asset_path": "/assets/app-c32.js",
+    "asset_header": "public, max-age=31536000, immutable",
+    "dynamic_paths": [
+      "/",
+      "/index.html",
+      "/runtime-config.json",
+      "/healthz",
+      "/readyz",
+      "/api/v1/diagnostics"
+    ],
+    "dynamic_header": "no-store"
+  }
+}

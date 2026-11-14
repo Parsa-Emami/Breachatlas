@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "task_id": "C32",
+  "project": "BreachAtlas",
+  "owned_public_domain_required": false,
+  "local_loopback_authorities": [
+    "127.0.0.1",
+    "localhost",
+    "[::1]"
+  ],
+  "default_ports": {
+    "web_relay": 4173,
+    "private_web_relay": 4310,
+    "loopback_engine": 8080
+  },
+  "standalone_web_engine_exposed_by_default": false,
+  "boundaries": {
+    "host_validation": "403 invalid_host for any non-loopback Host header on web relay and Go engine",
+    "origin_and_fetch_site": "403 origin_not_allowed for foreign/null Origin or Sec-Fetch-Site: cross-site across static, health, config, and API routes",
+    "forged_identity_headers": "403 forged_header on /api/* for X-Forwarded-Host, X-Forwarded-User, X-Forwarded-Role, X-Identity-Override, X-Role, X-Case-Scope, X-Provider, X-Auth-User, X-User-Override",
+    "allowed_proxy_transport_headers": [
+      "X-Forwarded-Proto",
+      "X-Forwarded-For"
+    ],
+    "cache_control": {
+      "fingerprinted_assets": "public, max-age=31536000, immutable",
+      "html_config_health_api": "no-store"
+    },
+    "non_loopback_upstream_rejected": true,
+    "optional_private_tls_ingress": {
+      "nginx_template": "ops/web/nginx.conf.template",
+      "systemd_unit": "ops/web/service.systemd",
+      "deployment_guide": "infra/deployment.md",
+      "default_access_policy": "deny all (loopback only until reviewed operator CIDRs configured)",
+      "proxy_host_header": "$proxy_host",
+      "engine_port_exposed_externally": false
+    }
+  }
+}

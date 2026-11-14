@@ -1,0 +1,11 @@
+{
+  "task": "C32",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic network, loopback, origin, cache, and prerequisite failure fixtures",
+  "sha256": {
+    "expected/network-boundary-outcomes.json": "a2172a4ac65687811b5a939e9c5fe657ef92c5170ae535c56aa19314152e7de8",
+    "invalid/missing-prerequisites-and-provider.json": "54c9fdd8db177047e36948641575fd2549f3c0d8ec8ef0a0ddd6e8a566ab6047",
+    "invalid/non-loopback-and-cross-origin.json": "8e5d3532163f7138b0896364d5a7292eb73cf994db6605caec923df0de65d0fc",
+    "positive/local-loopback-boundary.json": "65fe25ded6d82adfebe1d610990f3431aab0e6c3c07902056d016184cf53cc86"
+  }
+}

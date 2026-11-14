@@ -4,7 +4,7 @@
   "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_tree": "HEAD",
-  "scope": "C31 complete reproducible open-source release packaging: compiled Go engine and offline verifier binaries, web UI, contracts/offline resources, reproducible tar+gzip source archive and BUILD_RECIPE.json, SPDX-2.3 SBOM, complete THIRD_PARTY_NOTICES.md, SHA256SUMS.txt, atomic staging, replay/quota guards, and Ed25519 provenance",
+  "scope": "C32 local launch and optional private hosting hardening: zero-domain loopback operation, non-loopback upstream rejection, Host/Origin/Sec-Fetch-Site/forged-header/Cache-Control boundaries, optional private TLS proxy documentation, and domain/C32 evidence",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -36,26 +36,21 @@
     "C28",
     "C29",
     "C30",
-    "C31"
+    "C31",
+    "C32"
   ],
   "changed_paths": [
-    "THIRD_PARTY_NOTICES.md",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/engineering/WEB_RUNBOOK.md",
-    "docs/evidence/C31.json",
-    "docs/release/ARTIFACTS.md",
-    "internal/release/package.go",
-    "internal/release/package_test.go",
-    "ops/web/nginx.conf.template",
-    "ops/web/service.systemd",
+    "docs/engineering/CLONE_TO_RUN.md",
+    "docs/evidence/C32.json",
+    "docs/evidence/domain.json",
+    "infra/deployment.md",
     "plans/progress.json",
     "plans/project-state.json",
-    "scripts/package-source.mjs",
-    "scripts/package-web.mjs",
-    "scripts/package.sh",
-    "tests/fixtures/breachatlas/C31/",
-    "tests/release_packaging_test.go",
-    "tests/web/oss-tooling.test.mjs"
+    "scripts/serve-web.mjs",
+    "tests/fixtures/breachatlas/C32/",
+    "tests/network_boundaries_test.go",
+    "tests/web/network-boundaries.test.mjs"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -88,6 +83,8 @@
     "docs/evidence/C29.json",
     "docs/evidence/C30.json",
     "docs/evidence/C31.json",
+    "docs/evidence/C32.json",
+    "docs/evidence/domain.json",
     "docs/evidence/private-install.json"
   ],
   "ci": {
@@ -98,7 +95,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C32",
+  "next_task": "C33",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C32."
+  "continuation": "Implement C33."
 }

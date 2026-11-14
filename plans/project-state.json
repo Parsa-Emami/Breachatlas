@@ -1,6 +1,6 @@
 {
   "project": "BreachAtlas",
-  "reviewed_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
+  "reviewed_commit": "67fbc4fa9d2bbd882f79b04767b9f45c0b10d962",
   "readiness": "CORE_READY_LOCAL_USABLE",
   "core_ready": true,
   "implemented": [
@@ -35,10 +35,11 @@
     "bounded operational and overload workload performance benchmarks recording actual hardware, latency distributions, CPU/RSS/disk bounds, cancellation, saturation, and published limits without mutating sealed source bytes",
     "separated web-shell liveness, Go engine readiness, authoritative storage integrity checks, required provider verification, and bounded secret-redacted diagnostic logging",
     "complete clean-host git clone -> npm run setup -> npm start reference workflow, negative cases, offline verification, restart persistence, consistency rebuild, and bundle restore verified through C30",
-    "complete reproducible open-source release packaging (Go engine, standalone offline verifier, web UI, contracts, reproducible source tarball, build recipe, SPDX SBOM, third-party notices, SHA256SUMS, and atomic signed provenance) verified through C31"
+    "complete reproducible open-source release packaging (Go engine, standalone offline verifier, web UI, contracts, reproducible source tarball, build recipe, SPDX SBOM, third-party notices, SHA256SUMS, and atomic signed provenance) verified through C31",
+    "zero-domain local loopback launch, origin/fetch-site/cache/header boundary hardening, and optional private TLS ingress documentation verified through C32"
   ],
   "engine": "local_usable_clone_to_value_verified",
-  "next_task": "C32",
+  "next_task": "C33",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

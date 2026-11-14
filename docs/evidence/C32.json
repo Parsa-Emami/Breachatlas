@@ -1,0 +1,74 @@
+{
+  "commit_id": "C32",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Harden local launch and optional private hosting without requiring an owned public domain: prove loopback, Host, Origin, Sec-Fetch-Site, forged-header, and Cache-Control boundaries across the Node web relay and Go engine, reject non-loopback engine upstream targets, keep standalone engine work unexposed by default, and document optional deny-all Nginx/systemd TLS ingress.",
+  "passed": true,
+  "source_commit": "67fbc4fa9d2bbd882f79b04767b9f45c0b10d962",
+  "source_tree": "224170c61e1c2a11568ef8f2dea2122a96f27369",
+  "source_identity": "sha256:d36d7f50a6954c6583831c10f24af7b96de4bcc805e232ca82eb99b7c50e95d2",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C32/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "9207b3d957b7cf6bc6cd931e34d17941441799a41e592e168163d491cc54047a"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Validated plan, rebuilt web workspace, ran TypeScript typecheck, and passed all 35 Node web/contract/network-boundary tests."
+    },
+    {
+      "command": "go vet ./...",
+      "exit_code": 0,
+      "output": "Passed with no diagnostics."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "output": "Passed cmd/breachatlas, internal/release, and tests including TestC32LocalNetworkBoundariesAndPrivateHostingTemplate."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked repository JSON files and contract invariants."
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0,
+      "output": "Ran 6 tests in tests/engineering; OK."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N32",
+      "status": "passed",
+      "observations": [
+        "Added exported isLoopbackHost, isLoopbackAuthority, and validateLoopbackEngineTarget in scripts/serve-web.mjs to reject non-loopback engine upstream targets, enforced cross-site/origin rejection across all routes, and pinned upstream relay Host headers and Cache-Control: no-store.",
+        "Documented zero-domain local launch, boundary guarantees, and optional deny-all TLS/systemd private hosting in infra/deployment.md and docs/engineering/CLONE_TO_RUN.md, and recorded boundary proof in docs/evidence/domain.json.",
+        "Verified loopback Host, Origin, Sec-Fetch-Site, forged-header, Cache-Control, missing-storage/unavailable-provider 503, malformed JSON 400, restart persistence, Nginx/systemd template isolation, and 0440 sealed source byte immutability across tests/web/network-boundaries.test.mjs and tests/network_boundaries_test.go."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Live host Nginx/TLS certificate deployment requires an operator-owned domain and reviewed CIDRs; local operation requires no owned public domain."
+  ],
+  "rollback_or_recovery_observation": "Revert scripts/serve-web.mjs, infra/deployment.md, docs/engineering/CLONE_TO_RUN.md, docs/evidence/domain.json, docs/evidence/C32.json, tests/web/network-boundaries.test.mjs, tests/network_boundaries_test.go, tests/fixtures/breachatlas/C32/, plans/progress.json, plans/project-state.json, apps/web/src/generated/project.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

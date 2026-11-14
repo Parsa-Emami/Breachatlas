@@ -110,6 +110,43 @@ export function createDiagnosticLogBuffer({ maxEntries = 64, maxBytes = 16384 } 
   };
 }
 
+export function isLoopbackHost(host) {
+  const clean = String(host ?? '').trim().replace(/^\[|\]$/g, '').toLowerCase();
+  if (clean === 'localhost' || clean === '127.0.0.1' || clean === '::1') return true;
+  if (/^127(?:\.\d{1,3}){3}$/.test(clean)) {
+    return clean.split('.').every(part => Number(part) >= 0 && Number(part) <= 255);
+  }
+  return false;
+}
+
+export function isLoopbackAuthority(authority) {
+  const raw = String(authority ?? '').trim();
+  if (!raw) return false;
+  const match = /^(localhost|127(?:\.\d{1,3}){3}|\[::1\])(?::([0-9]{1,5}))?$/i.exec(raw);
+  if (!match) return false;
+  if (match[2] !== undefined) {
+    const port = Number(match[2]);
+    if (!Number.isInteger(port) || port < 1 || port > 65535) return false;
+  }
+  return isLoopbackHost(match[1]);
+}
+
+export function validateLoopbackEngineTarget(engine) {
+  if (engine === undefined || engine === null) return null;
+  if (typeof engine !== 'object' || Array.isArray(engine)) {
+    throw new Error('Loopback engine target must be an object.');
+  }
+  const hostname = String(engine.hostname ?? '127.0.0.1').trim();
+  const port = Number(engine.port);
+  if (!isLoopbackHost(hostname)) {
+    throw new Error(`Loopback engine target required; non-loopback host "${hostname}" rejected.`);
+  }
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error(`Loopback engine target port "${engine.port}" must be an integer between 1 and 65535.`);
+  }
+  return { hostname, port };
+}
+
 function hasDisallowedOriginOrSite(req) {
   const secFetchRaw = Array.isArray(req.headers['sec-fetch-site'])
     ? req.headers['sec-fetch-site'].join(',')
@@ -208,7 +245,9 @@ function relayEngineRequest(req, res, engine, targetPath, send, logBuffer, allow
     return;
   }
 
-  const headers = {};
+  const upstreamHostname = engine.hostname ?? '127.0.0.1';
+  const upstreamHostHeader = upstreamHostname.includes(':') ? `[${upstreamHostname}]:${engine.port}` : `${upstreamHostname}:${engine.port}`;
+  const headers = { Host: upstreamHostHeader };
   if (allowedMethod === 'POST') {
     headers['content-type'] = req.headers['content-type'] ?? '';
     for (const name of ['content-length', 'content-encoding']) {
@@ -217,7 +256,10 @@ function relayEngineRequest(req, res, engine, targetPath, send, logBuffer, allow
   }
   const signal = AbortSignal.timeout(5000);
   const upstream = http.request({ ...engine, path: targetPath, method: allowedMethod, headers, signal }, response => {
-    res.writeHead(response.statusCode ?? 502, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.writeHead(response.statusCode ?? 502, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-store',
+    });
     response.on('error', () => res.destroy());
     response.pipe(res);
   });
@@ -237,6 +279,7 @@ function relayEngineRequest(req, res, engine, targetPath, send, logBuffer, allow
 const csp = "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'";
 export function createWebServer({ root, config, projectId, manifestEngine, diagnosticLog }) {
   const valid = validateRuntimeConfig(config, projectId);
+  const validatedEngine = validateLoopbackEngineTarget(manifestEngine);
   const publicRoot = resolve(root);
   const logBuffer = diagnosticLog ?? createDiagnosticLogBuffer({
     maxEntries: valid.maxDiagnosticEntries ?? 64,
@@ -256,8 +299,7 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
       res.writeHead(status, { 'Content-Type': type, 'Content-Length': Buffer.byteLength(body) });
       res.end(req.method === 'HEAD' ? undefined : body);
     };
-    const localAuthority = /^(?:localhost|127\.0\.0\.1|\[::1\])(?::([0-9]{1,5}))?$/i.exec(req.headers.host ?? '');
-    if (!localAuthority || (localAuthority[1] && (Number(localAuthority[1]) < 1 || Number(localAuthority[1]) > 65535))) { send(403, '{"error":"invalid_host"}'); return; }
+    if (!isLoopbackAuthority(req.headers.host ?? '')) { send(403, '{"error":"invalid_host"}'); return; }
     let path;
     try {
       path = decodeURIComponent((req.url ?? '/').split('?')[0]);
@@ -272,7 +314,7 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
         let webAssetsReady = true;
         try { await stat(resolve(publicRoot, 'index.html')); } catch { webAssetsReady = false; }
 
-        if (!manifestEngine) {
+        if (!validatedEngine) {
           const failures = [];
           if (!webAssetsReady) {
             failures.push({ component: 'web', code: 'web_assets_missing', message: 'Built web assets missing.' });
@@ -300,7 +342,7 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
           return;
         }
 
-        const upstream = await probeEngineJson(manifestEngine, diagnosticsPath);
+        const upstream = await probeEngineJson(validatedEngine, diagnosticsPath);
         if (!upstream.data) {
           logBuffer.record('error', 'engine', upstream.code || 'engine_unavailable', upstream.message || 'Engine diagnostics unreachable.');
           const failures = [];
@@ -350,12 +392,13 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
         }));
         return;
       }
-      if (path === manifestPath || path === integrityPath || path === timelinePath || workflowPostPaths.has(path)) { relayEngineRequest(req, res, manifestEngine, path, send, logBuffer, 'POST'); return; }
-      if (path === workflowStatePath) { relayEngineRequest(req, res, manifestEngine, req.url ?? workflowStatePath, send, logBuffer, 'GET'); return; }
+      if (path === manifestPath || path === integrityPath || path === timelinePath || workflowPostPaths.has(path)) { relayEngineRequest(req, res, validatedEngine, path, send, logBuffer, 'POST'); return; }
+      if (path === workflowStatePath) { relayEngineRequest(req, res, validatedEngine, req.url ?? workflowStatePath, send, logBuffer, 'GET'); return; }
       if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); failApi(405, 'method_not_allowed'); return; }
       send(503, '{"error":"engine_not_integrated"}');
       return;
     }
+    if (hasDisallowedOriginOrSite(req)) { send(403, '{"error":"origin_not_allowed"}'); return; }
     if (!['GET', 'HEAD'].includes(req.method ?? '')) { res.setHeader('Allow', 'GET, HEAD'); send(405, '{"error":"method_not_allowed"}'); return; }
     if (path === '/healthz') { send(200, '{"status":"ok","scope":"web-shell","webHealthy":true}'); return; }
     if (path === '/readyz') {
@@ -365,7 +408,7 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
         logBuffer.record('error', 'web', 'web_assets_missing', 'Built web assets missing during /readyz probe.');
         send(503, JSON.stringify({
           status: 'not_ready',
-          scope: manifestEngine ? 'unified-local-runtime' : 'web-shell',
+          scope: validatedEngine ? 'unified-local-runtime' : 'web-shell',
           webReady: false,
           engineReady: false,
           storageReady: false,
@@ -374,7 +417,7 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
         }));
         return;
       }
-      if (!manifestEngine) {
+      if (!validatedEngine) {
         send(200, JSON.stringify({
           status: 'ready',
           scope: 'web-shell',
@@ -385,7 +428,7 @@ export function createWebServer({ root, config, projectId, manifestEngine, diagn
         }));
         return;
       }
-      const upstream = await probeEngineJson(manifestEngine, '/readyz');
+      const upstream = await probeEngineJson(validatedEngine, '/readyz');
       if (!upstream.data) {
         logBuffer.record('error', 'engine', upstream.code || 'engine_unavailable', upstream.message || 'Engine readiness endpoint unreachable.');
         send(503, JSON.stringify({

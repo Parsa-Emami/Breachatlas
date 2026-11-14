@@ -1,0 +1,31 @@
+{
+  "schema_version": "1",
+  "disallowed_hosts": [
+    "evil.example",
+    "127.0.0.1.evil.example",
+    "192.0.2.10:4173",
+    "0.0.0.0:4173"
+  ],
+  "disallowed_upstream_hosts": [
+    "0.0.0.0",
+    "192.0.2.10",
+    "external.invalid"
+  ],
+  "disallowed_origins": [
+    "https://attacker.invalid",
+    "null",
+    "http://127.0.0.1:4173, https://attacker.invalid"
+  ],
+  "disallowed_fetch_site": "cross-site",
+  "forged_headers": [
+    "X-Identity-Override",
+    "X-Forwarded-User",
+    "X-Forwarded-Host",
+    "X-Forwarded-Role",
+    "X-Role",
+    "X-Case-Scope",
+    "X-Provider",
+    "X-Auth-User",
+    "X-User-Override"
+  ]
+}

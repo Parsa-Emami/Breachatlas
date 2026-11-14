@@ -1,0 +1,6 @@
+{
+  "schema_version": "1",
+  "missing_storage_dir": "missing-c32-storage-dir",
+  "unavailable_provider": "unavailable-external-daemon",
+  "malformed_manifest_body": "{not-valid-json"
+}

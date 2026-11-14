@@ -285,10 +285,12 @@
     },
     {
       "id": "C32",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C32.json"
+      ],
+      "source_identity": "sha256:d36d7f50a6954c6583831c10f24af7b96de4bcc805e232ca82eb99b7c50e95d2",
+      "notes": "Hardened zero-domain local launch and optional private TLS hosting (N32): exported isLoopbackHost, isLoopbackAuthority, and validateLoopbackEngineTarget in scripts/serve-web.mjs to fail closed on non-loopback engine upstream targets, enforced cross-site/origin rejection across all HTTP routes while pinning upstream relay Host headers and Cache-Control: no-store, documented zero-domain local operation and optional deny-all Nginx/systemd TLS ingress in infra/deployment.md and docs/engineering/CLONE_TO_RUN.md, and verified loopback, Origin, Sec-Fetch-Site, forged-header, Cache-Control, missing-prerequisite, unavailable-provider, malformed-JSON, restart, and 0440 sealed-byte immutability invariants in tests/web/network-boundaries.test.mjs and tests/network_boundaries_test.go with evidence recorded in docs/evidence/domain.json and docs/evidence/C32.json."
     },
     {
       "id": "C33",
