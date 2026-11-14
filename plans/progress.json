@@ -339,10 +339,12 @@
     },
     {
       "id": "C38",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C38.json"
+      ],
+      "source_identity": "sha256:a107f3ed76fc02d4162d6d8ae855695324f9183515f1d1ab5914159e2c631d46",
+      "notes": "Frozen local privacy limits, data locations, export/deletion/retention/backup/recovery rules, supported Linux x86_64 profile, and dependency/maintenance policy (N38): authored docs/release/SERVICE_POLICY.md and docs/release/MAINTENANCE.md, and verified policy completeness, SealStore manifest-boundary crash recovery, idempotent replay, quota exhaustion (ErrStorageQuotaExceeded), and sealed-byte immutability in tests/release_policy_test.go and tests/fixtures/breachatlas/C38/."
     },
     {
       "id": "C39",

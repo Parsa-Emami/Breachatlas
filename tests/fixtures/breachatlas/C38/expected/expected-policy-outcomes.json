@@ -1,0 +1,10 @@
+{
+  "schema_version": "1",
+  "task": "C38",
+  "positive": {
+    "policy_docs_verified": true,
+    "boundary_crash_recovery_verified": true,
+    "replay_and_quota_verified": true,
+    "sealed_bytes_modified": false
+  }
+}

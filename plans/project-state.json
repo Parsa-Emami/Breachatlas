@@ -41,10 +41,11 @@
     "complete open-source installation, usage, licensing, limits/privacy/recovery/support, contribution, and private vulnerability reporting guides verified through C34",
     "signed release artifact verification against independently trusted Ed25519 keys, monotonic revision/expiry enforcement, data-safe upgrade and binary rollback preserving newer accepted data, and documented source-build alternative verified through C35",
     "independent clean-checkout clone-to-value repeatability, onboarding timings, negative prerequisite handling, and restart-safe 0440 sealed-byte verification verified through C36",
-    "observed C30/C33/C35/C36 installation and workflow blocker fixes documented and verified with targeted regressions through C37"
+    "observed C30/C33/C35/C36 installation and workflow blocker fixes documented and verified with targeted regressions through C37",
+    "local privacy limits, data locations, retention/backup/recovery, supported Linux x86_64 profile, and dependency/maintenance policy frozen through C38"
   ],
   "engine": "local_usable_clone_to_value_verified",
-  "next_task": "C38",
+  "next_task": "C39",
   "next_command": "npm run plan -- next",
   "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
 }

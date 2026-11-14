@@ -467,7 +467,7 @@
       "id": "C38",
       "title": "docs(release): freeze local privacy limits and maintenance policy",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Document local data locations, export/deletion/retention/backup/recovery, supported profiles and maintenance/dependency policy. No required hosted subscription, paid core feature or unearned SLA."
       ],

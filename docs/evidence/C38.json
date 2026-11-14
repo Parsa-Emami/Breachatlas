@@ -1,0 +1,69 @@
+{
+  "commit_id": "C38",
+  "planning_template": false,
+  "project": "BreachAtlas",
+  "scope": "Freeze local privacy limits, local data locations, export/deletion/retention/backup/recovery policies, supported Linux x86_64 profile, and dependency/maintenance policy in docs/release/SERVICE_POLICY.md and docs/release/MAINTENANCE.md with Go boundary/replay/quota regressions (N38).",
+  "passed": true,
+  "source_commit": "ebde1c2588418c18135028b4c3a05892ece41a5c",
+  "source_tree": "6c77f193966e62d18d72a7d44c34052bc1b260c5",
+  "source_identity": "sha256:a107f3ed76fc02d4162d6d8ae855695324f9183515f1d1ab5914159e2c631d46",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "go": "1.26.2",
+    "python": "3.14.4",
+    "os": "Linux x86_64",
+    "providers": [
+      "local",
+      "csv",
+      "json"
+    ]
+  },
+  "fixtures": {
+    "path": "tests/fixtures/breachatlas/C38/",
+    "license": "Apache-2.0",
+    "provenance_sha256": "2679e7e9a8ee7a6ee6c53fe668cbd272bb2874bb80524bf65d7bbc8c03f012a4"
+  },
+  "commands": [
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run validate:plan",
+      "exit_code": 0,
+      "output": "Validated 40 detailed tasks, resources, references and progress; no runtime capability inferred."
+    },
+    {
+      "command": "go vet ./... && go test -race -count=1 ./tests -run TestC38",
+      "exit_code": 0,
+      "output": "Passed TestC38ServiceAndMaintenancePolicy in tests/release_policy_test.go."
+    },
+    {
+      "command": "env -u NODE_USE_ENV_PROXY npm run check",
+      "exit_code": 0,
+      "output": "Plan validation, prepare:web, tsc typecheck, Vite build, and 36 Node tests passed."
+    },
+    {
+      "command": "python3 scripts/validate_repo.py",
+      "exit_code": 0,
+      "output": "VALIDATION PASSED: Checked 386 JSON files and repository contract invariants."
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/engineering -v",
+      "exit_code": 0,
+      "output": "Ran 6 tests in tests/engineering; OK."
+    }
+  ],
+  "results": [
+    {
+      "requirement": "N38",
+      "status": "passed",
+      "observations": [
+        "Authored docs/release/SERVICE_POLICY.md documenting local data locations, export/deletion/retention/backup/recovery, Linux x86_64 profile, published limits (256 KiB / 4 GiB / 1000 log ceiling), and zero paid/hosted/SLA requirements.",
+        "Authored docs/release/MAINTENANCE.md documenting supported branches (main / 0.1.x), SECURITY.md 3-business-day response, pinned toolchains, and SPDX-2.3 permissive OSS license policy.",
+        "Verified policy docs, SealStore FailAfterBlobSyncBeforeManifest crash recovery, idempotent replay, ErrStorageQuotaExceeded, and sealed-byte immutability in tests/release_policy_test.go."
+      ]
+    }
+  ],
+  "observed_limitations": [
+    "Supported host profile remains Linux x86_64."
+  ],
+  "rollback_or_recovery_observation": "Revert docs/release/SERVICE_POLICY.md, docs/release/MAINTENANCE.md, tests/release_policy_test.go, tests/fixtures/breachatlas/C38/, docs/evidence/C38.json, plans/progress.json, plans/project-state.json, apps/web/src/generated/project.json, and docs/agents/SESSION_HANDOFF.json. No database schemas, migrations, .env files, or Dockerfiles were modified."
+}

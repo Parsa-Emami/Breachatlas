@@ -1,0 +1,21 @@
+{
+  "schema_version": "1",
+  "task": "C38",
+  "cases": [
+    {
+      "id": "kill_at_staged_manifest_boundary",
+      "description": "Killing SealStore after blob sync before manifest commit must leave only prior or clean state on restart.",
+      "fault": "FailAfterBlobSyncBeforeManifest"
+    },
+    {
+      "id": "idempotent_replay_and_quota_exhaustion",
+      "description": "Replaying an operation ID is idempotent with zero duplicate side effects; exceeding MaxStorageBytes returns ErrStorageQuotaExceeded.",
+      "expected_error": "storage_quota_exceeded"
+    },
+    {
+      "id": "sealed_bytes_immutable",
+      "description": "Sealed evidence bytes are never modified across boundary faults, replays, or restarts.",
+      "expected_sealed_modified": false
+    }
+  ]
+}

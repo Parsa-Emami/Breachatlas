@@ -4,7 +4,7 @@
   "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_tree": "HEAD",
-  "scope": "C37 resolution and regression verification of observed C30/C33/C35/C36 installation and workflow blockers",
+  "scope": "C38 frozen local privacy limits, data lifecycle, supported profiles, and maintenance/dependency policy",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -42,18 +42,19 @@
     "C34",
     "C35",
     "C36",
-    "C37"
+    "C37",
+    "C38"
   ],
   "changed_paths": [
     "apps/web/src/generated/project.json",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/evidence/C37.json",
-    "docs/product/BETA_FIXES.md",
+    "docs/evidence/C38.json",
+    "docs/release/MAINTENANCE.md",
+    "docs/release/SERVICE_POLICY.md",
     "plans/progress.json",
     "plans/project-state.json",
-    "tests/acceptance_fixes_test.go",
-    "tests/fixtures/breachatlas/C37/",
-    "tests/release_packaging_test.go"
+    "tests/fixtures/breachatlas/C38/",
+    "tests/release_policy_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -92,6 +93,7 @@
     "docs/evidence/C35.json",
     "docs/evidence/C36.json",
     "docs/evidence/C37.json",
+    "docs/evidence/C38.json",
     "docs/evidence/domain.json",
     "docs/evidence/private-install.json",
     "docs/evidence/release-verification.json",
@@ -105,7 +107,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C38",
+  "next_task": "C39",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C38 after C37 review/commit."
+  "continuation": "Implement C39 after C38 review/commit."
 }

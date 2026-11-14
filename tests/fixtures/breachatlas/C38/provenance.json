@@ -1,0 +1,10 @@
+{
+  "task": "C38",
+  "license": "Apache-2.0",
+  "provenance": "repository-authored synthetic service policy, maintenance policy, and durability boundary fixtures",
+  "sha256": {
+    "positive/policy-contract.json": "0e165fe0075d77a589830b5fad1114b597d70a6ef44319730f24a024c243710c",
+    "invalid/negative-cases.json": "1278bef9d359558bc9a4838604cb7935ccbef6763f102adce12ab61688ef10c0",
+    "expected/expected-policy-outcomes.json": "1bcdc278c861952d992b2e364203c029fb418f6c1611be212e7414cd0543c701"
+  }
+}

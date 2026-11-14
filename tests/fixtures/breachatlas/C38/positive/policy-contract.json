@@ -1,0 +1,31 @@
+{
+  "schema_version": "1",
+  "project": "BreachAtlas",
+  "task": "C38",
+  "requirement": "N38",
+  "required_docs": [
+    "docs/release/SERVICE_POLICY.md",
+    "docs/release/MAINTENANCE.md"
+  ],
+  "required_tokens": {
+    "docs/release/SERVICE_POLICY.md": [
+      "Linux x86_64",
+      "256 KiB",
+      "4 GiB",
+      "1000",
+      "sealstore",
+      "custody",
+      "retention",
+      "No required hosted subscription",
+      "No unearned SLA"
+    ],
+    "docs/release/MAINTENANCE.md": [
+      "Apache-2.0",
+      "SPDX-2.3",
+      "toolchain-lock.json",
+      "SECURITY.md",
+      "3 business days",
+      "main"
+    ]
+  }
+}
