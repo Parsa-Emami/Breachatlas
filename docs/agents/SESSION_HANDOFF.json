@@ -4,7 +4,7 @@
   "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
   "verified_source_tree": "HEAD",
-  "scope": "C32 local launch and optional private hosting hardening: zero-domain loopback operation, non-loopback upstream rejection, Host/Origin/Sec-Fetch-Site/forged-header/Cache-Control boundaries, optional private TLS proxy documentation, and domain/C32 evidence",
+  "scope": "C33 UX keyboard, mobile/desktop 360px/1440px, table equivalents, failure-handling (empty/invalid/interrupted/provider-outage), N-1 export compatibility, Go engine negative cases (modified byte, missing evidence, untrusted signer, expired/stale/replayed revision, sealed byte immutability), and ux/C33 evidence",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -37,20 +37,21 @@
     "C29",
     "C30",
     "C31",
-    "C32"
+    "C32",
+    "C33"
   ],
   "changed_paths": [
+    "apps/web/src/generated/project.json",
+    "apps/web/src/pages/Workflow.tsx",
+    "apps/web/src/styles.css",
     "docs/agents/SESSION_HANDOFF.json",
-    "docs/engineering/CLONE_TO_RUN.md",
-    "docs/evidence/C32.json",
-    "docs/evidence/domain.json",
-    "infra/deployment.md",
+    "docs/evidence/C33.json",
+    "docs/evidence/ux.json",
     "plans/progress.json",
     "plans/project-state.json",
-    "scripts/serve-web.mjs",
-    "tests/fixtures/breachatlas/C32/",
-    "tests/network_boundaries_test.go",
-    "tests/web/network-boundaries.test.mjs"
+    "tests/browser/full-workflow-accessibility.spec.ts",
+    "tests/fixtures/breachatlas/C33/",
+    "tests/ux_compatibility_test.go"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -84,8 +85,10 @@
     "docs/evidence/C30.json",
     "docs/evidence/C31.json",
     "docs/evidence/C32.json",
+    "docs/evidence/C33.json",
     "docs/evidence/domain.json",
-    "docs/evidence/private-install.json"
+    "docs/evidence/private-install.json",
+    "docs/evidence/ux.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
@@ -95,7 +98,7 @@
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C33",
+  "next_task": "C34",
   "next_command": "npm run plan -- next",
-  "continuation": "Implement C33."
+  "continuation": "Implement C34."
 }

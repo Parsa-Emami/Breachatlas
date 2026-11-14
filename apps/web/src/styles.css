@@ -49,8 +49,8 @@ p{color:#b8c4d5}
 .preview ul{padding-left:18px}
 .error{color:#ffb2b2}
 .filters{display:flex;gap:18px;flex-wrap:wrap}
-.filters label{display:flex;flex-direction:column;gap:8px;font-size:13px;color:#b8c4d5}
-.filters input,.filters select{background:#0a111e;color:#ecf2fa;border:1px solid #3a4860;padding:10px 12px;border-radius:8px;min-width:200px}
+.filters label{display:flex;flex-direction:column;gap:8px;font-size:13px;color:#b8c4d5;min-width:0;max-width:100%}
+.filters input,.filters select{background:#0a111e;color:#ecf2fa;border:1px solid #3a4860;padding:10px 12px;border-radius:8px;min-width:0;width:100%;max-width:100%}
 .tasks{list-style:none;padding:0}
 .tasks li{padding:22px 0;border-top:1px solid #2b384e}
 .task-line{display:flex;align-items:baseline;gap:16px}

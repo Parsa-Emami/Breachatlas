@@ -1,0 +1,37 @@
+{
+  "schema_version": "1",
+  "case_id": "case-c33-ux-001",
+  "evidence_id": "ev-c33-auth-01",
+  "artifact_id": "art-c33-timeline-01",
+  "bundle_id": "bnd-c33-001",
+  "hold_id": "hold-c33-001",
+  "filename": "ev-c33-auth-01.jsonl",
+  "media_type": "application/x-ndjson",
+  "provider": "local",
+  "zone_hint": "Asia/Tehran",
+  "source_confidence": 0.96,
+  "acquired_at": "2026-11-14T08:00:00+03:30",
+  "actor": "analyst-parisa",
+  "custody_reason": "C33 keyboard/mobile UX & compatibility verification",
+  "hold_reason": "Active incident hold for C33 verification",
+  "payload_jsonl": "{\"timestamp\":\"2026-11-14T07:45:12+03:30\",\"event_type\":\"auth_login\",\"summary\":\"Interactive SSH login on bastion-01\",\"host\":\"bastion-01\",\"account\":\"analyst-parisa\"}\n{\"timestamp\":\"2026-11-14T08:05:30+03:30\",\"event_type\":\"privilege_check\",\"summary\":\"Read-only log collection initialized\",\"host\":\"bastion-01\",\"account\":\"analyst-parisa\"}\n{\"timestamp\":\"2026-11-14 08:20:00\",\"event_type\":\"export_prep\",\"summary\":\"Zoneless log line normalized with source zone hint\",\"host\":\"app-02\",\"account\":\"svc-dfir\"}\n",
+  "n_minus_1_compatibility": {
+    "previous_release": "0.9.0",
+    "schema_version": "1",
+    "legacy_single_file_bundle": {
+      "bundle_version": "0.9.0",
+      "case_id": "case-c33-n-minus-1",
+      "created_at": "2026-11-01T10:00:00Z",
+      "trust_key_id": "bnd-n-minus-1-key",
+      "manifest_ref": "manifest-n-minus-1.json",
+      "evidence_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "custody_root": "0000000000000000000000000000000000000000000000000000000000000000",
+      "signature": "valid-n-minus-1-legacy-sig",
+      "offline_verifiable": true
+    },
+    "legacy_bundle_id": "bnd-c33-n-minus-1"
+  },
+  "observed_supported_platforms": [
+    "Linux x86_64"
+  ]
+}

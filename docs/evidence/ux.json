@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "task_id": "C33",
+  "project": "BreachAtlas",
+  "observed_supported_platforms": [
+    "Linux x86_64"
+  ],
+  "viewports_verified": [
+    {
+      "name": "mobile",
+      "width_px": 360,
+      "height_px": 800,
+      "horizontal_overflow": false
+    },
+    {
+      "name": "desktop",
+      "width_px": 1440,
+      "height_px": 900,
+      "horizontal_overflow": false
+    }
+  ],
+  "accessibility_and_keyboard": {
+    "skip_link_focus": true,
+    "keyboard_8_step_workflow": true,
+    "table_equivalents": [
+      "Sealed Evidence Table",
+      "Workflow Timeline Table"
+    ]
+  },
+  "failure_cases_verified": [
+    "empty_upload",
+    "invalid_field",
+    "invalid_json",
+    "unavailable_provider",
+    "interrupted_request_and_restore",
+    "modified_byte_rejected",
+    "missing_evidence_rejected",
+    "untrusted_signer_rejected",
+    "expired_stale_replayed_checkpoint_rejected"
+  ],
+  "n_minus_1_compatibility": {
+    "previous_release": "0.9.0",
+    "schema_version": "1",
+    "offline_bundle_verify": true,
+    "portable_bundle_restore": true
+  },
+  "sealed_source_bytes_modified": false
+}

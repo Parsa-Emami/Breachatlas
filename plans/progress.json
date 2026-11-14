@@ -294,10 +294,12 @@
     },
     {
       "id": "C33",
-      "status": "planned",
-      "evidence": [],
-      "source_identity": null,
-      "notes": ""
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C33.json"
+      ],
+      "source_identity": "sha256:a965d1b7252d617f73badb09040444cfbdc588e6aa195c863913597ecabd8b18",
+      "notes": "Verified keyboard, mobile/desktop (360px and 1440px), failure handling, and N-1 export compatibility (N33): added accessible Sealed Evidence Table and Workflow Timeline Table equivalents in apps/web/src/pages/Workflow.tsx and responsive 360px input sizing in apps/web/src/styles.css; verified full 8-step keyboard workflow, zero horizontal overflow, empty/invalid/interrupted/provider-outage handling in tests/browser/full-workflow-accessibility.spec.ts; verified N-1 compatible bundle verification, modified-byte, missing-evidence, untrusted-signer, expired/stale/replayed checkpoint authority anti-rollback, interrupted restore rollback, and 0440 sealed-byte immutability in tests/ux_compatibility_test.go; recorded observed Linux x86_64 platform UX evidence in docs/evidence/ux.json and docs/evidence/C33.json."
     },
     {
       "id": "C34",

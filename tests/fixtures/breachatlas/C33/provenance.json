@@ -1,0 +1,10 @@
+{
+  "task": "C33",
+  "license": "Apache-2.0",
+  "provenance": "Synthetic deterministic C33 UX, keyboard/mobile accessibility, negative failure, and N-1 compatibility fixtures authored for BreachAtlas.",
+  "sha256": {
+    "positive/workflow-and-n-minus-1.json": "84b4fc48961018352fc988c3b23e3d2301832fdc707d6169c1a8a2286003add9",
+    "invalid/negative-cases.json": "8b13a7bad13c0e6662227359f10b211d749f84928b089e8c921a8b63784e4e8c",
+    "expected/expected-ux-outcomes.json": "ce51a3ac917ee4e3efcba805105edeb8f92f331891151cd9b4af80c3778d6796"
+  }
+}

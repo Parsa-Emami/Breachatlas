@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "viewports": [
+    { "name": "mobile", "width": 360, "height": 800 },
+    { "name": "desktop", "width": 1440, "height": 900 }
+  ],
+  "zero_horizontal_overflow": true,
+  "timeline_count": 3,
+  "preserved_raw_timestamp": "2026-11-14T07:45:12+03:30",
+  "preserved_timezone_offset": "+03:30",
+  "preserved_confidence": 0.96,
+  "hold_active": true,
+  "sealed_bytes_modified": false,
+  "custody_rewritten": false,
+  "offline_verified_without_server": true,
+  "observed_supported_platforms": [
+    "Linux x86_64"
+  ]
+}

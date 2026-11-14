@@ -455,6 +455,34 @@ export function WorkflowPage() {
             <p className="muted">
               Case <code>{snapshot.case_id}</code> · Sealed items: {snapshot.evidence.length} · Indexed timeline events: {snapshot.timeline_count}
             </p>
+            {snapshot.evidence.length > 0 && (
+              <div className="table-scroll">
+                <table className="evidence-table" aria-label="Sealed Evidence Table" data-testid="workflow-evidence-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Evidence ID</th>
+                      <th scope="col">SHA-256</th>
+                      <th scope="col">Size (bytes)</th>
+                      <th scope="col">Verified</th>
+                      <th scope="col">Custody Chain</th>
+                      <th scope="col">Legal Holds</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {snapshot.evidence.map(item => (
+                      <tr key={`row-${item.evidence_id}`}>
+                        <th scope="row">{item.evidence_id}</th>
+                        <td className="mono-break">{item.sha256}</td>
+                        <td>{item.size_bytes}</td>
+                        <td>{String(item.verified)}</td>
+                        <td>{String(item.custody_chain_valid)} ({item.custody_event_count} events)</td>
+                        <td>{item.hold_status?.active_hold_count ?? 0}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
             {snapshot.evidence.map(item => (
               <article key={item.evidence_id} className="preview" style={{ marginBottom: '0.75rem' }}>
                 <h3>{item.evidence_id}</h3>
@@ -467,13 +495,41 @@ export function WorkflowPage() {
               </article>
             ))}
             {snapshot.timeline_entries.length > 0 && (
-              <ul>
-                {snapshot.timeline_entries.map(entry => (
-                  <li key={entry.event_identity}>
-                    <code>{entry.time.raw_timestamp}</code> ({entry.time.timezone_offset}) → <code>{entry.time.normalized_timestamp}</code> · conf={entry.time.confidence} · {entry.event_type}: {entry.summary}
-                  </li>
-                ))}
-              </ul>
+              <>
+                <div className="table-scroll">
+                  <table className="evidence-table" aria-label="Workflow Timeline Table" data-testid="workflow-timeline-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Event</th>
+                        <th scope="col">Raw Timestamp</th>
+                        <th scope="col">Offset</th>
+                        <th scope="col">Normalized UTC</th>
+                        <th scope="col">Confidence</th>
+                        <th scope="col">Summary</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {snapshot.timeline_entries.map(entry => (
+                        <tr key={`row-${entry.event_identity}`}>
+                          <th scope="row">{entry.event_type}</th>
+                          <td className="mono-break">{entry.time.raw_timestamp}</td>
+                          <td>{entry.time.timezone_offset}</td>
+                          <td className="mono-break">{entry.time.normalized_timestamp}</td>
+                          <td>{entry.time.confidence}</td>
+                          <td>{entry.summary}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <ul>
+                  {snapshot.timeline_entries.map(entry => (
+                    <li key={entry.event_identity}>
+                      <code>{entry.time.raw_timestamp}</code> ({entry.time.timezone_offset}) → <code>{entry.time.normalized_timestamp}</code> · conf={entry.time.confidence} · {entry.event_type}: {entry.summary}
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
           </div>
         )}

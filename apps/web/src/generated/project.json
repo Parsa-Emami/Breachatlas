@@ -407,7 +407,7 @@
       "id": "C33",
       "title": "test(ux): verify keyboard mobile failures and compatible updates",
       "stage": "public-release",
-      "status": "planned",
+      "status": "verified",
       "acceptance": [
         "Complete the actual reference workflow with keyboard/table equivalents at 360px and 1440px, invalid/empty/interrupted/provider-outage cases and N-1 data/export fixtures. Advertise only observed supported platforms."
       ],

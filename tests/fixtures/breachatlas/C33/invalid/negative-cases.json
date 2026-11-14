@@ -1,0 +1,44 @@
+{
+  "schema_version": "1",
+  "empty_upload": {
+    "case_id": "case-c33-neg-001",
+    "evidence_id": "ev-c33-empty-01",
+    "payload": "",
+    "expected_status": 400,
+    "expected_code": "invalid_field"
+  },
+  "invalid_case_id": {
+    "case_id": "../bad-case",
+    "evidence_id": "ev-c33-bad-01",
+    "payload": "{\"timestamp\":\"2026-11-14T08:00:00Z\",\"event_type\":\"test\"}\n",
+    "expected_status": 400,
+    "expected_code": "invalid_field"
+  },
+  "malformed_json": {
+    "raw": "{not-valid-json",
+    "expected_status": 400,
+    "expected_code": "invalid_json"
+  },
+  "unavailable_provider": {
+    "provider": "cloud-s3-unconfigured",
+    "expected_status": 503,
+    "expected_code": "unavailable_provider"
+  },
+  "interrupted_operation": {
+    "operation_id": "op-c33-interrupted-01",
+    "fault": "fail_after_stage_before_commit",
+    "sealed_bytes_modified": false
+  },
+  "tampered_and_untrusted": {
+    "modified_byte_offset": 0,
+    "missing_evidence_rel_path": "evidence/ev-c33-auth-01/blob.dat",
+    "untrusted_key_id": "untrusted-key-c33",
+    "expected_signature_status": "untrusted_signer"
+  },
+  "checkpoint_authority_rollback": {
+    "accepted_revision": 2,
+    "expired_revision": 3,
+    "stale_revision": 1,
+    "replayed_revision": 2
+  }
+}
