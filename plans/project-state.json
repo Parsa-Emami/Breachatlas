@@ -1,7 +1,7 @@
 {
   "project": "BreachAtlas",
-  "reviewed_commit": "67fbc4fa9d2bbd882f79b04767b9f45c0b10d962",
-  "readiness": "CORE_READY_LOCAL_USABLE",
+  "reviewed_commit": "1e138af3163524f62a8a3f0be3b43249b6583268",
+  "readiness": "OSS_V1_PUBLISHED",
   "core_ready": true,
   "implemented": [
     "responsive web shell",
@@ -43,10 +43,16 @@
     "independent clean-checkout clone-to-value repeatability, onboarding timings, negative prerequisite handling, and restart-safe 0440 sealed-byte verification verified through C36",
     "observed C30/C33/C35/C36 installation and workflow blocker fixes documented and verified with targeted regressions through C37",
     "local privacy limits, data locations, retention/backup/recovery, supported Linux x86_64 profile, and dependency/maintenance policy frozen through C38",
-    "v1 release-readiness gate enforced for C01–C38 evidence, core_ready, clone-to-value, packaging, licenses, and recovery/security through C39"
+    "v1 release-readiness gate enforced for C01–C38 evidence, core_ready, clone-to-value, packaging, licenses, and recovery/security through C39",
+    "Verified public v1.0.0 installation including the full browser workflow, offline verifier, restart and restore"
   ],
   "engine": "local_usable_clone_to_value_verified",
-  "next_task": "C40",
-  "next_command": "npm run plan -- next",
-  "full_product_endpoint": "C30 locally usable; C40 full published OSS v1"
+  "next_task": null,
+  "next_command": "npm run plan -- status",
+  "full_product_endpoint": "C30 locally usable; C40 full published OSS v1",
+  "release": {
+    "version": "1.0.0",
+    "url": "https://github.com/Parsa-Emami/Breachatlas/releases/tag/v1.0.0",
+    "evidence": "docs/evidence/C40.json"
+  }
 }

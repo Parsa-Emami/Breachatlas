@@ -491,7 +491,7 @@
       "id": "C40",
       "title": "chore(release): publish and install the verified open-source v1",
       "stage": "public-release",
-      "status": "in_progress",
+      "status": "verified",
       "acceptance": [
         "Use a maintainer-authorized publication workflow to publish the verified source/tag and full artifacts. Install the actual published version on a clean host and complete the same core task; retain real source/version, results and rollback evidence."
       ],

@@ -1,10 +1,10 @@
 {
   "project": "BreachAtlas",
   "date": "2026-11-19",
-  "base_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
-  "verified_source_commit": "a028b5a47f91f3d2d50de173568bcf70c29f18ee",
-  "verified_source_tree": "HEAD",
-  "scope": "C40 release preparation. GitHub Actions must publish and successfully verify a fresh installation of v1.0.0 before C40 can be marked verified.",
+  "base_commit": "dd59476d8aaed2a48d6c23c6b2049f24a917a518",
+  "verified_source_commit": "1e138af3163524f62a8a3f0be3b43249b6583268",
+  "verified_source_tree": "926d16e117cdc2cc766a38c351e8455458f041bd",
+  "scope": "C40 published and independently verified from the public v1.0.0 assets.",
   "core_tasks_verified": [
     "C01",
     "C02",
@@ -44,20 +44,17 @@
     "C36",
     "C37",
     "C38",
-    "C39"
+    "C39",
+    "C40"
   ],
   "changed_paths": [
-    ".github/workflows/release.yml",
-    ".github/workflows/installed-release.yml",
-    "docs/release/RELEASE_MANIFEST.json",
+    "docs/evidence/C40.json",
+    "docs/evidence/launch.json",
+    "docs/agents/SESSION_HANDOFF.json",
     "docs/release/PUBLICATION.md",
-    "README.md",
-    "START_HERE.md",
-    "scripts/release-assets.sh",
-    "scripts/installed-release-proof.mjs",
-    "tests/release_crash_test.go",
-    "tests/browser/clone-to-value.spec.ts",
-    "plans/progress.json"
+    "plans/progress.json",
+    "plans/project-state.json",
+    "apps/web/src/generated/project.json"
   ],
   "validation_results": [
     "docs/evidence/C02.json",
@@ -101,17 +98,20 @@
     "docs/evidence/private-install.json",
     "docs/evidence/release-verification.json",
     "docs/evidence/ux.json",
-    "docs/evidence/C39.json"
+    "docs/evidence/C39.json",
+    "docs/evidence/C40.json",
+    "docs/evidence/launch.json"
   ],
   "ci": {
     "contracts": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858665",
     "plan": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858579",
     "web": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/42756858563",
-    "runtime": ".github/workflows/runtime.yml (pinned SHA CI workflow)"
+    "runtime": ".github/workflows/runtime.yml (pinned SHA CI workflow)",
+    "publication": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/44603388812"
   },
   "protected_paths_changed": [],
   "current_core_ready": true,
-  "next_task": "C40",
-  "next_command": "npm run plan -- next",
-  "continuation": "Implement C40 after C39 review/commit."
+  "next_task": null,
+  "next_command": "npm run plan -- status",
+  "continuation": "C01–C40 verified. Keep the released source and published files immutable."
 }

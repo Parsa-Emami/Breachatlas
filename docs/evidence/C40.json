@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "commit_id": "C40",
+  "requirement_id": "N40",
+  "planning_template": false,
+  "passed": true,
+  "source_commit": "1e138af3163524f62a8a3f0be3b43249b6583268",
+  "source_tree": "926d16e117cdc2cc766a38c351e8455458f041bd",
+  "source_identity": "sha256:91c7f12be7b9461006d6704b61288753f8edab0395f5007ebdce74a32cc83133",
+  "source_identity_method": "Canonical published source paths and SHA-256 file digests, excluding historical checksum inventory and evidence records",
+  "tag": "v1.0.0",
+  "published_at": "2026-11-19T20:02:20Z",
+  "runner": "GitHub-hosted Ubuntu 24.04 Linux x86-64",
+  "toolchain": {
+    "go": "1.24.0",
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "playwright": "1.64.1",
+    "chromium_headless_shell": "156.0.8078.4"
+  },
+  "providers": [],
+  "fixture": {
+    "path": "tests/fixtures/breachatlas/C40/scenarios.json",
+    "license": "Apache-2.0",
+    "sha256": "05d5fbc8d94e217079017ed1bd01c1adb01b344b60f12615de45660b9af8f6f2"
+  },
+  "reference_fixture": {
+    "path": "tests/fixtures/breachatlas/C30/positive/workflow-input.json",
+    "sha256": "92a01c6930012da11c9aa67cb24d8b169a6d85ad2d08fb51f0a3f08a7221ad37"
+  },
+  "commands": [
+    {
+      "command": "npm run release:check",
+      "exit_code": 0,
+      "result": "38 prerequisite checkpoints verified."
+    },
+    {
+      "command": "go test -race -count=1 -v ./tests -run 'TestC40|TestC09FixturesAndSealingInvariants|TestRestoreBoundaryCrashRecovery|TestRestoreReplayQuotaLockAndNegativeCases'",
+      "exit_code": 0,
+      "result": "Writer SIGKILL at the durable blob boundary, manifest restart recovery, lost-ACK replay, quota rejection and prior sealed byte preservation passed."
+    },
+    {
+      "command": "go test -race -count=1 ./...",
+      "exit_code": 0,
+      "result": "Full Go suite passed, including C35 data-safe application rollback and refusal to replace newer evidence with an older backup."
+    },
+    {
+      "command": "bash scripts/package.sh && bash scripts/release-assets.sh pack",
+      "exit_code": 0,
+      "result": "Complete package from the clean tagged source, with both binaries, web UI, source, SPDX inventory and checksums."
+    },
+    {
+      "command": "bash scripts/release-assets.sh verify (GitHub-hosted public installation)",
+      "exit_code": 0,
+      "result": "Verified hosted-runner attestation, source commit, tag-bound asset inventory and internal package hashes. Modified release.json was rejected."
+    },
+    {
+      "command": "playwright test tests/browser/clone-to-value.spec.ts --reporter=json (public installed runtime)",
+      "exit_code": 0,
+      "result": "Both installed-artifact tests passed across the full browser workflow, offline verifier, negative cases, restart, index rebuild and restore."
+    },
+    {
+      "command": "sha256sum --strict -c SHA256SUMS.txt (independent public re-download)",
+      "exit_code": 0,
+      "result": "Four listed assets and checksum manifest matched GitHub release digests."
+    }
+  ],
+  "results": {
+    "publication_verified": true,
+    "installed_public_workflow": {
+      "passed": true,
+      "published": true,
+      "source_commit": "1e138af3163524f62a8a3f0be3b43249b6583268",
+      "authenticated_assets": true,
+      "tampered_manifest_rejected": true,
+      "tests": [
+        "executes full 8-step reference workflow and negative UI/API cases through browser",
+        "proves offline verification without server, restart persistence, index rebuild, and bundle restore"
+      ],
+      "fixture": {
+        "path": "tests/fixtures/breachatlas/C40/scenarios.json",
+        "license": "Apache-2.0",
+        "sha256": "05d5fbc8d94e217079017ed1bd01c1adb01b344b60f12615de45660b9af8f6f2"
+      },
+      "reference_fixture": {
+        "path": "tests/fixtures/breachatlas/C30/positive/workflow-input.json",
+        "sha256": "92a01c6930012da11c9aa67cb24d8b169a6d85ad2d08fb51f0a3f08a7221ad37"
+      },
+      "host": {
+        "platform": "linux",
+        "architecture": "x64",
+        "node": "v24.19.0"
+      }
+    },
+    "asset_count": 5,
+    "rollback": {
+      "first_release_has_no_predecessor": true,
+      "binary_rollback_preserves_newer_evidence_tested": true,
+      "procedure": "docs/engineering/WEB_RUNBOOK.md#update-and-rollback"
+    }
+  },
+  "release": {
+    "url": "https://github.com/Parsa-Emami/Breachatlas/releases/tag/v1.0.0",
+    "assets": [
+      {
+        "name": "breachatlas-v1.0.0-linux-x64.tar.gz",
+        "size": 10680854,
+        "digest": "sha256:cca5cda97245bb9ca8984388892da8a4f7dbad19c417eabfbb3fc0eff00908d3",
+        "url": "https://github.com/Parsa-Emami/Breachatlas/releases/download/v1.0.0/breachatlas-v1.0.0-linux-x64.tar.gz"
+      },
+      {
+        "name": "breachatlas-v1.0.0-source.tar.gz",
+        "size": 787382,
+        "digest": "sha256:7ff32a0a2f723cdcb7751a78e23ae294451d6415ad7897d5f6e9370a34dbf331",
+        "url": "https://github.com/Parsa-Emami/Breachatlas/releases/download/v1.0.0/breachatlas-v1.0.0-source.tar.gz"
+      },
+      {
+        "name": "breachatlas-v1.0.0.spdx.json",
+        "size": 47083,
+        "digest": "sha256:540c536e47d602efb8ed519ba7b8ac327e8d9d2d2cdc8ffd983a41fdd1db0233",
+        "url": "https://github.com/Parsa-Emami/Breachatlas/releases/download/v1.0.0/breachatlas-v1.0.0.spdx.json"
+      },
+      {
+        "name": "release.json",
+        "size": 1641,
+        "digest": "sha256:43b9f25b1ee0309b4beeeb3274b1a9d71e41dfc148f7059aec05a591fa5a0b11",
+        "url": "https://github.com/Parsa-Emami/Breachatlas/releases/download/v1.0.0/release.json"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "size": 375,
+        "digest": "sha256:c9c59645a0be95b73619557c70fdc16e0de46e08e1444e6f3a0f81a367589cf9",
+        "url": "https://github.com/Parsa-Emami/Breachatlas/releases/download/v1.0.0/SHA256SUMS.txt"
+      }
+    ],
+    "attestation_url": "https://github.com/Parsa-Emami/Breachatlas/attestations/69828000"
+  },
+  "ci": {
+    "url": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/44603388812",
+    "id": 44603388812,
+    "jobs": [
+      {
+        "name": "prepare",
+        "id": 135840509994,
+        "url": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/44603388812/job/135840509994",
+        "conclusion": "success"
+      },
+      {
+        "name": "candidate-install / verify",
+        "id": 135842725130,
+        "url": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/44603388812/job/135842725130",
+        "conclusion": "success"
+      },
+      {
+        "name": "publish",
+        "id": 135844310751,
+        "url": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/44603388812/job/135844310751",
+        "conclusion": "success"
+      },
+      {
+        "name": "installed / verify",
+        "id": 135844477148,
+        "url": "https://github.com/Parsa-Emami/Breachatlas/actions/runs/44603388812/job/135844477148",
+        "conclusion": "success"
+      }
+    ],
+    "public_install_artifact": {
+      "id": 14568323485,
+      "name": "breachatlas-installed-public",
+      "digest": "sha256:da40d222d0efb923fbc4bc0f79868b5844267e1258a62c917ef5e1c0e95fe0b9",
+      "expires_at": "2026-12-19T20:03:55Z"
+    }
+  }
+}

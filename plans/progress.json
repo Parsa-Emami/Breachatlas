@@ -1,7 +1,7 @@
 {
-  "version": "0.0.0",
+  "version": "1.0.0",
   "project": "BreachAtlas",
-  "readiness": "WEB_FOUNDATION",
+  "readiness": "OSS_V1_PUBLISHED",
   "market_validation": "UNVALIDATED",
   "commits": [
     {
@@ -357,10 +357,12 @@
     },
     {
       "id": "C40",
-      "status": "in_progress",
-      "evidence": [],
-      "source_identity": null,
-      "notes": "Publication and clean installation of the public release are required for verification."
+      "status": "verified",
+      "evidence": [
+        "docs/evidence/C40.json"
+      ],
+      "source_identity": "sha256:91c7f12be7b9461006d6704b61288753f8edab0395f5007ebdce74a32cc83133",
+      "notes": "GitHub published v1.0.0. A fresh hosted runner authenticated and installed the public assets and passed the full workflow, offline verification, restart, and restore."
     }
   ],
   "web_progress": "plans/web-roadmap.json",

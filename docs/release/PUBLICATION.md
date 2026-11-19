@@ -38,3 +38,5 @@ node scripts/start-local.mjs --root web --engineBin bin/breachatlas --storageDir
 Open [the workflow](http://127.0.0.1:4173/#workflow). Keep the storage path when restarting. To avoid a port collision, add `--port 4310` or `--enginePort 8081` as needed. Run the [synthetic case walkthrough](../../README.md#walk-through-a-synthetic-case) before using the workspace with your own data.
 
 The release includes a standalone source archive and SPDX SBOM. The [artifact specification](ARTIFACTS.md) explains the source build. For upgrades, retain the previous verified install and a verified portable export. Use the [rollback procedure](../engineering/WEB_RUNBOOK.md#update-and-rollback) to switch application binaries while preserving authoritative case data. A first installation has no previous version to roll back to.
+
+[Public installation evidence and checksums](../evidence/C40.json) · [GitHub Actions run](https://github.com/Parsa-Emami/Breachatlas/actions/runs/44603388812)
