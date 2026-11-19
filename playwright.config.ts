@@ -2,7 +2,9 @@ import { defineConfig } from '@playwright/test';
 const webPort = Number(process.env.BREACHATLAS_WEB_PORT || '4173');
 const enginePort = Number(process.env.BREACHATLAS_ENGINE_PORT || '8080');
 const baseURL = `http://127.0.0.1:${webPort}`;
-const startCmd = process.env.BREACHATLAS_WEB_PORT || process.env.BREACHATLAS_ENGINE_PORT
+const startCmd = process.env.BREACHATLAS_INSTALLED_ROOT
+  ? `node "$BREACHATLAS_INSTALLED_ROOT/scripts/start-local.mjs" --root web --engineBin bin/breachatlas --port ${webPort} --enginePort ${enginePort} --storageDir "$BREACHATLAS_INSTALLED_STORAGE"`
+  : process.env.BREACHATLAS_WEB_PORT || process.env.BREACHATLAS_ENGINE_PORT
   ? `node scripts/start-local.mjs --port ${webPort} --enginePort ${enginePort}`
   : 'npm start';
 export default defineConfig({

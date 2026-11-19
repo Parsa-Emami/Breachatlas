@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	VerifierVersion = "0.0.1"
+	VerifierVersion = "1.0.0"
 	ServiceName     = "breachatlas-verifier"
 )
 

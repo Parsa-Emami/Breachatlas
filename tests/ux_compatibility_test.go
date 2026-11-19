@@ -514,6 +514,7 @@ func TestC33UXWorkflowNegativeCasesAndNMinusOneCompatibility(t *testing.T) {
 		RequireBundleSignature: true,
 		TrustedCheckpointKeys:  map[string]string{"chk-key-c33": chkPubHex},
 		RequireCheckpointTrust: true,
+		Now:                    baseNow,
 		ArtifactVerifyOpts: artifacts.VerifyOptions{
 			TrustedKeys:      map[string]ed25519.PublicKey{"art-key-c33": artPub},
 			RequireSignature: true,

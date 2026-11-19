@@ -357,10 +357,10 @@
     },
     {
       "id": "C40",
-      "status": "planned",
+      "status": "in_progress",
       "evidence": [],
       "source_identity": null,
-      "notes": ""
+      "notes": "Publication and clean installation of the public release are required for verification."
     }
   ],
   "web_progress": "plans/web-roadmap.json",

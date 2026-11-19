@@ -1,0 +1,70 @@
+name: installed-release
+
+on:
+  workflow_call:
+    inputs:
+      public-release:
+        required: true
+        type: boolean
+
+permissions: {}
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      attestations: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: ${{ !inputs.public-release }}
+        with:
+          name: breachatlas-v1-candidate
+          path: ${{ runner.temp }}/assets
+      - name: Download published assets
+        if: inputs.public-release
+        run: bash scripts/release-assets.sh download "$RUNNER_TEMP/assets" "$GITHUB_SHA"
+      - name: Authenticate and install the runtime
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/installed-proof"
+          bash scripts/release-assets.sh verify "$RUNNER_TEMP/assets" "$GITHUB_SHA" "$RUNNER_TEMP/breachatlas-install" |
+            tee "$RUNNER_TEMP/installed-proof/assets.log"
+          tampered=$(mktemp -d)
+          cp "$RUNNER_TEMP/assets/"* "$tampered/"
+          printf '\n' >> "$tampered/release.json"
+          if bash scripts/release-assets.sh verify "$tampered" "$GITHUB_SHA" > "$RUNNER_TEMP/installed-proof/tamper.log" 2>&1; then
+            echo "Altered release metadata passed verification" >&2
+            exit 1
+          fi
+          grep -Fx 'release.json: FAILED' "$RUNNER_TEMP/installed-proof/tamper.log"
+      - name: Exercise the installed browser workflow and offline verifier
+        env:
+          BREACHATLAS_INSTALLED_ROOT: ${{ runner.temp }}/breachatlas-install
+          BREACHATLAS_INSTALLED_STORAGE: ${{ runner.temp }}/breachatlas-c40-data
+          PUBLIC_RELEASE: ${{ inputs.public-release }}
+        run: |
+          set -euo pipefail
+          npm ci --ignore-scripts
+          npx --no-install playwright install --with-deps chromium
+          mkdir -m 0700 "$BREACHATLAS_INSTALLED_STORAGE"
+          PATH="$(pwd)/node_modules/.bin:$PATH" playwright test tests/browser/clone-to-value.spec.ts --reporter=json             > "$RUNNER_TEMP/installed-proof/playwright.json"
+          node scripts/installed-release-proof.mjs "$RUNNER_TEMP/installed-proof/playwright.json"             "$RUNNER_TEMP/installed-proof/report.json" "$GITHUB_SHA" "$PUBLIC_RELEASE"
+          cat "$RUNNER_TEMP/installed-proof/report.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: breachatlas-installed-${{ inputs.public-release && 'public' || 'candidate' }}
+          path: ${{ runner.temp }}/installed-proof/
+          retention-days: 30
+          if-no-files-found: error

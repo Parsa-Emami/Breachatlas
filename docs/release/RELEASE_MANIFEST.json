@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "repository": "Parsa-Emami/Breachatlas",
+  "version": "1.0.0",
+  "tag": "v1.0.0",
+  "platform": "linux-x64",
+  "source_ref": "refs/heads/main",
+  "signer_workflow": "Parsa-Emami/Breachatlas/.github/workflows/release.yml",
+  "assets": [
+    "breachatlas-v1.0.0-linux-x64.tar.gz",
+    "breachatlas-v1.0.0-source.tar.gz",
+    "breachatlas-v1.0.0.spdx.json",
+    "release.json",
+    "SHA256SUMS.txt"
+  ]
+}

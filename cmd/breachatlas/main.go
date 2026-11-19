@@ -20,7 +20,7 @@ import (
 )
 
 const (
-	EngineVersion = "0.0.1"
+	EngineVersion = "1.0.0"
 	ServiceName   = "breachatlas-engine"
 )
 

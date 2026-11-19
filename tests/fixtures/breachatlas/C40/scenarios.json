@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "license": "Apache-2.0",
+  "reference_fixture": "tests/fixtures/breachatlas/C30/positive/workflow-input.json",
+  "browser_tests": [
+    "executes full 8-step reference workflow and negative UI/API cases through browser",
+    "proves offline verification without server, restart persistence, index rebuild, and bundle restore"
+  ],
+  "negative_cases": [
+    "altered release metadata fails authenticated checksums",
+    "interrupted seal exposes no partial manifest",
+    "lost ACK replay returns the original seal",
+    "quota rejection preserves accepted bytes"
+  ]
+}

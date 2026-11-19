@@ -5,7 +5,17 @@ import { accessSync, constants, cpSync, mkdtempSync, readFileSync, rmSync, write
 import net from 'node:net';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { startSupervisor } from '../../scripts/start-local.mjs';
+import { pathToFileURL } from 'node:url';
+import * as sourceSupervisor from '../../scripts/start-local.mjs';
+
+const installedRoot = process.env.BREACHATLAS_INSTALLED_ROOT;
+const supervisor: typeof sourceSupervisor = installedRoot
+  ? await import(pathToFileURL(join(installedRoot, 'scripts/start-local.mjs')).href)
+  : sourceSupervisor;
+const startSupervisor: typeof sourceSupervisor.startSupervisor = options => supervisor.startSupervisor({
+  ...options,
+  ...(installedRoot ? { root: 'web', engineBin: 'bin/breachatlas' } : {}),
+});
 
 const repoRoot = process.cwd();
 const positiveFixture = JSON.parse(
@@ -37,6 +47,11 @@ function getFreePort(): Promise<number> {
 }
 
 function ensureVerifierBinary(tempDir: string): string {
+  if (installedRoot) {
+    const installedBinary = join(installedRoot, 'bin/verify');
+    accessSync(installedBinary, constants.X_OK);
+    return installedBinary;
+  }
   const builtPath = resolve(repoRoot, 'dist/bin/verify');
   try {
     accessSync(builtPath, constants.X_OK);

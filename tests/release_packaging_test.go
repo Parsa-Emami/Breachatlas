@@ -191,7 +191,8 @@ func TestC31CompleteReleasePackagingAndNegativeCases(t *testing.T) {
 	}
 	t.Cleanup(func() { _ = es.Close() })
 
-	now := time.Date(2026, 11, 14, 12, 0, 0, 0, time.UTC).Format(time.RFC3339)
+	checkpointTime := time.Date(2026, 11, 14, 12, 0, 0, 0, time.UTC)
+	now := checkpointTime.Format(time.RFC3339)
 	sealedPayload := []byte("2026-11-14T12:00:00Z release-host breachatlas: release-proof-line\n")
 	payloadSum := sha256.Sum256(sealedPayload)
 	expectedSHA := hex.EncodeToString(payloadSum[:])
@@ -248,7 +249,7 @@ func TestC31CompleteReleasePackagingAndNegativeCases(t *testing.T) {
 		KeyID:        "c31-signer",
 		Revision:     1,
 		IssuedAt:     now,
-		ExpiresAt:    time.Date(2026, 11, 15, 12, 0, 0, 0, time.UTC).Format(time.RFC3339),
+		ExpiresAt:    checkpointTime.Add(24 * time.Hour).Format(time.RFC3339),
 		PrivateKey:   privKey,
 	})
 	if err != nil {
@@ -265,6 +266,7 @@ func TestC31CompleteReleasePackagingAndNegativeCases(t *testing.T) {
 		CheckpointStore: cs,
 		CheckpointOpts: custody.VerifyCheckpointOptions{
 			TrustedPublicKeys: map[string]string{"c31-signer": hex.EncodeToString(pubKey)},
+			Now:               checkpointTime,
 		},
 	}, export.ExportRequest{
 		SchemaVersion: "1",

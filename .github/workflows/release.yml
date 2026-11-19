@@ -1,0 +1,147 @@
+name: publish-v1
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/release.yml']
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: breachatlas-v1-publication
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: github.repository == 'Parsa-Emami/Breachatlas' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      actions: read
+      contents: read
+      attestations: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Require all current-source checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          workflows=(plan.yml contracts.yml runtime.yml web.yml release-gate.yml)
+          deadline=$((SECONDS + 1200))
+          for workflow in "${workflows[@]}"; do
+            while :; do
+              run=$(gh api -X GET "repos/$GITHUB_REPOSITORY/actions/workflows/$workflow/runs" \
+                -f branch=main -f head_sha="$GITHUB_SHA" -f event=push -f per_page=1 --jq '.workflow_runs[0]')
+              if [[ -n "$run" && "$run" != null ]]; then
+                if [[ "$(jq -r .status <<< "$run")" == completed ]]; then
+                  jq -e --arg sha "$GITHUB_SHA" '.head_sha == $sha and .conclusion == "success"' <<< "$run" >/dev/null
+                  jq -r .html_url <<< "$run"
+                  break
+                fi
+              fi
+              [[ $SECONDS -lt $deadline ]] || { echo "Timed out waiting for $workflow"; exit 1; }
+              sleep 15
+            done
+          done
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Build release assets from the reviewed commit
+        run: |
+          npm ci --ignore-scripts
+          npm run release:check
+          go test -race -count=1 -v ./tests -run 'TestC40|TestC09FixturesAndSealingInvariants|TestRestoreBoundaryCrashRecovery|TestRestoreReplayQuotaLockAndNegativeCases'
+          bash scripts/package.sh
+          bash scripts/release-assets.sh pack "$RUNNER_TEMP/assets" "$GITHUB_SHA" "$PWD/dist/release"
+      - name: Attest the asset checksum manifest
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6
+        with:
+          subject-path: ${{ runner.temp }}/assets/SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: breachatlas-v1-candidate
+          path: ${{ runner.temp }}/assets/
+          retention-days: 14
+          if-no-files-found: error
+
+  candidate-install:
+    needs: prepare
+    permissions:
+      contents: read
+      attestations: read
+    uses: ./.github/workflows/installed-release.yml
+    with:
+      public-release: false
+
+  publish:
+    needs: candidate-install
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      attestations: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: breachatlas-v1-candidate
+          path: ${{ runner.temp }}/assets
+      - name: Verify uploaded files and publish the exact tested tag
+        run: |
+          set -euo pipefail
+          assets="$RUNNER_TEMP/assets"
+          manifest=docs/release/RELEASE_MANIFEST.json
+          tag=$(jq -er .tag "$manifest")
+          mapfile -t names < <(jq -er '.assets[]' "$manifest")
+          bash scripts/release-assets.sh verify "$assets" "$GITHUB_SHA"
+          main_commit() { gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha; }
+          [[ "$(main_commit)" == "$GITHUB_SHA" ]]
+          [[ -z "$(git ls-remote origin "refs/tags/$tag")" ]]
+          existing=$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases" \
+            --jq ".[] | select(.tag_name == \"$tag\") | .id")
+          [[ -z "$existing" ]] || { echo "Release $tag already exists, including drafts"; exit 1; }
+          files=()
+          for name in "${names[@]}"; do files+=("$assets/$name"); done
+          gh release create "$tag" "${files[@]}" --repo "$GITHUB_REPOSITORY" --draft --target "$GITHUB_SHA" \
+            --title "BreachAtlas $tag" --notes "Linux x86_64 release built from $GITHUB_SHA. Verify the signed checksum manifest before extraction. The package includes the local DFIR engine, browser workspace and offline verifier. See the repository's release artifact guide."
+          release_id=$(gh api --paginate "repos/$GITHUB_REPOSITORY/releases" \
+            --jq ".[] | select(.tag_name == \"$tag\" and .draft) | .id")
+          [[ "$release_id" =~ ^[0-9]+$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/releases/$release_id" > "$RUNNER_TEMP/draft.json"
+          jq -e --arg commit "$GITHUB_SHA" --argjson names "$(jq -c .assets "$manifest")" '
+            .draft and .target_commitish == $commit and
+            ([.assets[].name] | sort) == ($names | sort)
+          ' "$RUNNER_TEMP/draft.json" >/dev/null
+          for name in "${names[@]}"; do
+            digest=$(sha256sum "$assets/$name" | cut -d' ' -f1)
+            jq -e --arg name "$name" --arg digest "sha256:$digest" '
+              any(.assets[]; .name == $name and .state == "uploaded" and .digest == $digest)
+            ' "$RUNNER_TEMP/draft.json" >/dev/null
+          done
+          [[ "$(main_commit)" == "$GITHUB_SHA" ]]
+          gh api --method POST "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/$tag" -f sha="$GITHUB_SHA" >/dev/null
+          gh release edit "$tag" --repo "$GITHUB_REPOSITORY" --draft=false --verify-tag
+
+  installed:
+    needs: publish
+    permissions:
+      contents: read
+      attestations: read
+    uses: ./.github/workflows/installed-release.yml
+    with:
+      public-release: true

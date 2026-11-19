@@ -4,6 +4,8 @@ BreachAtlas is an open-source, local-first digital forensics and incident respon
 
 ## 1. Installation & Source Builds
 
+For a prebuilt package, follow [Verify and install BreachAtlas](PUBLICATION.md).
+
 ### Prerequisites
 - **OS (Observed Supported Platform):** `Linux x86_64`
 - **Toolchain:** Git, Node.js `24.19+` (within Node 24, `npm` included), Go `1.24+` (verified on `1.26.2`)
@@ -29,7 +31,7 @@ bash scripts/package.sh
 
 Open `http://127.0.0.1:4173/#workflow` (or navigate with `Tab` / `Enter` using keyboard-only controls and accessible table equivalents `Sealed Evidence Table` and `Workflow Timeline Table`):
 
-1. **Upload & Seal (`1-2. Upload & Seal`)**: Streams evidence into isolated quarantine, computes SHA-256, records initial custody, and seals `0440` content-addressed bytes. Sealed source bytes are immutable.
+1. **Upload & Seal (`1-2. Upload & Seal`)**: Streams evidence into isolated quarantine, computes SHA-256, records initial custody, and seals content-addressed bytes. Sealed source bytes are immutable.
 2. **Chain of Custody (`3. Add Custody`)**: Appends attributable custody events (`actor`, `timestamp`, `reason`) linked by cryptographic hashes.
 3. **Bounded Timeline (`4. Parse Bounded Timeline`)**: Parses JSON/CSV evidence in an isolated sandbox, preserving raw timestamps, timezone offsets, and confidence without fabricating UTC.
 4. **Legal Hold (`5a. Place Legal Hold`, `5b`, `5c`)**: Places active holds that block concurrent deletion or retention expiration (`hold_active`, keeping sealed evidence intact).

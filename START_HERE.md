@@ -1,18 +1,6 @@
-# Continue BreachAtlas
+# Start with BreachAtlas
 
-Current: web foundation; full domain workflow pending.
-
-```sh
-npm run setup
-npm start
-```
-
-Open http://127.0.0.1:4173. Read docs/engineering/CLONE_TO_RUN.md for actual prerequisites/capability. For implementation read AGENTS.md, docs/agents/EXECUTION_CONTRACT.md and ROADMAP.md, then use:
-
-```sh
-npm run validate:plan
-npm run plan -- status
-npm run plan -- next
-```
-
-Each task links exact work/resources/tests. C30 is first actual local usability and C40 full OSS v1; both require evidence. Do not run historical bootstrap or modify protected files.
+- **Try the workspace.** Follow the synthetic case in the [README](README.md#walk-through-a-synthetic-case).
+- **Install a release.** Download, authenticate and unpack the Linux x86-64 package using the [installation guide](docs/release/PUBLICATION.md).
+- **Verify an export.** See the [offline verifier instructions](docs/release/USER_GUIDE.md#2-executing-the-8-step-reference-workflow) and keep the trusted analyst public key separate from the export.
+- **Develop or contribute.** Read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md). Run `npm run validate:plan` and `npm run plan -- status` for the recorded milestone status. [فارسی](docs/ROADMAP_FA.md)
